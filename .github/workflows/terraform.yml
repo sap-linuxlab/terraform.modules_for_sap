@@ -1,0 +1,45 @@
+name: Smoke Tests for terraform.modules_for_sap
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform_validate:
+    name: 'Terraform Validate ALL'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        terraform_ver: [~1.0.0, ~1.1.0]
+        terraform_module_parent: [all, aws_ec2_instance, ibmcloud_vs, ibmcloud_powervs, ibmpowervc, msazure_vm]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ matrix.terraform_ver }}
+      - name: Terraform Init
+        id: init
+        run: |
+          cd "./${{ matrix.terraform_module_parent }}"
+          for d in */; do
+            cd "$d"
+            terraform init
+            cd ..
+          done
+      - name: Terraform Validate
+        id: validate
+        run: |
+          cd "./${{ matrix.terraform_module_parent }}"
+          for d in */; do
+            cd "$d"
+            terraform validate -no-color
+            cd ..
+          done

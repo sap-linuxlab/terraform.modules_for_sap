@@ -1,0 +1,3 @@
+#cloud-config
+hostname: ${template_var_lpar_hostname}.${template_var_domain}
+fqdn: ${template_var_lpar_hostname}.${template_var_domain}
