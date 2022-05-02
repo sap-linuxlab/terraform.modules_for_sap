@@ -61,7 +61,7 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | Infrastructure Platform | **Amazon Web Services (AWS)** | **Microsoft Azure** | **IBM Cloud** | **IBM Cloud** | **IBM PowerVC** |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | &emsp;&emsp;*Product* | EC2 instance | VM | Virtual Server | IBM Power Virtual Server | LPAR |
-| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Type* | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 1) |
+| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Type* | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) |
 | &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Hypervisor* | KVM | HyperV | KVM | IBM PowerVM (PHYP) | IBM PowerVM (PHYP) |
 | <br/><br/>***Account Init*** |   |   |   |   |   |
 | Create Resource Group, or re-use existing Resource Group | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A |
