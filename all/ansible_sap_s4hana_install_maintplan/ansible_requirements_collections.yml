@@ -13,7 +13,7 @@ collections:
     version: main
   - name: https://github.com/sap-linuxlab/community.sap_install.git
     type: git
-    version: 1.2.0
+    version: 1.0.3
 
 # Collections from private repositories via use SSH (embedded GitHub PAT does not work)
 # Used for customised/forked Ansible Collections
