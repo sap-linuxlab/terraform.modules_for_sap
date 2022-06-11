@@ -110,6 +110,19 @@ resource "null_resource" "build_script_cos_download_all" {
     $HOME/ibmcloud_cli/bin/ibmcloud login --no-region --apikey ${var.module_var_ibmcloud_api_key}
     $HOME/ibmcloud_cli/bin/ibmcloud plugin install -f cloud-object-storage
 
+    if [ "$platform" = "ppc64le" ]; then
+      echo "Confirm IBM Cloud Object Storage paths are reachable"
+      endpoint_locations="us eu ap us-south us-east eu-gb eu-de au-syd jp-tok jp-osa ca-tor br-sao ams03 che01 hkg02 mex01 mil01 mon01 par01 sjc04 seo01 sng01"
+      for i in $endpoint_locations; do
+          echo "Silent execution of dig and nslookup for s3.$i.cloud-object-storage.appdomain.cloud"
+          dig +short "s3.$i.cloud-object-storage.appdomain.cloud" > /dev/null 2>&1
+          nslookup "s3.$i.cloud-object-storage.appdomain.cloud" | grep "Address" | tail -1 > /dev/null 2>&1
+          echo "Silent execution of dig and nslookup for s3.direct.$i.cloud-object-storage.appdomain.cloud"
+          dig +short "s3.direct.$i.cloud-object-storage.appdomain.cloud" > /dev/null 2>&1
+          nslookup "s3.direct.$i.cloud-object-storage.appdomain.cloud" | grep "Address" | tail -1 > /dev/null 2>&1
+      done
+    fi
+
     # List all instances
     #$HOME/ibmcloud_cli/bin/ibmcloud resource service-instances --long --all-resource-groups --service-name cloud-object-storage
 
