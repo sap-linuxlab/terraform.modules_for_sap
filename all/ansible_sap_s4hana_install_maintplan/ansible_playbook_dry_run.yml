@@ -19,7 +19,7 @@
           - lxml
 
 # Use task block to call Ansible Module
-    - name: Test x86_64 software - Execute Ansible Module with system Python to download installation media for SAP HANA and SAP NetWeaver for hosting SAP S/4HANA
+    - name: Test x86_64 software availability - Execute Ansible Module with system Python to download installation media for SAP HANA and SAP NetWeaver for hosting SAP S/4HANA
       community.sap_launchpad.software_center_download:
         suser_id: "{{ suser_id }}"
         suser_password: "{{ suser_password }}"
@@ -31,7 +31,7 @@
 #        ansible_python_interpreter: python3.6
 
 # Use task block to call Ansible Module
-    - name: Test ppc64le software - Execute Ansible Module with system Python to download installation media for SAP HANA and SAP NetWeaver for hosting SAP S/4HANA
+    - name: Test ppc64le software availability - Execute Ansible Module with system Python to download installation media for SAP HANA and SAP NetWeaver for hosting SAP S/4HANA
       community.sap_launchpad.software_center_download:
         suser_id: "{{ suser_id }}"
         suser_password: "{{ suser_password }}"
@@ -43,7 +43,7 @@
 #        ansible_python_interpreter: python3.6
 
 # Use task block to call Ansible Module
-    - name: Execute Ansible Module with system Python to get installation files list from SAP Maintenance Planner for an SAP S/4HANA installation
+    - name: Test software list - Execute Ansible Module with system Python to get installation files list from SAP Maintenance Planner for an SAP S/4HANA installation
       community.sap_launchpad.maintenance_planner:
         suser_id: "{{ suser_id }}"
         suser_password: "{{ suser_password }}"
@@ -56,7 +56,7 @@
 #         - "{{ sap_maintenance_planner_basket_register.download_basket }}"
 
 # Use task block to call Ansible Module
-    - name: Execute Ansible Module with system Python to download files returned from SAP Maintenance Planner for an SAP S/4HANA installation
+    - name: Test software availability - Execute Ansible Module with system Python to download files returned from SAP Maintenance Planner for an SAP S/4HANA installation
       community.sap_launchpad.software_center_download:
         suser_id: "{{ suser_id }}"
         suser_password: "{{ suser_password }}"
