@@ -45,3 +45,7 @@ variable "module_var_sap_hana_install_sid" {
 variable "module_var_sap_hana_install_instance_number" {
   default = "00"
 }
+
+variable "module_var_dry_run_test" {
+  default = ""
+}

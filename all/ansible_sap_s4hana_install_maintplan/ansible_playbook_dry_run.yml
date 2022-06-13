@@ -1,5 +1,5 @@
 ---
-- name: Ansible Playbook dry-run for SAP S/4HANA System Copy installation media
+- name: Ansible Playbook dry-run for SAP S/4HANA installation media from SAP Maintenance Planner
   hosts: all
   become: false
 

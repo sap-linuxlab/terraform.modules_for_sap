@@ -4,6 +4,9 @@ resource "local_file" "ansible_extravars" {
   filename        = "${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml"
   file_permission = "0755"
   content         = <<EOF
+
+dry_run_test: "${var.module_var_dry_run_test}"
+
 suser_id: "${var.module_var_sap_id_user}"
 suser_password: '${var.module_var_sap_id_user_password}'
 
