@@ -12,10 +12,6 @@ variable "module_var_host_private_ip" {}
 
 variable "module_var_bastion_floating_ip" {}
 
-variable "module_var_bastion_public_ssh_key" {
-  sensitive = false
-}
-
 variable "module_var_bastion_private_ssh_key" {
   sensitive = false
 }
@@ -80,3 +76,7 @@ variable "module_var_sap_swpm_backup_system_password" {}
 variable "module_var_sap_swpm_ddic_000_password" {}
 
 variable "module_var_sap_swpm_template_selected" {}
+
+variable "module_var_dry_run_test" {
+  default = ""
+}

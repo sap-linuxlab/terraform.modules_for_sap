@@ -6,6 +6,8 @@ resource "local_file" "ansible_extravars" {
   content         = <<EOF
 #ansible_python_interpreter: python3
 
+dry_run_test: "${var.module_var_dry_run_test}"
+
 sap_swpm_ansible_role_mode: default_templates
 sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
 
@@ -22,8 +24,8 @@ softwarecenter_dictionary:
       - 'IMDB_SERVER20_061_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
       - 'IMDB_AFL20_061_2-80001894.SAR'
-      - 'IMDB_CLIENT20_012* -80002082.SAR'
-      - 'SWPM20SP11* -80003424.SAR'
+      - 'IMDB_CLIENT20_012_25-80002082.SAR'
+      - 'SWPM20SP11_6-80003424.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_400-80004393.SAR' # Kernel Part I (777)
@@ -50,8 +52,8 @@ softwarecenter_dictionary:
       - 'IMDB_SERVER20_061_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
       - 'IMDB_AFL20_061_2-80001894.SAR'
-      - 'IMDB_CLIENT20_012* -80002082.SAR'
-      - 'SWPM20SP11* -80003424.SAR'
+      - 'IMDB_CLIENT20_012_25-80002082.SAR'
+      - 'SWPM20SP11_6-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
@@ -78,8 +80,8 @@ softwarecenter_dictionary:
       - 'IMDB_SERVER20_061_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
       - 'IMDB_AFL20_061_2-80001894.SAR'
-      - 'IMDB_CLIENT20_012* -80002082.SAR'
-      - 'SWPM20SP11* -80003424.SAR'
+      - 'IMDB_CLIENT20_012_25-80002082.SAR'
+      - 'SWPM20SP11_6-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)

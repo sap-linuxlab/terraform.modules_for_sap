@@ -79,3 +79,7 @@ variable "module_var_dns_root_domain_name" {}
 variable "module_var_sap_maintenance_planner_transaction_name" {}
 
 variable "module_var_sap_swpm_template_selected" {}
+
+variable "module_var_dry_run_test" {
+  default = ""
+}

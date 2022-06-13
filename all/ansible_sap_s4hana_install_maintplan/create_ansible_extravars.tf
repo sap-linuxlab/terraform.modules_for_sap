@@ -6,6 +6,8 @@ resource "local_file" "ansible_extravars" {
   content         = <<EOF
 #ansible_python_interpreter: python3
 
+dry_run_test: "${var.module_var_dry_run_test}"
+
 sap_swpm_ansible_role_mode: default_templates
 sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
 
