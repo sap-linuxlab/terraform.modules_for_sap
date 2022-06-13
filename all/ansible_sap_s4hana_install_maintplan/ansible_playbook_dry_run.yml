@@ -62,5 +62,6 @@
         suser_password: "{{ suser_password }}"
         download_link: "{{ item.DirectLink }}"
         download_filename: "{{ item.Filename }}"
-        dest: "{{ sap_install_media_detect_directory }}"
+        dest: "{{ playbook_dir }}"
+        dry_run: True
       loop: "{{ sap_maintenance_planner_basket_register.download_basket }}"
