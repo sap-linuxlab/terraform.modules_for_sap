@@ -27,6 +27,8 @@
         dest: "{{ playbook_dir }}"
         dry_run: True
       with_items: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_s4hana_syscopy_x86_64'] }}"
+      when:
+        - dry_run_test == "x86_64"
 #      vars:
 #        ansible_python_interpreter: python3.6
 
@@ -39,5 +41,7 @@
         dest: "{{ playbook_dir }}"
         dry_run: True
       with_items: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_s4hana_syscopy_ppc64le'] }}"
+      when:
+        - dry_run_test == "ppc64le"
 #      vars:
 #        ansible_python_interpreter: python3.6

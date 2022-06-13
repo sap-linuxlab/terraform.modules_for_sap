@@ -7,7 +7,7 @@
 
 # Use path object to store key files temporarily in module of execution  - https://www.terraform.io/docs/language/expressions/references.html#filesystem-and-workspace-info
 resource "local_file" "bastion_rsa" {
-  count           = var.module_var_dry_run_boolean ? 0 : var.module_var_bastion_boolean ? 1 : 0
+  count           = local.dry_run_boolean ? 0 : var.module_var_bastion_boolean ? 1 : 0
   depends_on      = [local_file.ansible_extravars]
   content         = var.module_var_bastion_private_ssh_key
   filename        = "${path.root}/tmp/${var.module_var_hostname}/bastion_rsa"
@@ -16,7 +16,7 @@ resource "local_file" "bastion_rsa" {
 
 # Use path object to store key files temporarily in module of execution - https://www.terraform.io/docs/language/expressions/references.html#filesystem-and-workspace-info
 resource "local_file" "hosts_rsa" {
-  count           = var.module_var_dry_run_boolean ? 0 : 1
+  count           = local.dry_run_boolean ? 0 : 1
   depends_on      = [local_file.ansible_extravars]
   content         = var.module_var_host_private_ssh_key
   filename        = "${path.root}/tmp/${var.module_var_hostname}/hosts_rsa"
@@ -27,7 +27,7 @@ resource "local_file" "hosts_rsa" {
 resource "null_resource" "ansible_exec" {
 
   depends_on = [local_file.ansible_extravars, local_file.bastion_rsa, local_file.hosts_rsa]
-  count = var.module_var_dry_run_boolean ? 0 : 1
+  count = local.dry_run_boolean ? 0 : 1
 
   # for ansible-playbook, use timeout set to 60 seconds to avoid error "Connection timed out during banner exchange"
   # for ansible-playbook, use debug with connection details -vvvv if errors occur

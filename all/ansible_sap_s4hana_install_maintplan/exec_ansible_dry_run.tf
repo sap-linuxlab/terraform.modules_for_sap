@@ -2,7 +2,7 @@
 resource "null_resource" "ansible_exec_dry_run" {
 
   depends_on = [local_file.ansible_extravars, local_file.bastion_rsa, local_file.hosts_rsa]
-  count = var.module_var_dry_run_boolean ? 1 : 0
+  count = local.dry_run_boolean ? 1 : 0
 
   # for ansible-playbook, use timeout set to 60 seconds to avoid error "Connection timed out during banner exchange"
   # for ansible-playbook, use debug with connection details -vvvv if errors occur

@@ -77,6 +77,6 @@ variable "module_var_sap_swpm_ddic_000_password" {}
 
 variable "module_var_sap_swpm_template_selected" {}
 
-variable "module_var_dry_run_boolean" {
-  default = false
+variable "module_var_dry_run_test" {
+  default = ""
 }
