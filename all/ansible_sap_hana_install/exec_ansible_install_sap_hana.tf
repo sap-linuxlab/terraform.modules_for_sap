@@ -37,11 +37,6 @@ resource "null_resource" "ansible_exec" {
     export GIT_CONFIG_GLOBAL=/dev/null
     export GIT_CONFIG_SYSTEM=/dev/null
 
-    ansible_version="$(ansible --version | awk 'NR==1{print $3}' | sed 's/]//g')"
-
-    # Simple resolution to version comparison: https://stackoverflow.com/a/37939589/8412427
-    function version { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
-
     ansible-galaxy collection install --requirements-file ${path.module}/ansible_requirements_collections.yml --collections-path ${path.root}/tmp/${var.module_var_hostname}/collections
     #ansible-galaxy install --role-file ${path.module}/ansible_requirements_roles.yml --roles-path ${path.root}/tmp/${var.module_var_hostname}/roles
 
@@ -64,30 +59,63 @@ resource "null_resource" "ansible_exec" {
     # Ansible Config - Forces color mode when run without a TTY
     export ANSIBLE_FORCE_COLOR=1
 
-    if [ $(version $ansible_version) -gt $(version "2.9.0") ] && [ $(version $ansible_version) -lt $(version "2.11.0") ]; then
+    ansible_version="$(ansible --version | awk 'NR==1{print $3}' | sed 's/]//g')"
+
+    # Simple resolution to version comparison: https://stackoverflow.com/a/37939589/8412427 . Added search_string variable and removed function to work around Windows using WSL2 and Ubuntu
+    search_string="%d%03d%03d%03d\n"
+    if [ $(echo $ansible_version | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') -gt $(echo "2.9.0" | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') ] && [ $(echo $ansible_version | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') -lt $(echo "2.11.0" | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') ]; then
         echo "Lower Ansible version than tested, may produce unexpected results"
         export ANSIBLE_COLLECTIONS_PATHS="${abspath(path.root)}/tmp/${var.module_var_hostname}/collections"
     fi
 
-  bastion_boolean="${var.module_var_bastion_boolean}"
+    bastion_boolean="${var.module_var_bastion_boolean}"
 
-  if [ $bastion_boolean == "true" ]; then
-    ansible-playbook ${path.module}/ansible_playbook.yml \
-    --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
-    --connection 'ssh' \
-    --user root \
-    --inventory '${var.module_var_host_private_ip},' \
-    --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
-    --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/${var.module_var_hostname}/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
-  elif [ $bastion_boolean == "false" ]; then
-    ansible-playbook ${path.module}/ansible_playbook.yml \
-    --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
-    --connection 'ssh' \
-    --user root \
-    --inventory '${var.module_var_host_private_ip},' \
-    --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
-    --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-  fi
+    os_info_id=$(grep ^ID= /etc/os-release | cut -d '=' -f2 | tr -d '\"')
+    if [ "$os_info_id" = "ubuntu" ]
+    then
+      echo "Running on Windows using WSL2 with Ubuntu, amending command execution to use /bin/bash instead of Dash under /bin/sh"
+      # Required for running on Windows using WSL2 and Ubuntu (otherwise will default to Dash - https://wiki.ubuntu.com/DashAsBinSh)
+      cat << EOF > ansible_exec.sh
+      #!/bin/bash
+      if [ $bastion_boolean == "true" ]; then
+        ansible-playbook ${path.module}/ansible_playbook.yml \
+        --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
+        --connection 'ssh' \
+        --user root \
+        --inventory '${var.module_var_host_private_ip},' \
+        --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/${var.module_var_hostname}/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+      elif [ $bastion_boolean == "false" ]; then
+        ansible-playbook ${path.module}/ansible_playbook.yml \
+        --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
+        --connection 'ssh' \
+        --user root \
+        --inventory '${var.module_var_host_private_ip},' \
+        --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+      fi
+EOF
+      chmod +x ansible_exec.sh
+      /bin/bash ansible_exec.sh
+    else
+      if [ $bastion_boolean == "true" ]; then
+        ansible-playbook ${path.module}/ansible_playbook.yml \
+        --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
+        --connection 'ssh' \
+        --user root \
+        --inventory '${var.module_var_host_private_ip},' \
+        --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/${var.module_var_hostname}/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+      elif [ $bastion_boolean == "false" ]; then
+        ansible-playbook ${path.module}/ansible_playbook.yml \
+        --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
+        --connection 'ssh' \
+        --user root \
+        --inventory '${var.module_var_host_private_ip},' \
+        --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+      fi
+    fi
 
     EOT
   }

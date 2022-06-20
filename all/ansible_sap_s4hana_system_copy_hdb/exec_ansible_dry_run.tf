@@ -12,11 +12,6 @@ resource "null_resource" "ansible_exec_dry_run" {
     export GIT_CONFIG_GLOBAL=/dev/null
     export GIT_CONFIG_SYSTEM=/dev/null
 
-    ansible_version="$(ansible --version | awk 'NR==1{print $3}' | sed 's/]//g')"
-
-    # Simple resolution to version comparison: https://stackoverflow.com/a/37939589/8412427
-    function version { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
-
     ansible-galaxy collection install git+https://github.com/sap-linuxlab/community.sap_launchpad.git,main --collections-path ${path.root}/tmp/${var.module_var_hostname}/collections
 
     # Must export the Shell Variable, otherwise it cannot be read by Ansible binaries
@@ -26,7 +21,11 @@ resource "null_resource" "ansible_exec_dry_run" {
     # Ansible Config - Forces color mode when run without a TTY
     export ANSIBLE_FORCE_COLOR=1
 
-    if [ $(version $ansible_version) -gt $(version "2.9.0") ] && [ $(version $ansible_version) -lt $(version "2.11.0") ]; then
+    ansible_version="$(ansible --version | awk 'NR==1{print $3}' | sed 's/]//g')"
+
+    # Simple resolution to version comparison: https://stackoverflow.com/a/37939589/8412427 . Added search_string variable and removed function to work around Windows using WSL2 and Ubuntu
+    search_string="%d%03d%03d%03d\n"
+    if [ $(echo $ansible_version | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') -gt $(echo "2.9.0" | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') ] && [ $(echo $ansible_version | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') -lt $(echo "2.11.0" | awk -F '.' '{ printf "'$search_string'", $1,$2,$3,$4; }') ]; then
         echo "Lower Ansible version than tested, may produce unexpected results"
         export ANSIBLE_COLLECTIONS_PATHS="${abspath(path.root)}/tmp/${var.module_var_hostname}/collections"
     fi
@@ -35,10 +34,26 @@ resource "null_resource" "ansible_exec_dry_run" {
     #export ANSIBLE_PYTHON_INTERPRETER="auto_silent"
     #ansible_python=$(ansible --inventory 'localhost,' --connection 'local' --module-name setup localhost | awk '/ansible_python/{f=1} f{print; if (/}/) exit}' | awk '/executable/ { gsub("\"",""); gsub(",",""); print $NF }')
 
-    ansible-playbook ${path.module}/ansible_playbook_dry_run.yml \
-    --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
-    --inventory 'localhost,' \
-    --connection 'local'
+    os_info_id=$(grep ^ID= /etc/os-release | cut -d '=' -f2 | tr -d '\"')
+    if [ "$os_info_id" = "ubuntu" ]
+    then
+      echo "Running on Windows using WSL2 with Ubuntu, amending command execution to use /bin/bash instead of Dash under /bin/sh"
+      # Required for running on Windows using WSL2 and Ubuntu (otherwise will default to Dash - https://wiki.ubuntu.com/DashAsBinSh)
+      cat << EOF > ansible_dry_run.sh
+      #!/bin/bash
+      ansible-playbook ${path.module}/ansible_playbook_dry_run.yml \
+      --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
+      --inventory 'localhost,' \
+      --connection 'local'
+EOF
+      chmod +x ansible_dry_run.sh
+      /bin/bash ansible_dry_run.sh
+    else
+      ansible-playbook ${path.module}/ansible_playbook_dry_run.yml \
+      --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
+      --inventory 'localhost,' \
+      --connection 'local'
+    fi
 
     EOT
   }
