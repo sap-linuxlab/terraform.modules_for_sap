@@ -114,3 +114,13 @@
     - name: Execute Ansible Role sap_swpm with SAP ECC on HANA One Host, System Copy Homogeneous (SAP HANA Backup/Restore)
       include_role:
         name: { role: community.sap_install.sap_swpm }
+
+#    - name: Execute Ansible Role sap_profile_update to update Profile for ICM HTTPS
+#      include_role:
+#        name: { role: community.sap_operations.sap_profile_update }
+
+#    - name: Execute Ansible Role sap_control to restart SAP System/s for Profile update changes
+#      include_role:
+#        name: { role: community.sap_operations.sap_control }
+#      vars:
+#        sap_control_function: "restart_all_sap"
