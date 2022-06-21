@@ -67,7 +67,7 @@ resource "azurerm_network_security_group" "vnet_sg" {
   }
 
 
-  # SSH Inbound/Outbound from hosts within private VPC Subnet
+  # SSH Inbound/Outbound from hosts within private VNet Subnet
   security_rule {
     name                       = "inbound_ssh_22"
     priority                   = 104

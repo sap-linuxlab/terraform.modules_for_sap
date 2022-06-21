@@ -141,5 +141,15 @@ sap_swpm_templates_install_dictionary:
 # For dual host installation, change the sap_swpm_db_host to appropriate value
 
 
+# ------ Mandatory parameters : SAP S/4HANA ICM HTTPS ------ #
+
+sap_update_profile_sid: "${var.module_var_sap_swpm_sid}"
+sap_update_profile_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
+sap_update_profile_default_profile_params:
+  - icm/server_port_1 = PROT=HTTPS,PORT=443$$,PROCTIMEOUT=600,TIMEOUT=3600
+#sap_update_profile_instance_profile_params:
+#  - icm/server_port_1 = PROT=HTTPS,PORT=443$$,PROCTIMEOUT=600,TIMEOUT=3600
+
+
 EOF
 }
