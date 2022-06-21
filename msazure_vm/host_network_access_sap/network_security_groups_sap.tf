@@ -8,7 +8,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgu
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("32${var.module_var_sap_nwas_pas_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -25,7 +25,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("33${var.module_var_sap_nwas_pas_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -42,7 +42,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("43${var.module_var_sap_hana_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -59,7 +59,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("80${var.module_var_sap_hana_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -76,7 +76,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapnwas_java_
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("81${var.module_var_sap_nwas_pas_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -93,7 +93,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_webdi
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("3${var.module_var_sap_hana_instance_no}06")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -110,7 +110,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("3${var.module_var_sap_hana_instance_no}13")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -127,7 +127,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("3${var.module_var_sap_hana_instance_no}15")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -144,7 +144,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("443${var.module_var_sap_hana_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
@@ -161,7 +161,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl"
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
   destination_port_range     = tonumber("5${var.module_var_sap_nwas_pas_instance_no}13")
   destination_address_prefix = local.target_vnet_subnet_range
 
