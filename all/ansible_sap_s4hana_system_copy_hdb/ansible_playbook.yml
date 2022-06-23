@@ -101,13 +101,13 @@
       include_role:
         name: { role: community.sap_install.sap_general_preconfigure }
 
-    - name: Execute Ansible Role sap_hana_preconfigure 
-      include_role:
-        name: { role: community.sap_install.sap_hana_preconfigure }
-
     - name: Execute Ansible Role sap_netweaver_preconfigure 
       include_role:
         name: { role: community.sap_install.sap_netweaver_preconfigure }
+
+    - name: Execute Ansible Role sap_hana_preconfigure 
+      include_role:
+        name: { role: community.sap_install.sap_hana_preconfigure }
 
     - name: Execute Ansible Role sap_hana_install 
       include_role:
