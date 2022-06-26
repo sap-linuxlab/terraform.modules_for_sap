@@ -16,11 +16,11 @@ suser_password: '${var.module_var_sap_id_user_password}'
 
 softwarecenter_search_list_ecc_syscopy_x86_64:
   - 'SAPCAR_1115-70006178.EXE'
-  - 'IMDB_SERVER20_059_1-80002031.SAR'
+  - 'IMDB_SERVER20_059_3-80002031.SAR'
   - 'IMDB_LCAPPS_2059_0-20010426.SAR'
   - 'IMDB_AFL20_059_0-80001894.SAR'
   - 'VCH202000_2059_0-80005463.SAR'
-  - 'SWPM10SP33_6-20009703.SAR'
+  - 'SWPM10SP35_2-20009703.SAR'
   - 'igsexe_12-80003187.sar'
   - 'igshelper_17-10010245.sar'
   - 'SAPEXE_800-80002573.SAR'
@@ -30,11 +30,11 @@ softwarecenter_search_list_ecc_syscopy_x86_64:
 
 softwarecenter_search_list_ecc_syscopy_ppc64le:
   - 'SAPCAR_1115-70006238.EXE'
-  - 'IMDB_SERVER20_059_2-80002046.SAR'
+  - 'IMDB_SERVER20_059_3-80002046.SAR'
   - 'IMDB_LCAPPS_2059_0-80002183.SAR'
   - 'IMDB_AFL20_059_0-80002045.SAR'
   - 'VCH202000_2059_0-80005464.SAR'
-  - 'SWPM10SP33_6-70002492.SAR'
+  - 'SWPM10SP35_2-70002492.SAR'
   - 'igsexe_12-80003246.sar'
   - 'igshelper_17-10010245.sar'
   - 'SAPEXE_800-80002630.SAR'
