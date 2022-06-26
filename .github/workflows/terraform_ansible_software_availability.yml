@@ -1,0 +1,69 @@
+name: Software Availability Tests for Ansible in terraform.modules_for_sap
+
+on:
+  # * is a special character in YAML, quote string to avoid
+  # schedule uses UTC
+  schedule:
+    - cron: '0 12,16 * * 1-5'
+
+  push:
+    branches:
+      - main
+      - dev
+
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  terraform_validate:
+    name: 'Terraform software availability CRON job'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        terraform_module_ansible: [ansible_sap_ecc_hana_system_copy_hdb,ansible_sap_hana_install,ansible_sap_s4hana_install_maintplan,ansible_sap_s4hana_system_copy_hdb]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Ansible setup
+        id: local_setup
+        run: |
+          python --version
+          python -m pip install ansible-core requests beautifulsoup4 lxml
+          ansible --version
+          ansible-galaxy collection install git+https://github.com/sap-linuxlab/community.sap_launchpad.git,main
+      - name: Terraform Module for Ansible - check software
+        id: identify_software_list
+        env:
+          sap_user_id: ${{ secrets.SAP_USER_ID }}
+          sap_user_id_password: ${{ secrets.SAP_USER_ID_PASSWORD }}
+        run: |
+          cd "./all/${{ matrix.terraform_module_ansible }}"
+          # Extract from softwarecenter_search_list_.* until first empty line, then remove yaml formatting and sort for unique
+          export software_list=$(cat create_ansible_extravars.tf | awk '!NF{f=0} /^.*softwarecenter_search_list.*/{f=1} f{print}' | awk '!/.*softwarecenter_search_list.*/' | awk '{sub(/#.*/,""); print}' | awk '{sub(/ .*- '\''/,""); print}' | tr -d "'" | sort | uniq)
+          export errors_list=""
+          for item in $software_list
+          do
+            shell_exit_code=0
+            echo "Checking availability of SAP Software: $item"
+            ansible all --inventory 'localhost,' --connection 'local' --module-name community.sap_launchpad.software_center_download \
+            --args "suser_id='$sap_user_id' suser_password='$sap_user_id_password' softwarecenter_search_query='$item' dest='.' dry_run=True" \
+            || shell_exit_code=$?
+            if [ $shell_exit_code -ne 0 ]; then
+                errors_list="$errors_list $item"
+                continue
+            fi
+          done
+          if [ -z "$errors_list" ]
+          then
+            exit 0
+          else
+            echo "### ERRORS indentified ####"
+            echo "Terraform Templates for SAP require updating,"
+            echo "as the following SAP Software are no longer available:"
+            echo "$errors_list" | tr " " "\n"
+            exit 1
+          fi

@@ -19,6 +19,7 @@ softwarecenter_search_list_s4hana_install_x86_64:
   - 'SAPCAR_1115-70006178.EXE'
 softwarecenter_search_list_s4hana_install_ppc64le:
   - 'SAPCAR_1115-70006238.EXE'
+
 transaction_name: '${var.module_var_sap_maintenance_planner_transaction_name}'
 
 sap_install_media_detect_directory: "${var.module_var_sap_software_download_directory}"
