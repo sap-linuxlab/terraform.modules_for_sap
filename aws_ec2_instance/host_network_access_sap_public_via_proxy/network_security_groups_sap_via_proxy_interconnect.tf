@@ -36,8 +36,8 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_inbound_sapfiori" {
 
   type              = "ingress"
   source_security_group_id = var.module_var_bastion_sg_id
-  from_port         = tonumber("443${var.module_var_sap_hana_instance_no}")
-  to_port           = tonumber("443${var.module_var_sap_nwas_pas_instance_no}")
+  from_port         = tonumber("44300")
+  to_port           = tonumber("443${max(var.module_var_sap_hana_instance_no,var.module_var_sap_nwas_pas_instance_no)}")
   protocol          = "tcp"
 }
 

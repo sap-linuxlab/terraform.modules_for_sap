@@ -36,8 +36,8 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_sapfiori
   direction = "outbound"
   remote    = var.module_var_bastion_connection_security_group_id
   tcp {
-    port_min = tonumber("443${var.module_var_sap_hana_instance_no}")
-    port_max = tonumber("443${var.module_var_sap_nwas_pas_instance_no}")
+    port_min = tonumber("44300")
+    port_max = tonumber("443${max(var.module_var_sap_hana_instance_no,var.module_var_sap_nwas_pas_instance_no)}")
   }
 }
 
