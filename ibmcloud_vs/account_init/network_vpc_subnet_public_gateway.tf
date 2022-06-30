@@ -24,11 +24,6 @@ resource "ibm_is_public_gateway" "vpc_subnet_public_gateway" {
   zone           = var.module_var_ibmcloud_vpc_subnet_create_boolean ? var.module_var_ibmcloud_vpc_availability_zone : join(",", local.target_vpc_availability_zone)
   resource_group = var.module_var_resource_group_create_boolean ? ibm_resource_group.resource_group[0].id : data.ibm_resource_group.resource_group[0].id
 
-  //User can configure timeouts
-  timeouts {
-    create = "90m"
-    delete = "30m"
-  }
 }
 
 

@@ -28,9 +28,9 @@ resource "ibm_is_instance" "proxy_virtual_server" {
     name = "${var.module_var_virtual_server_hostname}-volume-boot-0"
   }
 
-  //User can configure timeouts
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {
-    create = "90m"
+    create = "30m"
     delete = "30m"
   }
 

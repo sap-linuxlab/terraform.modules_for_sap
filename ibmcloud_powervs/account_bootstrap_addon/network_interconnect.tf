@@ -25,7 +25,7 @@ resource "ibm_pi_cloud_connection" "cloud_connection" {
     ibm_pi_network.power_group_network_private.network_id
   ]
 
-  //User can configure timeouts
+  # Increase operation timeout
   timeouts {
     create = "90m"
     delete = "30m"

@@ -35,6 +35,12 @@ resource "aws_instance" "bastion_host" {
   tags = {
     Name = "${var.module_var_resource_prefix}-bastion"
   }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 

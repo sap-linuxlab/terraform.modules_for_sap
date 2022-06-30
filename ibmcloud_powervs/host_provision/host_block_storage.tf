@@ -11,6 +11,12 @@ resource "ibm_pi_volume" "block_volume_hana_data_tiered" {
   pi_volume_type       = var.module_var_disk_volume_type_hana_data
   pi_volume_shareable  = false
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 
@@ -22,6 +28,12 @@ resource "ibm_pi_volume" "block_volume_hana_log_tiered" {
   pi_volume_type       = var.module_var_disk_volume_type_hana_log
   pi_volume_shareable  = false
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 
@@ -33,6 +45,12 @@ resource "ibm_pi_volume" "block_volume_hana_shared_tiered" {
   pi_volume_type       = var.module_var_disk_volume_type_hana_shared
   pi_volume_shareable  = false
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 
@@ -44,6 +62,12 @@ resource "ibm_pi_volume" "block_volume_usr_sap_tiered" {
   pi_volume_type       = var.module_var_disk_volume_type_usr_sap
   pi_volume_shareable  = false
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "ibm_pi_volume" "block_volume_sapmnt_tiered" {
@@ -54,6 +78,12 @@ resource "ibm_pi_volume" "block_volume_sapmnt_tiered" {
   pi_volume_type       = var.module_var_disk_volume_type_sapmnt
   pi_volume_shareable  = false
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "ibm_pi_volume" "block_volume_swap_tiered" {
@@ -64,6 +94,12 @@ resource "ibm_pi_volume" "block_volume_swap_tiered" {
   pi_volume_type       = var.module_var_disk_volume_type_swap
   pi_volume_shareable  = false
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "ibm_pi_volume" "block_volume_software_tiered" {
@@ -72,4 +108,10 @@ resource "ibm_pi_volume" "block_volume_software_tiered" {
   pi_volume_type       = var.module_var_disk_volume_type_software
   pi_volume_shareable  = false
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }

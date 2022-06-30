@@ -39,6 +39,8 @@ resource "ibm_dns_resource_record" "dns_resource_record_cname" {
 
   # Force reference to the A record and increase timout, ensuring any destroy action will not have linked record errors
   depends_on = [ibm_dns_resource_record.dns_resource_record_a]
+
+  # Increase operation timeout
   timeouts {
     create = "10m"
     delete = "10m"
@@ -56,6 +58,8 @@ resource "ibm_dns_resource_record" "dns_resource_record_ptr" {
 
   # Force reference to the A record and increase timout, ensuring any destroy action will not have linked record errors
   depends_on = [ibm_dns_resource_record.dns_resource_record_a]
+
+  # Increase operation timeout
   timeouts {
     create = "10m"
     delete = "10m"

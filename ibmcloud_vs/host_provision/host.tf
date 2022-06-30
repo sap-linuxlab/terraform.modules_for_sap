@@ -38,9 +38,9 @@ resource "ibm_is_instance" "virtual_server" {
     ibm_is_volume.block_volume_software_tiered.id
   ])
 
-  //User can configure timeouts
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {
-    create = "90m"
+    create = "30m"
     delete = "30m"
   }
 
