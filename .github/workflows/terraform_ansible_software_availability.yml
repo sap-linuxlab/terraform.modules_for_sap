@@ -1,4 +1,4 @@
-name: Software Availability Tests for Ansible in terraform.modules_for_sap
+name: SAP Software Availability Tests
 
 on:
   # * is a special character in YAML, quote string to avoid
