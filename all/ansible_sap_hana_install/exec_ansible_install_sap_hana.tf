@@ -95,7 +95,7 @@ resource "null_resource" "ansible_exec" {
         --user root \
         --inventory '${var.module_var_host_private_ip},' \
         --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
-        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/${var.module_var_hostname}/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ForwardX11=no -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/${var.module_var_hostname}/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
       elif [ $bastion_boolean == "false" ]; then
         ansible-playbook ${path.module}/ansible_playbook.yml \
         --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
@@ -103,7 +103,7 @@ resource "null_resource" "ansible_exec" {
         --user root \
         --inventory '${var.module_var_host_private_ip},' \
         --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
-        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ForwardX11=no"
       fi
 EOF
       chmod +x ansible_exec.sh
@@ -116,7 +116,7 @@ EOF
         --user root \
         --inventory '${var.module_var_host_private_ip},' \
         --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
-        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/${var.module_var_hostname}/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ForwardX11=no -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/${var.module_var_hostname}/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
       elif [ $bastion_boolean == "false" ]; then
         ansible-playbook ${path.module}/ansible_playbook.yml \
         --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
@@ -124,7 +124,7 @@ EOF
         --user root \
         --inventory '${var.module_var_host_private_ip},' \
         --private-key '${path.root}/tmp/${var.module_var_hostname}/hosts_rsa' \
-        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=1800s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ForwardX11=no"
       fi
     fi
 
