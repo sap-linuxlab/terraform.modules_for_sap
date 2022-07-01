@@ -11,9 +11,13 @@ resource "azurerm_managed_disk" "block_volume_hana_data_voltype" {
   tier                 = var.module_var_disk_volume_type_hana_data
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_hana_data
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
-
-
 
 
 resource "azurerm_managed_disk" "block_volume_hana_log_voltype" {
@@ -26,9 +30,13 @@ resource "azurerm_managed_disk" "block_volume_hana_log_voltype" {
   tier                 = var.module_var_disk_volume_type_hana_log
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_hana_log
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
-
-
 
 
 resource "azurerm_managed_disk" "block_volume_hana_shared_voltype" {
@@ -41,9 +49,13 @@ resource "azurerm_managed_disk" "block_volume_hana_shared_voltype" {
   tier                 = var.module_var_disk_volume_type_hana_shared
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_hana_shared
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
-
-
 
 
 resource "azurerm_managed_disk" "block_volume_usr_sap_voltype" {
@@ -56,9 +68,13 @@ resource "azurerm_managed_disk" "block_volume_usr_sap_voltype" {
   tier                 = var.module_var_disk_volume_type_usr_sap
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_usr_sap
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
-
-
 
 
 resource "azurerm_managed_disk" "block_volume_sapmnt_voltype" {
@@ -71,9 +87,13 @@ resource "azurerm_managed_disk" "block_volume_sapmnt_voltype" {
   tier                 = var.module_var_disk_volume_type_sapmnt
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_sapmnt
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
-
-
 
 
 resource "azurerm_managed_disk" "block_volume_swap_voltype" {
@@ -86,9 +106,13 @@ resource "azurerm_managed_disk" "block_volume_swap_voltype" {
   tier                 = var.module_var_disk_volume_type_swap
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_swap
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
-
-
 
 
 resource "azurerm_managed_disk" "block_volume_software_voltype" {
@@ -99,4 +123,10 @@ resource "azurerm_managed_disk" "block_volume_software_voltype" {
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_software
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }

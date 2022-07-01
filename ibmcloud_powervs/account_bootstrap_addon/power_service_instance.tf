@@ -14,7 +14,7 @@ resource "ibm_resource_instance" "power_group" {
   resource_group_id = var.module_var_resource_group_id
   location          = var.module_var_ibmcloud_power_zone
 
-  //User can increase timeouts
+  # Increase operation timeout
   timeouts {
     create = "30m"
     update = "30m"

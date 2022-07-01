@@ -43,9 +43,9 @@ resource "ibm_pi_instance" "host_via_certified_profile" {
   ])
 
 
-  //User can configure timeouts
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {
-    create = "90m"
+    create = "30m"
     delete = "30m"
   }
 }
@@ -79,9 +79,9 @@ resource "ibm_pi_instance" "host_via_certified_profile" {
 #    ibm_pi_volume.block_volume.*.volume_id
 #  ])
 #
-#  //User can configure timeouts
+#  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
 #  timeouts {
-#    create = "90m"
+#    create = "30m"
 #    delete = "30m"
 #  }
 #}

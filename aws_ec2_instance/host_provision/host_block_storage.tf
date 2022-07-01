@@ -11,6 +11,12 @@ resource "aws_ebs_volume" "block_volume_hana_data_voltype" {
   tags = {
     Name = "${var.module_var_host_name}-volume-hana-data-${count.index}"
   }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "aws_ebs_volume" "block_volume_hana_data_custom" {
@@ -23,6 +29,12 @@ resource "aws_ebs_volume" "block_volume_hana_data_custom" {
 
   tags = {
     Name = "${var.module_var_host_name}-volume-hana-data-${count.index}"
+  }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
   }
 }
 
@@ -38,6 +50,12 @@ resource "aws_ebs_volume" "block_volume_hana_log_voltype" {
   tags = {
     Name = "${var.module_var_host_name}-volume-hana-log-${count.index}"
   }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "aws_ebs_volume" "block_volume_hana_log_custom" {
@@ -50,6 +68,12 @@ resource "aws_ebs_volume" "block_volume_hana_log_custom" {
 
   tags = {
     Name = "${var.module_var_host_name}-volume-hana-log-${count.index}"
+  }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
   }
 }
 
@@ -65,6 +89,12 @@ resource "aws_ebs_volume" "block_volume_hana_shared_voltype" {
   tags = {
     Name = "${var.module_var_host_name}-volume-hana-shared-${count.index}"
   }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "aws_ebs_volume" "block_volume_hana_shared_custom" {
@@ -77,6 +107,12 @@ resource "aws_ebs_volume" "block_volume_hana_shared_custom" {
 
   tags = {
     Name = "${var.module_var_host_name}-volume-hana-shared-${count.index}"
+  }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
   }
 }
 
@@ -92,6 +128,12 @@ resource "aws_ebs_volume" "block_volume_usr_sap_voltype" {
   tags = {
     Name = "${var.module_var_host_name}-volume-usr-sap-${count.index}"
   }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "aws_ebs_volume" "block_volume_sapmnt_voltype" {
@@ -103,6 +145,12 @@ resource "aws_ebs_volume" "block_volume_sapmnt_voltype" {
 
   tags = {
     Name = "${var.module_var_host_name}-volume-sapmnt-${count.index}"
+  }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
   }
 }
 
@@ -116,6 +164,12 @@ resource "aws_ebs_volume" "block_volume_swap_voltype" {
   tags = {
     Name = "${var.module_var_host_name}-volume-swap-${count.index}"
   }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "aws_ebs_volume" "block_volume_software_voltype" {
@@ -126,5 +180,11 @@ resource "aws_ebs_volume" "block_volume_software_voltype" {
 
   tags = {
     Name = "${var.module_var_host_name}-volume-software"
+  }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
   }
 }

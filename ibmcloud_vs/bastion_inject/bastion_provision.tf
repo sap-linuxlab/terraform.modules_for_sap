@@ -23,9 +23,9 @@ resource "ibm_is_instance" "bastion_host" {
     name = "${var.module_var_resource_prefix}-bastion-volume-boot-a"
   }
 
-  //User can configure timeouts
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {
-    create = "90m"
+    create = "30m"
     delete = "30m"
   }
 
