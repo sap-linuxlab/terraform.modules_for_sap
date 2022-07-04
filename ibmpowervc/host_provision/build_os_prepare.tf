@@ -36,6 +36,14 @@ resource "null_resource" "build_script_os_prepare" {
 
 set_hostname="${var.module_var_lpar_hostname}.${var.module_var_dns_root_domain_name}"
 hostnamectl set-hostname $set_hostname
+systemctl restart systemd-hostnamed
+
+#echo "hostname --short  == $(hostname --short)"
+#echo "hostname --domain == $(hostname --domain)"
+#echo "hostname --fqdn   == $(hostname --fqdn)"
+
+#echo "Debug - show hosts file"
+#cat /etc/hosts
 
 
 #############################################
