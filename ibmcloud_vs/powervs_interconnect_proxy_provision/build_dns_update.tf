@@ -57,11 +57,10 @@ os_version=$os_info_version
 
 echo "Detected $os_type Linux Operating System Distribution"
 
+echo '---- Sleep 30s to ensure Virtual Server is ready -----' && sleep 30
 
 echo 'Install dig...'
 if [ "$os_type" = "rhel" ] ; then yum --assumeyes --debuglevel=1 install bind-utils ; elif [ "$os_type" = "sles" ] ; then zypper install --no-confirm bind-utils ; fi
-
-echo '---- Sleep 30s to ensure Virtual Server is ready -----' && sleep 30
 
 echo '#### Run dig to Private DNS with Domain Name ####'
 echo 'Running dig @161.26.0.7 A ${ibm_is_instance.proxy_virtual_server.name}.${var.module_var_dns_root_domain_name}'
