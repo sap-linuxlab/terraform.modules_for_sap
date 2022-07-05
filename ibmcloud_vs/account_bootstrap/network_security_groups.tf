@@ -131,6 +131,17 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_ssh_private" {
   }
 }
 
+# SSH Outbound from hosts within private VPC Subnet
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_ssh_private" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_icmp_outbound]
+  group      = ibm_is_security_group.vpc_sg.id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = 22
+    port_max = 22
+  }
+}
 
 # Allow Inbound/Outbound any protocol or port to Classic IaaS Endpoints range using adn.networklayer.com domain
 # Required for access to OS Packages, e.g. Red Hat Satellite
