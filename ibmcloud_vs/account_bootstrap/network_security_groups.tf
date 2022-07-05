@@ -132,7 +132,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_ssh_private" {
 }
 
 # SSH Outbound from hosts within private VPC Subnet
-resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_ssh_private" {
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_ssh_private" {
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_icmp_outbound]
   group      = ibm_is_security_group.vpc_sg.id
   direction  = "outbound"
