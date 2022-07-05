@@ -21,8 +21,7 @@ resource "null_resource" "execute_os_scripts" {
       "$HOME/terraform_web_proxy_noninteractive.sh",
       "$HOME/terraform_os_subscriptions.sh",
       "echo 'Change DNS in resolv.conf'",
-      "mv /etc/resolv.conf /etc/resolv.conf.backup",
-      "mv /tmp/resolv.conf /etc/",
+      "if [ -f /tmp/resolv.conf ]; then mv /etc/resolv.conf /etc/resolv.conf.backup && mv /tmp/resolv.conf /etc/ ; fi",
       "chmod 644 /etc/resolv.conf",
       "$HOME/terraform_dig.sh",
       "$HOME/terraform_fs_init.sh"

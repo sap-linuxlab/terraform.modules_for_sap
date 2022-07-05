@@ -36,8 +36,8 @@ resource "null_resource" "execute_os_scripts" {
   # Execute, including all files provisioned by Terraform into $HOME
   provisioner "remote-exec" {
     inline = [
-      "mv /etc/resolv.conf /etc/resolv.conf.backup",
-      "mv /tmp/resolv.conf /etc/",
+      "echo 'Change DNS in resolv.conf'",
+      "if [ -f /tmp/resolv.conf ]; then mv /etc/resolv.conf /etc/resolv.conf.backup && mv /tmp/resolv.conf /etc/ ; fi",
       "chmod 644 /etc/resolv.conf",
       "chmod +x /home/ec2-user/terraform_*",
       "echo 'Show HOME directory for reference Shell scripts were transferred'",
