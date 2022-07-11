@@ -149,7 +149,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_repli
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_ranges     = "4${var.module_var_sap_hana_instance_no}01-4${var.module_var_sap_hana_instance_no}02"
+  destination_port_ranges     = ["4${var.module_var_sap_hana_instance_no}01-4${var.module_var_sap_hana_instance_no}02"]
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -164,7 +164,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_repl
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_ranges     = "4${var.module_var_sap_hana_instance_no}01-4${var.module_var_sap_hana_instance_no}02"
+  destination_port_ranges     = ["4${var.module_var_sap_hana_instance_no}01-4${var.module_var_sap_hana_instance_no}02"]
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
