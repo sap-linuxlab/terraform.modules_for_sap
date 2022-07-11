@@ -135,6 +135,43 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
   network_security_group_name = var.module_var_host_security_group_name
 }
 
+
+# SAP HANA System Replication
+## The port offset is +10000 from the SAP HANA indexserver MDC configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
+## In addition, there is another port offset +1 reserved for both systems to use during system replication communication.
+## Source: SAP HANA Administration Guide, SAP HANA System Replication with Multi-Tenant Databases (MDC) -- https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/d20e1a973df9462fa92149f29ee2c455.html?version=latest
+resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_replication" {
+  name      = "tcp_inbound_saphana_replication"
+  priority  = 301
+  direction = "Inbound"
+  access    = "Allow"
+  protocol  = "Tcp"
+
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_ranges     = "4${var.module_var_sap_hana_instance_no}01-4${var.module_var_sap_hana_instance_no}02"
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
+resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_replication" {
+  name      = "tcp_outbound_saphana_replication"
+  priority  = 302
+  direction = "Outbound"
+  access    = "Allow"
+  protocol  = "Tcp"
+
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_ranges     = "4${var.module_var_sap_hana_instance_no}01-4${var.module_var_sap_hana_instance_no}02"
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
+
+
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
   name      = "tcp_inbound_sapfiori"
