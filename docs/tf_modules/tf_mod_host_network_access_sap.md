@@ -51,3 +51,36 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 | | SAP NetWeaver AS JAVA Message Server | 81`01` |
 
 `*` Terraform Module
+
+### SAP HANA System Replication
+
+For SAP HANA System Replication, the port offset is +10000 from the SAP HANA indexserver MDC configured ports (e.g. `3<<sap_hana_instance_no>>15` for MDC Tenant #1). This is controlled by the parameter 'replication_port_offset' in the global.ini file.
+
+This replaces the old-style port offset +100, and replaces the additional +1 offset used for SAP HANA with single container/tenant (which is not supported after SAP HANA 2.0 SPS 01).
+
+The SAP HANA System Replication using SAP HANA 2.0 with MDC Tenants port calculations are therefore:
+
+| **SAP Technical Application** | **Component** | **Port** |
+| --- | --- | --- |
+| SAP HANA Sytem Replication | | |
+| | hdbnameserver, used for log and data shipping from a primary site to a secondary site.<br/>System DB port number plus 10,000 | 4`<sap_hana_instance_no>`01 |
+| | hdbnameserver, unencrypted metadata communication between sites.<br/>System DB port number plus 10,000 | 4`<sap_hana_instance_no>`02 |
+| | hdbnameserver, used for encrypted metadata communication between sites.<br/>System DB port number plus 10,000 | 4`<sap_hana_instance_no>`06 |
+| | hdbindexserver, used for first MDC Tenant database schema | 4`<sap_hana_instance_no>`03 |
+| | hdbxsengine, used for SAP HANA XSC/XSA | 4`<sap_hana_instance_no>`07 |
+| | hdbscriptserver, used for log and data shipping from a primary site to a secondary site.<br/>Tenant port number plus 10,000 | 4`<sap_hana_instance_no>`40-97 |
+| | hdbxsengine, used for log and data shipping from a primary site to a secondary site.<br/>Tenant port number plus 10,000 | 4`<sap_hana_instance_no>`40-97 |
+| Linux Pacemaker | | |
+| | pcsd | 2224 (TCP) |
+| | pacemaker | 3121 (TCP) |
+| | corosync | 5404-5412 (UDP) |
+
+
+The Ansible Role `sap_ha_install_hana_hsr` assumes these ports are open within the Subnet and on each host OS, otherwise errors such as "unable to contact primary site" will be shown.
+
+Sources:
+- [SAP Note 2477204 - FAQ: SAP HANA Services and Ports](https://launchpad.support.sap.com/#/notes/2477204)
+- Question 29 on [SAP Note 1999880 - FAQ: SAP HANA System Replication](https://launchpad.support.sap.com/#/notes/1999880)
+- [SAP HANA Administration Guide - SAP HANA System Replication with Multi-Tenant Databases (MDC)](https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/d20e1a973df9462fa92149f29ee2c455.html?version=latest)
+- [SAP HANA Security Checklists and Recommendations - Recommendations for Network Configuration](https://help.sap.com/docs/SAP_HANA_PLATFORM/742945a940f240f4a2a0e39f93d3e2d4/eccef06eabe545e68d5019bcb6d8e342.html?version=latest)
+- [High-Availability cluster with Pacemaker - Enabling ports](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_high_availability_clusters/assembly_creating-high-availability-cluster-configuring-and-managing-high-availability-clusters#proc_enabling-ports-for-high-availability-creating-high-availability-cluster)

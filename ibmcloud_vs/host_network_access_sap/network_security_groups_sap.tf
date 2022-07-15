@@ -94,33 +94,6 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc
   }
 }
 
-
-# SAP HANA System Replication
-## The port offset is +10000 from the SAP HANA indexserver MDC configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
-## In addition, there is another port offset +1 reserved for both systems to use during system replication communication.
-## Source: SAP HANA Administration Guide, SAP HANA System Replication with Multi-Tenant Databases (MDC) -- https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/d20e1a973df9462fa92149f29ee2c455.html?version=latest
-resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_replication" {
-  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
-  group      = var.module_var_host_security_group_id
-  direction  = "inbound"
-  remote     = local.target_vpc_subnet_range
-  tcp {
-    port_min = tonumber("4${var.module_var_sap_hana_instance_no}01")
-    port_max = tonumber("4${var.module_var_sap_hana_instance_no}02")
-  }
-}
-resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_replication" {
-  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
-  group      = var.module_var_host_security_group_id
-  direction  = "outbound"
-  remote     = local.target_vpc_subnet_range
-  tcp {
-    port_min = tonumber("4${var.module_var_sap_hana_instance_no}01")
-    port_max = tonumber("4${var.module_var_sap_hana_instance_no}02")
-  }
-}
-
-
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapfiori" {
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
@@ -142,5 +115,110 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_ctrl" {
   tcp {
     port_min = tonumber("5${var.module_var_sap_nwas_pas_instance_no}13")
     port_max = tonumber("5${var.module_var_sap_nwas_pas_instance_no}14")
+  }
+}
+
+
+# SAP HANA System Replication
+## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
+## More details in README
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_saphana_hsr1" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "inbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("4${var.module_var_sap_hana_instance_no}01")
+    port_max = tonumber("4${var.module_var_sap_hana_instance_no}07")
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_saphana_hsr1" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("4${var.module_var_sap_hana_instance_no}01")
+    port_max = tonumber("4${var.module_var_sap_hana_instance_no}07")
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_saphana_hsr2" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "inbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("4${var.module_var_sap_hana_instance_no}40")
+    port_max = tonumber("4${var.module_var_sap_hana_instance_no}40")
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_saphana_hsr2" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("4${var.module_var_sap_hana_instance_no}40")
+    port_max = tonumber("4${var.module_var_sap_hana_instance_no}40")
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_1" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "inbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = 2224
+    port_max = 2224
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_1" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = 2224
+    port_max = 2224
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_2" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "inbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = 3121
+    port_max = 3121
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_2" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = 3121
+    port_max = 3121
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_3" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "inbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = 5404
+    port_max = 5412
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_3" {
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = 5404
+    port_max = 5412
   }
 }
