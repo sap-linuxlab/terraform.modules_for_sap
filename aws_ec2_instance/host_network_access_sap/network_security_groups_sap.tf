@@ -69,7 +69,6 @@ resource "aws_security_group" "vpc_sg_hosts_sap" {
     cidr_blocks = [local.target_subnet_ip_range]
   }
 
-
   # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
   ingress {
     from_port   = tonumber("443${var.module_var_sap_hana_instance_no}")
@@ -82,6 +81,71 @@ resource "aws_security_group" "vpc_sg_hosts_sap" {
   ingress {
     from_port   = tonumber("5${var.module_var_sap_nwas_pas_instance_no}13")
     to_port     = tonumber("5${var.module_var_sap_nwas_pas_instance_no}13")
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+
+
+# SAP HANA System Replication
+## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
+## More details in README
+  ingress {
+    from_port   = tonumber("4${var.module_var_sap_hana_instance_no}01")
+    to_port     = tonumber("4${var.module_var_sap_hana_instance_no}07")
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  egress {
+    from_port   = tonumber("4${var.module_var_sap_hana_instance_no}01")
+    to_port     = tonumber("4${var.module_var_sap_hana_instance_no}07")
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  ingress {
+    from_port   = tonumber("4${var.module_var_sap_hana_instance_no}40")
+    to_port     = tonumber("4${var.module_var_sap_hana_instance_no}40")
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  egress {
+    from_port   = tonumber("4${var.module_var_sap_hana_instance_no}40")
+    to_port     = tonumber("4${var.module_var_sap_hana_instance_no}40")
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  ingress {
+    from_port   = 2224
+    to_port     = 2224
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  egress {
+    from_port   = 2224
+    to_port     = 2224
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  ingress {
+    from_port   = 3121
+    to_port     = 3121
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  egress {
+    from_port   = 3121
+    to_port     = 3121
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  ingress {
+    from_port   = 5404
+    to_port     = 5412
+    protocol    = "tcp"
+    cidr_blocks = [local.target_subnet_ip_range]
+  }
+  egress {
+    from_port   = 5404
+    to_port     = 5412
     protocol    = "tcp"
     cidr_blocks = [local.target_subnet_ip_range]
   }
