@@ -303,8 +303,8 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_pace
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_pacemaker3" {
-  name      = "tcp_inbound_saphana_replication"
-  priority  = 301
+  name      = "tcp_inbound_saphana_pacemaker3"
+  priority  = 309
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -319,8 +319,8 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_pacemaker3" {
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_pacemaker3" {
-  name      = "tcp_outbound_saphana_replication"
-  priority  = 302
+  name      = "tcp_outbound_saphana_pacemaker3"
+  priority  = 310
   direction = "Outbound"
   access    = "Allow"
   protocol  = "Tcp"
