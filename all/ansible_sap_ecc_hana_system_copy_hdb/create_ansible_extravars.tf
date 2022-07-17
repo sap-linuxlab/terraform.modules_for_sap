@@ -20,7 +20,7 @@ softwarecenter_search_list_ecc_syscopy_x86_64:
   - 'IMDB_LCAPPS_2059_0-20010426.SAR'
   - 'IMDB_AFL20_059_0-80001894.SAR'
   - 'VCH202000_2059_0-80005463.SAR'
-  - 'SWPM10SP35_3-20009703.SAR'
+  - 'SWPM10SP35_3-20009701.SAR'
   - 'igsexe_12-80003187.sar' # IGS 7.53
   - 'igshelper_17-10010245.sar'
   - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753)
