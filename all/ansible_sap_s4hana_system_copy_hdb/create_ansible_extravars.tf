@@ -42,7 +42,7 @@ softwarecenter_dictionary:
       - 'igsexe_13-80003246.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_400-80004418.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_400-80004417.SAR' # Kernel Part I (785)
+      - 'SAPEXEDB_400-80004417.SAR' # Kernel Part II (785)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
   sap_s4hana_2020_onehost_system_copy:
@@ -57,7 +57,7 @@ softwarecenter_dictionary:
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part I (785)
+      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_s4hana_syscopy_ppc64le:
@@ -70,7 +70,7 @@ softwarecenter_dictionary:
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part I (785)
+      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
   sap_s4hana_2021_onehost_system_copy:
@@ -85,7 +85,7 @@ softwarecenter_dictionary:
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part I (785)
+      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_s4hana_syscopy_ppc64le:
@@ -98,7 +98,7 @@ softwarecenter_dictionary:
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part I (785)
+      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
 sap_install_media_detect_directory: "${var.module_var_sap_software_download_directory}"
