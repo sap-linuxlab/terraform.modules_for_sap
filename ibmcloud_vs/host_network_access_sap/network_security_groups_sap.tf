@@ -207,7 +207,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_3" {
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
   remote     = local.target_vpc_subnet_range
-  tcp {
+  udp {
     port_min = 5404
     port_max = 5412
   }
@@ -217,7 +217,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_3" {
   group      = var.module_var_host_security_group_id
   direction  = "outbound"
   remote     = local.target_vpc_subnet_range
-  tcp {
+  udp {
     port_min = 5404
     port_max = 5412
   }

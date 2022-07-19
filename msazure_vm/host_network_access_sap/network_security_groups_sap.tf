@@ -302,12 +302,12 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_pace
   network_security_group_name = var.module_var_host_security_group_name
 }
 
-resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_pacemaker3" {
-  name      = "tcp_inbound_saphana_replication"
-  priority  = 301
+resource "azurerm_network_security_rule" "vnet_sg_rule_udp_inbound_pacemaker3" {
+  name      = "tcp_inbound_saphana_pacemaker3"
+  priority  = 309
   direction = "Inbound"
   access    = "Allow"
-  protocol  = "Tcp"
+  protocol  = "Udp"
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
@@ -318,12 +318,12 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_pacemaker3" {
   network_security_group_name = var.module_var_host_security_group_name
 }
 
-resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_pacemaker3" {
-  name      = "tcp_outbound_saphana_replication"
-  priority  = 302
+resource "azurerm_network_security_rule" "vnet_sg_rule_udp_outbound_pacemaker3" {
+  name      = "tcp_outbound_saphana_pacemaker3"
+  priority  = 310
   direction = "Outbound"
   access    = "Allow"
-  protocol  = "Tcp"
+  protocol  = "Udp"
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range

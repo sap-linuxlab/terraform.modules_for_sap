@@ -140,13 +140,13 @@ resource "aws_security_group" "vpc_sg_hosts_sap" {
   ingress {
     from_port   = 5404
     to_port     = 5412
-    protocol    = "tcp"
+    protocol    = "udp"
     cidr_blocks = [local.target_subnet_ip_range]
   }
   egress {
     from_port   = 5404
     to_port     = 5412
-    protocol    = "tcp"
+    protocol    = "udp"
     cidr_blocks = [local.target_subnet_ip_range]
   }
 
