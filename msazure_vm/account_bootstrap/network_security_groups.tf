@@ -6,7 +6,7 @@
 # Terraform using in-line rules nested instead of standalone declarations of Security Group Rules
 
 resource "azurerm_network_security_group" "vnet_sg" {
-  name                = "${var.module_var_resource_prefix}-vnet-sg-vm"
+  name                = "${var.module_var_resource_prefix}-vnet-vm-sg"
   resource_group_name = var.module_var_az_resource_group_name
   location            = var.module_var_az_region
 

@@ -8,7 +8,7 @@
 # Uses depends_on to provide an order to the rules
 
 resource "ibm_is_security_group" "vpc_sg" {
-  name           = "${var.module_var_resource_prefix}-vpc-sg"
+  name           = "${var.module_var_resource_prefix}-vpc-hosts-sg"
   vpc            = local.target_vpc_id
   resource_group = var.module_var_resource_group_id
 }

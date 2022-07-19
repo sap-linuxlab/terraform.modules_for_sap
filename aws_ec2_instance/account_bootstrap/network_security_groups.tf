@@ -1,7 +1,7 @@
 
 # Define host security group rules
 resource "aws_security_group" "vpc_sg" {
-  name        = "${var.module_var_resource_prefix}-vpc-sg"
+  name        = "${var.module_var_resource_prefix}-vpc-hosts-sg"
   vpc_id      = local.target_vpc_id
   description = "Open Ports for hosts in VPC"
 
@@ -55,7 +55,7 @@ resource "aws_security_group" "vpc_sg" {
   }
 
   tags = {
-    Name = "${var.module_var_resource_prefix}-vpc-sg"
+    Name = "${var.module_var_resource_prefix}-vpc-hosts-sg"
   }
 
 }
