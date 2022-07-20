@@ -474,10 +474,13 @@ function main() {
 
 
   # If any mount point uses LVM. i.e. IF with OR operator
-  if [[ "${var.module_var_lvm_enable_hana_data}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_log}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_shared}" == "true" ]]
-  then
-    lvm_install
-  fi
+  #if [[ "${var.module_var_lvm_enable_hana_data}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_log}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_shared}" == "true" || [[ "${var.module_var_lvm_enable_anydb}" == "true" ]]
+  #then
+  #  lvm_install
+  #fi
+
+  # Always install LVM, permenantly in-use for SAP Software download directory
+  lvm_install
 
 
   if [[ ${var.module_var_disk_volume_count_hana_data} -gt 0 ]]
