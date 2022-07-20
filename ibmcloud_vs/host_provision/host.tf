@@ -32,6 +32,7 @@ resource "ibm_is_instance" "virtual_server" {
     var.module_var_disk_volume_type_hana_data == "custom" ? ibm_is_volume.block_volume_hana_data_custom.*.id : ibm_is_volume.block_volume_hana_data_tiered.*.id,
     var.module_var_disk_volume_type_hana_log == "custom" ? ibm_is_volume.block_volume_hana_log_custom.*.id : ibm_is_volume.block_volume_hana_log_tiered.*.id,
     var.module_var_disk_volume_type_hana_shared == "custom" ? ibm_is_volume.block_volume_hana_shared_custom.*.id : ibm_is_volume.block_volume_hana_shared_tiered.*.id,
+    var.module_var_disk_volume_type_anydb == "custom" ? ibm_is_volume.block_volume_anydb_custom.*.id : ibm_is_volume.block_volume_anydb_tiered.*.id,
     ibm_is_volume.block_volume_usr_sap_tiered.*.id,
     ibm_is_volume.block_volume_sapmnt_tiered.*.id,
     ibm_is_volume.block_volume_swap_tiered.*.id,
