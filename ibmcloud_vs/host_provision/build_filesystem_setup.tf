@@ -523,11 +523,11 @@ function main() {
   then
     if [[ "${var.module_var_lvm_enable_anydb}" == "true" ]]
     then
-      lvm_filesystem_runner "${var.module_var_filesystem_mount_path}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_lvm_pv_data_alignment_anydb}" "vg_anydb" "${var.module_var_lvm_vg_data_alignment_anydb}" "${var.module_var_lvm_vg_physical_extent_size_anydb}" "${var.module_var_lvm_lv_stripe_size_anydb}" "${var.module_var_filesystem_anydb}"
+      lvm_filesystem_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_lvm_pv_data_alignment_anydb}" "vg_anydb" "${var.module_var_lvm_vg_data_alignment_anydb}" "${var.module_var_lvm_vg_physical_extent_size_anydb}" "${var.module_var_lvm_lv_stripe_size_anydb}" "${var.module_var_filesystem_anydb}"
     
     elif [[ "${var.module_var_lvm_enable_anydb}" == "false" ]]
     then
-      physical_volume_partition_runner "${var.module_var_filesystem_mount_path}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_physical_partition_filesystem_block_size_anydb}" "anydb" "${var.module_var_filesystem_anydb}"
+      physical_volume_partition_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_physical_partition_filesystem_block_size_anydb}" "anydb" "${var.module_var_filesystem_anydb}"
     fi
   fi
 

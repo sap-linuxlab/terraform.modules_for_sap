@@ -141,7 +141,7 @@ variable "module_var_lvm_vg_physical_extent_size_anydb" {
 variable "module_var_lvm_lv_stripe_size_anydb" {
   default = "64K"
 }
-variable "module_var_filesystem_mount_path" {
+variable "module_var_filesystem_mount_path_anydb" {
 }
 variable "module_var_filesystem_anydb" {
   default = "xfs"
