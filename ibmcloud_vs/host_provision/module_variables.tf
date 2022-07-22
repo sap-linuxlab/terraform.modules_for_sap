@@ -31,10 +31,6 @@ variable "module_var_bastion_private_ssh_key" {
   sensitive = false
 }
 
-variable "module_var_bastion_public_ssh_key" {
-  sensitive = false
-}
-
 variable "module_var_host_ssh_key_id" {}
 
 variable "module_var_host_private_ssh_key" {
