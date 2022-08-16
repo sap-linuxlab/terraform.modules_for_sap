@@ -58,7 +58,7 @@ resource "azurerm_managed_disk" "block_volume_hana_shared_voltype" {
 }
 
 
-resource "azurerm_managed_disk" "block_volume_anydb" {
+resource "azurerm_managed_disk" "block_volume_anydb_voltype" {
   count = var.module_var_disk_volume_type_anydb != "custom" ? var.module_var_disk_volume_count_anydb : 0
 
   name                 = "${var.module_var_host_name}-volume-anydb-${count.index}"
