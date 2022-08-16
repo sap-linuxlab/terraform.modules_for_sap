@@ -36,6 +36,7 @@ resource "ibm_pi_instance" "host_via_certified_profile" {
     ibm_pi_volume.block_volume_hana_data_tiered.*.volume_id,
     ibm_pi_volume.block_volume_hana_log_tiered.*.volume_id,
     ibm_pi_volume.block_volume_hana_shared_tiered.*.volume_id,
+    ibm_pi_volume.block_volume_anydb_tiered.*.volume_id,
     ibm_pi_volume.block_volume_usr_sap_tiered.*.volume_id,
     ibm_pi_volume.block_volume_sapmnt_tiered.*.volume_id,
     ibm_pi_volume.block_volume_swap_tiered.*.volume_id,
