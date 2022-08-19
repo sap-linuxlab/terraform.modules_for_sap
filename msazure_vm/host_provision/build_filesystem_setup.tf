@@ -533,7 +533,7 @@ function main() {
 
 
   # If any mount point uses LVM. i.e. IF with OR operator
-  if [[ "${var.module_var_lvm_enable_hana_data}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_log}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_shared}" == "true" ]]
+  if [[ "${var.module_var_lvm_enable_hana_data}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_log}" == "true" ]] || [[ "${var.module_var_lvm_enable_hana_shared}" == "true" ]] || [[ "${var.module_var_lvm_enable_anydb}" == "true" ]]
   then
     lvm_install
   fi
@@ -574,6 +574,19 @@ function main() {
     elif [[ "${var.module_var_lvm_enable_hana_shared}" == "false" ]]
     then
       physical_volume_partition_runner "/hana/shared" "${var.module_var_disk_volume_capacity_hana_shared}" "${var.module_var_physical_partition_filesystem_block_size_hana_shared}" "hana_shared" "${var.module_var_filesystem_hana_shared}"
+    fi
+  fi
+
+
+  if [[ ${var.module_var_disk_volume_count_anydb} -gt 0 ]]
+  then
+    if [[ "${var.module_var_lvm_enable_anydb}" == "true" ]]
+    then
+      lvm_filesystem_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_lvm_pv_data_alignment_anydb}" "vg_anydb" "${var.module_var_lvm_vg_data_alignment_anydb}" "${var.module_var_lvm_vg_physical_extent_size_anydb}" "${var.module_var_lvm_lv_stripe_size_anydb}" "${var.module_var_filesystem_anydb}"
+    
+    elif [[ "${var.module_var_lvm_enable_anydb}" == "false" ]]
+    then
+      physical_volume_partition_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_physical_partition_filesystem_block_size_anydb}" "anydb" "${var.module_var_filesystem_anydb}"
     fi
   fi
 

@@ -62,6 +62,26 @@ resource "openstack_blockstorage_volume_v2" "block_volume_hana_shared" {
 }
 
 
+resource "openstack_blockstorage_volume_v2" "block_volume_anydb" {
+  count = var.module_var_disk_volume_count_anydb
+
+  name        = "${var.module_var_lpar_hostname}-volume-anydb-${count.index}"
+  size        = var.module_var_disk_volume_capacity_anydb
+  volume_type = local.ibm_storwize_storage_template_sap_other_name
+  #multiattach = true
+
+  scheduler_hints {
+
+    # After provisioning, modifications to extra_specs parameters may not be identified during Terraform refresh and re-apply
+    additional_properties = {
+      "drivers:multipath" : "0"
+    }
+
+  }
+
+}
+
+
 resource "openstack_blockstorage_volume_v2" "block_volume_usr_sap" {
   count = var.module_var_disk_volume_count_usr_sap
 

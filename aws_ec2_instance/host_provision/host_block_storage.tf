@@ -118,6 +118,45 @@ resource "aws_ebs_volume" "block_volume_hana_shared_custom" {
 
 
 
+resource "aws_ebs_volume" "block_volume_anydb_voltype" {
+  count = var.module_var_disk_volume_type_anydb != "custom" ? var.module_var_disk_volume_count_anydb : 0
+
+  availability_zone = local.target_vpc_availability_zone
+  type              = var.module_var_disk_volume_type_anydb
+  size              = var.module_var_disk_volume_capacity_anydb
+
+  tags = {
+    Name = "${var.module_var_host_name}-volume-anydb-${count.index}"
+  }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
+}
+
+resource "aws_ebs_volume" "block_volume_anydb_custom" {
+  count = var.module_var_disk_volume_type_anydb == "custom" ? var.module_var_disk_volume_count_anydb : 0
+
+  availability_zone = local.target_vpc_availability_zone
+  type              = var.module_var_disk_volume_type_anydb
+  size              = var.module_var_disk_volume_capacity_anydb
+  iops              = var.module_var_disk_volume_iops_anydb
+
+  tags = {
+    Name = "${var.module_var_host_name}-volume-anydb-${count.index}"
+  }
+
+  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
+}
+
+
+
 resource "aws_ebs_volume" "block_volume_usr_sap_voltype" {
   count = var.module_var_disk_volume_count_usr_sap
 

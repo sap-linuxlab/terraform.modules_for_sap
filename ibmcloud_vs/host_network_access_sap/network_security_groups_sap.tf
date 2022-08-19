@@ -1,6 +1,7 @@
 
 # SAP NetWeaver PAS / SAP GUI, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_sapgui" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   group     = var.module_var_host_security_group_id
   direction = "inbound"
   remote    = local.target_vpc_subnet_range
@@ -12,6 +13,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_sapgui" {
 
 # SAP NetWeaver PAS Gateway, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_gw" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_sap_inbound_sapnwas_sapgui]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -24,6 +26,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_gw" {
 
 # SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_icm_https" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_sap_inbound_sapnwas_gw]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -36,6 +39,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_icm_https
 
 # SAP HANA ICM HTTP Internal Web Dispatcher, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_icm_http" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_icm_https]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -48,6 +52,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_icm_http"
 
 # SAP NetWeaver AS JAVA Message Server, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_sapnwas_java_ms" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_icm_http]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -60,6 +65,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_sapnwas_java_ms" 
 
 # SAP HANA Internal Web Dispatcher, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_webdisp" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_sapnwas_java_ms]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -72,6 +78,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_webdisp" 
 
 # SAP HANA indexserver MDC System Tenant SYSDB, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc_sysdb" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_webdisp]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -84,6 +91,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc
 
 # SAP HANA indexserver MDC Tenant #1, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc_1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_sysdb]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -96,6 +104,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc
 
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapfiori" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -108,6 +117,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapfiori" {
 
 # SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_ctrl" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_sap_inbound_sapfiori]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -123,6 +133,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_ctrl" {
 ## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
 ## More details in README
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_saphana_hsr1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -143,6 +154,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_saphana_hsr1" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_saphana_hsr2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -153,6 +165,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_saphana_hsr2" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_saphana_hsr2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "outbound"
@@ -163,6 +176,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_saphana_hsr2" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -173,6 +187,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_1" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "outbound"
@@ -183,6 +198,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_1" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -193,6 +209,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_2" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "outbound"
@@ -203,6 +220,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_2" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_3" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -213,6 +231,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_pacemaker_3" {
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_pacemaker_3" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "outbound"

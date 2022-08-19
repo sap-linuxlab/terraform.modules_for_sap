@@ -120,3 +120,18 @@ resource "aws_volume_attachment" "volume_attachment_software" {
   instance_id = aws_instance.host.id
   volume_id   = element(aws_ebs_volume.block_volume_software_voltype.*.id, count.index)
 }
+
+
+resource "aws_volume_attachment" "volume_attachment_anydb" {
+  count       = length(aws_ebs_volume.block_volume_anydb_voltype.*.id)
+  device_name = "/dev/sd${element(["aa", "ab", "ac", "ad"], count.index)}"
+  instance_id = aws_instance.host.id
+  volume_id   = element(aws_ebs_volume.block_volume_anydb_voltype.*.id, count.index)
+}
+
+resource "aws_volume_attachment" "volume_attachment_anydb_custom" {
+  count       = length(aws_ebs_volume.block_volume_anydb_custom.*.id)
+  device_name = "/dev/sd${element(["aa", "ab", "ac", "ad"], count.index)}"
+  instance_id = aws_instance.host.id
+  volume_id   = element(aws_ebs_volume.block_volume_anydb_custom.*.id, count.index)
+}

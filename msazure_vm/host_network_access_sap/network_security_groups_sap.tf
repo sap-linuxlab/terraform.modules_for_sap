@@ -1,6 +1,7 @@
 
 # SAP NetWeaver PAS / SAP GUI, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgui" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_sapgui"
   priority  = 201
   direction = "Inbound"
@@ -18,6 +19,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgu
 
 # SAP NetWeaver PAS Gateway, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_gw"
   priority  = 202
   direction = "Inbound"
@@ -35,6 +37,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
 
 # SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_https" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_icm_https"
   priority  = 203
   direction = "Inbound"
@@ -52,6 +55,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
 
 # SAP HANA ICM HTTP Internal Web Dispatcher, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_http" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_icm_http"
   priority  = 204
   direction = "Inbound"
@@ -69,6 +73,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
 
 # SAP NetWeaver AS JAVA Message Server, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapnwas_java_ms" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_java_ms"
   priority  = 205
   direction = "Inbound"
@@ -86,6 +91,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapnwas_java_
 
 # SAP HANA Internal Web Dispatcher, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_webdisp" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_webdisp"
   priority  = 206
   direction = "Inbound"
@@ -103,6 +109,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_webdi
 
 # SAP HANA indexserver MDC System Tenant SYSDB, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index_mdc_sysdb" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_index_mdc_sysdb"
   priority  = 207
   direction = "Inbound"
@@ -120,6 +127,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
 
 # SAP HANA indexserver MDC Tenant #1, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index_mdc_1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_index_mdc_1"
   priority  = 208
   direction = "Inbound"
@@ -138,6 +146,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
 
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   name      = "tcp_inbound_sapfiori"
   priority  = 209
   direction = "Inbound"
@@ -155,6 +164,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
 
 # SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_ctrl"
   priority  = 210
   direction = "Inbound"
@@ -175,6 +185,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl"
 ## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
 ## More details in README
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_hsr1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_hsr1"
   priority  = 301
   direction = "Inbound"
@@ -191,6 +202,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_hsr1"
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_hsr1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_hsr1"
   priority  = 302
   direction = "Outbound"
@@ -207,6 +219,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_hsr1
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_saphana_hsr2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_hsr2"
   priority  = 303
   direction = "Inbound"
@@ -223,6 +236,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_saphana_hsr2"
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_hsr2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_hsr2"
   priority  = 304
   direction = "Outbound"
@@ -239,6 +253,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_hsr2
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_saphana_pacemaker1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_pacemaker1"
   priority  = 305
   direction = "Inbound"
@@ -255,6 +270,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_saphana_pacem
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_pacemaker1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_pacemaker1"
   priority  = 306
   direction = "Outbound"
@@ -271,6 +287,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_pace
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_saphana_pacemaker2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_pacemaker2"
   priority  = 307
   direction = "Inbound"
@@ -287,6 +304,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_saphana_pacem
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_pacemaker2" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_pacemaker2"
   priority  = 308
   direction = "Outbound"
@@ -303,6 +321,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_pace
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_udp_inbound_pacemaker3" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_pacemaker3"
   priority  = 309
   direction = "Inbound"
@@ -319,6 +338,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_udp_inbound_pacemaker3" {
 }
 
 resource "azurerm_network_security_rule" "vnet_sg_rule_udp_outbound_pacemaker3" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_pacemaker3"
   priority  = 310
   direction = "Outbound"

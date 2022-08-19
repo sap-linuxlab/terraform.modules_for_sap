@@ -117,12 +117,22 @@ resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_hana_
   caching            = "ReadOnly"
 }
 
+resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_anydb" {
+  count = length(azurerm_managed_disk.block_volume_anydb_voltype.*.id)
+
+  managed_disk_id    = azurerm_managed_disk.block_volume_anydb_voltype[count.index].id
+  virtual_machine_id = azurerm_linux_virtual_machine.host.id
+  lun                = tostring(40 + count.index)
+  caching            = "ReadOnly"
+}
+
+
 resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_usr_sap" {
   count = length(azurerm_managed_disk.block_volume_usr_sap_voltype.*.id)
 
   managed_disk_id    = azurerm_managed_disk.block_volume_usr_sap_voltype[count.index].id
   virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(40 + count.index)
+  lun                = tostring(45 + count.index)
   caching            = "ReadWrite"
 }
 

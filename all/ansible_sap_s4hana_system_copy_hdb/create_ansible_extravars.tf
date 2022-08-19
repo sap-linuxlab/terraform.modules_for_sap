@@ -21,11 +21,11 @@ softwarecenter_dictionary:
 
     softwarecenter_search_list_s4hana_syscopy_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_063_0-80002031.SAR'
+      - 'IMDB_SERVER20_064_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
       - 'IMDB_AFL20_061_2-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
-      - 'SWPM20SP12_4-80003424.SAR'
+      - 'SWPM20SP12_5-80003424.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_400-80004393.SAR' # Kernel Part I (777)
@@ -34,11 +34,11 @@ softwarecenter_dictionary:
 
     softwarecenter_search_list_s4hana_syscopy_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_063_0-80002046.SAR'
+      - 'IMDB_SERVER20_064_0-80002046.SAR'
       - 'IMDB_LCAPPS_2061_0-80002183.SAR'
       - 'IMDB_AFL20_061_2-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
-      - 'SWPM20SP12_4-80003426.SAR'
+      - 'SWPM20SP12_5-80003426.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_400-80004418.SAR' # Kernel Part I (785)
@@ -49,11 +49,11 @@ softwarecenter_dictionary:
 
     softwarecenter_search_list_s4hana_syscopy_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_063_0-80002031.SAR'
+      - 'IMDB_SERVER20_064_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
       - 'IMDB_AFL20_061_2-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
-      - 'SWPM20SP12_4-80003424.SAR'
+      - 'SWPM20SP12_5-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
@@ -62,11 +62,11 @@ softwarecenter_dictionary:
 
     softwarecenter_search_list_s4hana_syscopy_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_063_0-80002046.SAR'
+      - 'IMDB_SERVER20_064_0-80002046.SAR'
       - 'IMDB_LCAPPS_2061_0-80002183.SAR'
       - 'IMDB_AFL20_061_2-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
-      - 'SWPM20SP12_4-80003426.SAR'
+      - 'SWPM20SP12_5-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
@@ -77,11 +77,11 @@ softwarecenter_dictionary:
 
     softwarecenter_search_list_s4hana_syscopy_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_063_0-80002031.SAR'
+      - 'IMDB_SERVER20_064_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
       - 'IMDB_AFL20_061_2-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
-      - 'SWPM20SP12_4-80003424.SAR'
+      - 'SWPM20SP12_5-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
@@ -90,11 +90,11 @@ softwarecenter_dictionary:
 
     softwarecenter_search_list_s4hana_syscopy_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_063_0-80002046.SAR'
+      - 'IMDB_SERVER20_064_0-80002046.SAR'
       - 'IMDB_LCAPPS_2061_0-80002183.SAR'
       - 'IMDB_AFL20_061_2-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
-      - 'SWPM20SP12_4-80003426.SAR'
+      - 'SWPM20SP12_5-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)

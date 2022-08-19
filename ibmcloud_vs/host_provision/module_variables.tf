@@ -31,10 +31,6 @@ variable "module_var_bastion_private_ssh_key" {
   sensitive = false
 }
 
-variable "module_var_bastion_public_ssh_key" {
-  sensitive = false
-}
-
 variable "module_var_host_ssh_key_id" {}
 
 variable "module_var_host_private_ssh_key" {
@@ -119,6 +115,37 @@ variable "module_var_filesystem_hana_shared" {
   default = "xfs"
 }
 variable "module_var_physical_partition_filesystem_block_size_hana_shared" {}
+
+variable "module_var_disk_volume_type_anydb" {}
+variable "module_var_disk_volume_count_anydb" {}
+variable "module_var_disk_volume_capacity_anydb" {}
+variable "module_var_disk_volume_iops_anydb" {
+  default = null
+}
+variable "module_var_lvm_enable_anydb" {
+  default = false
+}
+variable "module_var_lvm_pv_data_alignment_anydb" {
+  default = "1M"
+}
+variable "module_var_lvm_vg_data_alignment_anydb" {
+  default = "1M"
+}
+variable "module_var_lvm_vg_physical_extent_size_anydb" {
+  default = "4M"
+}
+variable "module_var_lvm_lv_stripe_size_anydb" {
+  default = "64K"
+}
+variable "module_var_filesystem_mount_path_anydb" {
+}
+variable "module_var_filesystem_anydb" {
+  default = "xfs"
+}
+variable "module_var_physical_partition_filesystem_block_size_anydb" {
+  default = "4k"
+}
+
 
 variable "module_var_host_os_image" {}
 

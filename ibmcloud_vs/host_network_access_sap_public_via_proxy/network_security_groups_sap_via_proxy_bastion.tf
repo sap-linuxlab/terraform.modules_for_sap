@@ -3,6 +3,7 @@
 ### ABAP dispatcher using 32<NN>
 ### ABAP gateway using 33<NN>
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_sapnwas_sapgui" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   group     = var.module_var_bastion_security_group_id
   direction = "outbound"
   remote    = var.module_var_bastion_connection_security_group_id
@@ -17,6 +18,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_sapnwas_
 # SAP HANA indexserver MDC Tenant #0 SYSTEMDB using 3<NN>15
 # SAP HANA indexserver MDC Tenant #1--n using 3<NN>41
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_saphana" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
   group     = var.module_var_bastion_security_group_id
   direction = "outbound"
   remote    = var.module_var_bastion_connection_security_group_id
@@ -32,6 +34,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_saphana"
 ### ABAP ICM HTTPS using 443<NN>, default 00
 ### Web Dispatcher HTTPS for NWAS PAS using 443<NN>, default 01
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_sapfiori" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   group     = var.module_var_bastion_security_group_id
   direction = "outbound"
   remote    = var.module_var_bastion_connection_security_group_id
@@ -44,6 +47,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_sapfiori
 
 # SAP NetWeaver sapctrl HTTP/HTTPS from SAP HANA
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_sapctrl" {
+  count = local.network_rules_sap_nwas_boolean ? 1 : 0
   group     = var.module_var_bastion_security_group_id
   direction = "outbound"
   remote    = var.module_var_bastion_connection_security_group_id

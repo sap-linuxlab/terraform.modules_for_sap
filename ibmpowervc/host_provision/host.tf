@@ -66,6 +66,15 @@ resource "openstack_compute_volume_attach_v2" "volume_attachment_hana_shared" {
 }
 
 
+resource "openstack_compute_volume_attach_v2" "volume_attachment_anydb" {
+  count = length(openstack_blockstorage_volume_v2.block_volume_anydb.*.id)
+
+  instance_id = openstack_compute_instance_v2.host_provision.id
+  volume_id   = openstack_blockstorage_volume_v2.block_volume_anydb[count.index].id
+  #multiattach = true
+}
+
+
 resource "openstack_compute_volume_attach_v2" "volume_attachment_usr_sap" {
   count = length(openstack_blockstorage_volume_v2.block_volume_usr_sap.*.id)
 
