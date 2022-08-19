@@ -3,11 +3,11 @@ variable "module_var_resource_prefix" {}
 variable "module_var_aws_vpc_subnet_id" {}
 
 variable "module_var_sap_nwas_pas_instance_no" {
-  default = "01"
+  default = null
 }
 
 variable "module_var_sap_hana_instance_no" {
-  default = "00"
+  default = null
 }
 
 variable "module_var_bastion_sg_id" {}
