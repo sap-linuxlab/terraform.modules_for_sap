@@ -115,7 +115,6 @@ variable "module_var_filesystem_hana_shared" {
 }
 variable "module_var_physical_partition_filesystem_block_size_hana_shared" {}
 
-variable "module_var_disk_volume_type_anydb" {}
 variable "module_var_disk_volume_count_anydb" {}
 variable "module_var_disk_volume_capacity_anydb" {}
 variable "module_var_disk_volume_iops_anydb" {
