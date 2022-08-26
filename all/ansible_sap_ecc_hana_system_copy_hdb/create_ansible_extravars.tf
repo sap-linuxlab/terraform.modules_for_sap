@@ -20,7 +20,7 @@ softwarecenter_search_list_ecc_syscopy_x86_64:
   - 'IMDB_LCAPPS_2059_0-20010426.SAR'
   - 'IMDB_AFL20_059_0-80001894.SAR'
   - 'VCH202000_2059_0-80005463.SAR'
-  - 'SWPM10SP35_4-20009701.SAR'
+  - 'SWPM10SP35_5-20009701.SAR'
   - 'igsexe_12-80003187.sar' # IGS 7.53
   - 'igshelper_17-10010245.sar'
   - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753)
@@ -34,7 +34,7 @@ softwarecenter_search_list_ecc_syscopy_ppc64le:
   - 'IMDB_LCAPPS_2059_0-80002183.SAR'
   - 'IMDB_AFL20_059_0-80002045.SAR'
   - 'VCH202000_2059_0-80005464.SAR'
-  - 'SWPM10SP35_4-70002492.SAR'
+  - 'SWPM10SP35_5-70002492.SAR'
   - 'igsexe_12-80003246.sar' # IGS 7.53
   - 'igshelper_17-10010245.sar'
   - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753)
@@ -110,6 +110,37 @@ sap_swpm_db_sidadm_password: "${var.module_var_sap_swpm_db_sidadm_password}"
 
 # Templates and default values
 sap_swpm_templates_install_dictionary:
+
+  sap_ecc6_ehp8_hana_onehost_system_copy:
+    sap_swpm_product_catalog_id: NW_ABAP_OneHost:BS2016.ERP608.HDB.CP
+    sap_swpm_inifile_list:
+    - installation_media
+    - installation_media_swpm1
+    - credentials
+    - db_hana_config
+    - db_hana_restore
+    - db_hana_nw_connection
+    - nw_other_config
+    - nw_central_instance
+    - nw_instance_config
+    - nw_ports_config
+    - unix_user
+    sap_swpm_inifile_dictionary:
+      sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
+      sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
+      sap_swpm_ascs_instance_nr: "${var.module_var_sap_swpm_ascs_instance_nr}"
+      sap_swpm_ascs_instance_hostname: "${var.module_var_hostname}"
+      sap_swpm_fqdn: "${var.module_var_dns_root_domain_name}"
+      sap_swpm_db_host: "${var.module_var_hostname}"
+      sap_swpm_db_sid: "${var.module_var_sap_hana_install_sid}"
+      sap_swpm_db_instance_nr: "${var.module_var_sap_hana_install_instance_number}"
+      sap_swpm_db_schema_abap: "${var.module_var_sap_swpm_db_schema_abap}"
+      sap_swpm_update_etchosts: 'false'
+      sap_swpm_backup_location: "${var.module_var_sap_hana_backup_directory}"
+      sap_swpm_backup_prefix: "${var.module_var_sap_hana_backup_filename_prefix}"
+      sap_swpm_backup_system_password: "${var.module_var_sap_swpm_backup_system_password}"
+      #sap_swpm_cd_rdms_path:
+      sap_swpm_load_type: HBR
 
   sap_ecc6_ehp7_hana_onehost_system_copy:
     sap_swpm_product_catalog_id: NW_ABAP_OneHost:BS2013SR2.ERP607SR2.HDB.CP
