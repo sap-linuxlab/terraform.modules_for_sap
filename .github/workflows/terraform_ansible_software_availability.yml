@@ -43,11 +43,11 @@ jobs:
           sap_user_id: ${{ secrets.SAP_USER_ID }}
           sap_user_id_password: ${{ secrets.SAP_USER_ID_PASSWORD }}
         run: |
+          export ANSIBLE_COLLECTIONS_PATH="$PWD/ansible_collections"
           cd "./gh_repo/all/${{ matrix.terraform_module_ansible }}"
           # Extract from softwarecenter_search_list_.* until first empty line, then remove yaml formatting and sort for unique
           export software_list=$(cat create_ansible_extravars.tf | awk '!NF{f=0} /^.*softwarecenter_search_list.*/{f=1} f{print}' | awk '!/.*softwarecenter_search_list.*/' | awk '{sub(/#.*/,""); print}' | awk '{sub(/ .*- '\''/,""); print}' | tr -d "'" | sort | uniq)
           export errors_list=""
-          export ANSIBLE_COLLECTIONS_PATH="$PWD/ansible_collections"
           for item in $software_list
           do
             shell_exit_code=0
