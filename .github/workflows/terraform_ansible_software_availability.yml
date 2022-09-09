@@ -117,10 +117,7 @@ jobs:
       - name: Commit to main branch
         id: git_commit_auto
         run: |
-          if [ -z "$errors_list" ]
-          then
-            exit 0
-          else
+          if [[ $(git status --porcelain) ]]; then
             cd ./gh_repo
             git config user.name github-actions
             git config user.email github-actions@github.com
@@ -128,4 +125,6 @@ jobs:
             git status
             git commit -m "software-update: replace with new filenames $(date +%F_%H-%M)"
             git push
+          else
+            exit 0
           fi
