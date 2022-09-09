@@ -110,17 +110,22 @@ jobs:
                 cd ../../../
               fi
             done
-            if $exit1_check == "1"; then
+            if [[ "$exit1_check" -eq 1 ]]; then
               exit 1
             fi
           fi
       - name: Commit to main branch
         id: git_commit_auto
         run: |
-          cd ./gh_repo
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git status
-          git commit -m "software-update: replace with new filenames $(date +%F_%H-%M)"
-          git push
+          if [ -z "$errors_list" ]
+          then
+            exit 0
+          else
+            cd ./gh_repo
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git status
+            git commit -m "software-update: replace with new filenames $(date +%F_%H-%M)"
+            git push
+          fi
