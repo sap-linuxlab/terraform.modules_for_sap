@@ -104,9 +104,9 @@ jobs:
                 exit1_check=1
               else
                 echo "Perform recursive sed for $filename change to $search_file"
-                cd ./gh_repo
+                cd "./gh_repo/all/${{ matrix.terraform_module_ansible }}"
                 find . -type f -not -path '*/\.*' -exec sed -i "s/$filename/$search_file/g" {} \;
-                cd ../
+                cd ../../../
               fi
             done
             if $exit1_check == "1"; then
@@ -121,5 +121,5 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git status
-          git commit -m "software-update: replace with new filenames $(date +%F)"
+          git commit -m "software-update: replace with new filenames $(date +%F_%H-%M)"
           git push
