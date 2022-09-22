@@ -1,7 +1,7 @@
 
 locals {
-  network_rules_sap_nwas_boolean = var.module_var_sap_nwas_pas_instance_no != null ? true : false
-  network_rules_sap_hana_boolean = var.module_var_sap_hana_instance_no != null ? true : false
+  network_rules_sap_nwas_boolean = var.module_var_sap_nwas_pas_instance_no != "" ? true : false
+  network_rules_sap_hana_boolean = var.module_var_sap_hana_instance_no != "" ? true : false
 
   target_resource_group_name = var.module_var_az_resource_group_name
   target_resource_group_id   = data.azurerm_resource_group.resource_group.id
