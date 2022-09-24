@@ -152,6 +152,11 @@ resource "null_resource" "build_script_cos_download_all" {
     IBMCOS_DOWNLOAD_DIRECTORY="${var.module_var_ibmcos_download_directory}"
     mkdir --parents $IBMCOS_DOWNLOAD_DIRECTORY
 
+    echo 'Prepare IBM Cloud CLI with IBM COS and IBM Aspera protocol'
+    echo 'Show help menu and trigger first-time use download of IBM Aspera Transferd binary to $HOME/.aspera_sdk/bin/asperatransferd'
+    export IBMCLOUD_API_KEY="${var.module_var_ibmcloud_api_key}"
+    ibmcloud cos aspera-download || true
+
     for FILENAME in $IBMCOS_BUCKET_FILES_LIST
     do
       echo "Downloading $FILENAME"
@@ -159,7 +164,8 @@ resource "null_resource" "build_script_cos_download_all" {
       if [ ! -f $IBMCOS_DOWNLOAD_DIRECTORY/$FILENAME_ONLY ]; then
         # Re-login in case of session invalidated 'due to inactivity' between file downloads
         $HOME/ibmcloud_cli/bin/ibmcloud login --no-region --apikey ${var.module_var_ibmcloud_api_key}
-        $HOME/ibmcloud_cli/bin/ibmcloud cos object-get --bucket $IBMCOS_BUCKET --key $FILENAME --region=$IBMCOS_REGION $IBMCOS_DOWNLOAD_DIRECTORY/$FILENAME_ONLY
+#        $HOME/ibmcloud_cli/bin/ibmcloud cos object-get --bucket $IBMCOS_BUCKET --key $FILENAME --region=$IBMCOS_REGION $IBMCOS_DOWNLOAD_DIRECTORY/$FILENAME_ONLY
+        $HOME/ibmcloud_cli/bin/ibmcloud cos aspera-download --bucket $IBMCOS_BUCKET --key $FILENAME --region=$IBMCOS_REGION $IBMCOS_DOWNLOAD_DIRECTORY/$FILENAME_ONLY
       else
         echo "File already exists"
       fi
