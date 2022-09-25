@@ -3,18 +3,7 @@
   hosts: all
   become: true
 
-  vars:
-    sap_hostname: "{{ ansible_hostname }}"
-    sap_domain: "{{ ansible_domain }}"
-    sap_ip: "{{ ansible_default_ipv4.address }}"
-    sap_general_preconfigure_modify_etc_hosts: false
-    sap_general_preconfigure_fail_if_reboot_required: no
-    sap_hana_preconfigure_fail_if_reboot_required: no
-    sap_hana_preconfigure_update: yes
-    sap_netweaver_preconfigure_fail_if_not_enough_swap_space_configured: no
-
   collections:
-    - community.general
     - community.sap_launchpad
 
 # Use include_role inside Task block, instead of using roles declaration or Task block with import_roles.

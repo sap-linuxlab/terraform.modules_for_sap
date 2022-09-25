@@ -5,8 +5,35 @@ resource "local_file" "ansible_extravars" {
   file_permission = "0755"
   content         = <<EOF
 
+# ---- Mandatory parameters : Ansible Defaults ---- #
+
+#ansible_python_interpreter: python3
+
+# Default Ansible Facts populate into default variables for all Ansible Roles
+sap_hostname: "{{ ansible_hostname }}"
+sap_domain: "{{ ansible_domain }}"
+sap_ip: "{{ ansible_default_ipv4.address }}"
+
+
+
+# ---- Mandatory parameters : Preconfigure OS for SAP Software ---- #
+
+# Configuration of Ansible Roles for preconfigure SAP (general, hana, netweaver)
+sap_general_preconfigure_modify_etc_hosts: false
+sap_general_preconfigure_reboot_ok: no
+sap_general_preconfigure_fail_if_reboot_required: no
+sap_hana_preconfigure_reboot_ok: yes
+sap_hana_preconfigure_fail_if_reboot_required: no
+sap_hana_preconfigure_update: yes
+sap_hana_update_etchosts: yes
+
+
+
+# ---- Mandatory parameters : SAP Software installation media downloads ---- #
+
 dry_run_test: "${var.module_var_dry_run_test}"
 
+# SAP ONE Support Launchpad credentials
 suser_id: "${var.module_var_sap_id_user}"
 suser_password: '${var.module_var_sap_id_user_password}'
 
@@ -22,8 +49,6 @@ softwarecenter_search_list_saphana_ppc64le:
   - 'IMDB_LCAPPS_2061_0-80002183.SAR'
   - 'IMDB_AFL20_061_2-80002045.SAR'
 
-
-#ansible_python_interpreter: python3
 
 
 # ------ Mandatory parameters : SAP HANA installation ------ #
@@ -41,6 +66,7 @@ sap_hana_install_master_password: "${var.module_var_sap_hana_install_master_pass
 # SAP HANA database server instance details
 sap_hana_install_sid: "${var.module_var_sap_hana_install_sid}"
 sap_hana_install_instance_number: "${var.module_var_sap_hana_install_instance_number}"
+
 
 
 # ------ Optional parameters : SAP HANA installation ------ #
