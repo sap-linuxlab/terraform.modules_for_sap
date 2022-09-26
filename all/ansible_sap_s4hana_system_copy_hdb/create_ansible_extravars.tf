@@ -99,7 +99,7 @@ softwarecenter_dictionary:
 
   sap_s4hana_1909_onehost_system_copy:
 
-    softwarecenter_search_list_s4hana_syscopy_x86_64:
+    softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_064_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
@@ -112,7 +112,7 @@ softwarecenter_dictionary:
       - 'SAPEXEDB_400-80004392.SAR' # Kernel Part II (777)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
-    softwarecenter_search_list_s4hana_syscopy_ppc64le:
+    softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_064_0-80002046.SAR'
       - 'IMDB_LCAPPS_2061_0-80002183.SAR'
@@ -127,7 +127,7 @@ softwarecenter_dictionary:
 
   sap_s4hana_2020_onehost_system_copy:
 
-    softwarecenter_search_list_s4hana_syscopy_x86_64:
+    softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_064_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
@@ -140,7 +140,7 @@ softwarecenter_dictionary:
       - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
-    softwarecenter_search_list_s4hana_syscopy_ppc64le:
+    softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_064_0-80002046.SAR'
       - 'IMDB_LCAPPS_2061_0-80002183.SAR'
@@ -155,7 +155,7 @@ softwarecenter_dictionary:
 
   sap_s4hana_2021_onehost_system_copy:
 
-    softwarecenter_search_list_s4hana_syscopy_x86_64:
+    softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_064_0-80002031.SAR'
       - 'IMDB_LCAPPS_2061_0-20010426.SAR'
@@ -168,7 +168,7 @@ softwarecenter_dictionary:
       - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
-    softwarecenter_search_list_s4hana_syscopy_ppc64le:
+    softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_064_0-80002046.SAR'
       - 'IMDB_LCAPPS_2061_0-80002183.SAR'

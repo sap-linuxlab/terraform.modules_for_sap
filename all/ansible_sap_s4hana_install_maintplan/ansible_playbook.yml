@@ -3,9 +3,6 @@
   hosts: all
   become: true
 
-  collections:
-    - community.sap_launchpad
-
 # Use include_role inside Task block, instead of using roles declaration or Task block with import_roles.
 # This ensures Ansible Roles, and the tasks within, will be parsed in sequence instead of parsing at Playbook initialisation
   tasks:
@@ -22,7 +19,7 @@
       when:
         - ansible_architecture == "ppc64le"
 
-    - name: update etc hosts
+    - name: Update etc hosts
       lineinfile:
         dest: /etc/hosts
         line: "{{ ansible_default_ipv4.address }}\t{{ ansible_hostname }}.{{ ansible_domain }}\t{{ ansible_hostname }}"

@@ -3,9 +3,6 @@
   hosts: all
   become: true
 
-  collections:
-    - community.sap_launchpad
-
 # Use include_role inside Task block, instead of using roles declaration or Task block with import_roles.
 # This ensures Ansible Roles, and the tasks within, will be parsed in sequence instead of parsing at Playbook initialisation
   tasks:
@@ -13,18 +10,18 @@
     # Set facts based on the install dictionary and the default template selected
     - name: Set fact x86_64 softwarecenter_search_list_s4hana_syscopy
       set_fact:
-        softwarecenter_search_list_s4hana_syscopy: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_s4hana_syscopy_x86_64'] }}"
+        softwarecenter_search_list_s4hana_syscopy: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
       when:
         - ansible_architecture == "x86_64"
 
     # Set facts based on the install dictionary and the default template selected
     - name: Set fact ppc64le softwarecenter_search_list_s4hana_syscopy
       set_fact:
-        softwarecenter_search_list_s4hana_syscopy: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_s4hana_syscopy_ppc64le'] }}"
+        softwarecenter_search_list_s4hana_syscopy: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
       when:
         - ansible_architecture == "ppc64le"
 
-    - name: update etc hosts
+    - name: Update etc hosts
       lineinfile:
         dest: /etc/hosts
         line: "{{ ansible_default_ipv4.address }}\t{{ ansible_hostname }}.{{ ansible_domain }}\t{{ ansible_hostname }}"
