@@ -27,7 +27,7 @@
         dest: "{{ playbook_dir }}"
         dry_run: True
       with_items:
-        - "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
+        - "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
       when:
         - dry_run_test == "x86_64"
 #      vars:
@@ -42,7 +42,7 @@
         dest: "{{ playbook_dir }}"
         dry_run: True
       with_items:
-        - "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
+        - "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
       when:
         - dry_run_test == "ppc64le"
 #      vars:

@@ -10,14 +10,14 @@
     # Set facts based on the install dictionary and the default template selected
     - name: Set fact x86_64 softwarecenter_search_list_s4hana_syscopy
       set_fact:
-        softwarecenter_search_list_s4hana_syscopy: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
+        softwarecenter_search_list_s4hana_syscopy: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
       when:
         - ansible_architecture == "x86_64"
 
     # Set facts based on the install dictionary and the default template selected
     - name: Set fact ppc64le softwarecenter_search_list_s4hana_syscopy
       set_fact:
-        softwarecenter_search_list_s4hana_syscopy: "{{ softwarecenter_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
+        softwarecenter_search_list_s4hana_syscopy: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
       when:
         - ansible_architecture == "ppc64le"
 
