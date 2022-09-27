@@ -1,0 +1,22 @@
+
+collections:
+
+# Collections from Ansible Galaxy
+  - name: community.general
+
+# Collections from public repositories via HTTPS
+  - name: https://github.com/sap-linuxlab/community.sap_launchpad.git
+    type: git
+    version: dev
+  - name: https://github.com/sap-linuxlab/community.sap_operations.git
+    type: git
+    version: dev
+  - name: https://github.com/sap-linuxlab/community.sap_install.git
+    type: git
+    version: dev
+
+# Collections from private repositories via use SSH (embedded GitHub PAT does not work)
+# Used for customised/forked Ansible Collections
+#  - name: git@github.domain.com:gheorg/namespace.sap_install.git
+#    type: git
+#    version: dev
