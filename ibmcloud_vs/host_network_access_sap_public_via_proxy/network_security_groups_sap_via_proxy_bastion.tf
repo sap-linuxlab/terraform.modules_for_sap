@@ -34,7 +34,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_saphana"
 ### ABAP ICM HTTPS using 443<NN>, default 00
 ### Web Dispatcher HTTPS for NWAS PAS using 443<NN>, default 01
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_bastion_outbound_sapfiori" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_boolean ? local.network_rules_sap_hana_boolean ? 1 : 0 : 0
   group     = var.module_var_bastion_security_group_id
   direction = "outbound"
   remote    = var.module_var_bastion_connection_security_group_id

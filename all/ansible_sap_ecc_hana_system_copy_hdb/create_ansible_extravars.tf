@@ -4,44 +4,41 @@ resource "local_file" "ansible_extravars" {
   filename        = "${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml"
   file_permission = "0755"
   content         = <<EOF
+
+# ---- Mandatory parameters : Ansible Defaults ---- #
+
 #ansible_python_interpreter: python3
+
+# Default Ansible Facts populate into default variables for all Ansible Roles
+sap_hostname: "{{ ansible_hostname }}"
+sap_domain: "{{ ansible_domain }}"
+sap_ip: "{{ ansible_default_ipv4.address }}"
+
+
+
+# ---- Mandatory parameters : Preconfigure OS for SAP Software ---- #
+
+# Configuration of Ansible Roles for preconfigure SAP (general, hana, netweaver)
+sap_general_preconfigure_modify_etc_hosts: false
+sap_general_preconfigure_reboot_ok: no
+sap_general_preconfigure_fail_if_reboot_required: no
+sap_hana_preconfigure_reboot_ok: yes
+sap_hana_preconfigure_fail_if_reboot_required: no
+sap_hana_preconfigure_update: yes
+sap_hana_update_etchosts: yes
+sap_netweaver_preconfigure_fail_if_not_enough_swap_space_configured: no
+
+
+
+# ---- Mandatory parameters : SAP Software installation media downloads ---- #
 
 dry_run_test: "${var.module_var_dry_run_test}"
 
-sap_swpm_ansible_role_mode: default_templates
-sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
-
+# SAP ONE Support Launchpad credentials
 suser_id: "${var.module_var_sap_id_user}"
 suser_password: '${var.module_var_sap_id_user_password}'
 
-softwarecenter_search_list_ecc_syscopy_x86_64:
-  - 'SAPCAR_1115-70006178.EXE'
-  - 'IMDB_SERVER20_059_4-80002031.SAR'
-  - 'IMDB_LCAPPS_2059_0-20010426.SAR'
-  - 'IMDB_AFL20_059_0-80001894.SAR'
-  - 'VCH202000_2059_0-80005463.SAR'
-  - 'SWPM10SP35_6-20009701.SAR'
-  - 'igsexe_12-80003187.sar' # IGS 7.53
-  - 'igshelper_17-10010245.sar'
-  - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753)
-  - 'SAPEXEDB_800-80002572.SAR' # Kernel Part II (753)
-  - 'IMDB_CLIENT20_007_26-80002082.SAR'
-  - 'SAPHOSTAGENT51_51-20009394.SAR'
-
-softwarecenter_search_list_ecc_syscopy_ppc64le:
-  - 'SAPCAR_1115-70006238.EXE'
-  - 'IMDB_SERVER20_059_4-80002046.SAR'
-  - 'IMDB_LCAPPS_2059_0-80002183.SAR'
-  - 'IMDB_AFL20_059_0-80002045.SAR'
-  - 'VCH202000_2059_0-80005464.SAR'
-  - 'SWPM10SP35_6-70002492.SAR'
-  - 'igsexe_12-80003246.sar' # IGS 7.53
-  - 'igshelper_17-10010245.sar'
-  - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753)
-  - 'SAPEXEDB_800-80002629.SAR' # Kernel Part II (753)
-  - 'IMDB_CLIENT20_007_26-80002095.SAR'
-  - 'SAPHOSTAGENT51_51-70002261.SAR'
-
+# Directory for SAP installation media
 sap_install_media_detect_directory: "${var.module_var_sap_software_download_directory}"
 
 
@@ -95,6 +92,12 @@ sap_hana_install_update_etchosts: 'false'
 
 # ------ Mandatory parameters : SAP SWPM installation using Defaults Templates mode of the Ansible Role ------ #
 
+sap_swpm_ansible_role_mode: default_templates
+sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
+
+
+# ------ Mandatory parameters : SAP SWPM installation using Defaults Templates mode of the Ansible Role ------ #
+
 # Override any variable set in sap_swpm_inifile_dictionary
 # NW Passwords
 sap_swpm_master_password: "${var.module_var_sap_swpm_master_password}"
@@ -112,19 +115,9 @@ sap_swpm_db_sidadm_password: "${var.module_var_sap_swpm_db_sidadm_password}"
 sap_swpm_templates_install_dictionary:
 
   sap_ecc6_ehp8_hana_onehost_system_copy:
+
     sap_swpm_product_catalog_id: NW_ABAP_OneHost:BS2016.ERP608.HDB.CP
-    sap_swpm_inifile_list:
-    - installation_media
-    - installation_media_swpm1
-    - credentials
-    - db_hana_config
-    - db_hana_restore
-    - db_hana_nw_connection
-    - nw_other_config
-    - nw_central_instance
-    - nw_instance_config
-    - nw_ports_config
-    - unix_user
+
     sap_swpm_inifile_dictionary:
       sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
       sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
@@ -141,21 +134,53 @@ sap_swpm_templates_install_dictionary:
       sap_swpm_backup_system_password: "${var.module_var_sap_swpm_backup_system_password}"
       #sap_swpm_cd_rdms_path:
       sap_swpm_load_type: HBR
+
+    sap_swpm_inifile_list:
+      - installation_media
+      - installation_media_swpm1
+      - credentials
+      - db_hana_config
+      - db_hana_restore
+      - db_hana_nw_connection
+      - nw_other_config
+      - nw_central_instance
+      - nw_instance_config
+      - nw_ports_config
+      - unix_user
+
+    softwarecenter_search_list_x86_64:
+      - 'SAPCAR_1115-70006178.EXE'
+      - 'IMDB_SERVER20_059_5-80002031.SAR'
+      - 'IMDB_LCAPPS_2059_0-20010426.SAR'
+      - 'IMDB_AFL20_059_0-80001894.SAR'
+      - 'VCH202000_2059_0-80005463.SAR'
+      - 'SWPM10SP35_7-20009701.SAR'
+      - 'igsexe_12-80003187.sar' # IGS 7.53
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753)
+      - 'SAPEXEDB_800-80002572.SAR' # Kernel Part II (753)
+      - 'IMDB_CLIENT20_007_26-80002082.SAR'
+      - 'SAPHOSTAGENT51_51-20009394.SAR'
+
+    softwarecenter_search_list_pc64le:
+      - 'SAPCAR_1115-70006238.EXE'
+      - 'IMDB_SERVER20_059_5-80002046.SAR'
+      - 'IMDB_LCAPPS_2059_0-80002183.SAR'
+      - 'IMDB_AFL20_059_0-80002045.SAR'
+      - 'VCH202000_2059_0-80005464.SAR'
+      - 'SWPM10SP35_7-70002492.SAR'
+      - 'igsexe_12-80003246.sar' # IGS 7.53
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753)
+      - 'SAPEXEDB_800-80002629.SAR' # Kernel Part II (753)
+      - 'IMDB_CLIENT20_007_26-80002095.SAR'
+      - 'SAPHOSTAGENT51_51-70002261.SAR'
+
 
   sap_ecc6_ehp7_hana_onehost_system_copy:
+
     sap_swpm_product_catalog_id: NW_ABAP_OneHost:BS2013SR2.ERP607SR2.HDB.CP
-    sap_swpm_inifile_list:
-    - installation_media
-    - installation_media_swpm1
-    - credentials
-    - db_hana_config
-    - db_hana_restore
-    - db_hana_nw_connection
-    - nw_other_config
-    - nw_central_instance
-    - nw_instance_config
-    - nw_ports_config
-    - unix_user
+
     sap_swpm_inifile_dictionary:
       sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
       sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
@@ -173,6 +198,46 @@ sap_swpm_templates_install_dictionary:
       #sap_swpm_cd_rdms_path:
       sap_swpm_load_type: HBR
 
+    sap_swpm_inifile_list:
+      - installation_media
+      - installation_media_swpm1
+      - credentials
+      - db_hana_config
+      - db_hana_restore
+      - db_hana_nw_connection
+      - nw_other_config
+      - nw_central_instance
+      - nw_instance_config
+      - nw_ports_config
+      - unix_user
+
+    softwarecenter_search_list_x86_64:
+      - 'SAPCAR_1115-70006178.EXE'
+      - 'IMDB_SERVER20_059_5-80002031.SAR'
+      - 'IMDB_LCAPPS_2059_0-20010426.SAR'
+      - 'IMDB_AFL20_059_0-80001894.SAR'
+      - 'VCH202000_2059_0-80005463.SAR'
+      - 'SWPM10SP35_7-20009701.SAR'
+      - 'igsexe_12-80003187.sar' # IGS 7.53
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753)
+      - 'SAPEXEDB_800-80002572.SAR' # Kernel Part II (753)
+      - 'IMDB_CLIENT20_007_26-80002082.SAR'
+      - 'SAPHOSTAGENT51_51-20009394.SAR'
+
+    softwarecenter_search_list_pc64le:
+      - 'SAPCAR_1115-70006238.EXE'
+      - 'IMDB_SERVER20_059_5-80002046.SAR'
+      - 'IMDB_LCAPPS_2059_0-80002183.SAR'
+      - 'IMDB_AFL20_059_0-80002045.SAR'
+      - 'VCH202000_2059_0-80005464.SAR'
+      - 'SWPM10SP35_7-70002492.SAR'
+      - 'igsexe_12-80003246.sar' # IGS 7.53
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753)
+      - 'SAPEXEDB_800-80002629.SAR' # Kernel Part II (753)
+      - 'IMDB_CLIENT20_007_26-80002095.SAR'
+      - 'SAPHOSTAGENT51_51-70002261.SAR'
 
 EOF
 }

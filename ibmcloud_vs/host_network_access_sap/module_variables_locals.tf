@@ -1,7 +1,7 @@
 
 locals {
-  network_rules_sap_nwas_boolean = var.module_var_sap_nwas_pas_instance_no != null ? true : false
-  network_rules_sap_hana_boolean = var.module_var_sap_hana_instance_no != null ? true : false
+  network_rules_sap_nwas_boolean = var.module_var_sap_nwas_pas_instance_no != "" ? true : false
+  network_rules_sap_hana_boolean = var.module_var_sap_hana_instance_no != "" ? true : false
 
   target_resource_group_id     = data.ibm_is_subnet.vpc_subnet.resource_group
   target_vpc_id                = data.ibm_is_subnet.vpc_subnet.vpc

@@ -14,9 +14,9 @@ variable "module_var_bastion_security_group_name" {}
 variable "module_var_bastion_connection_security_group_name" {}
 
 variable "module_var_sap_nwas_pas_instance_no" {
-  default = null
+  default = ""
 }
 
 variable "module_var_sap_hana_instance_no" {
-  default = null
+  default = ""
 }
