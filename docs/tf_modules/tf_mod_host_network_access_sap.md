@@ -71,9 +71,9 @@ The SAP HANA System Replication using SAP HANA 2.0 with MDC Tenants port calcula
 | | hdbscriptserver, used for log and data shipping from a primary site to a secondary site.<br/>Tenant port number plus 10,000 | 4`<sap_hana_instance_no>`40-97 |
 | | hdbxsengine, used for log and data shipping from a primary site to a secondary site.<br/>Tenant port number plus 10,000 | 4`<sap_hana_instance_no>`40-97 |
 | Linux Pacemaker | | |
-| | pcsd | 2224 (TCP) |
-| | pacemaker | 3121 (TCP) |
-| | corosync | 5404-5412 (UDP) |
+| | pcsd | 2224 (TCP), cluster nodes requirement for node-to-node communication  |
+| | pacemaker | 3121 (TCP), cluster nodes requirement for Pacemaker Remote service daemon |
+| | corosync | 5404-5412 (UDP), cluster nodes requirement for node-to-node communcation |
 
 
 The Ansible Role `sap_ha_install_hana_hsr` assumes these ports are open within the Subnet and on each host OS, otherwise errors such as "unable to contact primary site" will be shown.
