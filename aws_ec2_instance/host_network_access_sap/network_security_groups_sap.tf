@@ -199,7 +199,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_pacemaker_3" {
   type              = "ingress"
   from_port         = 5404
   to_port           = 5412
-  protocol          = "tcp"
+  protocol          = "udp"
   cidr_blocks  = [local.target_subnet_ip_range]
 }
 
@@ -209,6 +209,6 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_pacemaker_3" {
   type              = "egress"
   from_port         = 5404
   to_port           = 5412
-  protocol          = "tcp"
+  protocol          = "udp"
   cidr_blocks  = [local.target_subnet_ip_range]
 }
