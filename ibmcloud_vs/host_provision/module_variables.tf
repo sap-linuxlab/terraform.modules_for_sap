@@ -180,3 +180,7 @@ variable "module_var_disk_volume_capacity_software" {
 variable "module_var_disk_volume_type_software" {
   default = "5iops-tier"
 }
+
+variable "module_var_enable_ip_anti_spoofing" {
+  default = false
+}

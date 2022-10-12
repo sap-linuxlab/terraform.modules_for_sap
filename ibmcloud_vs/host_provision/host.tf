@@ -18,6 +18,7 @@ resource "ibm_is_instance" "virtual_server" {
   primary_network_interface {
     name   = "${var.module_var_virtual_server_hostname}-nic-0"
     subnet = local.target_subnet_id
+    allow_ip_spoofing = var.module_var_enable_ip_anti_spoofing
     security_groups = [
       var.module_var_host_security_group_id,
       var.module_var_bastion_connection_security_group_id
@@ -38,6 +39,8 @@ resource "ibm_is_instance" "virtual_server" {
     ibm_is_volume.block_volume_swap_tiered.*.id,
     ibm_is_volume.block_volume_software_tiered.id
   ])
+
+  metadata_service_enabled  = true
 
   # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {

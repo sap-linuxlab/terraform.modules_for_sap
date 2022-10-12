@@ -290,6 +290,64 @@ sap_swpm_templates_install_dictionary:
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
 
+  sap_s4hana_2022_onehost_system_copy:
+
+    sap_swpm_product_catalog_id: NW_ABAP_OneHost:S4HANA2022.CORE.HDB.CP
+
+    sap_swpm_inifile_dictionary:
+      sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
+      sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
+      sap_swpm_ascs_instance_nr: "${var.module_var_sap_swpm_ascs_instance_nr}"
+      sap_swpm_ascs_instance_hostname: "${var.module_var_hostname}"
+      sap_swpm_fqdn: "${var.module_var_dns_root_domain_name}"
+      sap_swpm_db_host: "${var.module_var_hostname}"
+      sap_swpm_db_sid: "${var.module_var_sap_hana_install_sid}"
+      sap_swpm_db_instance_nr: "${var.module_var_sap_hana_install_instance_number}"
+      sap_swpm_db_schema_abap: "${var.module_var_sap_swpm_db_schema_abap}"
+      sap_swpm_update_etchosts: 'false'
+      sap_swpm_backup_location: "${var.module_var_sap_hana_backup_directory}"
+      sap_swpm_backup_prefix: "${var.module_var_sap_hana_backup_filename_prefix}"
+      sap_swpm_backup_system_password: "${var.module_var_sap_swpm_backup_system_password}"
+
+    sap_swpm_inifile_list:
+      - installation_media
+      - credentials
+      - db_hana_config
+      - db_hana_restore
+      - db_hana_nw_connection
+      - nw_other_config
+      - nw_central_instance
+      - nw_instance_config
+      - nw_ports_config
+      - unix_user
+
+    softwarecenter_search_list_x86_64:
+      - 'SAPCAR_1115-70006178.EXE'
+      - 'IMDB_SERVER20_064_0-80002031.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
+      - 'IMDB_CLIENT20_014_18-80002082.SAR' # SAP HANA Client 2.14
+      - 'SWPM20SP13_0-80003424.SAR'
+      - 'igsexe_1-70005417.sar' # IGS 7.81
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_51-70006642.SAR' # Kernel Part I (789)
+      - 'SAPEXEDB_51-70006641.SAR' # Kernel Part II (789)
+      - 'SAPHOSTAGENT57_57-80004822.SAR' # SAP Host Agent 7.22 SP57
+
+    softwarecenter_search_list_ppc64le:
+      - 'SAPCAR_1115-70006238.EXE'
+      - 'IMDB_SERVER20_064_0-80002046.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
+      - 'IMDB_CLIENT20_014_18-80002095.SAR' # SAP HANA Client 2.14
+      - 'SWPM20SP13_0-80003426.SAR'
+      - 'igsexe_1-70005446.sar' # IGS 7.81
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_51-70006667.SAR' # Kernel Part I (789)
+      - 'SAPEXEDB_51-70006666.SAR' # Kernel Part II (789)
+      - 'SAPHOSTAGENT57_57-80004831.SAR' # SAP Host Agent 7.22 SP57
+
+
 # For dual host installation, change the sap_swpm_db_host to appropriate value
 
 

@@ -178,6 +178,33 @@ sap_swpm_templates_install_dictionary:
       sap_swpm_db_schema_abap: "${var.module_var_sap_swpm_db_schema_abap}"
       sap_swpm_update_etchosts: 'false'
 
+  sap_s4hana_2022_onehost_install:
+
+    sap_swpm_product_catalog_id: NW_ABAP_OneHost:S4HANA2022.CORE.HDB.ABAP
+
+    sap_swpm_inifile_list:
+      - installation_media
+      - credentials
+      - db_hana_config
+      - db_hana_nw_connection
+      - nw_other_config
+      - nw_central_instance
+      - nw_instance_config
+      - nw_ports_config
+      - unix_user
+
+    sap_swpm_inifile_dictionary:
+      sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
+      sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
+      sap_swpm_ascs_instance_nr: "${var.module_var_sap_swpm_ascs_instance_nr}"
+      sap_swpm_ascs_instance_hostname: "${var.module_var_hostname}"
+      sap_swpm_fqdn: "${var.module_var_dns_root_domain_name}"
+      sap_swpm_db_host: "${var.module_var_hostname}"
+      sap_swpm_db_sid: "${var.module_var_sap_hana_install_sid}"
+      sap_swpm_db_instance_nr: "${var.module_var_sap_hana_install_instance_number}"
+      sap_swpm_db_schema_abap: "${var.module_var_sap_swpm_db_schema_abap}"
+      sap_swpm_update_etchosts: 'false'
+
 # For dual host installation, change the sap_swpm_db_host to appropriate value
 
 

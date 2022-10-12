@@ -32,6 +32,15 @@ resource "aws_instance" "host" {
     }
   }
 
+  metadata_options = {
+    http_endpoint               = "enabled"
+    http_put_response_hop_limit = 8
+    http_tokens                 = "required" // IMDSv2
+    instance_metadata_tags      = "disabled"
+  }
+
+  source_dest_check = var.module_var_disable_ip_anti_spoofing
+
   tags = {
     Name = var.module_var_host_name
   }
