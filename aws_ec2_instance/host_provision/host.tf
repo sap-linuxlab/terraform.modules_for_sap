@@ -39,7 +39,7 @@ resource "aws_instance" "host" {
     instance_metadata_tags      = "disabled"
   }
 
-  source_dest_check = var.module_var_enable_ip_anti_spoofing ? false : true // To enable IP Anti Spoofing, must disable the Source/Destination Check
+  source_dest_check = var.module_var_disable_ip_anti_spoofing ? false : true  // When disable the Anti IP Spoofing = true, then Source/Destination Check = false
 
   tags = {
     Name = var.module_var_host_name

@@ -18,7 +18,7 @@ resource "ibm_is_instance" "virtual_server" {
   primary_network_interface {
     name   = "${var.module_var_virtual_server_hostname}-nic-0"
     subnet = local.target_subnet_id
-    allow_ip_spoofing = var.module_var_enable_ip_anti_spoofing
+    allow_ip_spoofing = var.module_var_disable_ip_anti_spoofing // When disable the Anti IP Spoofing = true, then Allow IP Spoofing = true
     security_groups = [
       var.module_var_host_security_group_id,
       var.module_var_bastion_connection_security_group_id
