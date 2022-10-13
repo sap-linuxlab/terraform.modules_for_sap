@@ -56,6 +56,10 @@ sap_install_media_detect_export: "sapecc"
 sap_swpm_ansible_role_mode: default_templates
 sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
 
+
+
+# ------ Mandatory parameters : Overrides for SAP SWPM installation using Default Templates mode of the Ansible Role ------ #
+
 # Override any variable set in sap_swpm_inifile_dictionary
 # NW Passwords
 sap_swpm_master_password: "${var.module_var_sap_swpm_master_password}"
@@ -109,21 +113,21 @@ sap_swpm_templates_install_dictionary:
       sap_swpm_load_type: SAP
 
     sap_swpm_inifile_list:
-    - swpm_installation_media
-    - swpm_installation_media_swpm1_exportfiles
-    - swpm_installation_media_swpm1_ibmdb2
-    - credentials
-    - credentials_anydb_ibmdb2
-    - db_config_anydb_all
-    - db_config_anydb_ibmdb2
-    - db_connection_nw_anydb_ibmdb2
-    - nw_config_anydb
-    - nw_config_other
-    - nw_config_central_services_abap
-    - nw_config_primary_application_server_instance
-    - nw_config_ports
-    - nw_config_host_agent
-    - sap_os_linux_user
+      - swpm_installation_media
+      - swpm_installation_media_swpm1_exportfiles
+      - swpm_installation_media_swpm1_ibmdb2
+      - credentials
+      - credentials_anydb_ibmdb2
+      - db_config_anydb_all
+      - db_config_anydb_ibmdb2
+      - db_connection_nw_anydb_ibmdb2
+      - nw_config_anydb
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - nw_config_host_agent
+      - sap_os_linux_user
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'

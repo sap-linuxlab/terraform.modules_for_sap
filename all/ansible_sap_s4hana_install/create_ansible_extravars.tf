@@ -107,6 +107,10 @@ sap_hana_install_update_etchosts: 'false'
 sap_swpm_ansible_role_mode: default_templates
 sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
 
+
+
+# ------ Mandatory parameters : Overrides for SAP SWPM installation using Default Templates mode of the Ansible Role ------ #
+
 # Override any variable set in sap_swpm_inifile_dictionary
 # NW Passwords
 sap_swpm_master_password: "${var.module_var_sap_swpm_master_password}"
@@ -250,6 +254,7 @@ sap_swpm_templates_install_dictionary:
 #      - 'KD75783.SAR' # SPAM/SAINT Update - Version 757/0083
 #      - 'SAPPAAPL4_2203_2-80004546.ZIP' # Predictive Analytics APL 2203 for SAP HANA 2.0 SPS03 and beyond
 #      - 'SUM20SP15_0-80002470.SAR' # SUM 2.0 SP15 Patch 
+
 
   sap_s4hana_2021_onehost_install:
 
