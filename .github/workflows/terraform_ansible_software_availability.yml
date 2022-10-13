@@ -27,7 +27,7 @@ jobs:
         terraform_module_ansible: [ansible_sap_ecc_hana_system_copy_hdb,ansible_sap_hana_install,ansible_sap_s4hana_install_maintplan,ansible_sap_s4hana_system_copy_hdb]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           path: gh_repo
       - name: Ansible setup
