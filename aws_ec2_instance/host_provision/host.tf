@@ -35,7 +35,7 @@ resource "aws_instance" "host" {
   metadata_options {
     http_endpoint               = "enabled"
     http_put_response_hop_limit = 8
-    http_tokens                 = "required" // IMDSv2
+    http_tokens                 = "optional" // IMDSv1 = optional, IMDSv2 = required
     instance_metadata_tags      = "disabled"
   }
 
