@@ -180,7 +180,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_CLIENT20_007_26-80002082.SAR'
       - 'SAPHOSTAGENT51_51-20009394.SAR'
 
-    softwarecenter_search_list_pc64le:
+    softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_059_5-80002046.SAR'
       - 'IMDB_LCAPPS_2059_0-80002183.SAR'
@@ -245,7 +245,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_CLIENT20_007_26-80002082.SAR'
       - 'SAPHOSTAGENT51_51-20009394.SAR'
 
-    softwarecenter_search_list_pc64le:
+    softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_059_5-80002046.SAR'
       - 'IMDB_LCAPPS_2059_0-80002183.SAR'
