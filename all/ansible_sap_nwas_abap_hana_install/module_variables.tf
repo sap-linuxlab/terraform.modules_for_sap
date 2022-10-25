@@ -78,7 +78,3 @@ variable "module_var_sap_swpm_template_selected" {}
 variable "module_var_dry_run_test" {
   default = ""
 }
-
-variable "module_var_filesystem_mount_path_anydb" {
-  default = "/hana"
-}
