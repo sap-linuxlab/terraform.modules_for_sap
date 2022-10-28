@@ -77,6 +77,17 @@
 #        ansible_python_interpreter: python3.6
 
 # Use task block to call Ansible Module
+    - name: Execute Ansible Module with system Python to download SAP Maintenance Planner Stack XML for the SAP S/4HANA installation
+      community.sap_launchpad.maintenance_planner_stack_xml_download:
+        suser_id: "{{ suser_id }}"
+        suser_password: "{{ suser_password }}"
+        transaction_name: "{{ transaction_name }}"
+        dest: "{{ sap_install_media_detect_directory }}"
+      register: sap_maintenance_planner_basket_register
+#      vars:
+#        ansible_python_interpreter: python3.6
+
+# Use task block to call Ansible Module
     - name: Execute Ansible Module with system Python to get installation files list from SAP Maintenance Planner for an SAP S/4HANA installation
       community.sap_launchpad.maintenance_planner_files:
         suser_id: "{{ suser_id }}"

@@ -132,6 +132,15 @@ sap_swpm_db_systemdb_password: "${var.module_var_sap_swpm_db_systemdb_password}"
 sap_swpm_db_schema_abap_password: "${var.module_var_sap_swpm_db_schema_abap_password}"
 sap_swpm_db_sidadm_password: "${var.module_var_sap_swpm_db_sidadm_password}"
 
+# Override any variable set in sap_swpm_inifile_dictionary
+# SAP SWPM using SAP Maintenance Planner Stack XML
+sap_swpm_mp_stack_path: "${var.module_var_sap_software_download_directory}" # Enables search for MP Stack XML file and changes SAP SWPM execution
+sap_swpm_configure_tms: true
+sap_swpm_tmsadm_password: "${var.module_var_sap_swpm_master_password}"
+sap_swpm_spam_update: false
+sap_swpm_sum_prepare: true
+sap_swpm_sum_start: true
+
 
 # Templates and default values
 sap_swpm_templates_install_dictionary:
@@ -152,6 +161,9 @@ sap_swpm_templates_install_dictionary:
       - nw_config_primary_application_server_instance
       - nw_config_ports
       - sap_os_linux_user
+      - maintenance_plan_stack_tms_config
+      - maintenance_plan_stack_spam_config
+      - maintenance_plan_stack_sum_config
 
     sap_swpm_inifile_dictionary:
       sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
@@ -181,6 +193,9 @@ sap_swpm_templates_install_dictionary:
       - nw_config_primary_application_server_instance
       - nw_config_ports
       - sap_os_linux_user
+      - maintenance_plan_stack_tms_config
+      - maintenance_plan_stack_spam_config
+      - maintenance_plan_stack_sum_config
 
     sap_swpm_inifile_dictionary:
       sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
@@ -210,6 +225,9 @@ sap_swpm_templates_install_dictionary:
       - nw_config_primary_application_server_instance
       - nw_config_ports
       - sap_os_linux_user
+      - maintenance_plan_stack_tms_config
+      - maintenance_plan_stack_spam_config
+      - maintenance_plan_stack_sum_config
 
     sap_swpm_inifile_dictionary:
       sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
