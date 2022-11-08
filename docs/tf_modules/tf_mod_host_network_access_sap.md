@@ -18,37 +18,53 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 | SAP Router | | |
 | | SAP Router | 3200 |
 | | SAP Router | 3299 |
-| SAP NetWeaver | | |
-| | `*` SAP NetWeaver AS Primary App Server (PAS Dialog) Instance `01` **[SAP GUI]** | 32`01` |
-| | SAP NetWeaver AS PAS Gateway Instance `01` | 33`01` |
+| SAP NetWeaver AS ABAP CS,<br/>using Instance Number `00` | | |
 | | SAP NetWeaver AS Central Services Messenger Server (ASCS MS) Instance `02` | 36`02` |
-| | SAP NetWeaver AS PAS Gateway (with SNC Enabled) Instance `01` | 48`01` |
-| | SAP NetWeaver AS ICM HTTP (Port 80 prefix) Instance Number `01` | 80`01` |
-| | `*` SAP NetWeaver AS ICM HTTPS (Secure, Port 443 prefix) Instance Number `01` **[SAP Web GUI and SAP Fiori Launchpad (HTTPS)]** | 443`01` |
-| | SAP NetWeaver sapctrl HTTP _(Dual Host install)_ | 5`01`13 |
-| | SAP NetWeaver sapctrl HTTPS _(Dual Host install)_ | 5`01`14 |
-| SAP HANA | | |
-| | SAP HANA sapctrl HTTP _(One Host install)_ | 5`00`13 |
-| | SAP HANA sapctrl HTTPS _(One Host install)_ | 5`00`14 |
-| | SAP HANA Internal Web Dispatcher | 3`00`06 |
-| | SAP HANA indexserver MDC System Tenant SYSDB | 3`00`13 |
-| | SAP HANA indexserver MDC Tenant 1 | 3`00`15 |
-| | SAP HANA ICM HTTP Internal Web Dispatcher | 80`00` |
-| | SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher | 43`00` |
-| SAP Web Dispatcher | | |
-| | SAP Web Dispatcher ICM HTTP (Port 80 prefix) Instance Number `90` | 80`90` |
-| | SAP Web Dispatcher ICM HTTPS (Secure, Port 443 prefix) Instance Number `90` | 443`90` |
-| SAP HANA XSA | | |
-| | SAP HANA XSA Instance `00` Client HTTPS for the connection to the xscontroller-managed Web Dispatcher (platform router) for purposes of user authentication. | 3`00`32 |
-| | SAP HANA XSA Instance `00` Internal HTTPS for the connection from the xscontroller-managed Web Dispatcher (platform router) to xsuaaserver for purposes of user authentication. | 3`00`31 |
-| | SAP HANA XSA Instance `00` Client HTTPS for the connection to the xscontroller-managed Web Dispatcher for purposes of data access.  | 3`00`30 |
-| | SAP HANA XSA Instance `00` Dynamic Range Internal HTTPS for the connection from the client to the xscontroller-managed Web Dispatcher (Platform Router) for access to the application instance. | 510`00`-515`00` |
-| | SAP HANA XSA Instance `00` Internal HTTPS xsexecagent to xscontroller | 3`00`29 |
-| | SAP HANA XSA Instance `00` Web Dispatcher HTTP(S) routing | 3`00`33 |
-| SAP NetWeaver JAVA | | |
-| | SAP NetWeaver AS JAVA P4 Port | 50304 |
-| | SAP NetWeaver AS JAVA P4 Port | 50404 |
-| | SAP NetWeaver AS JAVA Message Server | 81`01` |
+| SAP NetWeaver AS ABAP PAS,<br/>using Instance Number `02` | | |
+| | `*` SAP NetWeaver AS Primary App Server (PAS Dialog) **[SAP GUI]** | 32`02` |
+| | SAP NetWeaver AS PAS Gateway | 33`02` |
+| | SAP NetWeaver AS PAS Gateway (with SNC Enabled) | 48`02` |
+| | SAP NetWeaver AS ICM HTTP (Port 80 prefix) | 80`02` |
+| | `*` SAP NetWeaver AS ICM HTTPS (Secure, Port 443 prefix) **[SAP Web GUI and SAP Fiori Launchpad (HTTPS)]** | 443`02` |
+| | SAP NetWeaver sapctrl HTTP _(Dual Host install)_ | 5`02`13 |
+| | SAP NetWeaver sapctrl HTTPS _(Dual Host install)_ | 5`02`14 |
+| SAP HANA,<br/>using Instance Number `10` | | |
+| | SAP HANA sapctrl HTTP _(One Host install)_ | 5`10`13 |
+| | SAP HANA sapctrl HTTPS _(One Host install)_ | 5`10`14 |
+| | SAP HANA Internal Web Dispatcher | 3`10`06 |
+| | SAP HANA indexserver MDC System Tenant SYSDB | 3`10`13 |
+| | SAP HANA indexserver MDC Tenant 1 | 3`10`15 |
+| | SAP HANA ICM HTTP Internal Web Dispatcher | 80`10` |
+| | SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher | 43`10` |
+| SAP HANA XSA,<br/>using Instance Number `10` | | |
+| | SAP HANA XSA Client HTTPS for the connection to the xscontroller-managed Web Dispatcher (platform router) for purposes of user authentication. | 3`10`32 |
+| | SAP HANA XSA Internal HTTPS for the connection from the xscontroller-managed Web Dispatcher (platform router) to xsuaaserver for purposes of user authentication. | 3`10`31 |
+| | SAP HANA XSA Client HTTPS for the connection to the xscontroller-managed Web Dispatcher for purposes of data access.  | 3`10`30 |
+| | SAP HANA XSA Dynamic Range Internal HTTPS for the connection from the client to the xscontroller-managed Web Dispatcher (Platform Router) for access to the application instance. | 510`10`-515`10` |
+| | SAP HANA XSA Internal HTTPS xsexecagent to xscontroller | 3`10`29 |
+| | SAP HANA XSA Web Dispatcher HTTP(S) routing | 3`10`33 |
+| SAP Web Dispatcher,<br/>using Instance Number `90` | | |
+| | SAP Web Dispatcher ICM HTTP (Port 80 prefix) | 80`90` |
+| | SAP Web Dispatcher ICM HTTPS (Secure, Port 443 prefix) | 443`90` |
+| SAP NetWeaver JAVA CS,<br/>using Instance Number `20` | | |
+| | SAP NetWeaver AS JAVA Message Server | 81`20` |
+| SAP NetWeaver AS JAVA ICM server process 0..n,<br/>using Instance Number `22`<br/>*(+5 on all ports for subsequent server processes)* | | |
+| | SAP NetWeaver AS JAVA HTTP port | 5`22`00 |
+| | SAP NetWeaver AS JAVA HTTP SSL port | 5`22`01 |
+| | SAP NetWeaver AS JAVA IIOP Initial Context port | 5`22`02 |
+| | SAP NetWeaver AS JAVA IIOP SSL port | 5`22`03 |
+| | SAP NetWeaver AS JAVA P4 and JMS port | 5`22`04 |
+| | SAP NetWeaver AS JAVA P4 SSL port | 5`22`05 |
+| | SAP NetWeaver AS JAVA IIOP port | 5`22`06 |
+| | ~~SAP NetWeaver AS JAVA Telnet port~~ | ~~5`22`07~~ |
+| SAP NetWeaver AS JAVA Access server process 0..n,<br/>using Instance Number `22`<br/>*(+5 on all ports for subsequent server processes)* | | |
+| | SAP NetWeaver AS JAVA Server Join port | 5`22`20 |
+| | SAP NetWeaver AS JAVA Server Debug port | 5`22`21 |
+| | SAP NetWeaver AS JAVA Server DSR Infrastructure port | 5`22`22 |
+| SAP NetWeaver AS JAVA Administrative Services server process 0,<br/>using Instance Number `22` | | |
+| | SAP NetWeaver AS JAVA Admin Start Service HTTP port | 5`22`13 |
+| | SAP NetWeaver AS JAVA Admin Start Service HTTPS port | 5`22`14 |
+| | SAP NetWeaver AS JAVA Admin SL Controller port/s | 5`22`17-5`22`19 |
 
 `*` Terraform Module
 
