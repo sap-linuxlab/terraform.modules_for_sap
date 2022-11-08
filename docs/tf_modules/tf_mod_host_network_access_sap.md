@@ -18,16 +18,16 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 | SAP Router | | |
 | | SAP Router | 3200 |
 | | SAP Router | 3299 |
-| SAP NetWeaver AS ABAP CS,<br/>using Instance Number `00` | | |
-| | SAP NetWeaver AS Central Services Messenger Server (ASCS MS) | 36`00` |
-| SAP NetWeaver AS ABAP PAS,<br/>using Instance Number `02` | | |
-| | `*` SAP NetWeaver AS Primary App Server (PAS Dialog) **[SAP GUI]** | 32`02` |
-| | SAP NetWeaver AS PAS Gateway | 33`02` |
-| | SAP NetWeaver AS PAS Gateway (with SNC Enabled) | 48`02` |
-| | SAP NetWeaver AS ICM HTTP (Port 80 prefix) | 80`02` |
-| | `*` SAP NetWeaver AS ICM HTTPS (Secure, Port 443 prefix) **[SAP Web GUI and SAP Fiori Launchpad (HTTPS)]** | 443`02` |
-| | SAP NetWeaver sapctrl HTTP _(Dual Host install)_ | 5`02`13 |
-| | SAP NetWeaver sapctrl HTTPS _(Dual Host install)_ | 5`02`14 |
+| SAP NetWeaver AS ABAP CS,<br/>using Instance Number `01` | | |
+| | SAP NetWeaver AS Central Services Messenger Server (ASCS MS) | 36`01` |
+| SAP NetWeaver AS ABAP PAS,<br/>using Instance Number `00` | | |
+| | `*` SAP NetWeaver AS Primary App Server (PAS Dialog) **[SAP GUI]** | 32`00` |
+| | SAP NetWeaver AS PAS Gateway | 33`00` |
+| | SAP NetWeaver AS PAS Gateway (with SNC Enabled) | 48`00` |
+| | SAP NetWeaver AS ICM HTTP (Port 80 prefix) | 80`00` |
+| | `*` SAP NetWeaver AS ICM HTTPS (Secure, Port 443 prefix) **[SAP Web GUI and SAP Fiori Launchpad (HTTPS)]** | 443`00` |
+| | SAP NetWeaver sapctrl HTTP _(Dual Host install)_ | 5`00`13 |
+| | SAP NetWeaver sapctrl HTTPS _(Dual Host install)_ | 5`00`14 |
 | SAP HANA,<br/>using Instance Number `10` | | |
 | | SAP HANA sapctrl HTTP _(One Host install)_ | 5`10`13 |
 | | SAP HANA sapctrl HTTPS _(One Host install)_ | 5`10`14 |
@@ -46,25 +46,25 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 | SAP Web Dispatcher,<br/>using Instance Number `90` | | |
 | | SAP Web Dispatcher ICM HTTP (Port 80 prefix) | 80`90` |
 | | SAP Web Dispatcher ICM HTTPS (Secure, Port 443 prefix) | 443`90` |
-| SAP NetWeaver JAVA CS,<br/>using Instance Number `20` | | |
-| | SAP NetWeaver AS JAVA Message Server | 81`20` |
-| SAP NetWeaver AS JAVA ICM server process 0..n,<br/>using Instance Number `22`<br/>*(+5 on all ports for subsequent server processes)* | | |
-| | SAP NetWeaver AS JAVA HTTP port | 5`22`00 |
-| | SAP NetWeaver AS JAVA HTTP SSL port | 5`22`01 |
-| | SAP NetWeaver AS JAVA IIOP Initial Context port | 5`22`02 |
-| | SAP NetWeaver AS JAVA IIOP SSL port | 5`22`03 |
-| | SAP NetWeaver AS JAVA P4 and JMS port | 5`22`04 |
-| | SAP NetWeaver AS JAVA P4 SSL port | 5`22`05 |
-| | SAP NetWeaver AS JAVA IIOP port | 5`22`06 |
-| | ~~SAP NetWeaver AS JAVA Telnet port~~ | ~~5`22`07~~ |
-| SAP NetWeaver AS JAVA Access server process 0..n,<br/>using Instance Number `22`<br/>*(+5 on all ports for subsequent server processes)* | | |
-| | SAP NetWeaver AS JAVA Server Join port | 5`22`20 |
-| | SAP NetWeaver AS JAVA Server Debug port | 5`22`21 |
-| | SAP NetWeaver AS JAVA Server DSR Infrastructure port | 5`22`22 |
-| SAP NetWeaver AS JAVA Administrative Services server process 0,<br/>using Instance Number `22` | | |
-| | SAP NetWeaver AS JAVA Admin Start Service HTTP port | 5`22`13 |
-| | SAP NetWeaver AS JAVA Admin Start Service HTTPS port | 5`22`14 |
-| | SAP NetWeaver AS JAVA Admin SL Controller port/s | 5`22`17-5`22`19 |
+| SAP NetWeaver AS JAVA Central Services (SCS),<br/>using Instance Number `21` | | |
+| | SAP NetWeaver AS JAVA Message Server | 81`21` |
+| SAP NetWeaver AS JAVA Central Instance (CI) ICM server process 0..n,<br/>using Instance Number `20`<br/>*(+5 on all ports for subsequent server processes)* | | |
+| | SAP NetWeaver AS JAVA HTTP port | 5`20`00 |
+| | SAP NetWeaver AS JAVA HTTP SSL port | 5`20`01 |
+| | SAP NetWeaver AS JAVA IIOP Initial Context port | 5`20`02 |
+| | SAP NetWeaver AS JAVA IIOP SSL port | 5`20`03 |
+| | SAP NetWeaver AS JAVA P4 and JMS port | 5`20`04 |
+| | SAP NetWeaver AS JAVA P4 SSL port | 5`20`05 |
+| | SAP NetWeaver AS JAVA IIOP port | 5`20`06 |
+| | ~~SAP NetWeaver AS JAVA Telnet port~~ | ~~5`20`07~~ |
+| SAP NetWeaver AS JAVA Central Instance (CI) Access server process 0..n,<br/>using Instance Number `20`<br/>*(+5 on all ports for subsequent server processes)* | | |
+| | SAP NetWeaver AS JAVA Server Join port | 5`20`20 |
+| | SAP NetWeaver AS JAVA Server Debug port | 5`20`21 |
+| | SAP NetWeaver AS JAVA Server DSR Infrastructure port | 5`20`22 |
+| SAP NetWeaver AS JAVA Central Instance (CI) Administrative Services server process 0,<br/>using Instance Number `20` | | |
+| | SAP NetWeaver AS JAVA Admin Start Service HTTP port | 5`20`13 |
+| | SAP NetWeaver AS JAVA Admin Start Service HTTPS port | 5`20`14 |
+| | SAP NetWeaver AS JAVA Admin SL Controller port/s | 5`20`17-5`20`19 |
 
 `*` Terraform Module
 

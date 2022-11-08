@@ -1,7 +1,7 @@
 
 # SAP NetWeaver PAS / SAP GUI, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_sapgui" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
   from_port         = tonumber("32${var.module_var_sap_nwas_pas_instance_no}")
@@ -12,7 +12,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_sapgui" {
 
 # SAP NetWeaver PAS Gateway, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_gw" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
   from_port         = tonumber("33${var.module_var_sap_nwas_pas_instance_no}")
@@ -45,7 +45,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_icm_http" {
 
 # SAP NetWeaver AS JAVA Message Server, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ms" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
   from_port         = tonumber("81${var.module_var_sap_nwas_pas_instance_no}")
@@ -89,7 +89,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_index_mdc_1"
 
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapfiori" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
   from_port         = tonumber("443${var.module_var_sap_hana_instance_no}")
@@ -100,7 +100,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapfiori" {
 
 # SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_ctrl" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
   from_port         = tonumber("5${var.module_var_sap_nwas_pas_instance_no}13")

@@ -1,7 +1,7 @@
 
 # SAP NetWeaver PAS / SAP GUI, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgui" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_sapgui"
   priority  = 201
   direction = "Inbound"
@@ -19,7 +19,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgu
 
 # SAP NetWeaver PAS Gateway, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_gw"
   priority  = 202
   direction = "Inbound"
@@ -73,7 +73,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
 
 # SAP NetWeaver AS JAVA Message Server, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapnwas_java_ms" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_java_ms"
   priority  = 205
   direction = "Inbound"
@@ -146,7 +146,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
 
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   name      = "tcp_inbound_sapfiori"
   priority  = 209
   direction = "Inbound"
@@ -164,7 +164,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
 
 # SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl" {
-  count = local.network_rules_sap_nwas_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_ctrl"
   priority  = 210
   direction = "Inbound"
