@@ -8,8 +8,8 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_inbound_sapnwas_sapgui" {
 
   type              = "ingress"
   source_security_group_id = var.module_var_bastion_sg_id
-  from_port         = tonumber("32${var.module_var_sap_nwas_pas_instance_no}")
-  to_port           = tonumber("33${var.module_var_sap_nwas_pas_instance_no}")
+  from_port         = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
+  to_port           = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
   protocol          = "tcp"
 }
 
@@ -39,8 +39,8 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_inbound_sapfiori" {
 
   type              = "ingress"
   source_security_group_id = var.module_var_bastion_sg_id
-  from_port         = tonumber(var.module_var_sap_hana_instance_no) < tonumber(var.module_var_sap_nwas_pas_instance_no) ? tonumber("443${var.module_var_sap_hana_instance_no}") : tonumber("443${var.module_var_sap_nwas_pas_instance_no}")
-  to_port           = tonumber(var.module_var_sap_hana_instance_no) > tonumber(var.module_var_sap_nwas_pas_instance_no) ? tonumber("443${var.module_var_sap_hana_instance_no}") : tonumber("443${var.module_var_sap_nwas_pas_instance_no}")
+  from_port         = tonumber(var.module_var_sap_hana_instance_no) < tonumber(var.module_var_sap_nwas_abap_pas_instance_no) ? tonumber("443${var.module_var_sap_hana_instance_no}") : tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")
+  to_port           = tonumber(var.module_var_sap_hana_instance_no) > tonumber(var.module_var_sap_nwas_abap_pas_instance_no) ? tonumber("443${var.module_var_sap_hana_instance_no}") : tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")
   protocol          = "tcp"
 }
 

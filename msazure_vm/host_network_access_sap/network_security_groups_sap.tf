@@ -10,7 +10,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgu
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("32${var.module_var_sap_nwas_pas_instance_no}")
+  destination_port_range     = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -28,7 +28,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("33${var.module_var_sap_nwas_pas_instance_no}")
+  destination_port_range     = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -82,7 +82,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapnwas_java_
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("81${var.module_var_sap_nwas_pas_instance_no}")
+  destination_port_range     = tonumber("81${var.module_var_sap_nwas_java_ci_instance_no}")
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -173,7 +173,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl"
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("5${var.module_var_sap_nwas_pas_instance_no}13")
+  destination_port_range     = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}13")
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -228,7 +228,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_saphana_hsr2"
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("4${var.module_var_sap_nwas_pas_instance_no}40")
+  destination_port_range     = tonumber("4${var.module_var_sap_nwas_abap_pas_instance_no}40")
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -245,7 +245,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_saphana_hsr2
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("4${var.module_var_sap_nwas_pas_instance_no}40")
+  destination_port_range     = tonumber("4${var.module_var_sap_nwas_abap_pas_instance_no}40")
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name

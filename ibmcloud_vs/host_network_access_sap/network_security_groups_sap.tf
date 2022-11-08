@@ -6,8 +6,8 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_sapgui" {
   direction = "inbound"
   remote    = local.target_vpc_subnet_range
   tcp {
-    port_min = tonumber("32${var.module_var_sap_nwas_pas_instance_no}")
-    port_max = tonumber("32${var.module_var_sap_nwas_pas_instance_no}")
+    port_min = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
+    port_max = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
   }
 }
 
@@ -19,8 +19,8 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_gw" {
   direction  = "inbound"
   remote     = local.target_vpc_subnet_range
   tcp {
-    port_min = tonumber("33${var.module_var_sap_nwas_pas_instance_no}")
-    port_max = tonumber("33${var.module_var_sap_nwas_pas_instance_no}")
+    port_min = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
+    port_max = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
   }
 }
 
@@ -58,8 +58,8 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_sapnwas_java_ms" 
   direction  = "inbound"
   remote     = local.target_vpc_subnet_range
   tcp {
-    port_min = tonumber("81${var.module_var_sap_nwas_pas_instance_no}")
-    port_max = tonumber("81${var.module_var_sap_nwas_pas_instance_no}")
+    port_min = tonumber("81${var.module_var_sap_nwas_java_ci_instance_no}")
+    port_max = tonumber("81${var.module_var_sap_nwas_java_ci_instance_no}")
   }
 }
 
@@ -123,8 +123,8 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_ctrl" {
   direction  = "inbound"
   remote     = local.target_vpc_subnet_range
   tcp {
-    port_min = tonumber("5${var.module_var_sap_nwas_pas_instance_no}13")
-    port_max = tonumber("5${var.module_var_sap_nwas_pas_instance_no}14")
+    port_min = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}13")
+    port_max = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}14")
   }
 }
 

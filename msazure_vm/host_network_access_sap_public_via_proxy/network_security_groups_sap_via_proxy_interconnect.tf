@@ -11,10 +11,10 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapnwas_sapgu
   protocol  = "Tcp"
 
   source_address_prefix       = local.target_vnet_bastion_subnet_range
-  source_port_ranges          = tolist([tonumber("32${var.module_var_sap_nwas_pas_instance_no}"), tonumber("33${var.module_var_sap_nwas_pas_instance_no}")])
+  source_port_ranges          = tolist([tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}"), tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
   destination_address_prefix  = local.target_vnet_subnet_range
-  destination_port_ranges     = tolist([tonumber("32${var.module_var_sap_nwas_pas_instance_no}"), tonumber("33${var.module_var_sap_nwas_pas_instance_no}")])
+  destination_port_ranges     = tolist([tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}"), tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_bastion_connection_security_group_name
@@ -56,10 +56,10 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapfiori" {
   protocol  = "Tcp"
 
   source_address_prefix       = local.target_vnet_bastion_subnet_range
-  source_port_ranges          = tolist([tonumber("443${var.module_var_sap_hana_instance_no}"), tonumber("443${var.module_var_sap_nwas_pas_instance_no}")])
+  source_port_ranges          = tolist([tonumber("443${var.module_var_sap_hana_instance_no}"), tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
   destination_address_prefix  = local.target_vnet_subnet_range
-  destination_port_ranges     = tolist([tonumber("443${var.module_var_sap_hana_instance_no}"), tonumber("443${var.module_var_sap_nwas_pas_instance_no}")])
+  destination_port_ranges     = tolist([tonumber("443${var.module_var_sap_hana_instance_no}"), tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_bastion_connection_security_group_name
