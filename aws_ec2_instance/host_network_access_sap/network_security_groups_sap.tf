@@ -21,6 +21,29 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_gw" {
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
 
+# SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapfiori" {
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "ingress"
+  from_port         = tonumber("443${var.module_var_sap_hana_instance_no}")
+  to_port           = tonumber("443${var.module_var_sap_hana_instance_no}")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+
+# SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_ctrl" {
+  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "ingress"
+  from_port         = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}13")
+  to_port           = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}14")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+
+
 # SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_icm_https" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
@@ -39,17 +62,6 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_icm_http" {
   type              = "ingress"
   from_port         = tonumber("80${var.module_var_sap_hana_instance_no}")
   to_port           = tonumber("80${var.module_var_sap_hana_instance_no}")
-  protocol          = "tcp"
-  cidr_blocks  = ["${local.target_subnet_ip_range}"]
-}
-
-# SAP NetWeaver AS JAVA Message Server, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ms" {
-  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
-  security_group_id = var.module_var_host_security_group_id
-  type              = "ingress"
-  from_port         = tonumber("81${var.module_var_sap_nwas_java_ci_instance_no}")
-  to_port           = tonumber("81${var.module_var_sap_nwas_java_ci_instance_no}")
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
@@ -83,28 +95,6 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_index_mdc_1"
   type              = "ingress"
   from_port         = tonumber("3${var.module_var_sap_hana_instance_no}15")
   to_port           = tonumber("3${var.module_var_sap_hana_instance_no}15")
-  protocol          = "tcp"
-  cidr_blocks  = ["${local.target_subnet_ip_range}"]
-}
-
-# SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapfiori" {
-  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
-  security_group_id = var.module_var_host_security_group_id
-  type              = "ingress"
-  from_port         = tonumber("443${var.module_var_sap_hana_instance_no}")
-  to_port           = tonumber("443${var.module_var_sap_hana_instance_no}")
-  protocol          = "tcp"
-  cidr_blocks  = ["${local.target_subnet_ip_range}"]
-}
-
-# SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_ctrl" {
-  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
-  security_group_id = var.module_var_host_security_group_id
-  type              = "ingress"
-  from_port         = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}13")
-  to_port           = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}14")
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
@@ -210,5 +200,17 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_pacemaker_3" {
   from_port         = 5404
   to_port           = 5412
   protocol          = "udp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+
+
+# SAP NetWeaver AS JAVA Message Server, access from within the same Subnet
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ms" {
+  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "ingress"
+  from_port         = tonumber("81${var.module_var_sap_nwas_java_ci_instance_no}")
+  to_port           = tonumber("81${var.module_var_sap_nwas_java_ci_instance_no}")
+  protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }

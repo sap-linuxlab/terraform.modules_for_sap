@@ -14,21 +14,6 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_inbound_sapnwas_sapgui" {
 }
 
 
-# SAP HANA indexserver MDC System Database (SYSTEMDB) using 3<NN>13
-# SAP HANA indexserver MDC Tenant #0 SYSTEMDB using 3<NN>15
-# SAP HANA indexserver MDC Tenant #1--n using 3<NN>41
-resource "aws_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana" {
-  count = local.network_rules_sap_hana_boolean ? 1 : 0
-  security_group_id = var.module_var_bastion_connection_sg_id
-
-  type              = "ingress"
-  source_security_group_id = var.module_var_bastion_sg_id
-  from_port         = tonumber("3${var.module_var_sap_hana_instance_no}13")
-  to_port           = tonumber("3${var.module_var_sap_hana_instance_no}41")
-  protocol          = "tcp"
-}
-
-
 # SAP NetWeaver AS ICM HTTPS (Secure, Port 443 prefix) Instance Number 01
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS)
 ### ABAP ICM HTTPS using 443<NN>, default 00
@@ -54,5 +39,20 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_inbound_sapctrl" {
   source_security_group_id = var.module_var_bastion_sg_id
   from_port         = tonumber("5${var.module_var_sap_hana_instance_no}13")
   to_port           = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  protocol          = "tcp"
+}
+
+
+# SAP HANA indexserver MDC System Database (SYSTEMDB) using 3<NN>13
+# SAP HANA indexserver MDC Tenant #0 SYSTEMDB using 3<NN>15
+# SAP HANA indexserver MDC Tenant #1--n using 3<NN>41
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_bastion_connection_sg_id
+
+  type              = "ingress"
+  source_security_group_id = var.module_var_bastion_sg_id
+  from_port         = tonumber("3${var.module_var_sap_hana_instance_no}13")
+  to_port           = tonumber("3${var.module_var_sap_hana_instance_no}41")
   protocol          = "tcp"
 }
