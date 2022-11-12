@@ -57,6 +57,7 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 | | SAP NetWeaver AS JAVA P4 SSL port | 5`20`05 |
 | | SAP NetWeaver AS JAVA IIOP port | 5`20`06 |
 | | ~~SAP NetWeaver AS JAVA Telnet port~~ | ~~5`20`07~~ |
+| | SAP NetWeaver AS JAVA Debug Proxy port | 5`20`08 |
 | SAP NetWeaver AS JAVA Central Instance (CI) Access server process 0..n,<br/>using Instance Number `20`<br/>*(+5 on all ports for subsequent server processes)* | | |
 | | SAP NetWeaver AS JAVA Server Join port | 5`20`20 |
 | | SAP NetWeaver AS JAVA Server Debug port | 5`20`21 |

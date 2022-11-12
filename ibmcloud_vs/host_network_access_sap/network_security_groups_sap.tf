@@ -252,31 +252,6 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_java_ci_i
   }
 }
 
-# SAP NetWeaver AS JAVA Central Instance (CI) ICM server process 0..n, access to hosts within the same Subnet
-# OUTBOUND, for SAP SWPM deploycontroller with SAP NWAS Java 'offline deployment'
-# When /etc/hosts is correctly maintained at the start of installatons, SAP SWPM will execute API calls to the hostname using the P4 Port
-# Which will go through the firewall and therefore this SG Rule is required
-# For debugging if this SG Rule is not working, please see /tmp/sapinst_instdir/NW750/xxx/INSTALL/STD/log/dc_log/deploy_api.0.log
-resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_sapnwas_java_ci_icm_tcp" {
-  count      = local.network_rules_sap_nwas_java_boolean ? 1 : 0
-  group      = var.module_var_host_security_group_id
-  direction  = "outbound"
-  remote     = local.target_vpc_subnet_range
-  tcp {
-    port_min = tonumber("5${var.module_var_sap_nwas_java_ci_instance_no}00")
-    port_max = tonumber("5${var.module_var_sap_nwas_java_ci_instance_no}06")
-  }
-}
-resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_sapnwas_java_ci_icm_udp" {
-  count      = local.network_rules_sap_nwas_java_boolean ? 1 : 0
-  group      = var.module_var_host_security_group_id
-  direction  = "outbound"
-  remote     = local.target_vpc_subnet_range
-  udp {
-    port_min = tonumber("5${var.module_var_sap_nwas_java_ci_instance_no}00")
-    port_max = tonumber("5${var.module_var_sap_nwas_java_ci_instance_no}06")
-  }
-}
 
 # SAP NetWeaver AS JAVA Central Instance (CI) Access server process 0..n, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_java_ci_access" {
