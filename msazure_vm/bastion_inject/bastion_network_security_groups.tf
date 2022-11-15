@@ -8,7 +8,7 @@
 resource "azurerm_network_security_group" "bastion_connection_sg" {
   name                = "${var.module_var_resource_prefix}-bastion-proxy-connection-sg"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 
   # Security Group Rule for Host - Allow Inbound Proxy Connection on SSH Port 22 via the Bastion/Jump Host
   security_rule {
@@ -29,7 +29,7 @@ resource "azurerm_network_security_group" "bastion_connection_sg" {
 resource "azurerm_network_security_group" "bastion_vm_sg" {
   name                = "${var.module_var_resource_prefix}-bastion-vm-sg"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 
   # Security Group Rule for Bastion/Jump Host - Allow Inbound SSH Port 22 connection from remote (i.e. Public Internet)
   security_rule {

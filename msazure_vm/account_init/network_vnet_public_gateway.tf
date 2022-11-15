@@ -4,7 +4,7 @@
 resource "azurerm_public_ip" "nat_gw_publicip" {
   count               = var.module_var_az_vnet_name_create_boolean ? 1 : 0
   name                = "${var.module_var_resource_prefix}-vnet-nat-gw-publicip"
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
   resource_group_name = var.module_var_az_resource_group_create_boolean ? azurerm_resource_group.resource_group[0].name : data.azurerm_resource_group.resource_group[0].name
   allocation_method   = "Static"
   sku                 = "Standard"
@@ -14,7 +14,7 @@ resource "azurerm_public_ip" "nat_gw_publicip" {
 resource "azurerm_nat_gateway" "nat_gw" {
   count               = var.module_var_az_vnet_name_create_boolean ? 1 : 0
   name                = "${var.module_var_resource_prefix}-vnet-nat-gw"
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
   resource_group_name = var.module_var_az_resource_group_create_boolean ? azurerm_resource_group.resource_group[0].name : data.azurerm_resource_group.resource_group[0].name
   sku_name            = "Standard"
   #idle_timeout_in_minutes = 10

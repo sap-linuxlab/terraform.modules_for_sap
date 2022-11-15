@@ -4,7 +4,7 @@ resource "azurerm_virtual_network" "vnet" {
   name                = "${var.module_var_resource_prefix}-vnet"
   resource_group_name = var.module_var_az_resource_group_create_boolean ? azurerm_resource_group.resource_group[0].name : data.azurerm_resource_group.resource_group[0].name
   address_space       = ["10.200.0.0/16"]
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 }
 
 

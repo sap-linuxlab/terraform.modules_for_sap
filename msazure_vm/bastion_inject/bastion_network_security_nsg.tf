@@ -7,7 +7,7 @@
 resource "azurerm_network_security_group" "bastion_nsg" {
   name                = "${var.module_var_resource_prefix}-bastion-subnet-nsg"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 
   security_rule {
     name                       = "inbound_tcp_all"

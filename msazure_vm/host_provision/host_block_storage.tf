@@ -6,7 +6,7 @@ resource "azurerm_managed_disk" "block_volume_hana_data_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-hana-data-${count.index}"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   tier                 = var.module_var_disk_volume_type_hana_data
   create_option        = "Empty"
@@ -25,7 +25,7 @@ resource "azurerm_managed_disk" "block_volume_hana_log_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-hana-log-${count.index}"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   tier                 = var.module_var_disk_volume_type_hana_log
   create_option        = "Empty"
@@ -44,7 +44,7 @@ resource "azurerm_managed_disk" "block_volume_hana_shared_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-hana-shared-${count.index}"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   tier                 = var.module_var_disk_volume_type_hana_shared
   create_option        = "Empty"
@@ -63,7 +63,7 @@ resource "azurerm_managed_disk" "block_volume_anydb_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-anydb-${count.index}"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   tier                 = var.module_var_disk_volume_type_anydb
   create_option        = "Empty"
@@ -82,7 +82,7 @@ resource "azurerm_managed_disk" "block_volume_usr_sap_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-usr-sap-${count.index}"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   tier                 = var.module_var_disk_volume_type_usr_sap
   create_option        = "Empty"
@@ -101,7 +101,7 @@ resource "azurerm_managed_disk" "block_volume_sapmnt_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-sapmnt-${count.index}"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   tier                 = var.module_var_disk_volume_type_sapmnt
   create_option        = "Empty"
@@ -120,7 +120,7 @@ resource "azurerm_managed_disk" "block_volume_swap_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-swap-${count.index}"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   tier                 = var.module_var_disk_volume_type_swap
   create_option        = "Empty"
@@ -138,7 +138,7 @@ resource "azurerm_managed_disk" "block_volume_software_voltype" {
 
   name                 = "${var.module_var_host_name}-volume-software"
   resource_group_name  = local.target_resource_group_name
-  location             = var.module_var_az_region
+  location             = var.module_var_az_location_region
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_software

@@ -8,7 +8,7 @@
 resource "azurerm_network_security_group" "vnet_sg" {
   name                = "${var.module_var_resource_prefix}-vnet-vm-sg"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 
 
   # Allow Outbound HTTP Port 80 connection to any (e.g. via NAT Gateway)

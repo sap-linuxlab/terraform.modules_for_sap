@@ -3,7 +3,7 @@
 resource "azurerm_network_interface" "host_nic0" {
   name                = "${var.module_var_host_name}-nic-0"
   resource_group_name = local.target_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 
   ip_configuration {
     primary                       = "true"
@@ -20,7 +20,7 @@ resource "azurerm_network_interface" "host_nic0" {
 resource "azurerm_linux_virtual_machine" "host" {
   name                = var.module_var_host_name
   resource_group_name = local.target_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
   size                = "Standard_M32ls"
 
   network_interface_ids = [
