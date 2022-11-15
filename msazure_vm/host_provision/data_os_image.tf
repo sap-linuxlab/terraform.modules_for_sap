@@ -13,7 +13,7 @@
 
 
 data "azurerm_platform_image" "host_os_image" {
-  location  = var.module_var_az_region
+  location  = var.module_var_az_location_region
   publisher = var.module_var_host_os_image.publisher
   offer     = var.module_var_host_os_image.offer
   sku       = var.module_var_host_os_image.sku

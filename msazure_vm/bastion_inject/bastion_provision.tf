@@ -3,7 +3,7 @@
 resource "azurerm_public_ip" "bastion_host_publicip" {
   name                = "${var.module_var_resource_prefix}-bastion-publicip"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
   allocation_method   = "Static"
   #public_ip_address_allocation = "Dynamic"
 }
@@ -13,7 +13,7 @@ resource "azurerm_public_ip" "bastion_host_publicip" {
 resource "azurerm_network_interface" "bastion_host_nic0" {
   name                = "${var.module_var_resource_prefix}-bastion-nic-0"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 
   ip_configuration {
     primary                       = "true"
@@ -35,7 +35,7 @@ resource "azurerm_network_interface_security_group_association" "bastion_host_ni
 resource "azurerm_network_interface" "bastion_host_nic1" {
   name                = "${var.module_var_resource_prefix}-bastion-nic-1"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
 
   ip_configuration {
     name                          = "${var.module_var_resource_prefix}-bastion-nic-1-link"
@@ -57,7 +57,7 @@ resource "azurerm_network_interface_security_group_association" "bastion_host_ni
 resource "azurerm_linux_virtual_machine" "bastion_host" {
   name                = "${var.module_var_resource_prefix}-bastion"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
   size                = "Standard_B2ms"
 
   network_interface_ids = [

@@ -9,7 +9,7 @@ resource "tls_private_key" "bastion_ssh" {
 resource "azurerm_ssh_public_key" "bastion_ssh" {
   name                = "${var.module_var_resource_prefix}-bastion-ssh-key"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
   public_key          = trimspace(tls_private_key.bastion_ssh.public_key_openssh)
 }
 
@@ -24,7 +24,7 @@ resource "tls_private_key" "host_ssh" {
 resource "azurerm_ssh_public_key" "host_ssh" {
   name                = "${var.module_var_resource_prefix}-host-ssh-key"
   resource_group_name = var.module_var_az_resource_group_name
-  location            = var.module_var_az_region
+  location            = var.module_var_az_location_region
   public_key          = trimspace(tls_private_key.host_ssh.public_key_openssh)
 }
 
