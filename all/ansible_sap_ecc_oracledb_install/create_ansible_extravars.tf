@@ -151,8 +151,8 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753)
-      - 'SAPEXEDB_1000-80002605.SAR' # Kernel Part II (753), Oracle DB
+      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
+      - 'SAPEXEDB_1000-80002605.SAR' # Kernel Part II (753 Patch 1000), Oracle DB
       - 'SAPHOSTAGENT51_51-20009394.SAR'
       - 'SWPM10SP36_1-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53

@@ -125,10 +125,10 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753)
-      - 'SAPEXEDB_1000-80002616.SAR' # Kernel Part II (753), SAP ASE 16.0 FOR BUS. SUITE
+      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
+      - 'SAPEXEDB_1000-80002616.SAR' # Kernel Part II (753 Patch 1000), SAP ASE 16.0 FOR BUS. SUITE
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP35_7-20009701.SAR'
+      - 'SWPM10SP36_1-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SYBCTRL_1036-80002616.SAR'
@@ -177,10 +177,10 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753)
-      - 'SAPEXEDB_1000-80002616.SAR' # Kernel Part II (753), SAP ASE 16.0 FOR BUS. SUITE
+      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
+      - 'SAPEXEDB_1000-80002616.SAR' # Kernel Part II (753 Patch 1000), SAP ASE 16.0 FOR BUS. SUITE
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP35_7-20009701.SAR'
+      - 'SWPM10SP36_1-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SYBCTRL_1036-80002616.SAR'

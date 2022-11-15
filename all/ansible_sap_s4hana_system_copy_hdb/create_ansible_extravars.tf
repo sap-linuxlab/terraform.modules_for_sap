@@ -166,27 +166,27 @@ sap_swpm_templates_install_dictionary:
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_065_0-80002031.SAR'
-      - 'IMDB_LCAPPS_2061_0-20010426.SAR'
-      - 'IMDB_AFL20_061_2-80001894.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
       - 'SWPM20SP12_6-80003424.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_400-80004393.SAR' # Kernel Part I (777)
-      - 'SAPEXEDB_400-80004392.SAR' # Kernel Part II (777)
+      - 'SAPEXE_400-80004393.SAR' # Kernel Part I (777 Patch 400)
+      - 'SAPEXEDB_400-80004392.SAR' # Kernel Part II (777 Patch 400)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_065_0-80002046.SAR'
-      - 'IMDB_LCAPPS_2061_0-80002183.SAR'
-      - 'IMDB_AFL20_061_2-80002045.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
       - 'SWPM20SP12_6-80003426.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_400-80004418.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_400-80004417.SAR' # Kernel Part II (785)
+      - 'SAPEXE_400-80004418.SAR' # Kernel Part I (785 Patch 400)
+      - 'SAPEXEDB_400-80004417.SAR' # Kernel Part II (785 Patch 400)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
 
@@ -227,27 +227,27 @@ sap_swpm_templates_install_dictionary:
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_065_0-80002031.SAR'
-      - 'IMDB_LCAPPS_2061_0-20010426.SAR'
-      - 'IMDB_AFL20_061_2-80001894.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
       - 'SWPM20SP12_6-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_065_0-80002046.SAR'
-      - 'IMDB_LCAPPS_2061_0-80002183.SAR'
-      - 'IMDB_AFL20_061_2-80002045.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
       - 'SWPM20SP12_6-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
 
@@ -287,27 +287,27 @@ sap_swpm_templates_install_dictionary:
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_065_0-80002031.SAR'
-      - 'IMDB_LCAPPS_2061_0-20010426.SAR'
-      - 'IMDB_AFL20_061_2-80001894.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
       - 'SWPM20SP12_6-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_065_0-80002046.SAR'
-      - 'IMDB_LCAPPS_2061_0-80002183.SAR'
-      - 'IMDB_AFL20_061_2-80002045.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
       - 'SWPM20SP12_6-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
 
@@ -353,8 +353,8 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM20SP13_0-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_51-70006642.SAR' # Kernel Part I (789)
-      - 'SAPEXEDB_51-70006641.SAR' # Kernel Part II (789)
+      - 'SAPEXE_51-70006642.SAR' # Kernel Part I (789 Patch 51)
+      - 'SAPEXEDB_51-70006641.SAR' # Kernel Part II (789 Patch 51)
       - 'SAPHOSTAGENT57_57-80004822.SAR' # SAP Host Agent 7.22 SP57
 
     softwarecenter_search_list_ppc64le:
@@ -366,8 +366,8 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM20SP13_0-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_51-70006667.SAR' # Kernel Part I (789)
-      - 'SAPEXEDB_51-70006666.SAR' # Kernel Part II (789)
+      - 'SAPEXE_51-70006667.SAR' # Kernel Part I (789 Patch 51)
+      - 'SAPEXEDB_51-70006666.SAR' # Kernel Part II (789 Patch 51)
       - 'SAPHOSTAGENT57_57-80004831.SAR' # SAP Host Agent 7.22 SP57
 
 

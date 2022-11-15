@@ -132,10 +132,10 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753)
-      - 'SAPEXEDB_1000-80002604.SAR' # Kernel Part II (753), SAP MaxDB 7.9
+      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
+      - 'SAPEXEDB_1000-80002604.SAR' # Kernel Part II (753 Patch 1000), SAP MaxDB 7.9
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP35_7-20009701.SAR'
+      - 'SWPM10SP36_1-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - '51054410_2' # MaxDB 7.9 - SP10 Build 04 Linux on x86_64 64bit

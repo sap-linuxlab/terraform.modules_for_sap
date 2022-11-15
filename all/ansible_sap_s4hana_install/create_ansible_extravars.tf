@@ -168,8 +168,8 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM20SP13_0-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_51-70006642.SAR' # Kernel Part I (789)
-      - 'SAPEXEDB_51-70006641.SAR' # Kernel Part II (789)
+      - 'SAPEXE_51-70006642.SAR' # Kernel Part I (789 Patch 51)
+      - 'SAPEXEDB_51-70006641.SAR' # Kernel Part II (789 Patch 51)
       - 'SAPHOSTAGENT57_57-80004822.SAR' # SAP Host Agent 7.22 SP57
       - 'S4CORE107_INST_EXPORT_1.zip'
       - 'S4CORE107_INST_EXPORT_2.zip'
@@ -216,8 +216,8 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM20SP13_0-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_51-70006667.SAR' # Kernel Part I (789)
-      - 'SAPEXEDB_51-70006666.SAR' # Kernel Part II (789)
+      - 'SAPEXE_51-70006667.SAR' # Kernel Part I (789 Patch 51)
+      - 'SAPEXEDB_51-70006666.SAR' # Kernel Part II (789 Patch 51)
       - 'SAPHOSTAGENT57_57-80004831.SAR' # SAP Host Agent 7.22 SP57
       - 'S4CORE107_INST_EXPORT_1.zip'
       - 'S4CORE107_INST_EXPORT_2.zip'
@@ -294,8 +294,8 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM20SP12_6-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
       - 'S4CORE106_INST_EXPORT_1.zip'
       - 'S4CORE106_INST_EXPORT_2.zip'
@@ -336,8 +336,8 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM20SP12_6-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
       - 'S4CORE106_INST_EXPORT_1.zip'
       - 'S4CORE106_INST_EXPORT_2.zip'
