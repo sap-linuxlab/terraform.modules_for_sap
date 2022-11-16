@@ -1,0 +1,107 @@
+---
+- name: Ansible Playbook execution for SAP NetWeaver (ABAP) with SAP ASE 16.0 OneHost installation
+  hosts: all
+  become: true
+
+# Use include_role inside Task block, instead of using roles declaration or Task block with import_roles.
+# This ensures Ansible Roles, and the tasks within, will be parsed in sequence instead of parsing at Playbook initialisation
+  tasks:
+
+    # Set facts based on the install dictionary and the default template selected
+    - name: Set fact x86_64 softwarecenter_search_list_nw_sapase_install
+      set_fact:
+        softwarecenter_search_list_nw_sapase_install: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
+      when:
+        - ansible_architecture == "x86_64"
+
+    # Set facts based on the install dictionary and the default template selected
+    - name: Set fact ppc64le softwarecenter_search_list_nw_sapase_install
+      set_fact:
+        softwarecenter_search_list_nw_sapase_install: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
+      when:
+        - ansible_architecture == "ppc64le"
+
+    - name: Update etc hosts
+      lineinfile:
+        dest: /etc/hosts
+        line: "{{ ansible_default_ipv4.address }}\t{{ ansible_hostname }}.{{ ansible_domain }}\t{{ ansible_hostname }}"
+        state: present
+      become: yes
+
+    - name: Install Python package manager pip3 to system Python and unzip
+      ansible.builtin.package:
+        name:
+        - python3-pip
+        - unzip
+        state: present
+
+    - name: Install Python package manager lxml to system Python when ppc64le
+      ansible.builtin.package:
+        name:
+        - python3-lxml
+        - libxslt-devel
+        - libxml2-devel
+        state: present
+      when:
+        - ansible_architecture == "ppc64le"
+
+    - name: Install Python dependency wheel to system Python
+      ansible.builtin.pip:
+        name:
+          - wheel
+#        executable: pip3.6
+
+    - name: Install Python dependencies for Ansible Modules to system Python
+      ansible.builtin.pip:
+        name:
+          - urllib3
+          - requests
+          - beautifulsoup4
+          - lxml
+#        executable: pip3.6
+
+    - name: Create directories if does not exist
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      with_items:
+        - "{{ sap_install_media_detect_directory }}"
+
+# Use task block to call Ansible Module
+    - name: Execute Ansible Module with system Python to download installation media for SAP NetWeaver (ABAP) with SAP ASE 16.0
+      community.sap_launchpad.software_center_download:
+        suser_id: "{{ suser_id }}"
+        suser_password: "{{ suser_password }}"
+        softwarecenter_search_query: "{{ item }}"
+        dest: "{{ sap_install_media_detect_directory }}"
+      with_items: "{{ softwarecenter_search_list_nw_sapase_install }}"
+#      vars:
+#        ansible_python_interpreter: python3.6
+
+
+    - name: Execute Ansible Role sap_install_media_detect
+      include_role:
+        name: { role: community.sap_install.sap_install_media_detect }
+
+    - name: Execute Ansible Role sap_general_preconfigure
+      include_role:
+        name: { role: community.sap_install.sap_general_preconfigure }
+
+    - name: Execute Ansible Role sap_netweaver_preconfigure 
+      include_role:
+        name: { role: community.sap_install.sap_netweaver_preconfigure }
+
+    - name: Execute Ansible Role sap_swpm for SAP NetWeaver (ABAP) with SAP ASE 16.0
+      include_role:
+        name: { role: community.sap_install.sap_swpm }
+
+#    - name: Execute Ansible Role sap_profile_update to update Profile for ICM HTTPS
+#      include_role:
+#        name: { role: community.sap_operations.sap_profile_update }
+
+#    - name: Execute Ansible Role sap_control to restart SAP System/s for Profile update changes
+#      include_role:
+#        name: { role: community.sap_operations.sap_control }
+#      vars:
+#        sap_control_function: "restart_all_sap"

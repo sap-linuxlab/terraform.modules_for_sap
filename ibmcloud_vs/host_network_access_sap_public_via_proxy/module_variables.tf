@@ -7,7 +7,11 @@ variable "module_var_bastion_connection_security_group_id" {}
 
 variable "module_var_host_security_group_id" {}
 
-variable "module_var_sap_nwas_pas_instance_no" {
+variable "module_var_sap_nwas_abap_pas_instance_no" {
+  default = ""
+}
+
+variable "module_var_sap_nwas_java_ci_instance_no" {
   default = ""
 }
 

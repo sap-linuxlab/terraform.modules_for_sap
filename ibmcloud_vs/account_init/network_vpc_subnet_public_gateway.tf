@@ -14,26 +14,34 @@
 # From an individual Virtual Server, obtain the network's external IP address by running...
 #  curl ipecho.net/plain ; echo
 
+
+# Due to Terraform design limitations,
+# cannot perform detect whether existing VPC Subnet has a Public Gateway (PGW) and IF NOT then create new PGW and attach. Results in error:
+## The "count" value depends on resource attributes that cannot be determined until apply, so Terraform cannot predict how many instances will be created. To work around this, use the -target argument to first apply only the resources that the count depends on.
+# Instead, use assumption that any existing VPC Subnet has a PGW and note this in the documentation
+
+
 resource "ibm_is_public_gateway" "vpc_subnet_public_gateway" {
 
-  count = var.module_var_ibmcloud_vpc_subnet_create_boolean ? 1 : (local.target_subnet_public_gateway == "" ? 1 : 0)
+  count = var.module_var_ibmcloud_vpc_subnet_create_boolean ? 1 : 0
+#  count = var.module_var_ibmcloud_vpc_subnet_create_boolean ? 1 : (local.target_subnet_public_gateway == "" ? 1 : 0)
 
   name = var.module_var_ibmcloud_vpc_subnet_create_boolean ? "${var.module_var_resource_prefix}-vpc-subnet-public-gateway" : "${var.module_var_ibmcloud_vpc_subnet_name}-public-gateway"
   vpc  = var.module_var_ibmcloud_vpc_subnet_create_boolean ? join(",", ibm_is_vpc.vpc[*].id) : join(",", local.target_vpc_id)
 
-  zone           = var.module_var_ibmcloud_vpc_subnet_create_boolean ? var.module_var_ibmcloud_vpc_availability_zone : join(",", local.target_vpc_availability_zone)
+  zone           = var.module_var_ibmcloud_vpc_subnet_create_boolean ? var.module_var_ibmcloud_vpc_availability_zone : 0
+#  zone           = var.module_var_ibmcloud_vpc_subnet_create_boolean ? var.module_var_ibmcloud_vpc_availability_zone : join(",", local.target_vpc_availability_zone)
   resource_group = var.module_var_resource_group_create_boolean ? ibm_resource_group.resource_group[0].id : data.ibm_resource_group.resource_group[0].id
 
 }
 
-
-resource "ibm_is_subnet_public_gateway_attachment" "vpc_subnet_public_gateway_attach" {
-
-  depends_on = [ibm_is_public_gateway.vpc_subnet_public_gateway]
-
-  count = var.module_var_ibmcloud_vpc_subnet_create_boolean ? 0 : (local.target_subnet_public_gateway == "" ? 1 : 0)
-
-  subnet         = local.target_subnet_id
-  public_gateway = ibm_is_public_gateway.vpc_subnet_public_gateway[0].id
-
-}
+#resource "ibm_is_subnet_public_gateway_attachment" "vpc_subnet_public_gateway_attach" {
+#
+#  depends_on = [ibm_is_public_gateway.vpc_subnet_public_gateway]
+#
+#  count = var.module_var_ibmcloud_vpc_subnet_create_boolean ? 0 : (local.target_subnet_public_gateway == "" ? 1 : 0)
+#
+#  subnet         = local.target_subnet_id
+#  public_gateway = ibm_is_public_gateway.vpc_subnet_public_gateway[0].id
+#
+#}

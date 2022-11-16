@@ -33,6 +33,9 @@ resource "null_resource" "ansible_exec" {
   # for ansible-playbook, use debug with connection details -vvvv if errors occur
   provisioner "local-exec" {
     command = <<EOT
+    # If Terraform Cloud/Enterprise, install Ansible to the Workspace Run container (Ubuntu)
+    if [ ! -z "$TFC_RUN_ID" ] || [ ! -z "$TFE_RUN_ID" ] ; then echo 'Install Ansible to Terraform Cloud/Enterprise runtime' && python3 -m pip install ansible ; fi
+
     # Git 2.32.0 and above - ignore the global Git config (e.g. ~/.gitconfig) and system Git config (e.g. /usr/local/etc/gitconfig)
     export GIT_CONFIG_GLOBAL=/dev/null
     export GIT_CONFIG_SYSTEM=/dev/null

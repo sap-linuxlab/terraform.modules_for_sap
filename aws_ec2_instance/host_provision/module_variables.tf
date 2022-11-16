@@ -160,3 +160,7 @@ variable "module_var_disk_volume_type_software" {
 }
 
 variable "module_var_dns_nameserver_list" {}
+
+variable "module_var_disable_ip_anti_spoofing" {
+  default = false
+}

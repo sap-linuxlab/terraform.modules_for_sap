@@ -32,6 +32,15 @@ resource "aws_instance" "host" {
     }
   }
 
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_put_response_hop_limit = 8
+    http_tokens                 = "optional" // IMDSv1 = optional, IMDSv2 = required
+    instance_metadata_tags      = "disabled"
+  }
+
+  source_dest_check = var.module_var_disable_ip_anti_spoofing ? false : true  // When disable the Anti IP Spoofing = true, then Source/Destination Check = false
+
   tags = {
     Name = var.module_var_host_name
   }

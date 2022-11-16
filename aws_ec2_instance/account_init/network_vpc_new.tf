@@ -27,6 +27,8 @@ resource "aws_subnet" "vpc_subnet_public" {
   enable_dns64            = false
   map_public_ip_on_launch = false
 
+  availability_zone       = var.module_var_aws_vpc_availability_zone
+
   tags = {
     Name = "${var.module_var_resource_prefix}-vpc-subnet-public"
   }
@@ -43,6 +45,8 @@ resource "aws_subnet" "vpc_subnet_private" {
   cidr_block              = "10.200.10.0/24"
   enable_dns64            = false
   map_public_ip_on_launch = false
+
+  availability_zone       = var.module_var_aws_vpc_availability_zone
 
   tags = {
     Name = "${var.module_var_resource_prefix}-vpc-subnet-private"

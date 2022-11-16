@@ -41,6 +41,18 @@ suser_password: '${var.module_var_sap_id_user_password}'
 # Directory for SAP installation media
 sap_install_media_detect_directory: "${var.module_var_sap_software_download_directory}"
 
+# Configuration for SAP installation media detection
+sap_install_media_detect_source: local_dir
+sap_install_media_detect_db: "saphana"
+sap_install_media_detect_swpm: true
+sap_install_media_detect_hostagent: true
+sap_install_media_detect_igs: true
+sap_install_media_detect_kernel: true
+sap_install_media_detect_webdisp: false
+#sap_install_media_detect_export:
+#sap_install_media_detect_backup_directory:
+#sap_install_media_detect_backup:
+
 
 
 # ------ Mandatory parameters : SAP HANA installation ------ #
@@ -90,7 +102,7 @@ sap_hana_install_update_etchosts: 'false'
 
 
 
-# ------ Mandatory parameters : SAP SWPM installation using Defaults Templates mode of the Ansible Role ------ #
+# ------ Mandatory parameters : SAP SWPM installation using Default Templates mode of the Ansible Role ------ #
 
 sap_swpm_ansible_role_mode: default_templates
 sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
@@ -106,7 +118,7 @@ transaction_name: '${var.module_var_sap_maintenance_planner_transaction_name}'
 
 
 
-# ------ Mandatory parameters : SAP SWPM installation using Default Templates mode of the Ansible Role ------ #
+# ------ Mandatory parameters : Overrides for SAP SWPM installation using Default Templates mode of the Ansible Role ------ #
 
 # Override any variable set in sap_swpm_inifile_dictionary
 # NW Passwords
@@ -120,6 +132,15 @@ sap_swpm_db_systemdb_password: "${var.module_var_sap_swpm_db_systemdb_password}"
 sap_swpm_db_schema_abap_password: "${var.module_var_sap_swpm_db_schema_abap_password}"
 sap_swpm_db_sidadm_password: "${var.module_var_sap_swpm_db_sidadm_password}"
 
+# Override any variable set in sap_swpm_inifile_dictionary
+# SAP SWPM using SAP Maintenance Planner Stack XML
+sap_swpm_mp_stack_path: "${var.module_var_sap_software_download_directory}" # Enables search for MP Stack XML file and changes SAP SWPM execution
+sap_swpm_configure_tms: true
+sap_swpm_tmsadm_password: "${var.module_var_sap_swpm_master_password}"
+sap_swpm_spam_update: false
+sap_swpm_sum_prepare: true
+sap_swpm_sum_start: true
+
 
 # Templates and default values
 sap_swpm_templates_install_dictionary:
@@ -129,15 +150,20 @@ sap_swpm_templates_install_dictionary:
     sap_swpm_product_catalog_id: NW_ABAP_OneHost:S4HANA2020.CORE.HDB.ABAP
 
     sap_swpm_inifile_list:
-      - installation_media
+      - swpm_installation_media
+      - swpm_installation_media_swpm2_hana
       - credentials
-      - db_hana_config
-      - db_hana_nw_connection
-      - nw_other_config
-      - nw_central_instance
-      - nw_instance_config
-      - nw_ports_config
-      - unix_user
+      - credentials_hana
+      - db_config_hana
+      - db_connection_nw_hana
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - sap_os_linux_user
+      - maintenance_plan_stack_tms_config
+      - maintenance_plan_stack_spam_config
+      - maintenance_plan_stack_sum_config
 
     sap_swpm_inifile_dictionary:
       sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
@@ -156,15 +182,52 @@ sap_swpm_templates_install_dictionary:
     sap_swpm_product_catalog_id: NW_ABAP_OneHost:S4HANA2021.CORE.HDB.ABAP
 
     sap_swpm_inifile_list:
-      - installation_media
+      - swpm_installation_media
+      - swpm_installation_media_swpm2_hana
       - credentials
-      - db_hana_config
-      - db_hana_nw_connection
-      - nw_other_config
-      - nw_central_instance
-      - nw_instance_config
-      - nw_ports_config
-      - unix_user
+      - credentials_hana
+      - db_config_hana
+      - db_connection_nw_hana
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - sap_os_linux_user
+      - maintenance_plan_stack_tms_config
+      - maintenance_plan_stack_spam_config
+      - maintenance_plan_stack_sum_config
+
+    sap_swpm_inifile_dictionary:
+      sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
+      sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
+      sap_swpm_ascs_instance_nr: "${var.module_var_sap_swpm_ascs_instance_nr}"
+      sap_swpm_ascs_instance_hostname: "${var.module_var_hostname}"
+      sap_swpm_fqdn: "${var.module_var_dns_root_domain_name}"
+      sap_swpm_db_host: "${var.module_var_hostname}"
+      sap_swpm_db_sid: "${var.module_var_sap_hana_install_sid}"
+      sap_swpm_db_instance_nr: "${var.module_var_sap_hana_install_instance_number}"
+      sap_swpm_db_schema_abap: "${var.module_var_sap_swpm_db_schema_abap}"
+      sap_swpm_update_etchosts: 'false'
+
+  sap_s4hana_2022_onehost_install:
+
+    sap_swpm_product_catalog_id: NW_ABAP_OneHost:S4HANA2022.CORE.HDB.ABAP
+
+    sap_swpm_inifile_list:
+      - swpm_installation_media
+      - swpm_installation_media_swpm2_hana
+      - credentials
+      - credentials_hana
+      - db_config_hana
+      - db_connection_nw_hana
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - sap_os_linux_user
+      - maintenance_plan_stack_tms_config
+      - maintenance_plan_stack_spam_config
+      - maintenance_plan_stack_sum_config
 
     sap_swpm_inifile_dictionary:
       sap_swpm_sid: "${var.module_var_sap_swpm_sid}"

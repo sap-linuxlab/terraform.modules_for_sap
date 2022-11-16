@@ -9,6 +9,8 @@ resource "aws_subnet" "vpc_bastion_subnet" {
   enable_dns64            = false
   map_public_ip_on_launch = false
 
+  availability_zone       = var.module_var_aws_vpc_availability_zone
+
   tags = {
     Name = "${var.module_var_resource_prefix}-vpc-bastion-subnet"
   }

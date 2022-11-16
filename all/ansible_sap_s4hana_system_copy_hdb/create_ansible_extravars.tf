@@ -41,6 +41,18 @@ suser_password: '${var.module_var_sap_id_user_password}'
 # Directory for SAP installation media
 sap_install_media_detect_directory: "${var.module_var_sap_software_download_directory}"
 
+# Configuration for SAP installation media detection
+sap_install_media_detect_source: local_dir
+sap_install_media_detect_db: "saphana"
+sap_install_media_detect_swpm: true
+sap_install_media_detect_hostagent: true
+sap_install_media_detect_igs: true
+sap_install_media_detect_kernel: true
+sap_install_media_detect_webdisp: false
+#sap_install_media_detect_export:
+#sap_install_media_detect_backup_directory:
+#sap_install_media_detect_backup:
+
 
 
 # ------ Mandatory parameters : SAP HANA installation ------ #
@@ -90,14 +102,14 @@ sap_hana_install_update_etchosts: 'false'
 
 
 
-# ------ Mandatory parameters : SAP SWPM installation using Defaults Templates mode of the Ansible Role ------ #
+# ------ Mandatory parameters : SAP SWPM installation using Default Templates mode of the Ansible Role ------ #
 
 sap_swpm_ansible_role_mode: default_templates
 sap_swpm_templates_product_input: "${var.module_var_sap_swpm_template_selected}"
 
 
 
-# ------ Mandatory parameters : SAP SWPM installation using Defaults Templates mode of the Ansible Role ------ #
+# ------ Mandatory parameters : Overrides for SAP SWPM installation using Default Templates mode of the Ansible Role ------ #
 
 # Override any variable set in sap_swpm_inifile_dictionary
 # NW Passwords
@@ -111,6 +123,9 @@ sap_swpm_db_systemdb_password: "${var.module_var_sap_swpm_db_systemdb_password}"
 sap_swpm_db_schema_abap_password: "${var.module_var_sap_swpm_db_schema_abap_password}"
 sap_swpm_db_sidadm_password: "${var.module_var_sap_swpm_db_sidadm_password}"
 
+
+
+# ---- Mandatory parameters : Ansible Dictionary for SAP SWPM installation using Default Templates mode of the Ansible Role ---- #
 
 # Templates and default values
 sap_swpm_templates_install_dictionary:
@@ -135,41 +150,43 @@ sap_swpm_templates_install_dictionary:
       sap_swpm_backup_system_password: "${var.module_var_sap_swpm_backup_system_password}"
 
     sap_swpm_inifile_list:
-      - installation_media
+      - swpm_installation_media
+      - swpm_installation_media_swpm2_hana
       - credentials
-      - db_hana_config
-      - db_hana_restore
-      - db_hana_nw_connection
-      - nw_other_config
-      - nw_central_instance
-      - nw_instance_config
-      - nw_ports_config
-      - unix_user
+      - credentials_hana
+      - db_config_hana
+      - db_connection_nw_hana
+      - db_restore_hana
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - sap_os_linux_user
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_064_0-80002031.SAR'
-      - 'IMDB_LCAPPS_2061_0-20010426.SAR'
-      - 'IMDB_AFL20_061_2-80001894.SAR'
+      - 'IMDB_SERVER20_065_0-80002031.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
-      - 'SWPM20SP12_6-80003424.SAR'
+      - 'SWPM20SP13_1-80003424.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_400-80004393.SAR' # Kernel Part I (777)
-      - 'SAPEXEDB_400-80004392.SAR' # Kernel Part II (777)
+      - 'SAPEXE_400-80004393.SAR' # Kernel Part I (777 Patch 400)
+      - 'SAPEXEDB_400-80004392.SAR' # Kernel Part II (777 Patch 400)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_064_0-80002046.SAR'
-      - 'IMDB_LCAPPS_2061_0-80002183.SAR'
-      - 'IMDB_AFL20_061_2-80002045.SAR'
+      - 'IMDB_SERVER20_065_0-80002046.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
-      - 'SWPM20SP12_6-80003426.SAR'
+      - 'SWPM20SP13_1-80003426.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_400-80004418.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_400-80004417.SAR' # Kernel Part II (785)
+      - 'SAPEXE_400-80004418.SAR' # Kernel Part I (785 Patch 400)
+      - 'SAPEXEDB_400-80004417.SAR' # Kernel Part II (785 Patch 400)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
 
@@ -194,41 +211,43 @@ sap_swpm_templates_install_dictionary:
       sap_swpm_backup_system_password: "${var.module_var_sap_swpm_backup_system_password}"
 
     sap_swpm_inifile_list:
-      - installation_media
+      - swpm_installation_media
+      - swpm_installation_media_swpm2_hana
       - credentials
-      - db_hana_config
-      - db_hana_restore
-      - db_hana_nw_connection
-      - nw_other_config
-      - nw_central_instance
-      - nw_instance_config
-      - nw_ports_config
-      - unix_user
+      - credentials_hana
+      - db_config_hana
+      - db_connection_nw_hana
+      - db_restore_hana
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - sap_os_linux_user
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_064_0-80002031.SAR'
-      - 'IMDB_LCAPPS_2061_0-20010426.SAR'
-      - 'IMDB_AFL20_061_2-80001894.SAR'
+      - 'IMDB_SERVER20_065_0-80002031.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
-      - 'SWPM20SP12_6-80003424.SAR'
+      - 'SWPM20SP13_1-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_064_0-80002046.SAR'
-      - 'IMDB_LCAPPS_2061_0-80002183.SAR'
-      - 'IMDB_AFL20_061_2-80002045.SAR'
+      - 'IMDB_SERVER20_065_0-80002046.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
-      - 'SWPM20SP12_6-80003426.SAR'
+      - 'SWPM20SP13_1-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
 
 
@@ -252,42 +271,104 @@ sap_swpm_templates_install_dictionary:
       sap_swpm_backup_system_password: "${var.module_var_sap_swpm_backup_system_password}"
 
     sap_swpm_inifile_list:
-      - installation_media
+      - swpm_installation_media
+      - swpm_installation_media_swpm2_hana
       - credentials
-      - db_hana_config
-      - db_hana_restore
-      - db_hana_nw_connection
-      - nw_other_config
-      - nw_central_instance
-      - nw_instance_config
-      - nw_ports_config
-      - unix_user
+      - credentials_hana
+      - db_config_hana
+      - db_connection_nw_hana
+      - db_restore_hana
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - sap_os_linux_user
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_064_0-80002031.SAR'
-      - 'IMDB_LCAPPS_2061_0-20010426.SAR'
-      - 'IMDB_AFL20_061_2-80001894.SAR'
+      - 'IMDB_SERVER20_065_0-80002031.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
       - 'IMDB_CLIENT20_012_25-80002082.SAR'
-      - 'SWPM20SP12_6-80003424.SAR'
+      - 'SWPM20SP13_1-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005373.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004822.SAR'
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_064_0-80002046.SAR'
-      - 'IMDB_LCAPPS_2061_0-80002183.SAR'
-      - 'IMDB_AFL20_061_2-80002045.SAR'
+      - 'IMDB_SERVER20_065_0-80002046.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
       - 'IMDB_CLIENT20_012_25-80002095.SAR'
-      - 'SWPM20SP12_6-80003426.SAR'
+      - 'SWPM20SP13_1-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
-      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785)
-      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785)
+      - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785 Patch 100)
+      - 'SAPEXEDB_100-80005508.SAR' # Kernel Part II (785 Patch 100)
       - 'SAPHOSTAGENT55_55-80004831.SAR'
+
+
+  sap_s4hana_2022_onehost_system_copy:
+
+    sap_swpm_product_catalog_id: NW_ABAP_OneHost:S4HANA2022.CORE.HDB.CP
+
+    sap_swpm_inifile_dictionary:
+      sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
+      sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
+      sap_swpm_ascs_instance_nr: "${var.module_var_sap_swpm_ascs_instance_nr}"
+      sap_swpm_ascs_instance_hostname: "${var.module_var_hostname}"
+      sap_swpm_fqdn: "${var.module_var_dns_root_domain_name}"
+      sap_swpm_db_host: "${var.module_var_hostname}"
+      sap_swpm_db_sid: "${var.module_var_sap_hana_install_sid}"
+      sap_swpm_db_instance_nr: "${var.module_var_sap_hana_install_instance_number}"
+      sap_swpm_db_schema_abap: "${var.module_var_sap_swpm_db_schema_abap}"
+      sap_swpm_update_etchosts: 'false'
+      sap_swpm_backup_location: "${var.module_var_sap_hana_backup_directory}"
+      sap_swpm_backup_prefix: "${var.module_var_sap_hana_backup_filename_prefix}"
+      sap_swpm_backup_system_password: "${var.module_var_sap_swpm_backup_system_password}"
+
+    sap_swpm_inifile_list:
+      - swpm_installation_media
+      - swpm_installation_media_swpm2_hana
+      - credentials
+      - credentials_hana
+      - db_config_hana
+      - db_connection_nw_hana
+      - db_restore_hana
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - sap_os_linux_user
+
+    softwarecenter_search_list_x86_64:
+      - 'SAPCAR_1115-70006178.EXE'
+      - 'IMDB_SERVER20_065_0-80002031.SAR'
+      - 'IMDB_LCAPPS_2064_0-20010426.SAR'
+      - 'IMDB_AFL20_064_1-80001894.SAR'
+      - 'IMDB_CLIENT20_014_22-80002082.SAR' # SAP HANA Client 2.14
+      - 'SWPM20SP13_1-80003424.SAR'
+      - 'igsexe_1-70005417.sar' # IGS 7.81
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_51-70006642.SAR' # Kernel Part I (789 Patch 51)
+      - 'SAPEXEDB_51-70006641.SAR' # Kernel Part II (789 Patch 51)
+      - 'SAPHOSTAGENT57_57-80004822.SAR' # SAP Host Agent 7.22 SP57
+
+    softwarecenter_search_list_ppc64le:
+      - 'SAPCAR_1115-70006238.EXE'
+      - 'IMDB_SERVER20_065_0-80002046.SAR'
+      - 'IMDB_LCAPPS_2064_0-80002183.SAR'
+      - 'IMDB_AFL20_064_1-80002045.SAR'
+      - 'IMDB_CLIENT20_014_22-80002095.SAR' # SAP HANA Client 2.14
+      - 'SWPM20SP13_1-80003426.SAR'
+      - 'igsexe_1-70005446.sar' # IGS 7.81
+      - 'igshelper_17-10010245.sar'
+      - 'SAPEXE_51-70006667.SAR' # Kernel Part I (789 Patch 51)
+      - 'SAPEXEDB_51-70006666.SAR' # Kernel Part II (789 Patch 51)
+      - 'SAPHOSTAGENT57_57-80004831.SAR' # SAP Host Agent 7.22 SP57
 
 
 # For dual host installation, change the sap_swpm_db_host to appropriate value

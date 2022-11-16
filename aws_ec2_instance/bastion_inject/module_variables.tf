@@ -17,3 +17,5 @@ variable "module_var_bastion_ssh_key_name" {}
 variable "module_var_bastion_private_ssh_key" {}
 
 variable "module_var_bastion_public_ssh_key" {}
+
+variable "module_var_aws_vpc_availability_zone" {}

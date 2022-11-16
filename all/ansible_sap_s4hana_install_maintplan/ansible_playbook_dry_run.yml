@@ -48,7 +48,7 @@
 
 # Use task block to call Ansible Module
     - name: Test software list - Execute Ansible Module with system Python to get installation files list from SAP Maintenance Planner for an SAP S/4HANA installation
-      community.sap_launchpad.maintenance_planner:
+      community.sap_launchpad.maintenance_planner_files:
         suser_id: "{{ suser_id }}"
         suser_password: "{{ suser_password }}"
         transaction_name: "{{ transaction_name }}"
