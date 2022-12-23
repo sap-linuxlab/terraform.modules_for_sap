@@ -94,7 +94,7 @@ jobs:
             echo "            if sublist['Title'].startswith(input_search_file_name_and_version_only):" >> python_module_fuzzy_call_script.py
             echo "                print(sublist['Title'])" >> python_module_fuzzy_call_script.py
             echo "    else:" >> python_module_fuzzy_call_script.py
-            echo '        print("\nERROR. More than 1 result, manual intervention required for " + query_result[0]['Title'])' >> python_module_fuzzy_call_script.py
+            echo '        print("\nERROR. More than 1 result, manual intervention required....")' >> python_module_fuzzy_call_script.py
             echo '        for item in query_result:' >> python_module_fuzzy_call_script.py
             echo "            print('Identified ' + item['Title'] + ' : ' + item['Description'] + ', ' + item['Infotype'],end='\n')" >> python_module_fuzzy_call_script.py
             echo '            print("\n")' >> python_module_fuzzy_call_script.py
