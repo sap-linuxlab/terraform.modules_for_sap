@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        terraform_module_ansible: [ansible_sap_bw4hana_install, ansible_sap_ecc_hana_system_copy_hdb, ansible_sap_ecc_ibmdb2_install, ansible_sap_ecc_oracledb_install, ansible_sap_ecc_sapase_install, ansible_sap_ecc_sapmaxdb_install, ansible_sap_hana_install, ansible_sap_nwas_abap_hana_install, ansible_sap_nwas_abap_ibmdb2_install, ansible_sap_nwas_abap_oracledb_install, ansible_sap_nwas_abap_sapase_install, ansible_sap_nwas_abap_sapmaxdb_install, ansible_sap_nwas_java_ibmdb2_install, ansible_sap_nwas_java_sapase_install, ansible_sap_s4hana_install, ansible_sap_s4hana_install_maintplan, ansible_sap_s4hana_system_copy_hdb]
+        terraform_module_ansible: [ansible_sap_hana_ha_install, ansible_sap_hana_scale_out_install, ansible_sap_s4hana_distributed_install_maintplan, ansible_sap_solman_java_sapase_install, ansible_sap_software_install_media]
     steps:
       - name: Checkout
         uses: actions/checkout@v3.1.0
@@ -77,31 +77,50 @@ jobs:
             echo 'sap_sso_login(username, password)' >> python_module_fuzzy_call_script.py
             echo 'query_result = search_software_fuzzy(input_search_file)' >> python_module_fuzzy_call_script.py
             echo 'if len(query_result) >= 2:' >> python_module_fuzzy_call_script.py
-            echo "    if 'IMDB_CLIENT20' in query_result[0]['Title']:" >> python_module_fuzzy_call_script.py
-            echo "        print(query_result[-1]['Title'])" >> python_module_fuzzy_call_script.py
-            echo "    elif '70SWPM' in query_result[0]['Title']:" >> python_module_fuzzy_call_script.py
+            echo "    if '70SWPM' in query_result[0]['Title']:" >> python_module_fuzzy_call_script.py
             echo "        print(query_result[-1]['Title'])" >> python_module_fuzzy_call_script.py
             echo "    elif any('DBATL' in sublist['Title'] for sublist in query_result):" >> python_module_fuzzy_call_script.py
             echo "        for sublist in query_result:" >> python_module_fuzzy_call_script.py
             echo "            if sublist['Title'].startswith('DBATL'):" >> python_module_fuzzy_call_script.py
             echo "                print(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "    elif any('IMDB_CLIENT20' in sublist['Title'] for sublist in query_result):" >> python_module_fuzzy_call_script.py
+            echo "        input_imdb_client = input_search_file_name_and_version_only[:-2]" >> python_module_fuzzy_call_script.py
+            echo "        list_imdb_client = []" >> python_module_fuzzy_call_script.py
+            echo "        for sublist in query_result:" >> python_module_fuzzy_call_script.py
+            echo "            if sublist['Title'].startswith(input_imdb_client):" >> python_module_fuzzy_call_script.py
+            echo "                list_imdb_client.append(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "        list_imdb_client.sort(reverse=True)" >> python_module_fuzzy_call_script.py
+            echo "        print(list_imdb_client[0])" >> python_module_fuzzy_call_script.py
             echo "    elif any('IMDB_AFL' in sublist['Title'] for sublist in query_result):" >> python_module_fuzzy_call_script.py
+            echo "        input_imdb_afl = input_search_file_name_and_version_only[:-1]" >> python_module_fuzzy_call_script.py
+            echo "        list_imdb_afl = []" >> python_module_fuzzy_call_script.py
             echo "        for sublist in query_result:" >> python_module_fuzzy_call_script.py
-            echo "            if sublist['Title'].startswith(input_search_file_name_and_version_only):" >> python_module_fuzzy_call_script.py
-            echo "                print(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "            if sublist['Title'].startswith(input_imdb_afl):" >> python_module_fuzzy_call_script.py
+            echo "                list_imdb_afl.append(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "        list_imdb_afl.sort(reverse=True)" >> python_module_fuzzy_call_script.py
+            echo "        print(list_imdb_afl[0])" >> python_module_fuzzy_call_script.py
             echo "    elif any('IMDB_LCAPPS' in sublist['Title'] for sublist in query_result):" >> python_module_fuzzy_call_script.py
+            echo "        input_imdb_lcapps = input_search_file_name_and_version_only[:-1]" >> python_module_fuzzy_call_script.py
+            echo "        list_imdb_lcapps = []" >> python_module_fuzzy_call_script.py
             echo "        for sublist in query_result:" >> python_module_fuzzy_call_script.py
-            echo "            if sublist['Title'].startswith(input_search_file_name_and_version_only):" >> python_module_fuzzy_call_script.py
-            echo "                print(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "            if sublist['Title'].startswith(input_imdb_lcapps):" >> python_module_fuzzy_call_script.py
+            echo "                list_imdb_lcapps.append(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "        list_imdb_lcapps.sort(reverse=True)" >> python_module_fuzzy_call_script.py
+            echo "        print(list_imdb_lcapps[0])" >> python_module_fuzzy_call_script.py
             echo "    elif any('IMDB_SERVER' in sublist['Title'] for sublist in query_result):" >> python_module_fuzzy_call_script.py
             echo "        for sublist in query_result:" >> python_module_fuzzy_call_script.py
-            echo "            input_imdb_server = input_search_file_name_and_version_only.rstrip(input_search_file_name_and_version_only[-1])" >> python_module_fuzzy_call_script.py
+            echo "            input_imdb_server = input_search_file_name_and_version_only[:-1]" >> python_module_fuzzy_call_script.py
             echo "            if sublist['Title'].startswith(input_imdb_server):" >> python_module_fuzzy_call_script.py
             echo "                print(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "    # As SAP WebDisp file name numbering does not use preceeding 0's, manually filter out v7 which is older than v69:" >> python_module_fuzzy_call_script.py
             echo "    elif any('SAPWEBDISP' in sublist['Title'] for sublist in query_result):" >> python_module_fuzzy_call_script.py
+            echo "        input_webdisp = input_search_file_name_and_version_only[:-2]" >> python_module_fuzzy_call_script.py
+            echo "        list_webdisp = []" >> python_module_fuzzy_call_script.py
             echo "        for sublist in query_result:" >> python_module_fuzzy_call_script.py
-            echo "            if sublist['Title'].startswith(input_search_file_name_and_version_only):" >> python_module_fuzzy_call_script.py
-            echo "                print(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "            if sublist['Title'].startswith(input_webdisp) and not sublist['Title'].startswith('SAPWEBDISP_SP_7'):" >> python_module_fuzzy_call_script.py
+            echo "                list_webdisp.append(sublist['Title'])" >> python_module_fuzzy_call_script.py
+            echo "        list_webdisp.sort(reverse=True)" >> python_module_fuzzy_call_script.py
+            echo "        print(list_webdisp[0])" >> python_module_fuzzy_call_script.py
             echo "    else:" >> python_module_fuzzy_call_script.py
             echo '        print("\nERROR. More than 1 result, manual intervention required....")' >> python_module_fuzzy_call_script.py
             echo '        for item in query_result:' >> python_module_fuzzy_call_script.py
