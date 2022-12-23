@@ -161,7 +161,6 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_LCAPPS_2066_0-20010426.SAR'
       - 'IMDB_AFL20_066_0-80001894.SAR'
       - 'IMDB_CLIENT20_015_17-80002082.SAR' # SAP HANA Client
-      - 'SWPM20SP13_1-80003424.SAR'
       - 'SWPM20SP13_3-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
