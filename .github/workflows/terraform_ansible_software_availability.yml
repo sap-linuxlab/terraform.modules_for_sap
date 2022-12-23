@@ -5,7 +5,7 @@ on:
   # schedule uses UTC
   # only uses the main branch, to alter use 'with: ref: branch_name' for the step using actions/checkout
   schedule:
-    - cron: '0 12,18 * * 1-5'
+    - cron: '0 11,19 * * 1-5'
 
   push:
     branches:
