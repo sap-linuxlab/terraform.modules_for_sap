@@ -177,7 +177,7 @@ sap_swpm_templates_install_dictionary:
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002572.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_007_26-80002082.SAR'
+      - 'IMDB_CLIENT20_007_26-80002082.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-20009394.SAR'
 
     softwarecenter_search_list_ppc64le:
@@ -191,7 +191,7 @@ sap_swpm_templates_install_dictionary:
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002629.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_007_26-80002095.SAR'
+      - 'IMDB_CLIENT20_007_26-80002095.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-70002261.SAR'
 
 
@@ -242,7 +242,7 @@ sap_swpm_templates_install_dictionary:
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002572.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_007_26-80002082.SAR'
+      - 'IMDB_CLIENT20_007_26-80002082.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-20009394.SAR'
 
     softwarecenter_search_list_ppc64le:
@@ -256,7 +256,7 @@ sap_swpm_templates_install_dictionary:
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002629.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_007_26-80002095.SAR'
+      - 'IMDB_CLIENT20_007_26-80002095.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-70002261.SAR'
 
 EOF
