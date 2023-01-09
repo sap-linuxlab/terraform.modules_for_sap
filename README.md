@@ -57,7 +57,7 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | &emsp;Microsoft Azure Virtual Machine| N/A |
 | &emsp;~~oVirt KVM Virtual Machine~~ | N/A |
 | &emsp;~~VMware vSphere Virtual Machine~~ | N/A |
-| &emsp;Generic documentation | <ul><li>[/all/ansible_sap_s4hana_install_maintplan](/docs/tf_modules/tf_mod_host_network_access_sap.md)</li></ul> |
+| &emsp;Generic documentation | <ul><li>[**/host_network_access_sap](/docs/tf_modules/tf_mod_host_network_access_sap.md)</li></ul> |
 | **TF Modules as wrapper to Ansible for SAP solution scenarios** | - |
 | &emsp; SAP BW/4HANA single-node | /all/ansible_sap_bw4hana_install |
 | &emsp; SAP ECC on SAP HANA single-node | /all/ansible_sap_ecc_hana_install |
