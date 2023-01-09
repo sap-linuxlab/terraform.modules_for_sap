@@ -59,23 +59,24 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | &emsp;~~VMware vSphere Virtual Machine~~ | N/A |
 | &emsp;Generic documentation | <ul><li>[/all/ansible_sap_s4hana_install_maintplan](/docs/tf_modules/tf_mod_host_network_access_sap.md)</li></ul> |
 | **TF Modules as wrapper to Ansible for SAP solution scenarios** | - |
-| &emsp;  | /all/ansible_sap_bw4hana_install |
-| &emsp;SAP ECC on SAP HANA single-node System Copy | /all/ansible_sap_ecc_hana_system_copy_hdb |
-| &emsp;  | /all/ansible_sap_ecc_ibmdb2_install |
-| &emsp;  | /all/ansible_sap_ecc_oracledb_install |
-| &emsp;  | /all/ansible_sap_ecc_sapase_install |
-| &emsp;  | /all/ansible_sap_ecc_sapmaxdb_install |
-| &emsp;SAP HANA single-node installation | /all/ansible_sap_hana_install |
-| &emsp;  | /all/ansible_sap_nwas_abap_hana_install |
-| &emsp;  | /all/ansible_sap_nwas_abap_ibmdb2_install |
-| &emsp;  | /all/ansible_sap_nwas_abap_oracledb_install |
-| &emsp;  | /all/ansible_sap_nwas_abap_sapase_install |
-| &emsp;  | /all/ansible_sap_nwas_abap_sapmaxdb_install |
-| &emsp;  | /all/ansible_sap_nwas_java_ibmdb2_install |
-| &emsp;  | /all/ansible_sap_nwas_java_sapase_install |
-| &emsp;  | /all/ansible_sap_s4hana_install |
-| &emsp;SAP S/4HANA single-node installation, using SAP Maintenance Planner | [/all/ansible_sap_s4hana_install_maintplan](/docs/tf_modules/tf_mod_ansible_sap_s4hana_install_maintplan.md) |
-| &emsp;SAP S/4HANA single-node System Copy (Homogeneous with SAP HANA Backup / Recovery) installation | /all/ansible_sap_s4hana_system_copy_hdb |
+| &emsp; SAP BW/4HANA single-node installation | /all/ansible_sap_bw4hana_install |
+| &emsp; SAP ECC on SAP HANA single-node installation | /all/ansible_sap_ecc_hana_install |
+| &emsp; SAP ECC on SAP HANA single-node System Copy installation (Homogeneous with SAP HANA Backup / Recovery) | /all/ansible_sap_ecc_hana_system_copy_hdb |
+| &emsp; SAP ECC on IBM Db2 single-node installation | /all/ansible_sap_ecc_ibmdb2_install |
+| &emsp; SAP ECC on Oracle DB single-node installation | /all/ansible_sap_ecc_oracledb_install |
+| &emsp; SAP ECC on SAP ASE single-node installation | /all/ansible_sap_ecc_sapase_install |
+| &emsp; SAP ECC on SAP MaxDB single-node installation | /all/ansible_sap_ecc_sapmaxdb_install |
+| &emsp; SAP HANA 2.0 single-node installation | /all/ansible_sap_hana_install |
+| &emsp; SAP NetWeaver AS (ABAP) with SAP HANA single-node installation | /all/ansible_sap_nwas_abap_hana_install |
+| &emsp; SAP NetWeaver AS (ABAP) with IBM Db2 single-node installation | /all/ansible_sap_nwas_abap_ibmdb2_install |
+| &emsp; SAP NetWeaver AS (ABAP) with Oracle DB single-node installation | /all/ansible_sap_nwas_abap_oracledb_install |
+| &emsp; SAP NetWeaver AS (ABAP) with SAP ASE single-node installation | /all/ansible_sap_nwas_abap_sapase_install |
+| &emsp; SAP NetWeaver AS (ABAP) with SAP MaxDB single-node installation | /all/ansible_sap_nwas_abap_sapmaxdb_install |
+| &emsp; SAP NetWeaver AS (JAVA) with IBM Db2 single-node installation | /all/ansible_sap_nwas_java_ibmdb2_install |
+| &emsp; SAP NetWeaver AS (JAVA) with SAP ASE single-node installation | /all/ansible_sap_nwas_java_sapase_install |
+| &emsp; SAP S/4HANA single-node installation | /all/ansible_sap_s4hana_install |
+| &emsp; SAP S/4HANA single-node installation, using SAP Maintenance Planner Stack XML (to run SUM and SPAM / SAINT) | [/all/ansible_sap_s4hana_install_maintplan](/docs/tf_modules/tf_mod_ansible_sap_s4hana_install_maintplan.md) |
+| &emsp; SAP S/4HANA single-node System Copy installation (Homogeneous with SAP HANA Backup / Recovery) | /all/ansible_sap_s4hana_system_copy_hdb |
 
 ## Infrastructure provisioning parity comparison
 
