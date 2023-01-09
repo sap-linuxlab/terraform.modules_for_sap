@@ -1,0 +1,9 @@
+
+# Roles from Ansible Galaxy
+#- name: linux-system-roles.storage
+
+# Roles from public repositories (e.g. upstream Linux System Roles)
+#- src: https://github.com/linux-system-roles/storage.git
+
+# Roles from private repositories via GitHub PAT
+#- src: https://PAT_TOKEN@github.com/infrasap/repo.git

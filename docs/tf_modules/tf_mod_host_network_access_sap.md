@@ -1,4 +1,4 @@
-# Terraform Module - Cloud Service Providers - 
+# Terraform Module - Cloud Service Providers - Network Access for SAP
 
 Terraform Module to dynamically open the correct Ports for access to SAP Systems endpoints.
 

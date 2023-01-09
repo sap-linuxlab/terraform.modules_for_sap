@@ -4,11 +4,16 @@
 
 Terraform Modules for SAP are a subcomponent designed to be used from the [Terraform Templates for SAP](https://github.com/sap-linuxlab/terraform.templates_for_sap), but can be executed individually.
 
-These custom Terraform Modules for SAP enable different solution scenarios of SAP software installations, and are used where there is siginificant repeated code, such as bootstraping a new Cloud Account with a new Resource Group, VPC and Subnets.
+These custom Terraform Modules for SAP enable different solution scenarios of SAP software installations, and are used where there is siginificant repeated code, such as bootstraping a new Cloud Account with a new Resource Group, VPC and Subnets - i.e. a 'Minimal Landing Zone'.
 
 Every Terraform Template (e.g. `/sap_hana_single_node_install/aws_ec2_instance`):
 - will reference Terraform Modules for SAP infrastructure platforms (e.g. `/aws_ec2_instance/host_provision`)
 - will reference Terraform Modules for SAP solution scenarios (e.g. `/all/ansible_sap_s4hana_install_maintplan`)
+
+It is possible to create your own Terraform Templates and re-use [other Terraform Modules from the Terraform Registry](https://registry.terraform.io/browse/modules), although these combinations are not tested; for example:
+- Terraform Module for the Cloud Service Provider's defined landing zone patterns (e.g. [Azure Cloud Adoption Framework (CAF)](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest))
+- Terraform Module for SAP Host provision to a specified Infrastructure Platform (e.g. `/msazure_vm/host_provision` subdirectory)
+- any of the Terraform Modules for SAP installations using Ansible (e.g. `/all/ansible_sap_s4hana_install_maintplan` subdirectory)
 
 For more information which explains Terraform Modules, please see:
 - [Terraform HCL Language - Syntax of Module Blocks](https://www.terraform.io/docs/language/modules/syntax.html)
@@ -44,7 +49,7 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | **Terraform Modules for SAP** | **Link** |
 |:---|:---|
 | **TF Modules for Infrastructure Platforms** | - |
-| &emsp;Amazon Web Services Elastic Compute Cloud (EC2) Instance | |
+| &emsp;Amazon Web Services Elastic Compute Cloud (EC2) Virtual Server | |
 | &emsp;~~Google Cloud Platform Compute Engine (CE) Virtual Machine~~ | N/A |
 | &emsp;IBM Cloud Virtual Servers | N/A |
 | &emsp;IBM Cloud, IBM Power Virtual Servers | |
@@ -52,19 +57,34 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | &emsp;Microsoft Azure Virtual Machine| N/A |
 | &emsp;~~oVirt KVM Virtual Machine~~ | N/A |
 | &emsp;~~VMware vSphere Virtual Machine~~ | N/A |
+| &emsp;Generic documentation | <ul><li>[**/host_network_access_sap](/docs/tf_modules/tf_mod_host_network_access_sap.md)</li></ul> |
 | **TF Modules as wrapper to Ansible for SAP solution scenarios** | - |
-| &emsp;SAP HANA single-node installation | [modules_for_sap/all/ansible_sap_hana_install](../docs/tf_modules/tf_mod_ansible_sap_hana_install.md) |
-| &emsp;SAP S/4HANA single-node System Copy (Homogeneous with SAP HANA Backup / Recovery) installation | [modules_for_sap/all/ansible_sap_s4hana_system_copy_hdb](../docs/tf_modules/tf_mod_ansible_sap_s4hana_system_copy_hdb.md) |
-| &emsp;SAP S/4HANA single-node installation, using SAP Maintenance Planner | [modules_for_sap/all/ansible_sap_s4hana_install_maintplan](../docs/tf_modules/tf_mod_ansible_sap_s4hana_install_maintplan.md) |
-| &emsp;SAP ECC on SAP HANA single-node System Copy | [modules_for_sap/all/ansible_sap_ecc_hana_system_copy_hdb](../docs/tf_modules/tf_mod_ansible_sap_ecc_hana_system_copy_hdb.md) |
+| &emsp; SAP BW/4HANA single-node | /all/ansible_sap_bw4hana_install |
+| &emsp; SAP ECC on SAP HANA single-node | /all/ansible_sap_ecc_hana_install |
+| &emsp; SAP ECC on SAP HANA single-node System Copy<br/>&emsp;  (Homogeneous with SAP HANA Backup / Recovery) | /all/ansible_sap_ecc_hana_system_copy_hdb |
+| &emsp; SAP ECC on IBM Db2 single-node | /all/ansible_sap_ecc_ibmdb2_install |
+| &emsp; SAP ECC on Oracle DB single-node | /all/ansible_sap_ecc_oracledb_install |
+| &emsp; SAP ECC on SAP ASE single-node | /all/ansible_sap_ecc_sapase_install |
+| &emsp; SAP ECC on SAP MaxDB single-node | /all/ansible_sap_ecc_sapmaxdb_install |
+| &emsp; SAP HANA 2.0 single-node | /all/ansible_sap_hana_install |
+| &emsp; SAP NetWeaver AS (ABAP) with SAP HANA single-node | /all/ansible_sap_nwas_abap_hana_install |
+| &emsp; SAP NetWeaver AS (ABAP) with IBM Db2 single-node | /all/ansible_sap_nwas_abap_ibmdb2_install |
+| &emsp; SAP NetWeaver AS (ABAP) with Oracle DB single-node | /all/ansible_sap_nwas_abap_oracledb_install |
+| &emsp; SAP NetWeaver AS (ABAP) with SAP ASE single-node | /all/ansible_sap_nwas_abap_sapase_install |
+| &emsp; SAP NetWeaver AS (ABAP) with SAP MaxDB single-node | /all/ansible_sap_nwas_abap_sapmaxdb_install |
+| &emsp; SAP NetWeaver AS (JAVA) with IBM Db2 single-node | /all/ansible_sap_nwas_java_ibmdb2_install |
+| &emsp; SAP NetWeaver AS (JAVA) with SAP ASE single-node | /all/ansible_sap_nwas_java_sapase_install |
+| &emsp; SAP S/4HANA single-node | /all/ansible_sap_s4hana_install |
+| &emsp; SAP S/4HANA single-node,<br/>&emsp; using SAP Maintenance Planner Stack XML<br/>&emsp; (to run SUM and SPAM / SAINT) | [/all/ansible_sap_s4hana_install_maintplan](/docs/tf_modules/tf_mod_ansible_sap_s4hana_install_maintplan.md) |
+| &emsp; SAP S/4HANA single-node System Copy<br/>&emsp; (Homogeneous with SAP HANA Backup / Recovery) | /all/ansible_sap_s4hana_system_copy_hdb |
 
 ## Infrastructure provisioning parity comparison
 
 | Infrastructure Platform | **Amazon Web Services (AWS)** | **Microsoft Azure** | **IBM Cloud** | **IBM Cloud** | **IBM PowerVC** |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| &emsp;&emsp;*Product* | EC2 instance | VM | Virtual Server | IBM Power Virtual Server | LPAR |
-| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Type* | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 2) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) |
-| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Hypervisor* | KVM | HyperV | KVM | IBM PowerVM (PHYP) | IBM PowerVM (PHYP) |
+| &emsp;&emsp;*Product* | EC2 Virtual Server | VM | Virtual Server | IBM Power Virtual Server | LPAR |
+| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Type* | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) |
+| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Hypervisor* | KVM | HyperV | KVM | IBM PowerVM<br> (PHYP LE) | IBM PowerVM<br> (PHYP LE) |
 | <br/><br/>***Account Init*** |   |   |   |   |   |
 | Create Resource Group, or re-use existing Resource Group | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A |
 | Create VPC/VNet, or re-use existing VPC/VNet | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A |

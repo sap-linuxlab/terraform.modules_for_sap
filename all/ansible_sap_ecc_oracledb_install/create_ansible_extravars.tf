@@ -45,7 +45,6 @@ sap_install_media_detect_hostagent: true
 sap_install_media_detect_igs: true
 sap_install_media_detect_kernel: true
 sap_install_media_detect_webdisp: false
-sap_install_media_detect_export: "sapecc"
 #sap_install_media_detect_backup_directory:
 #sap_install_media_detect_backup:
 
@@ -115,6 +114,8 @@ sap_swpm_templates_install_dictionary:
   # uses SAP NetWeaver 7.5
   sap_ecc6_ehp8_oracledb_onehost:
 
+    sap_install_media_detect_export: "sapecc"
+
     sap_swpm_product_catalog_id: NW_ABAP_OneHost:BS2016.ERP608.ORA.PD
 
     sap_swpm_inifile_dictionary:
@@ -179,6 +180,92 @@ sap_swpm_templates_install_dictionary:
 #      - '51050610_16' # SAP ERP 6.0 EHP8 SAP Components, ZIP
 #      - '51050610_17' # BS7i2016 Java Components - NW 7.5, ZIP
 
+    # Not available for IBM Power Little Endian (ppc64le), leave code to keep similarity of code structure across all Terraform Modules for SAP that wrap Ansible Playbooks
+    softwarecenter_search_list_ppc64le:
+      - 'SAPCAR_1115-70006238.EXE'
+
+
+  # SAP Business Suite 7i 2016 > EHP8 for SAP ERP 6.0 ABAP > Oracle > Installation > Application Server ABAP > Standard System > Standard System
+  # uses SAP NetWeaver 7.5
+  sap_ides_ecc6_ehp8_oracledb_onehost:
+
+    sap_install_media_detect_export: "sapecc_ides"
+
+    sap_swpm_product_catalog_id: NW_ABAP_OneHost:BS2016.ERP608.ORA.PD
+
+    sap_swpm_inifile_dictionary:
+      sap_swpm_sid: "${var.module_var_sap_swpm_sid}"
+      sap_swpm_pas_instance_hostname: "${var.module_var_hostname}"
+      sap_swpm_pas_instance_nr: "${var.module_var_sap_swpm_pas_instance_nr}"
+      sap_swpm_ascs_instance_nr: "${var.module_var_sap_swpm_ascs_instance_nr}"
+      sap_swpm_ascs_instance_hostname: "${var.module_var_hostname}"
+      sap_swpm_fqdn: "${var.module_var_dns_root_domain_name}"
+      sap_swpm_db_host: "${var.module_var_hostname}"
+      sap_swpm_db_sid: "${var.module_var_sap_anydb_install_sid}"
+      sap_swpm_db_instance_nr: "${var.module_var_sap_anydb_install_instance_number}"
+      sap_swpm_db_schema_abap: "SAPSR3"
+      sap_swpm_update_etchosts: 'false'
+      sap_swpm_load_type: SAP
+
+    sap_swpm_inifile_list:
+      - swpm_installation_media
+      - swpm_installation_media_swpm1_exportfiles
+      - swpm_installation_media_swpm1_oracledb_19
+      - credentials
+      - credentials_anydb_oracledb
+      - db_config_anydb_all
+      - db_config_anydb_oracledb
+      - db_config_anydb_oracledb_19
+      - db_connection_nw_anydb_oracledb
+      - nw_config_anydb
+      - nw_config_other
+      - nw_config_central_services_abap
+      - nw_config_primary_application_server_instance
+      - nw_config_ports
+      - nw_config_host_agent
+      - sap_os_linux_user
+
+    softwarecenter_search_list_x86_64:
+      - 'SAPCAR_1115-70006178.EXE'
+      - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
+      - 'SAPEXEDB_1000-80002605.SAR' # Kernel Part II (753 Patch 1000), Oracle DB
+      - 'SAPHOSTAGENT51_51-20009394.SAR'
+      - 'SWPM10SP36_3-20009701.SAR'
+      - 'igsexe_13-80003187.sar' # IGS 7.53
+      - 'igshelper_17-10010245.sar'
+      - 'DBATL740O11_48-80002605.SAR' # DBATOOLS Package for Oracle 11g, 12c and higher, Support Package SAP KERNEL 7.53 64-BIT UNICODE Linux on x86_64 64bit ORACLE
+#      - '51047708'   # Oracle 12.1 RDBMS Linux on x86_64 64bit (AKA. Oracle Database 12c Release 1), ZIP. Compatible with RHEL 7.x and SLES 12.x
+#      - '51052773_1' # Oracle 12.2.0.1 RDBMS Linux on x86_64 64bit 1/3, RAR EXE (AKA. Oracle Database 12c Release 2). Compatible with RHEL 7.x and SLES 12.x
+#      - '51052773_2' # Oracle 12.2.0.1 RDBMS Linux on x86_64 64bit 2/3, RAR. Compatible with RHEL 7.x and SLES 12.x
+#      - '51052773_3' # Oracle 12.2.0.1 RDBMS Linux on x86_64 64bit 3/3, RAR. Compatible with RHEL 7.x and SLES 12.x
+      - '51053828'   # Oracle 19.0.0.0 RDBMS Linux on x86_64 64bit, ZIP. Compatible with RHEL 7.x/8.x and SLES 12.x/15.x
+#      - '51054219'   # Oracle Client 12.1.0.2. Compatible with RHEL 7.x and SLES 12.x
+#      - '51054433'   # Oracle 12.2.0.1 Client V2 64bit (All), ZIP. Compatible with RHEL 7.x and SLES 12.x
+      - '51055071'   # Oracle 19.0.0.0 RDBMS Client 64bit (All), ZIP (AKA. Oracle Database 19c Base Release). Compatible with RHEL 7.x/8.x and SLES 12.x/15.x
+      - '51053216_1' # IDES SAP ERP 6.0 EHP8 - INSTALL. EXP. (1/2) 1/22
+      - '51053216_2'
+      - '51053216_3'
+      - '51053216_4'
+      - '51053216_5'
+      - '51053216_6'
+      - '51053216_7'
+      - '51053216_8'
+      - '51053216_9'
+      - '51053216_10'
+      - '51053216_11'
+      - '51053216_12'
+      - '51053216_13'
+      - '51053216_14'
+      - '51053216_15'
+      - '51053216_16'
+      - '51053216_17'
+      - '51053216_18'
+      - '51053216_19'
+      - '51053216_20'
+      - '51053216_21'
+      - '51053216_22'
+
+    # Not available for IBM Power Little Endian (ppc64le), leave code to keep similarity of code structure across all Terraform Modules for SAP that wrap Ansible Playbooks
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
 

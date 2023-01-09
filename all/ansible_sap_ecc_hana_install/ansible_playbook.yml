@@ -1,5 +1,5 @@
 ---
-- name: Ansible Playbook execution for SAP ECC on SAP MaxDB OneHost installation
+- name: Ansible Playbook execution for SAP ECC on HANA One Host
   hosts: all
   become: true
 
@@ -8,16 +8,16 @@
   tasks:
 
     # Set facts based on the install dictionary and the default template selected
-    - name: Set fact x86_64 softwarecenter_search_list_ecc_sapmaxdb_install
+    - name: Set fact x86_64 softwarecenter_search_list_ecc_hana_install
       set_fact:
-        softwarecenter_search_list_ecc_sapmaxdb_install: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
+        softwarecenter_search_list_ecc_hana_install: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_x86_64'] }}"
       when:
         - ansible_architecture == "x86_64"
 
     # Set facts based on the install dictionary and the default template selected
-    - name: Set fact ppc64le softwarecenter_search_list_ecc_sapmaxdb_install
+    - name: Set fact ppc64le softwarecenter_search_list_ecc_hana_install
       set_fact:
-        softwarecenter_search_list_ecc_sapmaxdb_install: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
+        softwarecenter_search_list_ecc_hana_install: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['softwarecenter_search_list_ppc64le'] }}"
       when:
         - ansible_architecture == "ppc64le"
 
@@ -32,11 +32,9 @@
         state: present
       become: yes
 
-    - name: Install Python package manager pip3 to system Python and unzip
+    - name: Install Python package manager pip3 to system Python
       ansible.builtin.package:
-        name:
-        - python3-pip
-        - unzip
+        name: python3-pip
         state: present
 
     - name: Install Python package manager lxml to system Python when ppc64le
@@ -73,13 +71,13 @@
         - "{{ sap_install_media_detect_directory }}"
 
 # Use task block to call Ansible Module
-    - name: Execute Ansible Module with system Python to download installation media for SAP ECC on AnyDB
+    - name: Execute Ansible Module with system Python to download installation media for SAP HANA and SAP NetWeaver for hosting SAP ECC on HANA
       community.sap_launchpad.software_center_download:
         suser_id: "{{ suser_id }}"
         suser_password: "{{ suser_password }}"
         softwarecenter_search_query: "{{ item }}"
         dest: "{{ sap_install_media_detect_directory }}"
-      with_items: "{{ softwarecenter_search_list_ecc_sapmaxdb_install }}"
+      with_items: "{{ softwarecenter_search_list_ecc_hana_install }}"
 #      vars:
 #        ansible_python_interpreter: python3.6
 
@@ -96,7 +94,15 @@
       include_role:
         name: { role: community.sap_install.sap_netweaver_preconfigure }
 
-    - name: Execute Ansible Role sap_swpm with SAP ECC on SAP MaxDB One Host
+    - name: Execute Ansible Role sap_hana_preconfigure 
+      include_role:
+        name: { role: community.sap_install.sap_hana_preconfigure }
+
+    - name: Execute Ansible Role sap_hana_install 
+      include_role:
+        name: { role: community.sap_install.sap_hana_install }
+
+    - name: Execute Ansible Role sap_swpm with SAP ECC on HANA One Host
       include_role:
         name: { role: community.sap_install.sap_swpm }
 

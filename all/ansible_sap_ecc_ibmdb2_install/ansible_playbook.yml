@@ -21,6 +21,10 @@
       when:
         - ansible_architecture == "ppc64le"
 
+    - name: Set fact for sap_install_media_detect
+      set_fact:
+        sap_install_media_detect_export: "{{ sap_swpm_templates_install_dictionary[sap_swpm_templates_product_input]['sap_install_media_detect_export'] }}"
+
     - name: Update etc hosts
       lineinfile:
         dest: /etc/hosts
