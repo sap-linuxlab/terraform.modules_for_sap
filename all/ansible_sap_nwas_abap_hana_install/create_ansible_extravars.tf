@@ -123,6 +123,8 @@ sap_swpm_db_schema_abap_password: "${var.module_var_sap_swpm_db_schema_abap_pass
 sap_swpm_db_sidadm_password: "${var.module_var_sap_swpm_db_sidadm_password}"
 
 
+# ---- Mandatory parameters : Ansible Dictionary for SAP SWPM installation using Default Templates mode of the Ansible Role ---- #
+
 # Templates and default values
 sap_swpm_templates_install_dictionary:
 
