@@ -1,7 +1,19 @@
 
+# SAP NetWeaver AS ABAP Central Services (ASCS) Message Server (MS), access from within the same Subnet
+resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_ascs_ms" {
+  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
+  group     = var.module_var_host_security_group_id
+  direction = "inbound"
+  remote    = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("36${var.module_var_sap_nwas_abap_ascs_instance_no}")
+    port_max = tonumber("36${var.module_var_sap_nwas_abap_ascs_instance_no}")
+  }
+}
+
 # SAP NetWeaver PAS / SAP GUI, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_sapgui" {
-  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   group     = var.module_var_host_security_group_id
   direction = "inbound"
   remote    = local.target_vpc_subnet_range
@@ -13,7 +25,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_sapgui" {
 
 # SAP NetWeaver PAS Gateway, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_gw" {
-  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_sap_inbound_sapnwas_sapgui]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -26,7 +38,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_gw" {
 
 # SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapfiori" {
-  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
@@ -39,7 +51,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapfiori" {
 
 # SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_ctrl" {
-  count = local.network_rules_sap_nwas_abap_boolean ? 1 : 0
+  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_sap_inbound_sapfiori]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
