@@ -3,7 +3,7 @@
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ascs_ms" {
   count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_ascs_ms"
-  priority  = 200
+  priority  = 201
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -17,11 +17,29 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ascs_
   network_security_group_name = var.module_var_host_security_group_name
 }
 
+resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_ascs_ms" {
+  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
+  name      = "tcp_outbound_sapnwas_ascs_ms"
+  priority  = 202
+  direction = "Outbound"
+  access    = "Allow"
+  protocol  = "Tcp"
+
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_range     = tonumber("36${var.module_var_sap_nwas_abap_ascs_instance_no}")
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
+
+
 # SAP NetWeaver PAS / SAP GUI, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgui" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_sapgui"
-  priority  = 201
+  priority  = 203
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -39,7 +57,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgu
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_gw"
-  priority  = 202
+  priority  = 204
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -58,7 +76,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   name      = "tcp_inbound_sapfiori"
-  priority  = 203
+  priority  = 205
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -76,7 +94,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_ctrl"
-  priority  = 204
+  priority  = 206
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -94,7 +112,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl"
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_https" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_icm_https"
-  priority  = 205
+  priority  = 207
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -112,7 +130,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_http" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_icm_http"
-  priority  = 206
+  priority  = 208
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -131,7 +149,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_webdisp" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_webdisp"
-  priority  = 207
+  priority  = 209
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -149,7 +167,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_webdi
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index_mdc_sysdb" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_index_mdc_sysdb"
-  priority  = 208
+  priority  = 210
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -167,7 +185,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index_mdc_1" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_index_mdc_1"
-  priority  = 209
+  priority  = 211
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
