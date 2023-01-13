@@ -9,7 +9,6 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_ascs_ms" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
-
 resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_ascs_ms" {
   count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
@@ -109,12 +108,30 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_index_mdc_sy
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_index_mdc_sysdb" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "egress"
+  from_port         = tonumber("3${var.module_var_sap_hana_instance_no}13")
+  to_port           = tonumber("3${var.module_var_sap_hana_instance_no}13")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
 
 # SAP HANA indexserver MDC Tenant #1, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_index_mdc_1" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
+  from_port         = tonumber("3${var.module_var_sap_hana_instance_no}15")
+  to_port           = tonumber("3${var.module_var_sap_hana_instance_no}15")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_index_mdc_1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "egress"
   from_port         = tonumber("3${var.module_var_sap_hana_instance_no}15")
   to_port           = tonumber("3${var.module_var_sap_hana_instance_no}15")
   protocol          = "tcp"

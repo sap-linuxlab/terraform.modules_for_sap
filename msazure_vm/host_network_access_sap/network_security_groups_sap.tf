@@ -180,12 +180,28 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
 }
+resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_index_mdc_sysdb" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  name      = "tcp_outbound_saphana_index_mdc_sysdb"
+  priority  = 211
+  direction = "Outbound"
+  access    = "Allow"
+  protocol  = "Tcp"
+
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_range     = tonumber("3${var.module_var_sap_hana_instance_no}13")
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
 
 # SAP HANA indexserver MDC Tenant #1, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index_mdc_1" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_index_mdc_1"
-  priority  = 211
+  priority  = 212
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -198,7 +214,22 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
 }
+resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_index_mdc_1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  name      = "tcp_outbound_saphana_index_mdc_1"
+  priority  = 213
+  direction = "Outbound"
+  access    = "Allow"
+  protocol  = "Tcp"
 
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_range     = tonumber("3${var.module_var_sap_hana_instance_no}15")
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
 
 # SAP HANA System Replication
 ## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).

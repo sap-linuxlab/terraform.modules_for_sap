@@ -10,7 +10,6 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_ascs_ms" 
     port_max = tonumber("36${var.module_var_sap_nwas_abap_ascs_instance_no}")
   }
 }
-
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_outbound_sapnwas_ascs_ms" {
   count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
   group     = var.module_var_host_security_group_id
@@ -126,6 +125,17 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc
     port_max = tonumber("3${var.module_var_sap_hana_instance_no}13")
   }
 }
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_index_mdc_sysdb" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_webdisp]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("3${var.module_var_sap_hana_instance_no}13")
+    port_max = tonumber("3${var.module_var_sap_hana_instance_no}13")
+  }
+}
 
 # SAP HANA indexserver MDC Tenant #1, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc_1" {
@@ -139,7 +149,17 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_index_mdc
     port_max = tonumber("3${var.module_var_sap_hana_instance_no}15")
   }
 }
-
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_index_mdc_1" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_sysdb]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("3${var.module_var_sap_hana_instance_no}15")
+    port_max = tonumber("3${var.module_var_sap_hana_instance_no}15")
+  }
+}
 
 # SAP HANA System Replication
 ## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
