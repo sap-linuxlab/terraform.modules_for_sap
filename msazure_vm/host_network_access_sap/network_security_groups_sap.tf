@@ -231,10 +231,6 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_inde
   network_security_group_name = var.module_var_host_security_group_name
 }
 
-
-
-
-
 # SAP HANA for SOAP over HTTP for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_startsrv_http_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
