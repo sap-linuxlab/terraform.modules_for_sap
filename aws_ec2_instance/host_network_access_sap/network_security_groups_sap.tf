@@ -138,6 +138,47 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_index_mdc_1" 
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
 
+# SAP HANA for SOAP over HTTP for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_startsrv_http_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "ingress"
+  from_port         = tonumber("5${var.module_var_sap_hana_instance_no}13")
+  to_port           = tonumber("5${var.module_var_sap_hana_instance_no}13")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_startsrv_http_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "egress"
+  from_port         = tonumber("5${var.module_var_sap_hana_instance_no}13")
+  to_port           = tonumber("5${var.module_var_sap_hana_instance_no}13")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+
+# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_startsrv_https_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "ingress"
+  from_port         = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  to_port           = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_startsrv_https_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "egress"
+  from_port         = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  to_port           = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+
+
 
 # SAP HANA System Replication
 ## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).

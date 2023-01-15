@@ -161,6 +161,56 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_index_md
   }
 }
 
+# SAP HANA for SOAP over HTTP for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_startsrv_http_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_sysdb]
+  group      = var.module_var_host_security_group_id
+  direction  = "inbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("5${var.module_var_sap_hana_instance_no}13")
+    port_max = tonumber("5${var.module_var_sap_hana_instance_no}13")
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_startsrv_http_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_sysdb]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("5${var.module_var_sap_hana_instance_no}13")
+    port_max = tonumber("5${var.module_var_sap_hana_instance_no}13")
+  }
+}
+
+# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_startsrv_https_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_sysdb]
+  group      = var.module_var_host_security_group_id
+  direction  = "inbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("5${var.module_var_sap_hana_instance_no}14")
+    port_max = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  }
+}
+resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_startsrv_https_soap" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_sysdb]
+  group      = var.module_var_host_security_group_id
+  direction  = "outbound"
+  remote     = local.target_vpc_subnet_range
+  tcp {
+    port_min = tonumber("5${var.module_var_sap_hana_instance_no}14")
+    port_max = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  }
+}
+
+
+
 # SAP HANA System Replication
 ## The port offset is +10000 from the SAP HANA configured ports (e.g. `3<<hdb_instance_no>>15` for MDC Tenant #1).
 ## More details in README
