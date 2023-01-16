@@ -9,6 +9,16 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_icm_https" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_icm_https" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "egress"
+  from_port         = tonumber("43${var.module_var_sap_hana_instance_no}")
+  to_port           = tonumber("43${var.module_var_sap_hana_instance_no}")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+
 
 # SAP HANA ICM HTTP Internal Web Dispatcher, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_icm_http" {
@@ -20,8 +30,18 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_icm_http" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_icm_http" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "egress"
+  from_port         = tonumber("80${var.module_var_sap_hana_instance_no}")
+  to_port           = tonumber("80${var.module_var_sap_hana_instance_no}")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
 
-# SAP HANA Internal Web Dispatcher, access from within the same Subnet
+
+# SAP HANA Internal Web Dispatcher, webdispatcher process, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_webdisp" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
@@ -31,6 +51,16 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_webdisp" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
+resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_webdisp" {
+  count = local.network_rules_sap_hana_boolean ? 1 : 0
+  security_group_id = var.module_var_host_security_group_id
+  type              = "egress"
+  from_port         = tonumber("3${var.module_var_sap_hana_instance_no}06")
+  to_port           = tonumber("3${var.module_var_sap_hana_instance_no}06")
+  protocol          = "tcp"
+  cidr_blocks  = ["${local.target_subnet_ip_range}"]
+}
+
 
 # SAP HANA indexserver MDC System Tenant SYSDB, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_index_mdc_sysdb" {
