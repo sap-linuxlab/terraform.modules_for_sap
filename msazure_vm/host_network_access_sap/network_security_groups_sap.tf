@@ -16,7 +16,6 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ascs_
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
 }
-
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_ascs_ms" {
   count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
   name      = "tcp_outbound_sapnwas_ascs_ms"
@@ -34,8 +33,42 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_ascs
   network_security_group_name = var.module_var_host_security_group_name
 }
 
+# SAP NetWeaver AS ABAP Central Services (ASCS) Enqueue Server (EN), access from within the same Subnet
+resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ascs_en" {
+  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
+  name      = "tcp_inbound_sapnwas_ascs_en"
+  priority  = 201
+  direction = "Inbound"
+  access    = "Allow"
+  protocol  = "Tcp"
 
-# SAP NetWeaver PAS / SAP GUI, access from within the same Subnet
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_range     = tonumber("39${var.module_var_sap_nwas_abap_ascs_instance_no}")
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
+resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_ascs_en" {
+  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
+  name      = "tcp_outbound_sapnwas_ascs_en"
+  priority  = 202
+  direction = "Outbound"
+  access    = "Allow"
+  protocol  = "Tcp"
+
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_range     = tonumber("39${var.module_var_sap_nwas_abap_ascs_instance_no}")
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
+
+
+# SAP NetWeaver AS Primary Application Server (PAS) Dispatcher (sapdp), for SAP GUI, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgui" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_sapgui"
@@ -52,13 +85,45 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgu
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
 }
+resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_sapgui" {
+  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
+  name      = "tcp_outbound_sapnwas_sapgui"
+  priority  = 203
+  direction = "Outbound"
+  access    = "Allow"
+  protocol  = "Tcp"
 
-# SAP NetWeaver PAS Gateway, access from within the same Subnet
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_range     = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
+
+# SAP NetWeaver AS Primary Application Server (PAS) Gateway (sapgw), access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_gw"
   priority  = 204
   direction = "Inbound"
+  access    = "Allow"
+  protocol  = "Tcp"
+
+  source_port_range          = "*"
+  source_address_prefix      = local.target_vnet_subnet_range
+  destination_port_range     = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
+  destination_address_prefix = local.target_vnet_subnet_range
+
+  resource_group_name         = var.module_var_az_resource_group_name
+  network_security_group_name = var.module_var_host_security_group_name
+}
+resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_gw" {
+  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
+  name      = "tcp_outbound_sapnwas_gw"
+  priority  = 204
+  direction = "Outbound"
   access    = "Allow"
   protocol  = "Tcp"
 
