@@ -1,183 +1,9 @@
 
-# SAP NetWeaver AS ABAP Central Services (ASCS) Message Server (MS), access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ascs_ms" {
-  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_ascs_ms"
-  priority  = 201
-  direction = "Inbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("36${var.module_var_sap_nwas_abap_ascs_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_ascs_ms" {
-  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
-  name      = "tcp_outbound_sapnwas_ascs_ms"
-  priority  = 202
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("36${var.module_var_sap_nwas_abap_ascs_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-# SAP NetWeaver AS ABAP Central Services (ASCS) Enqueue Server (EN), access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ascs_en" {
-  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_ascs_en"
-  priority  = 201
-  direction = "Inbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("39${var.module_var_sap_nwas_abap_ascs_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_ascs_en" {
-  count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
-  name      = "tcp_outbound_sapnwas_ascs_en"
-  priority  = 202
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("39${var.module_var_sap_nwas_abap_ascs_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-
-# SAP NetWeaver AS Primary Application Server (PAS) Dispatcher (sapdp), for SAP GUI, access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_sapgui" {
-  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_sapgui"
-  priority  = 203
-  direction = "Inbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_sapgui" {
-  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
-  name      = "tcp_outbound_sapnwas_sapgui"
-  priority  = 203
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-# SAP NetWeaver AS Primary Application Server (PAS) Gateway (sapgw), access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_gw" {
-  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_gw"
-  priority  = 204
-  direction = "Inbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_gw" {
-  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
-  name      = "tcp_outbound_sapnwas_gw"
-  priority  = 204
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-
-# SAP Web GUI and SAP Fiori Launchpad (HTTPS), access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapfiori" {
-  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
-  name      = "tcp_inbound_sapfiori"
-  priority  = 205
-  direction = "Inbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("443${var.module_var_sap_hana_instance_no}")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-# SAP NetWeaver sapctrl HTTP and HTTPS, access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_ctrl" {
-  count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_ctrl"
-  priority  = 206
-  direction = "Inbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("5${var.module_var_sap_nwas_abap_pas_instance_no}13")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
 # SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_https" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_icm_https"
-  priority  = 207
+  priority  = 250
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -195,7 +21,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_http" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_icm_http"
-  priority  = 208
+  priority  = 251
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -214,7 +40,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_icm_h
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_webdisp" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_webdisp"
-  priority  = 209
+  priority  = 252
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -232,7 +58,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_webdi
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index_mdc_sysdb" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_index_mdc_sysdb"
-  priority  = 210
+  priority  = 253
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -248,7 +74,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_index_mdc_sysdb" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_index_mdc_sysdb"
-  priority  = 211
+  priority  = 254
   direction = "Outbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -266,7 +92,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_inde
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index_mdc_1" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_index_mdc_1"
-  priority  = 212
+  priority  = 255
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -282,7 +108,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_index
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_index_mdc_1" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_index_mdc_1"
-  priority  = 213
+  priority  = 256
   direction = "Outbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -300,7 +126,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_inde
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_startsrv_http_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_startsrv_http_soap"
-  priority  = 214
+  priority  = 257
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -316,7 +142,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_start
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_startsrv_http_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_startsrv_http_soap"
-  priority  = 215
+  priority  = 258
   direction = "Outbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -334,7 +160,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_star
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_startsrv_https_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_startsrv_https_soap"
-  priority  = 216
+  priority  = 259
   direction = "Inbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -350,7 +176,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_start
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_startsrv_https_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_outbound_saphana_startsrv_https_soap"
-  priority  = 217
+  priority  = 260
   direction = "Outbound"
   access    = "Allow"
   protocol  = "Tcp"
@@ -533,79 +359,6 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_udp_outbound_pacemaker3" 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
   destination_port_ranges    = ["5404-5412"]
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-
-# SAP NetWeaver AS JAVA Central Instance (CI) ICM server process 0..n, access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_ci_icm" {
-  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_java_ci_icm"
-  priority  = 401
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_ranges    = ["5${var.module_var_sap_nwas_java_ci_instance_no}00-5${var.module_var_sap_nwas_java_ci_instance_no}06"]
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-# SAP NetWeaver AS JAVA Central Instance (CI) Access server process 0..n, access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_ci_access" {
-  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_java_ci_access"
-  priority  = 402
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_ranges    = ["5${var.module_var_sap_nwas_java_ci_instance_no}20-5${var.module_var_sap_nwas_java_ci_instance_no}22"]
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-# SAP NetWeaver AS JAVA Central Instance (CI) Admin Services HTTP server process 0..n, access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_ci_admin_http" {
-  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_java_ci_admin_http"
-  priority  = 403
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_ranges    = ["5${var.module_var_sap_nwas_java_ci_instance_no}13-5${var.module_var_sap_nwas_java_ci_instance_no}14"]
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-# SAP NetWeaver AS JAVA Central Instance (CI) Admin Services SL Controller server process 0..n, access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_ci_admin_slcontroller" {
-  count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
-  name      = "tcp_inbound_sapnwas_java_ci_admin_slcontroller"
-  priority  = 403
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_ranges    = ["5${var.module_var_sap_nwas_java_ci_instance_no}17-5${var.module_var_sap_nwas_java_ci_instance_no}19"]
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
