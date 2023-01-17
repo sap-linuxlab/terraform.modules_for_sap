@@ -1,6 +1,6 @@
 
 # SAP NetWeaver AS Primary Application Server (PAS) Dispatcher, sapdp<PAS_NN> process as 32<PAS_NN> port, for SAP GUI, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_sapgui" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_sapgui" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
@@ -9,7 +9,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_sapgui" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
-resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_sapgui" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_sapgui" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "egress"
@@ -21,7 +21,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_sapgui" {
 
 
 # SAP NetWeaver AS Primary Application Server (PAS) Gateway, sapgw<PAS_NN> process as 33<PAS_NN> port, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_gw" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_gw" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
@@ -30,7 +30,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_gw" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
-resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_gw" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_gw" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "egress"
@@ -42,7 +42,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_gw" {
 
 
 # SAP NetWeaver AS Primary Application Server (PAS) Gateway Secured, sapgw<PAS_NN>s process as 48<PAS_NN> port, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_gw_secure" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_gw_secure" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
@@ -51,7 +51,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_gw_secure" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
-resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_gw_secure" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_gw_secure" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "egress"
@@ -62,8 +62,8 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_gw_secure" {
 }
 
 
-# SAP NetWeaver sapctrl HTTP and HTTPS, sapctrl<PAS_NN> and sapctrls<PAS_NN> processes as 5<PAS_NN>13 and 5<PAS_NN>14 ports, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_ctrl" {
+# SAP NetWeaver AS Primary Application Server (PAS) SAP Start Service (i.e. SAPControl SOAP Web Service) HTTP and HTTPS, sapctrl<PAS_NN> and sapctrls<PAS_NN> processes as 5<PAS_NN>13 and 5<PAS_NN>14 ports, access from within the same Subnet
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_ctrl" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
@@ -72,7 +72,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_ctrl" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
-resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_ctrl" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_ctrl" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "egress"
@@ -84,7 +84,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_ctrl" {
 
 
 # SAP NetWeaver AS Primary Application Server (PAS) ICM HTTPS for Web GUI and SAP Fiori Launchpad (HTTPS), icman process as 443<PAS_NN>, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_icm" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_icm" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
@@ -93,7 +93,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_icm" {
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
-resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_icm" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_icm" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "egress"
