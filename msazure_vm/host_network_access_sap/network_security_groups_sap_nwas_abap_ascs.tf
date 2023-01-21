@@ -115,7 +115,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_abap_
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = ["5${var.module_var_sap_nwas_abap_ascs_instance_no}13-5${var.module_var_sap_nwas_abap_ascs_instance_no}14"]
+  destination_port_ranges     = ["5${var.module_var_sap_nwas_abap_ascs_instance_no}13-5${var.module_var_sap_nwas_abap_ascs_instance_no}14"]
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -131,7 +131,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_abap
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = ["5${var.module_var_sap_nwas_abap_ascs_instance_no}13-5${var.module_var_sap_nwas_abap_ascs_instance_no}14"]
+  destination_port_ranges     = ["5${var.module_var_sap_nwas_abap_ascs_instance_no}13-5${var.module_var_sap_nwas_abap_ascs_instance_no}14"]
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
