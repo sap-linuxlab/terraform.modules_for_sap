@@ -17,6 +17,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_
   network_security_group_name = var.module_var_host_security_group_name
 }
 
+
 # SAP NetWeaver AS JAVA Central Instance (CI) Access server process 0..n, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_ci_access" {
   count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
@@ -34,6 +35,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
 }
+
 
 # SAP NetWeaver AS JAVA Central Instance (CI) Admin Services HTTP server process 0..n, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_ci_admin_http" {
@@ -53,11 +55,12 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_
   network_security_group_name = var.module_var_host_security_group_name
 }
 
+
 # SAP NetWeaver AS JAVA Central Instance (CI) Admin Services SL Controller server process 0..n, access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_java_ci_admin_slcontroller" {
   count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
   name      = "tcp_inbound_sapnwas_java_ci_admin_slcontroller"
-  priority  = 403
+  priority  = 404
   direction = "Outbound"
   access    = "Allow"
   protocol  = "Tcp"

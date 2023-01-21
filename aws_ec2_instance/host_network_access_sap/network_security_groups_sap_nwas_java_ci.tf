@@ -10,6 +10,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ci_icm"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
 
+
 # SAP NetWeaver AS JAVA Central Instance (CI) Access server process 0..n, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ci_access" {
   count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
@@ -21,6 +22,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ci_acce
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
 
+
 # SAP NetWeaver AS JAVA Central Instance (CI) Admin Services HTTP server process 0..n, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ci_admin_http" {
   count = local.network_rules_sap_nwas_java_boolean ? 1 : 0
@@ -31,6 +33,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ci_admi
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
+
 
 # SAP NetWeaver AS JAVA Central Instance (CI) Admin Services SL Controller server process 0..n, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_sapnwas_java_ci_admin_slcontroller" {

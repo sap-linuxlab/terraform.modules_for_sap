@@ -82,6 +82,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_index_mdc_sys
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
 
+
 # SAP HANA indexserver MDC Tenant #1, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_index_mdc_1" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
@@ -102,6 +103,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_index_mdc_1" 
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
 
+
 # SAP HANA for SOAP over HTTP for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_startsrv_http_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
@@ -121,6 +123,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_tcp_egress_saphana_startsrv_http
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
+
 
 # SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_tcp_ingress_saphana_startsrv_https_soap" {

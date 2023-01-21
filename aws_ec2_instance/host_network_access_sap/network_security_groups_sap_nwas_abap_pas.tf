@@ -1,6 +1,6 @@
 
 # SAP NetWeaver AS Primary Application Server (PAS) Dispatcher, sapdp<PAS_NN> process as 32<PAS_NN> port, for SAP GUI, access from within the same Subnet
-resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_sapgui" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_dp_sapgui" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "ingress"
@@ -9,7 +9,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_sap
   protocol          = "tcp"
   cidr_blocks  = ["${local.target_subnet_ip_range}"]
 }
-resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_sapgui" {
+resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_dp_sapgui" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id
   type              = "egress"

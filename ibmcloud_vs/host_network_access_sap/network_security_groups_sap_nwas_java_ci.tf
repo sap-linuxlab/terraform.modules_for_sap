@@ -24,6 +24,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_java_ci_a
   }
 }
 
+
 # SAP NetWeaver AS JAVA Central Instance (CI) Admin Services HTTP server process 0..n, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_java_ci_admin_http" {
   count      = local.network_rules_sap_nwas_java_boolean ? 1 : 0
@@ -35,6 +36,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_java_ci_a
     port_max = tonumber("5${var.module_var_sap_nwas_java_ci_instance_no}14")
   }
 }
+
 
 # SAP NetWeaver AS JAVA Central Instance (CI) Admin Services SL Controller server process 0..n, access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_sapnwas_java_ci_admin_slcontroller" {
