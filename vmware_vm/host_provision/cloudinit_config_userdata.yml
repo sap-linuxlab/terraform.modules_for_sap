@@ -1,0 +1,51 @@
+#cloud-config
+hostname: ${template_var_hostname}abc.${template_var_dns_root_domain_name}
+fqdn: ${template_var_hostname}.${template_var_dns_root_domain_name}
+
+# Enable the traditional VMware Linux Guest Customisation configuration
+## To ensure VMware datasource is found in ds-identify, VMware Customization should be enabled. This has been ignored to force cloud-init native behaviour.
+## To ensure cloud-init uses VMware Customization (instead of directly via metadata and userdata files), allow raw data for cloud-init should be disabled. This has been ignored to force cloud-init native behaviour.
+## Set the maximum waiting time for the VMware customisation file to 10 seconds
+## When using multi line datasource array, then the single datasource_list array will be ignored
+disable_vmware_customization: true
+datasource:
+  VMware:
+    allow_raw_data: true
+    vmware_cust_file_max_wait: 10 # seconds
+
+# Ensure root login is enabled
+disable_root: false
+
+# Ensure SSH password authentication is disabled for all users
+ssh_pwauth: false
+
+# Ensure all existing SSH Keys are removed from host
+ssh_deletekeys: true
+
+# By default, (most) ssh host keys are printed to the console
+# Set emit_keys_to_console to false suppresses this output
+ssh:
+  emit_keys_to_console: false
+
+# By default, the fingerprints of the authorized keys for the users
+# cloud-init adds are printed to the console. Setting
+# no_ssh_fingerprints to true suppresses this output
+no_ssh_fingerprints: false
+
+# For first user in the cloud-init configuration, set the SSH Public Key
+ssh_authorized_keys:
+  - ${template_public_key_openssh}
+
+# Add entry to /root/.ssh/authorized_keys
+users:
+  - name: 'root'
+    lock_passwd: false # Do not lock password once access to host, however password authentication for SSH remains disabled
+    ssh_pwauth: false # Ensure SSH password authentication is disabled for root
+    ssh_authorized_keys:
+      - ${template_public_key_openssh}
+
+# After first boot of the VMware VM Template, disable cloud-init from running again
+write_files:
+  - path: /etc/cloud/cloud-init.disabled
+    permissions: "0644"
+    content: ""

@@ -1,0 +1,9 @@
+instance-id: ${template_var_hostname} # Otherwise uses /sys/class/dmi/id/product_uuid
+local-hostname: ${template_var_hostname}
+network:
+  version: 2
+  ethernets:
+    nics:
+      match:
+        name: ens*
+      dhcp4: yes
