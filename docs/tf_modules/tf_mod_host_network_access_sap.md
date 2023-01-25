@@ -19,7 +19,7 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 | | SAP Router | 3200 |
 | | SAP Router | 3299 |
 | SAP NetWeaver AS ABAP Central Services (ASCS),<br/>using Instance Number `01` | | |
-| | SAP NetWeaver AS Messenger Server (ASCS MS) | 36`01` |
+| | SAP NetWeaver AS Messenge Server (ASCS MS) | 36`01` |
 | SAP NetWeaver AS ABAP PAS,<br/>using Instance Number `00` | | |
 | | `*` SAP NetWeaver AS Primary App Server (PAS Dialog) **[SAP GUI]** | 32`00` |
 | | SAP NetWeaver AS PAS Gateway | 33`00` |
