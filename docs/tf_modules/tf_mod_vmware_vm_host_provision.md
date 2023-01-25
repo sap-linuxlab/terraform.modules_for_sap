@@ -1,6 +1,14 @@
 # Terraform Module - VMware Virtual Machine
 
+## Requirements
+
+- VMware vCenter and VMware vSphere (7.x and above)
+- Network access setup for successful VMware Virtual Machine provisioning and subsequent SSH access from Terraform/Ansible, see below for more details
+
+
 ## VMware VM Template setup
+
+The following are required setup items for provisioning VMware Virtual Machines:
 
 - **OS Image with cloud-init installed**
   - Edit the default cloud-init configuration file, found at `/etc/cloud`. It must contain the data source for VMware (and not OVF), and force use of cloud-init metadata and userdata files.
@@ -21,7 +29,11 @@
     - cloud-init documentation - Reference - Datasources - VMware (https://cloudinit.readthedocs.io/en/latest/reference/datasources/vmware.html)
 
 
-## VMware vCenter and vSphere clusters with VMware NSX virtualized network overlays
+## VMware networking setup
+
+The following are required setup items for provisioning VMware Virtual Machines.
+
+### VMware vCenter and vSphere clusters with VMware NSX virtualized network overlays
 
 For VMware vCenter and vSphere clusters with VMware NSX virtualized network overlays using Segments (e.g. 192.168.0.0/16) connected to Tier-0/Tier-1 Gateways (which are bound to the backbone network subnet, e.g. 10.0.0.0/8), the following are required:
 
@@ -32,7 +44,7 @@ For VMware vCenter and vSphere clusters with VMware NSX virtualized network over
 - **DNS Server (Private)** is recommended to assist custom/private root domain resolution (e.g. poc.cloud)
 
 
-## VMware vCenter and vSphere clusters with direct network subnet IP allocation
+### VMware vCenter and vSphere clusters with direct network subnet IP allocation
 
 For VMware vCenter and vSphere clusters with direct network subnet IP allocations to the VMXNet network adapter (no VMware NSX network overlays), the following are required:
 
