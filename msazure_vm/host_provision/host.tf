@@ -21,7 +21,7 @@ resource "azurerm_linux_virtual_machine" "host" {
   name                = var.module_var_host_name
   resource_group_name = local.target_resource_group_name
   location            = var.module_var_az_location_region
-  size                = "Standard_M32ls"
+  size                = var.module_var_az_vm_instance
 
   network_interface_ids = [
     azurerm_network_interface.host_nic0.id
