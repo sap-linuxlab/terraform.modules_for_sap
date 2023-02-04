@@ -4,8 +4,9 @@ on:
   # * is a special character in YAML, quote string to avoid
   # schedule uses UTC
   # only uses the main branch, to alter use 'with: ref: branch_name' for the step using actions/checkout
+  # At 05:00 on every day-of-week from Monday through Friday
   schedule:
-    - cron: '0 11,19 * * 1-5'
+    - cron: '0 5 * * 1-5'
 
   push:
     branches:
