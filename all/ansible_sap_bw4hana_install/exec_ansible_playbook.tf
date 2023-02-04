@@ -76,9 +76,9 @@ resource "null_resource" "ansible_exec" {
       curl -L https://github.com/sap-linuxlab/community.sap_launchpad/archive/refs/heads/main.tar.gz -o ${path.root}/tmp/${var.module_var_hostname}/sap_launchpad-main.tar.gz
       mkdir -p ${path.root}/tmp/${var.module_var_hostname}/ansible_collections/community/sap_launchpad
       tar xvf ${path.root}/tmp/${var.module_var_hostname}/sap_launchpad-main.tar.gz --strip-components=1 -C ${path.root}/tmp/${var.module_var_hostname}/ansible_collections/community/sap_launchpad
-      curl -L https://github.com/sap-linuxlab/community.sap_install/archive/refs/tags/1.2.0.tar.gz -o ${path.root}/tmp/${var.module_var_hostname}/sap_install-1.2.0.tar.gz
+      curl -L https://github.com/sap-linuxlab/community.sap_install/archive/refs/tags/1.2.2.tar.gz -o ${path.root}/tmp/${var.module_var_hostname}/sap_install-1.2.2.tar.gz
       mkdir -p ${path.root}/tmp/${var.module_var_hostname}/ansible_collections/community/sap_install
-      tar xvf ${path.root}/tmp/${var.module_var_hostname}/sap_install-1.2.0.tar.gz --strip-components=1 -C ${path.root}/tmp/${var.module_var_hostname}/ansible_collections/community/sap_install
+      tar xvf ${path.root}/tmp/${var.module_var_hostname}/sap_install-1.2.2.tar.gz --strip-components=1 -C ${path.root}/tmp/${var.module_var_hostname}/ansible_collections/community/sap_install
       curl -L https://github.com/sap-linuxlab/community.sap_operations/archive/refs/heads/main.tar.gz -o ${path.root}/tmp/${var.module_var_hostname}/sap_operations-main.tar.gz
       mkdir -p ${path.root}/tmp/${var.module_var_hostname}/ansible_collections/community/sap_operations
       tar xvf ${path.root}/tmp/${var.module_var_hostname}/sap_operations-main.tar.gz --strip-components=1 -C ${path.root}/tmp/${var.module_var_hostname}/ansible_collections/community/sap_operations
