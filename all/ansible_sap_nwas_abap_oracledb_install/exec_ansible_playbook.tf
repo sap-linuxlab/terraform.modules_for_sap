@@ -59,8 +59,9 @@ resource "null_resource" "ansible_exec" {
     # Ansible Config - Forces color mode when run without a TTY
     export ANSIBLE_FORCE_COLOR=1
 
-    # Ansible Config - Arguments to pass to all SSH CLI tools. To ensure larger timeouts, overwrite the default "-C -o ControlMaster=auto -o ControlPersist=60s"
-    export ANSIBLE_SSH_ARGS="-C"
+    # Ansible Config - Arguments to pass to all SSH CLI tools
+    # Default is "-C -o ControlMaster=auto -o ControlPersist=60s", if set to "-C" and using --ssh-extra-args operator for Ansible, then sftp and scp will have errors "transfer mechanism failed on"
+    export ANSIBLE_SSH_ARGS="-C -o ControlMaster=auto -o ControlPersist=3600s"
 
     # Ansible Config - Common extra args for all SSH CLI tools. Leave blank, same as default.
     export ANSIBLE_SSH_COMMON_ARGS=""
