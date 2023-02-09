@@ -1,5 +1,6 @@
 
 # Create Network Interface (NIC) to attach
+# By default, the Internal Domain Name Suffix will use ".internal.cloudapp.net" from the Azure Dynamic Host Configuration Protocol (DHCP) is applied to each NIC.
 resource "azurerm_network_interface" "host_nic0" {
   name                = "${var.module_var_host_name}-nic-0"
   resource_group_name = local.target_resource_group_name
@@ -137,7 +138,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_usr_s
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_sapmnt" {
-  count = length(azurerm_managed_disk.block_volume_sapmnt_voltype.*.id)
+  count              = var.module_var_nfs_boolean_sapmnt ? 0 : length(azurerm_managed_disk.block_volume_sapmnt_voltype.*.id)
 
   managed_disk_id    = azurerm_managed_disk.block_volume_sapmnt_voltype[count.index].id
   virtual_machine_id = azurerm_linux_virtual_machine.host.id

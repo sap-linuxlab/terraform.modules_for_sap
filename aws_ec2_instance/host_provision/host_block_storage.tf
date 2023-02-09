@@ -176,7 +176,7 @@ resource "aws_ebs_volume" "block_volume_usr_sap_voltype" {
 }
 
 resource "aws_ebs_volume" "block_volume_sapmnt_voltype" {
-  count = var.module_var_disk_volume_count_sapmnt
+  count = var.module_var_nfs_boolean_sapmnt ? 0 : var.module_var_disk_volume_count_sapmnt
 
   availability_zone = local.target_vpc_availability_zone
   type              = var.module_var_disk_volume_type_sapmnt
