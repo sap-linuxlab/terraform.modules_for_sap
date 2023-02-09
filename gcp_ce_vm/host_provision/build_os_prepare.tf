@@ -55,6 +55,8 @@ os_version=$os_info_version
 
 #echo "--- DEBUG ---"
 #cat /etc/hosts
+#cat /etc/hostname
+#cat /proc/sys/kernel/hostname
 #cat /etc/resolv.conf
 #cat /etc/dhcp/dhclient.conf
 
@@ -121,6 +123,8 @@ python3 -c "import socket; print(socket.getfqdn())"
 
 #echo "--- DEBUG ---"
 #cat /etc/hosts
+#cat /etc/hostname
+#cat /proc/sys/kernel/hostname
 #cat /etc/resolv.conf
 #cat /etc/dhcp/dhclient.conf
 

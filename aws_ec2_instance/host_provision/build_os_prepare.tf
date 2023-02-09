@@ -55,6 +55,8 @@ os_version=$os_info_version
 
 #echo "--- DEBUG ---"
 #cat /etc/hosts
+#cat /etc/hostname
+#cat /proc/sys/kernel/hostname
 #cat /etc/resolv.conf
 #cat /etc/dhcp/dhclient.conf
 
@@ -99,6 +101,8 @@ echo "uname -n          == $(uname -n)"
 
 #echo "--- DEBUG ---"
 #cat /etc/hosts
+#cat /etc/hostname
+#cat /proc/sys/kernel/hostname
 #cat /etc/resolv.conf
 #cat /etc/dhcp/dhclient.conf
 
