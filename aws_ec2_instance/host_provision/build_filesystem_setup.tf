@@ -550,9 +550,28 @@ function main() {
   fi
 
 
-  if [[ ${var.module_var_disk_volume_count_sapmnt} -gt 0 ]]
+  if [[ ${var.module_var_nfs_boolean_sapmnt} == "false" ]] && [[ ${var.module_var_disk_volume_count_sapmnt} -gt 0 ]]
   then
     physical_volume_partition_runner "/sapmnt" "${var.module_var_disk_volume_capacity_sapmnt}" "4k" "sapmnt" "${var.module_var_filesystem_sapmnt}"
+  elif [[ ${var.module_var_nfs_boolean_sapmnt} == "true" ]]
+  then
+    # Establish AWS EFS Mount Target DNS Name
+    aws_efs_mount_fqdn_sapmnt='${var.module_var_nfs_boolean_sapmnt ? var.module_var_nfs_fqdn_sapmnt : "null"}'
+
+    # AWS recommend OS mount of the AWS EFS Mount Target via the DNS FQDN, which resolves to the IP Address of the AWS EFS Mount Target in the same AWS Availability Zone as the AWS EC2 Virtual Server.
+    # Usually to increase network latency performance for SAP NetWeaver read/write operations, IP Addresses should be used
+    # However, the NFS protocol performs DNS lookup at mount time, and stores into the local host DNS cache - based on the DNS TTL defined by the AWS DNS Name Server
+    # As this activity is infrequent, it should not impact performance to set to the FQDN of the AWS EFS Mount Target
+    # It is mandatory that the AWS VPC has enabled DNS Support and DNS Hostname Support, otherwise resolution to the Private IP Address will fail
+
+    # Install NFS
+    if [ "$os_type" = "rhel" ] ; then yum --assumeyes --debuglevel=1 install nfs-utils ; elif [ "$os_type" = "sles" ] ; then zypper install --no-confirm nfs-client ; fi
+
+    # Mount AWS EFS via DNS FQDN
+    echo "Mounting NFS for /sapmnt to AWS EFS Mount Target DNS Name: $aws_efs_mount_fqdn_sapmnt"
+    #sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $aws_efs_mount_fqdn_sapmnt:/ /sapmnt
+    echo "# fstab entries for NFS"  >> /etc/fstab
+    echo "$aws_efs_mount_fqdn_sapmnt:/    /sapmnt    nfs4    nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev    0    0" >> /etc/fstab
   fi
 
 

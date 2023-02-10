@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_pas_gw" 
 }
 
 
-# SAP NetWeaver AS Primary Application Server (PAS) Gateway Secured, sapgw<PAS_NN>s process as 48<PAS_NN> port, access from within the same Subnet
+# SAP NetWeaver AS Primary Application Server (PAS) Gateway Secured (with SNC Enabled), sapgw<PAS_NN>s process as 48<PAS_NN> port, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_pas_gw_secure" {
   count = local.network_rules_sap_nwas_abap_pas_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id

@@ -15,27 +15,28 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 
 | **SAP Technical Application** | **Component** | **Port** |
 | --- | --- | --- |
-| SAP Router | | |
-| | SAP Router | 3200 |
-| | SAP Router | 3299 |
 | SAP NetWeaver AS ABAP Central Services (ASCS),<br/>using Instance Number `01` | | |
-| | SAP NetWeaver AS Messenge Server (ASCS MS) | 36`01` |
+| | `*` SAP NetWeaver AS ASCS Dispatcher (ASCS DP), sapdp<ASCS_NN> process | 32`01` |
+| | `*` SAP NetWeaver AS ASCS Message Server (ASCS MS), sapms<SAPSID> process | 36`01` |
+| | `*` SAP NetWeaver AS ASCS Enqueue Server (ASCS EN), sapenq<SAPSID> process | 39`01` |
+| | `*` SAP NetWeaver AS ASCS SAP Start Service<br/>(i.e. SAPControl SOAP Web Service) HTTP, sapctrl<ASCS_NN> process | 5`01`13 |
+| | `*` SAP NetWeaver AS ASCS SAP Start Service<br/>(i.e. SAPControl SOAP Web Service) HTTPS (Secure), sapctrls<ASCS_NN> | 5`01`14 |
 | SAP NetWeaver AS ABAP PAS,<br/>using Instance Number `00` | | |
-| | `*` SAP NetWeaver AS Primary App Server (PAS Dialog) **[SAP GUI]** | 32`00` |
-| | SAP NetWeaver AS PAS Gateway | 33`00` |
-| | SAP NetWeaver AS PAS Gateway (with SNC Enabled) | 48`00` |
+| | `*` SAP NetWeaver AS PAS Dispatcher, sapdp<PAS_NN> process **[SAP GUI]** | 32`00` |
+| | `*` SAP NetWeaver AS PAS Gateway, sapgw<PAS_NN> process | 33`00` |
+| | `*` SAP NetWeaver AS PAS Gateway Secured (with SNC Enabled), sapgw<PAS_NN>s process | 48`00` |
+| | `*` SAP NetWeaver AS PAS SAP Start Service<br/>(i.e. SAPControl SOAP Web Service) HTTP, sapctrl<PAS_NN> process | 5`00`13 |
+| | `*` SAP NetWeaver AS PAS SAP Start Service<br/>(i.e. SAPControl SOAP Web Service) HTTPS (Secure), sapctrls<PAS_NN> | 5`00`14 |
 | | SAP NetWeaver AS ICM HTTP (Port 80 prefix) | 80`00` |
-| | `*` SAP NetWeaver AS ICM HTTPS (Secure, Port 443 prefix) **[SAP Web GUI and SAP Fiori Launchpad (HTTPS)]** | 443`00` |
-| | SAP NetWeaver sapctrl HTTP _(Dual Host install)_ | 5`00`13 |
-| | SAP NetWeaver sapctrl HTTPS _(Dual Host install)_ | 5`00`14 |
+| | `*` SAP NetWeaver AS PAS ICM HTTPS (Secure), icman process **[SAP Web GUI and SAP Fiori Launchpad (HTTPS)]** | 443`00` |
 | SAP HANA,<br/>using Instance Number `10` | | |
-| | SAP HANA sapctrl HTTP _(One Host install)_ | 5`10`13 |
-| | SAP HANA sapctrl HTTPS _(One Host install)_ | 5`10`14 |
-| | SAP HANA Internal Web Dispatcher | 3`10`06 |
-| | SAP HANA indexserver MDC System Tenant SYSDB | 3`10`13 |
-| | SAP HANA indexserver MDC Tenant 1 | 3`10`15 |
-| | SAP HANA ICM HTTP Internal Web Dispatcher | 80`10` |
-| | SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher | 43`10` |
+| | `*` SAP HANA for SOAP over HTTP <br/>for SAP Instance Agent<br/>(SAPStartSrv, i.e. host:port/SAPControl?wsdl) | 5`10`13 |
+| | `*` SAP HANA for SOAP over HTTPS (Secure)<br/>for SAP Instance Agent<br/>(SAPStartSrv, i.e. host:port/SAPControl?wsdl) | 5`10`14 |
+| | `*` SAP HANA Internal Web Dispatcher | 3`10`06 |
+| | `*` SAP HANA indexserver MDC System Tenant SYSDB | 3`10`13 |
+| | `*` SAP HANA indexserver MDC Tenant 1 | 3`10`15 |
+| | `*` SAP HANA ICM HTTP Internal Web Dispatcher | 80`10` |
+| | `*` SAP HANA ICM HTTPS (Secure) Internal Web Dispatcher | 43`10` |
 | SAP HANA XSA,<br/>using Instance Number `10` | | |
 | | SAP HANA XSA Client HTTPS for the connection to the xscontroller-managed Web Dispatcher (platform router) for purposes of user authentication. | 3`10`32 |
 | | SAP HANA XSA Internal HTTPS for the connection from the xscontroller-managed Web Dispatcher (platform router) to xsuaaserver for purposes of user authentication. | 3`10`31 |
@@ -43,31 +44,38 @@ The below table includes some of the key Ports to use with SAP Systems that use 
 | | SAP HANA XSA Dynamic Range Internal HTTPS for the connection from the client to the xscontroller-managed Web Dispatcher (Platform Router) for access to the application instance. | 510`10`-515`10` |
 | | SAP HANA XSA Internal HTTPS xsexecagent to xscontroller | 3`10`29 |
 | | SAP HANA XSA Web Dispatcher HTTP(S) routing | 3`10`33 |
-| SAP Web Dispatcher,<br/>using Instance Number `90` | | |
-| | SAP Web Dispatcher ICM HTTP (Port 80 prefix) | 80`90` |
-| | SAP Web Dispatcher ICM HTTPS (Secure, Port 443 prefix) | 443`90` |
 | SAP NetWeaver AS JAVA Central Services (SCS),<br/>using Instance Number `21` | | |
 | | SAP NetWeaver AS JAVA Message Server | 81`21` |
 | SAP NetWeaver AS JAVA Central Instance (CI) ICM server process 0..n,<br/>using Instance Number `20`<br/>*(+5 on all ports for subsequent server processes)* | | |
-| | SAP NetWeaver AS JAVA HTTP port | 5`20`00 |
-| | SAP NetWeaver AS JAVA HTTP SSL port | 5`20`01 |
-| | SAP NetWeaver AS JAVA IIOP Initial Context port | 5`20`02 |
-| | SAP NetWeaver AS JAVA IIOP SSL port | 5`20`03 |
-| | SAP NetWeaver AS JAVA P4 and JMS port | 5`20`04 |
-| | SAP NetWeaver AS JAVA P4 SSL port | 5`20`05 |
-| | SAP NetWeaver AS JAVA IIOP port | 5`20`06 |
+| | `*` SAP NetWeaver AS JAVA HTTP port | 5`20`00 |
+| | `*` SAP NetWeaver AS JAVA HTTP SSL port | 5`20`01 |
+| | `*` SAP NetWeaver AS JAVA IIOP Initial Context port | 5`20`02 |
+| | `*` SAP NetWeaver AS JAVA IIOP SSL port | 5`20`03 |
+| | `*` SAP NetWeaver AS JAVA P4 and JMS port | 5`20`04 |
+| | `*` SAP NetWeaver AS JAVA P4 SSL port | 5`20`05 |
+| | `*` SAP NetWeaver AS JAVA IIOP port | 5`20`06 |
 | | ~~SAP NetWeaver AS JAVA Telnet port~~ | ~~5`20`07~~ |
 | | SAP NetWeaver AS JAVA Debug Proxy port | 5`20`08 |
 | SAP NetWeaver AS JAVA Central Instance (CI) Access server process 0..n,<br/>using Instance Number `20`<br/>*(+5 on all ports for subsequent server processes)* | | |
-| | SAP NetWeaver AS JAVA Server Join port | 5`20`20 |
-| | SAP NetWeaver AS JAVA Server Debug port | 5`20`21 |
-| | SAP NetWeaver AS JAVA Server DSR Infrastructure port | 5`20`22 |
+| | `*` SAP NetWeaver AS JAVA Server Join port | 5`20`20 |
+| | `*` SAP NetWeaver AS JAVA Server Debug port | 5`20`21 |
+| | `*` SAP NetWeaver AS JAVA Server DSR Infrastructure port | 5`20`22 |
 | SAP NetWeaver AS JAVA Central Instance (CI) Administrative Services server process 0,<br/>using Instance Number `20` | | |
-| | SAP NetWeaver AS JAVA Admin Start Service HTTP port | 5`20`13 |
-| | SAP NetWeaver AS JAVA Admin Start Service HTTPS port | 5`20`14 |
-| | SAP NetWeaver AS JAVA Admin SL Controller port/s | 5`20`17-5`20`19 |
+| | `*` SAP NetWeaver AS JAVA Admin Start Service HTTP port | 5`20`13 |
+| | `*` SAP NetWeaver AS JAVA Admin Start Service HTTPS port | 5`20`14 |
+| | `*` SAP NetWeaver AS JAVA Admin SL Controller port/s | 5`20`17-5`20`19 |
+| SAP Host Agent | | |
+| | `*` SAP Host Agent with SOAP over HTTP, saphostctrl process | 1128 |
+| | `*` SAP Host Agent with SOAP over HTTPS (Secure), saphostctrls process | 1129 |
+| SAP Router | | |
+| | SAP Router | 3200 |
+| | SAP Router | 3299 |
+| SAP Web Dispatcher,<br/>using Instance Number `90` | | |
+| | SAP Web Dispatcher ICM HTTP (Port 80 prefix) | 80`90` |
+| | SAP Web Dispatcher ICM HTTPS (Secure, Port 443 prefix) | 443`90` |
 
 `*` Terraform Module
+
 
 ### SAP HANA System Replication
 

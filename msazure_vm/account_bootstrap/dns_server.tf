@@ -1,5 +1,5 @@
 
-# DNS Services - Create a DNS Zone to hold Domain Names
+# Private DNS Services - Create a Private DNS Zone to hold Domain Names
 # The DNS Zone Name must be a fully qualified domain name (FQDN) and becomes the "root domain"
 # During creation of a DNS Zone Name, only 2-level zones are supported (e.g. example.com)
 # After DNS Zone Name is created, subdomains within the zone can be established (e.g. subdomain.example.com)
@@ -9,7 +9,7 @@ resource "azurerm_private_dns_zone" "dns_services_zone" {
 }
 
 
-# DNS Services - Attach the DNS Zone to a VNet
+# Private DNS Services - Attach the DNS Zone to a VNet
 # Used as an access control mechanism to guarantee that only the VNet can perform name resolution on the DNS zone
 resource "azurerm_private_dns_zone_virtual_network_link" "dns_services_linked_network" {
   name                  = "${var.module_var_resource_prefix}-dns-link"

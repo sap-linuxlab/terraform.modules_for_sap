@@ -109,7 +109,7 @@ resource "aws_volume_attachment" "volume_attachment_usr_sap" {
 }
 
 resource "aws_volume_attachment" "volume_attachment_sapmnt" {
-  count       = length(aws_ebs_volume.block_volume_sapmnt_voltype.*.id)
+  count        = var.module_var_nfs_boolean_sapmnt ? 0 : length(aws_ebs_volume.block_volume_sapmnt_voltype.*.id)
   device_name = "/dev/sd${element(["s", "t", "u", "v"], count.index)}"
   instance_id = aws_instance.host.id
   volume_id   = element(aws_ebs_volume.block_volume_sapmnt_voltype.*.id, count.index)

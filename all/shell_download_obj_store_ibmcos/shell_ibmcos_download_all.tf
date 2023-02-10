@@ -123,18 +123,25 @@ resource "null_resource" "build_script_cos_download_all" {
       done
     fi
 
-    # List all instances
-    #$HOME/ibmcloud_cli/bin/ibmcloud resource service-instances --long --all-resource-groups --service-name cloud-object-storage
-
-    # Identify information about 1 object storage instance
-    #IBMCOS_SERVICE_INSTANCE="name-of-instance"
-    #IBMCOS_SERVICE_INSTANCE_CRN=$($HOME/ibmcloud_cli/bin/ibmcloud resource service-instance $IBMCOS_SERVICE_INSTANCE | awk '$1 == "ID:" { print $2 }')
-    #$HOME/ibmcloud_cli/bin/ibmcloud cos buckets --ibm-service-instance-id $IBMCOS_SERVICE_INSTANCE_CRN
-
 
     # Download all files in object storage bucket
 
     BUCKET_INPUT="${var.module_var_ibmcos_bucket}"
+
+    # List all IBM Cloud Object Storage instances
+    IBMCOS_SERVICE_INSTANCE_LIST=$($HOME/ibmcloud_cli/bin/ibmcloud resource service-instances --long --all-resource-groups --service-name cloud-object-storage | awk '$1 == "ID:" { print $2 }')
+
+    # Identify IBM Cloud Object Storage instance which contains the Object Storage Bucket
+    for LOOP_ITEM in $IBMCOS_SERVICE_INSTANCE_LIST
+    do
+      search_for_bucket=$($HOME/ibmcloud_cli/bin/ibmcloud cos buckets --ibm-service-instance-id $LOOP_ITEM | awk '{ print $1 }')
+      if [[ "$search_for_bucket" == *"$BUCKET_INPUT"* ]]; then
+        export IBMCOS_SERVICE_INSTANCE_CRN="$LOOP_ITEM"
+      fi
+    done
+
+    # Store IBM Cloud Object Storage instance CRN in the configuration of IBM Cloud CLI for COS
+    ibmcloud cos config crn --crn $IBMCOS_SERVICE_INSTANCE_CRN
 
     if [[ "$BUCKET_INPUT" == *\/* ]]
     then

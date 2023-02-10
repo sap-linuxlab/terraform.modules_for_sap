@@ -4,7 +4,7 @@ resource "null_resource" "ansible_exec_dry_run" {
   depends_on = [local_file.ansible_extravars, local_file.bastion_rsa, local_file.hosts_rsa]
   count = local.dry_run_boolean ? 1 : 0
 
-  # for ansible-playbook, use timeout set to 60 seconds to avoid error "Connection timed out during banner exchange"
+  # for ansible-playbook, use timeout set to 180 seconds to avoid error "Connection timed out during banner exchange"
   # for ansible-playbook, use debug with connection details -vvvv if errors occur
   provisioner "local-exec" {
     command = <<EOT
@@ -14,6 +14,13 @@ resource "null_resource" "ansible_exec_dry_run" {
     # Git 2.32.0 and above - ignore the global Git config (e.g. ~/.gitconfig) and system Git config (e.g. /usr/local/etc/gitconfig)
     export GIT_CONFIG_GLOBAL=/dev/null
     export GIT_CONFIG_SYSTEM=/dev/null
+
+    # Documentation regarding SSH and Timeout configurations
+    # https://docs.ansible.com/ansible/latest/reference_appendices/config.html
+    # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/ssh_connection.html
+
+    # Ansible Config - Default timeout for connection plugins to use. Equivilant to 'ansible-playbook --timeout 180' command, and creates SSH connection with '-o ConnectTimeout=180'.
+    export ANSIBLE_TIMEOUT=180
 
     # Ansible Config - Forces color mode when run without a TTY
     export ANSIBLE_FORCE_COLOR=1

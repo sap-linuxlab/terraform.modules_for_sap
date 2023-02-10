@@ -111,6 +111,7 @@ function lvm_filesystem_runner() {
     lvm_logical_volume_name="lv_$${lvm_volume_group_name#vg_}"
     lvm_logical_volume_stripe_size="$7"
     filesystem_format="$8"
+    azure_disks_multipath_bool="$9"
 
     # Ensure directory is available
     mkdir --parents $mount_point
@@ -190,7 +191,7 @@ function lvm_filesystem_runner() {
       elif [[ $disk_capacity_gb = "$disk_capacity_gb_specified" ]]
       then
         echo "Creating LVM Physical Volume for /dev/$disk_id using data alignment offset $lvm_pv_data_alignment"
-        if [[ $(cat /run/cloud-init/instance-data.json | jq -r '.v1.platform') == "azure" ]]
+        if [[ $(cat /run/cloud-init/instance-data.json | jq -r '.v1.platform') == "azure" && $azure_disks_multipath_bool == "true" ]]
         then
           echo "MS Azure detected: Detecting Multipath DM"
           multipath_map=$(multipathd show maps json | jq --raw-output '.maps[] | [.path_groups[].paths[].dev, .sysfs, .uuid] | @sh' | tr -d \'\")
@@ -285,6 +286,7 @@ function physical_volume_partition_runner() {
     physical_partition_filesystem_block_size="$3"
     physical_partition_name="$4"
     filesystem_format="$5"
+    azure_disks_multipath_bool="$6"
 
     # Ensure directory is available
     mkdir --parents $mount_point
@@ -353,7 +355,7 @@ function physical_volume_partition_runner() {
       elif [[ $disk_capacity_gb = $disk_capacity_gb_specified ]]
       then
         echo "Creating Whole Disk Physical Volume Partition and File System for /dev/$disk_id at $mount_point with GPT Partition Table, start at 1MiB"
-        if [[ $(cat /run/cloud-init/instance-data.json | jq -r '.v1.platform') == "azure" ]]
+        if [[ $(cat /run/cloud-init/instance-data.json | jq -r '.v1.platform') == "azure" && $azure_disks_multipath_bool == "true" ]]
         then
           echo "MS Azure detected: Detecting Multipath DM"
           multipath_map=$(multipathd show maps json | jq --raw-output '.maps[] | [.path_groups[].paths[].dev, .sysfs, .uuid] | @sh' | tr -d \'\")
@@ -543,11 +545,11 @@ function main() {
   then
     if [[ "${var.module_var_lvm_enable_hana_data}" == "true" ]]
     then
-      lvm_filesystem_runner "/hana/data" "${var.module_var_disk_volume_capacity_hana_data}" "${var.module_var_lvm_pv_data_alignment_hana_data}" "vg_hana_data" "${var.module_var_lvm_vg_data_alignment_hana_data}" "${var.module_var_lvm_vg_physical_extent_size_hana_data}" "${var.module_var_lvm_lv_stripe_size_hana_data}" "${var.module_var_filesystem_hana_data}"
+      lvm_filesystem_runner "/hana/data" "${var.module_var_disk_volume_capacity_hana_data}" "${var.module_var_lvm_pv_data_alignment_hana_data}" "vg_hana_data" "${var.module_var_lvm_vg_data_alignment_hana_data}" "${var.module_var_lvm_vg_physical_extent_size_hana_data}" "${var.module_var_lvm_lv_stripe_size_hana_data}" "${var.module_var_filesystem_hana_data}" "${can(regex("^[P].*",var.module_var_disk_volume_type_hana_data))}"
     
     elif [[ "${var.module_var_lvm_enable_hana_data}" == "false" ]]
     then
-      physical_volume_partition_runner "/hana/data" "${var.module_var_disk_volume_capacity_hana_data}" "${var.module_var_physical_partition_filesystem_block_size_hana_data}" "hana_data" "${var.module_var_filesystem_hana_data}"
+      physical_volume_partition_runner "/hana/data" "${var.module_var_disk_volume_capacity_hana_data}" "${var.module_var_physical_partition_filesystem_block_size_hana_data}" "hana_data" "${var.module_var_filesystem_hana_data}" "${can(regex("^[P].*",var.module_var_disk_volume_type_hana_data))}"
     fi
   fi
 
@@ -556,11 +558,11 @@ function main() {
   then
     if [[ "${var.module_var_lvm_enable_hana_log}" == "true" ]]
     then
-      lvm_filesystem_runner "/hana/log" "${var.module_var_disk_volume_capacity_hana_log}" "${var.module_var_lvm_pv_data_alignment_hana_log}" "vg_hana_log" "${var.module_var_lvm_vg_data_alignment_hana_log}" "${var.module_var_lvm_vg_physical_extent_size_hana_log}" "${var.module_var_lvm_lv_stripe_size_hana_log}" "${var.module_var_filesystem_hana_log}"
+      lvm_filesystem_runner "/hana/log" "${var.module_var_disk_volume_capacity_hana_log}" "${var.module_var_lvm_pv_data_alignment_hana_log}" "vg_hana_log" "${var.module_var_lvm_vg_data_alignment_hana_log}" "${var.module_var_lvm_vg_physical_extent_size_hana_log}" "${var.module_var_lvm_lv_stripe_size_hana_log}" "${var.module_var_filesystem_hana_log}" "${can(regex("^[P].*",var.module_var_disk_volume_type_hana_log))}"
     
     elif [[ "${var.module_var_lvm_enable_hana_log}" == "false" ]]
     then
-      physical_volume_partition_runner "/hana/log" "${var.module_var_disk_volume_capacity_hana_log}" "${var.module_var_physical_partition_filesystem_block_size_hana_log}" "hana_log" "${var.module_var_filesystem_hana_log}"
+      physical_volume_partition_runner "/hana/log" "${var.module_var_disk_volume_capacity_hana_log}" "${var.module_var_physical_partition_filesystem_block_size_hana_log}" "hana_log" "${var.module_var_filesystem_hana_log}" "${can(regex("^[P].*",var.module_var_disk_volume_type_hana_log))}"
     fi
   fi
 
@@ -569,11 +571,11 @@ function main() {
   then
     if [[ "${var.module_var_lvm_enable_hana_shared}" == "true" ]]
     then
-      lvm_filesystem_runner "/hana/shared" "${var.module_var_disk_volume_capacity_hana_shared}" "${var.module_var_lvm_pv_data_alignment_hana_shared}" "vg_hana_shared" "${var.module_var_lvm_vg_data_alignment_hana_shared}" "${var.module_var_lvm_vg_physical_extent_size_hana_shared}" "${var.module_var_lvm_lv_stripe_size_hana_shared}" "${var.module_var_filesystem_hana_shared}"
+      lvm_filesystem_runner "/hana/shared" "${var.module_var_disk_volume_capacity_hana_shared}" "${var.module_var_lvm_pv_data_alignment_hana_shared}" "vg_hana_shared" "${var.module_var_lvm_vg_data_alignment_hana_shared}" "${var.module_var_lvm_vg_physical_extent_size_hana_shared}" "${var.module_var_lvm_lv_stripe_size_hana_shared}" "${var.module_var_filesystem_hana_shared}" "${can(regex("^[P].*",var.module_var_disk_volume_type_hana_shared))}"
     
     elif [[ "${var.module_var_lvm_enable_hana_shared}" == "false" ]]
     then
-      physical_volume_partition_runner "/hana/shared" "${var.module_var_disk_volume_capacity_hana_shared}" "${var.module_var_physical_partition_filesystem_block_size_hana_shared}" "hana_shared" "${var.module_var_filesystem_hana_shared}"
+      physical_volume_partition_runner "/hana/shared" "${var.module_var_disk_volume_capacity_hana_shared}" "${var.module_var_physical_partition_filesystem_block_size_hana_shared}" "hana_shared" "${var.module_var_filesystem_hana_shared}" "${can(regex("^[P].*",var.module_var_disk_volume_type_hana_shared))}"
     fi
   fi
 
@@ -582,24 +584,42 @@ function main() {
   then
     if [[ "${var.module_var_lvm_enable_anydb}" == "true" ]]
     then
-      lvm_filesystem_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_lvm_pv_data_alignment_anydb}" "vg_anydb" "${var.module_var_lvm_vg_data_alignment_anydb}" "${var.module_var_lvm_vg_physical_extent_size_anydb}" "${var.module_var_lvm_lv_stripe_size_anydb}" "${var.module_var_filesystem_anydb}"
+      lvm_filesystem_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_lvm_pv_data_alignment_anydb}" "vg_anydb" "${var.module_var_lvm_vg_data_alignment_anydb}" "${var.module_var_lvm_vg_physical_extent_size_anydb}" "${var.module_var_lvm_lv_stripe_size_anydb}" "${var.module_var_filesystem_anydb}" "${can(regex("^[P].*",var.module_var_disk_volume_type_anydb))}"
     
     elif [[ "${var.module_var_lvm_enable_anydb}" == "false" ]]
     then
-      physical_volume_partition_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_physical_partition_filesystem_block_size_anydb}" "anydb" "${var.module_var_filesystem_anydb}"
+      physical_volume_partition_runner "${var.module_var_filesystem_mount_path_anydb}" "${var.module_var_disk_volume_capacity_anydb}" "${var.module_var_physical_partition_filesystem_block_size_anydb}" "anydb" "${var.module_var_filesystem_anydb}" "${can(regex("^[P].*",var.module_var_disk_volume_type_anydb))}"
     fi
   fi
 
 
   if [[ ${var.module_var_disk_volume_count_usr_sap} -gt 0 ]]
   then
-    physical_volume_partition_runner "/usr/sap" "${var.module_var_disk_volume_capacity_usr_sap}" "4k" "usr_sap" "${var.module_var_filesystem_usr_sap}"
+    physical_volume_partition_runner "/usr/sap" "${var.module_var_disk_volume_capacity_usr_sap}" "4k" "usr_sap" "${var.module_var_filesystem_usr_sap}" "${can(regex("^[P].*",var.module_var_disk_volume_type_usr_sap))}"
   fi
 
 
-  if [[ ${var.module_var_disk_volume_count_sapmnt} -gt 0 ]]
+  if [[ ${var.module_var_nfs_boolean_sapmnt} == "false" ]] && [[ ${var.module_var_disk_volume_count_sapmnt} -gt 0 ]]
   then
-    physical_volume_partition_runner "/sapmnt" "${var.module_var_disk_volume_capacity_sapmnt}" "4k" "sapmnt" "${var.module_var_filesystem_sapmnt}"
+    physical_volume_partition_runner "/sapmnt" "${var.module_var_disk_volume_capacity_sapmnt}" "4k" "sapmnt" "${var.module_var_filesystem_sapmnt}" "${can(regex("^[P].*",var.module_var_disk_volume_type_sapmnt))}"
+  elif [[ ${var.module_var_nfs_boolean_sapmnt} == "true" ]]
+  then
+    # Establish Azure Files Mount Target DNS Name
+    azure_files_mount_fqdn_sapmnt='${var.module_var_nfs_boolean_sapmnt ? var.module_var_nfs_fqdn_sapmnt : "null"}'
+
+    # Recommend OS mount of the Azure Files via the DNS FQDN, which resolves to the IP Address of the Azure Files mount target
+    # Usually to increase network latency performance for SAP NetWeaver read/write operations, IP Addresses should be used
+    # However, the NFS protocol performs DNS lookup at mount time, and stores into the local host DNS cache - based on the DNS TTL defined by the Azure DNS Name Server
+    # As this activity is infrequent, it should not impact performance to set to the FQDN of the Azure Files Mount Target
+
+    # Install NFS
+    if [ "$os_type" = "rhel" ] ; then yum --assumeyes --debuglevel=1 install nfs-utils ; elif [ "$os_type" = "sles" ] ; then zypper install --no-confirm nfs-client ; fi
+
+    # Mount Azure Files via DNS FQDN
+    echo "Mounting NFS for /sapmnt to Azure Files Mount Target DNS Name: $azure_files_mount_fqdn_sapmnt"
+    #sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $azure_files_mount_fqdn_sapmnt /sapmnt
+    echo "# fstab entries for NFS"  >> /etc/fstab
+    echo "$azure_files_mount_fqdn_sapmnt    /sapmnt    nfs4    nfsvers=4.1,rsize=262144,wsize=262144,hard,timeo=600,retrans=2,sec=sys,noatime,proto=tcp,namlen=255    0    0" >> /etc/fstab
   fi
 
 
@@ -611,7 +631,14 @@ function main() {
   fi
 
 
-  physical_volume_partition_runner "${var.module_var_sap_software_download_directory}" "${var.module_var_disk_volume_capacity_software}" "4k" "software" "xfs"
+  echo "Check if Multipath was activated, then alter setup of /software mount point (which is static set to Premium_LRS to avoid heavy installation delay)"
+  if multipath; then
+      use_multipath="true"
+  else
+      use_multipath="false"
+  fi
+
+  physical_volume_partition_runner "${var.module_var_sap_software_download_directory}" "${var.module_var_disk_volume_capacity_software}" "4k" "software" "xfs" "$use_multipath"
 
 
   mount -a

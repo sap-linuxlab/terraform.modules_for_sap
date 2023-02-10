@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "vpc_sg_rule_sap_egress_sapnwas_abap_ascs_ms"
 }
 
 
-# SAP NetWeaver AS ABAP Central Services (ASCS) Enqueue Server (EN), sapdp<ASCS_NN> process as 39<ASCS_NN> port, access from within the same Subnet
+# SAP NetWeaver AS ABAP Central Services (ASCS) Enqueue Server (EN), sapenq<SAPSID> process as 39<ASCS_NN> port, access from within the same Subnet
 resource "aws_security_group_rule" "vpc_sg_rule_sap_ingress_sapnwas_abap_ascs_en" {
   count = local.network_rules_sap_nwas_abap_ascs_boolean ? 1 : 0
   security_group_id = var.module_var_host_security_group_id

@@ -1,0 +1,82 @@
+
+resource "random_string" "random_suffix1" {
+  length      = 6
+  min_numeric = 4
+  special     = false
+  numeric     = false
+  lower       = true
+  upper       = false
+}
+
+
+data "http" "terraform_host_current_public_ip" {
+  url = "https://ipv4.icanhazip.com"
+}
+
+locals {
+  terraform_host_current_public_ip = "${trimspace(data.http.terraform_host_current_public_ip.response_body)}"
+}
+
+
+
+## THIS CODE IS NOT SECURE because of error 403 "This request is not authorized to perform this operation" on proceeding File Share provision
+## By design, Azure Storage Account management APIs are private only (working only with the GUI)
+## Multiple complaints on the Terraform Provider for MS Azure have only provided workarounds to these issues: https://github.com/hashicorp/terraform-provider-azurerm/issues?q=is%3Aissue+azurerm_storage_share+403+%22not+authorized%22
+
+# Create Azure Storage Account for File Storage
+
+resource "azurerm_storage_account" "storage_account_sap" {
+  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
+
+  name                     = "${var.module_var_resource_prefix}stgacc1${random_string.random_suffix1.result}"
+  resource_group_name      = var.module_var_az_resource_group_name
+  location                 = var.module_var_az_location_region
+  account_kind             = "FileStorage"
+  account_tier             = "Premium"
+  access_tier              = "Hot"
+  account_replication_type = "LRS"
+  large_file_share_enabled = true
+
+
+  # If false, then Terraform error 403...
+  public_network_access_enabled = true
+
+
+  # If specifying network_rules, one of either ip_rules or virtual_network_subnet_ids must be specified and default_action must be set to Deny.
+  network_rules {
+    default_action = "Deny"
+    bypass = [ "AzureServices" ]  // Allow trusted Microsoft services to access this storage account
+#    virtual_network_subnet_ids = [ "" ]
+
+    # If false, then Terraform error 403...
+    ip_rules = ["${trimspace(data.http.terraform_host_current_public_ip.response_body)}"] // For specific IP, do not use /32. Could also enable for all of Public Internet access to this API, by using ["0.0.0.0/0"]
+  }
+
+
+  enable_https_traffic_only         = false // "Secure transfer required" must be disabled, as the NFS protocol does not support encryption and relies on network-level security.
+  infrastructure_encryption_enabled = true // Encryption-at-rest for NFS
+  cross_tenant_replication_enabled  = false
+  allow_nested_items_to_be_public   = false
+  nfsv3_enabled                     = false // Ensure NFS v4.1 is used
+
+  shared_access_key_enabled         = true // Enabled, otherwise Terraform error 'Key based authentication is not permitted on this storage account'
+  default_to_oauth_authentication   = false // Disabled, otherwise Terraform error 'Key based authentication is not permitted on this storage account'
+
+}
+
+
+# Create Azure Files mount, forced to enable Public Network Access and allowlist current Public IP of Terraform host
+# Otherwise Terraform will 403 error, with message...
+## shares.Client#GetProperties: Failure responding to request: StatusCode=403
+## Error: autorest/azure: Service returned an error. Status=403 Code="AuthorizationFailure" Message="This request is not authorized to perform this operation"
+
+resource "azurerm_storage_share" "file_storage_sapmnt" {
+  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
+
+  storage_account_name     = azurerm_storage_account.storage_account_sap[0].name
+  name                     = "${var.module_var_resource_prefix}nfs1"
+  access_tier              = "Premium"
+  enabled_protocol         = "NFS"
+  quota                    = 1000  // Maximum GB capacity of NFS
+
+}

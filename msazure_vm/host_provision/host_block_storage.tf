@@ -7,8 +7,10 @@ resource "azurerm_managed_disk" "block_volume_hana_data_voltype" {
   name                 = "${var.module_var_host_name}-volume-hana-data-${count.index}"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
-  storage_account_type = "Premium_LRS"
-  tier                 = var.module_var_disk_volume_type_hana_data
+
+  // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
+  storage_account_type = can(regex("^P.*", var.module_var_disk_volume_type_hana_data)) ? "Premium_LRS" : can(regex("^E.*", var.module_var_disk_volume_type_hana_data)) ? "StandardSSD_LRS" : can(regex("^S.*", var.module_var_disk_volume_type_hana_data)) ? "Standard_LRS" : "error"
+  tier                 = can(regex("^[P].*",var.module_var_disk_volume_type_hana_data)) ? var.module_var_disk_volume_type_hana_data : null
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_hana_data
 
@@ -26,8 +28,11 @@ resource "azurerm_managed_disk" "block_volume_hana_log_voltype" {
   name                 = "${var.module_var_host_name}-volume-hana-log-${count.index}"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
-  storage_account_type = "Premium_LRS"
-  tier                 = var.module_var_disk_volume_type_hana_log
+
+  // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
+  storage_account_type = can(regex("^P.*", var.module_var_disk_volume_type_hana_log)) ? "Premium_LRS" : can(regex("^E.*", var.module_var_disk_volume_type_hana_log)) ? "StandardSSD_LRS" : can(regex("^S.*", var.module_var_disk_volume_type_hana_log)) ? "Standard_LRS" : "error"
+  tier                 = can(regex("^[P].*",var.module_var_disk_volume_type_hana_log)) ? var.module_var_disk_volume_type_hana_log : null
+  
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_hana_log
 
@@ -45,8 +50,10 @@ resource "azurerm_managed_disk" "block_volume_hana_shared_voltype" {
   name                 = "${var.module_var_host_name}-volume-hana-shared-${count.index}"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
-  storage_account_type = "Premium_LRS"
-  tier                 = var.module_var_disk_volume_type_hana_shared
+
+  // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
+  storage_account_type = can(regex("^P.*", var.module_var_disk_volume_type_hana_shared)) ? "Premium_LRS" : can(regex("^E.*", var.module_var_disk_volume_type_hana_shared)) ? "StandardSSD_LRS" : can(regex("^S.*", var.module_var_disk_volume_type_hana_shared)) ? "Standard_LRS" : "error"
+  tier                 = can(regex("^[P].*",var.module_var_disk_volume_type_hana_shared)) ? var.module_var_disk_volume_type_hana_shared : null
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_hana_shared
 
@@ -64,8 +71,10 @@ resource "azurerm_managed_disk" "block_volume_anydb_voltype" {
   name                 = "${var.module_var_host_name}-volume-anydb-${count.index}"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
-  storage_account_type = "Premium_LRS"
-  tier                 = var.module_var_disk_volume_type_anydb
+
+  // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
+  storage_account_type = can(regex("^P.*", var.module_var_disk_volume_type_anydb)) ? "Premium_LRS" : can(regex("^E.*", var.module_var_disk_volume_type_anydb)) ? "StandardSSD_LRS" : can(regex("^S.*", var.module_var_disk_volume_type_anydb)) ? "Standard_LRS" : "error"
+  tier                 = can(regex("^[P].*",var.module_var_disk_volume_type_anydb)) ? var.module_var_disk_volume_type_anydb : null
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_anydb
 
@@ -83,8 +92,10 @@ resource "azurerm_managed_disk" "block_volume_usr_sap_voltype" {
   name                 = "${var.module_var_host_name}-volume-usr-sap-${count.index}"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
-  storage_account_type = "Premium_LRS"
-  tier                 = var.module_var_disk_volume_type_usr_sap
+
+  // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
+  storage_account_type = can(regex("^P.*", var.module_var_disk_volume_type_usr_sap)) ? "Premium_LRS" : can(regex("^E.*", var.module_var_disk_volume_type_usr_sap)) ? "StandardSSD_LRS" : can(regex("^S.*", var.module_var_disk_volume_type_usr_sap)) ? "Standard_LRS" : "error"
+  tier                 = can(regex("^[P].*",var.module_var_disk_volume_type_usr_sap)) ? var.module_var_disk_volume_type_usr_sap : null
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_usr_sap
 
@@ -97,13 +108,15 @@ resource "azurerm_managed_disk" "block_volume_usr_sap_voltype" {
 
 
 resource "azurerm_managed_disk" "block_volume_sapmnt_voltype" {
-  count = var.module_var_disk_volume_count_sapmnt
+  count = var.module_var_nfs_boolean_sapmnt ? 0 : var.module_var_disk_volume_count_sapmnt
 
   name                 = "${var.module_var_host_name}-volume-sapmnt-${count.index}"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
-  storage_account_type = "Premium_LRS"
-  tier                 = var.module_var_disk_volume_type_sapmnt
+
+  // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
+  storage_account_type = can(regex("^P.*", var.module_var_disk_volume_type_sapmnt)) ? "Premium_LRS" : can(regex("^E.*", var.module_var_disk_volume_type_sapmnt)) ? "StandardSSD_LRS" : can(regex("^S.*", var.module_var_disk_volume_type_sapmnt)) ? "Standard_LRS" : "error"
+  tier                 = can(regex("^[P].*",var.module_var_disk_volume_type_sapmnt)) ? var.module_var_disk_volume_type_sapmnt : null
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_sapmnt
 
@@ -121,8 +134,10 @@ resource "azurerm_managed_disk" "block_volume_swap_voltype" {
   name                 = "${var.module_var_host_name}-volume-swap-${count.index}"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
-  storage_account_type = "Premium_LRS"
-  tier                 = var.module_var_disk_volume_type_swap
+
+  // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
+  storage_account_type = can(regex("^P.*", var.module_var_disk_volume_type_swap)) ? "Premium_LRS" : can(regex("^E.*", var.module_var_disk_volume_type_swap)) ? "StandardSSD_LRS" : can(regex("^S.*", var.module_var_disk_volume_type_swap)) ? "Standard_LRS" : "error"
+  tier                 = can(regex("^[P].*",var.module_var_disk_volume_type_swap)) ? var.module_var_disk_volume_type_swap : null
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_swap
 
@@ -139,6 +154,7 @@ resource "azurerm_managed_disk" "block_volume_software_voltype" {
   name                 = "${var.module_var_host_name}-volume-software"
   resource_group_name  = local.target_resource_group_name
   location             = var.module_var_az_location_region
+
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
   disk_size_gb         = var.module_var_disk_volume_capacity_software

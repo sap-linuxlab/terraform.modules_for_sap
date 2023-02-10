@@ -50,7 +50,7 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 |:---|:---|
 | **TF Modules for Infrastructure Platforms** | - |
 | &emsp;Amazon Web Services Elastic Compute Cloud (EC2) Virtual Server | |
-| &emsp;~~Google Cloud Platform Compute Engine (CE) Virtual Machine~~ | N/A |
+| &emsp;Google Cloud Platform Compute Engine (CE) Virtual Machine | N/A |
 | &emsp;IBM Cloud Virtual Servers | N/A |
 | &emsp;IBM Cloud, IBM Power Virtual Servers | |
 | &emsp;IBM Power Virtualization Center | N/A |
@@ -80,46 +80,46 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 
 ## Infrastructure provisioning parity comparison
 
-| Infrastructure Platform | **Amazon Web Services (AWS)** | **Microsoft Azure** | **IBM Cloud** | **IBM Cloud** | **IBM PowerVC** | **VMware vSphere** |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| &emsp;&emsp;*Product* | EC2 Virtual Server | VM | Virtual Server | IBM Power Virtual Server | LPAR | VM |
-| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Type* | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) |
-| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Hypervisor* | KVM | HyperV | KVM | IBM PowerVM<br> (PHYP LE) | IBM PowerVM<br> (PHYP LE) | VMware vSphere |
-| <br/><br/>***Account Init*** |   |   |   |   |   |   |
-| Create Resource Group, or re-use existing Resource Group | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create VPC/VNet, or re-use existing VPC/VNet | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Subnet, or re-use existing Subnet | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Many-to-One NAT Gateway (Public Internet access for hosts) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| <br/>***Account Bootstrap<br/>(aka. minimal landing zone)*** |   |   |   |   |   |   |
-| Create Private DNS | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Network Interconnectivity hub (e.g. Transit Gateway) | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Network Security for Subnet/s (e.g. ACL, NSG) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Network Security for Host/s (e.g. Security Groups) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create TLS key pair for SSH (using RSA algorithm) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Import public key to Cloud platform | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| <br/>***Account IAM*** |   |   |   |   |   |   |
-| Create IAM Access Group/s and contained Policies | :x: | :x: | :warning: WIP | :x: | N/A | N/A |
-| <br/>***Bastion Injection*** |   |   |   |   |   |   |
-| Find OS Image | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Subnet for Bastion (using small CIDR prefix) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Network Security for Host/s connection from Bastion (e.g. Security Groups) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Network Security for Bastion (e.g. Security Groups) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Public IP address for Bastion | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Bastion host | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Build scripts for Bastion host:<br>     - Create OS User for bastion access<br>     - Amend SSH Authorized Keys of OS User for bastion access<br>     - Activate firewalld<br>     - Change SSH Port to within IANA Dynamic Ports range<br>     - Update SELinux of port change<br>     - Deny root login from Public IP | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| <br/>***Host Network Access for SAP*** |   |   |   |   |   |   |
-| Append Network Security rules for SAP (e.g. Security Group Rules)<br>     - SAP NetWeaver AS (ABAP)<br>     - SAP NetWeaver AS (JAVA)<br>     - SAP HANA<br>     - SAP HANA XSA<br>     - SAP Web Dispatcher | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| <br/>***Proxy interconnect provision for increased security hosts*** |   |   |   |   |   |   |
-| Find OS Image | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
-| Create Proxy host | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
-| Create DNS Records (i.e. A, CNAME, PTR) | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
-| Build scripts for Bastion host:<br>     - Setup BIND/named for DNS Proxy<br>     - Setup Squid for Web Forward Proxy<br>     - Setup Nginx for Web Reverse Proxy | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
-| <br/>***Host Provision*** |   |   |   |   |   |   |
-| Find OS Image with SAP-relevant OS   Package Repositories | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:<br/><sub>clone from Stock OS Image</sub> | :white_check_mark: | :white_check_mark: |
-| Create DNS Records (i.e. A, CNAME, PTR) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Storage Volumes (defined storage   profile with IOPS/GB, or custom IOPS) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning:<br/><sub>no custom IOPS</sub> | :white_check_mark: | :white_check_mark: |
-| Create Host/s | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Attach Storage Volumes to Host/s | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Build scripts for Host:<br>     - Enable root login<br>     - Set hostname<br>     - Set DNS in resolv.conf<br>     - Disks and Filesystem setup (LVM with XFS and striping, or Physical with XFS) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Build scripts for increased security Hosts:<br>     - Set DNS Proxy in resolv.conf<br>     - Set Web Proxy for non-interactive login shell | N/A | N/A | N/A | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Build scripts for BYOL OS:<br>     - Enable OS Subscription with BYOL, setup OS Package Repositories | N/A | N/A | N/A | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Infrastructure Platform | **Amazon Web Services (AWS)** | **Google Cloud** | **Microsoft Azure** | **IBM Cloud** | **IBM Cloud** | **IBM PowerVC** | **VMware vSphere** |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| &emsp;&emsp;*Product* | EC2 Virtual Server | VM | VM | Virtual Server | IBM Power Virtual Server | LPAR | VM |
+| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Type* | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) |
+| &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Hypervisor* | KVM | KVM | HyperV | KVM | IBM PowerVM<br> (PHYP LE) | IBM PowerVM<br> (PHYP LE) | VMware vSphere |
+| <br/><br/>***Account Init*** |   |   |   |   |   |   |   |
+| Create Resource Group, or re-use existing Resource Group | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create VPC/VNet, or re-use existing VPC/VNet | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Subnet, or re-use existing Subnet | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Many-to-One NAT Gateway (Public Internet access for hosts) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| <br/>***Account Bootstrap<br/>(aka. minimal landing zone)*** |   |   |   |   |   |   |   |
+| Create Private DNS | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Network Interconnectivity hub (e.g. Transit Gateway) | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Network Security for Subnet/s (e.g. ACL, NSG) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Network Security for Host/s (e.g. Security Groups) | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create TLS key pair for SSH (using RSA algorithm) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Import public key to Cloud platform | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| <br/>***Account IAM*** |   |   |   |   |   |   |   |
+| Create IAM Access Group/s and contained Policies for SAP 'Basis' Administrators | :x: WIP | :x: WIP | :x: WIP | :warning: WIP | :x: WIP | N/A | N/A |
+| <br/>***Bastion Injection*** |   |   |   |   |   |   |   |
+| Find OS Image | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Subnet for Bastion (using small CIDR prefix) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Network Security for Host/s connection from Bastion (e.g. Security Groups) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Network Security for Bastion (e.g. Security Groups) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Public IP address for Bastion | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Bastion host | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Build scripts for Bastion host:<sub><br>     - Create OS User for bastion access<br>     - Amend SSH Authorized Keys of OS User for bastion access<br>     - Activate firewalld<br>     - Change SSH Port to within IANA Dynamic Ports range<br>     - Update SELinux of port change<br>     - Deny root login from Public IP</sub> | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| <br/>***Host Network Access for SAP*** |   |   |   |   |   |   |   |
+| Append Network Security rules for SAP (e.g. Security Group Rules)<sub><br>     - SAP NetWeaver AS (ABAP)<br>     - SAP NetWeaver AS (JAVA)<br>     - SAP HANA<br>     - SAP HANA XSA<br>     - SAP Web Dispatcher</sub> | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| <br/>***Proxy interconnect provision for increased security hosts*** |   |   |   |   |   |   |   |
+| Find OS Image | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
+| Create Proxy host | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
+| Create DNS Records (i.e. A, CNAME, PTR) | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
+| Build scripts for Bastion host:<sub><br>     - Setup BIND/named for DNS Proxy<br>     - Setup Squid for Web Forward Proxy<br>     - Setup Nginx for Web Reverse Proxy</sub> | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
+| <br/>***Host Provision*** |   |   |   |   |   |   |   |
+| Find OS Image with SAP-relevant OS   Package Repositories | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:<br/><sub>clone from Stock OS Image</sub> | :white_check_mark: | :white_check_mark: |
+| Create DNS Records (i.e. A, CNAME, PTR) | :white_check_mark: | :white_check_mark: | ::white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Storage Volumes (defined storage   profile with IOPS/GB, or custom IOPS) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning:<br/><sub>no custom IOPS</sub> | :white_check_mark: | :white_check_mark: |
+| Create Host/s | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Attach Storage Volumes to Host/s | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Build scripts for Host:<sub><br>     - Enable root login<br>     - Set hostname<br>     - Set DNS in resolv.conf<br>     - Disks and Filesystem setup (LVM with XFS and striping, or Physical with XFS)</sub> | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Build scripts for increased security Hosts:<sub><br>     - Set DNS Proxy in resolv.conf<br>     - Set Web Proxy for non-interactive login shell</sub> | N/A | N/A | N/A | N/A | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Build scripts for BYOL OS:<sub><br>     - Enable OS Subscription with BYOL, setup OS Package Repositories</sub> | N/A | N/A | N/A | N/A | :white_check_mark: | :white_check_mark: | :white_check_mark: |

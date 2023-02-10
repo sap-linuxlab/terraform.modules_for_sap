@@ -6,7 +6,7 @@ Terraform Module to inject Terraform Input Variables into Ansible Extra Vars fil
 
 This Terraform Module uses the Default Templates mode of the sap_swpm Ansible Role. By defining various deployments in the Ansible Extra Vars, Terraform is able to use 1 variable to define the SAP SWPM Product Catalog ID and all parameters to generate the inifile.params for SAP SWPM execution.
 
-These Default Templates are:
+These Default Templates for the `sap_swpm` Ansible Role are:
 
 | Default Template name | SAP SWPM Product Catalog ID | Description |
 | --- | --- | --- |

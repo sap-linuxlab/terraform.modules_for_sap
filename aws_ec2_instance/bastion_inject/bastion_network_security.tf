@@ -11,7 +11,7 @@ resource "aws_security_group" "bastion_connection_sg" {
 
 }
 
-# Allow Inbound SSH Port 22 connection from remote (i.e. Public Internet), required during provisioning
+# Allow Inbound SSH Port 22 connection from Bastion Subnet
 resource "aws_security_group_rule" "bastion_connection_sg_rule_inbound_ssh" {
   security_group_id = aws_security_group.bastion_connection_sg.id
   type              = "ingress"
