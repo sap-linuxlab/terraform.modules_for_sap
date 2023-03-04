@@ -40,7 +40,11 @@ resource "ibm_is_instance" "virtual_server" {
     ibm_is_volume.block_volume_software_tiered.id
   ])
 
-  metadata_service_enabled  = true
+  metadata_service {
+    enabled = true
+    protocol = "https"
+    response_hop_limit = 5
+  }
 
   # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {
