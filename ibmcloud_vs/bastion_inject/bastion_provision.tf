@@ -49,7 +49,10 @@ resource "ibm_is_floating_ip" "bastion_floating_ip" {
 
 resource "null_resource" "bastion_ssh_configure" {
 
-  depends_on = [ibm_is_instance.bastion_host]
+  depends_on = [
+    ibm_is_instance.bastion_host,
+    ibm_is_floating_ip.bastion_floating_ip
+    ]
 
   # Virtual Server Private Key apply file permissions
   provisioner "remote-exec" {

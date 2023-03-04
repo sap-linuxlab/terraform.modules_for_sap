@@ -196,7 +196,7 @@ EOF
     # Checking Host Key is false when not using bastion_host_key
     type         = "ssh"
     user         = "root"
-    host         = ibm_is_instance.proxy_virtual_server.primary_network_interface[0].primary_ipv4_address
+    host         = ibm_is_instance.proxy_virtual_server.primary_network_interface[0].primary_ip[0].address
     private_key  = var.module_var_host_private_ssh_key
     bastion_host = var.module_var_bastion_floating_ip
     #bastion_host_key = 
