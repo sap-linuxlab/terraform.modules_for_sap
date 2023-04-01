@@ -29,7 +29,9 @@ Therefore it is not possible to match precisely the same functionality when boot
 
 In addition, dependant upon the additional configuration and policies within an existing configured environment - these Terraform Modules for SAP may not work at all and may require custom changes to fit the bespoke environment.
 
-Contributions to these Terraform Modules need to retain as much parity across each infrastructure platform.
+For further information, please see below for the [Infrastructure provisioning parity comparison](#infrastructure-provisioning-parity-comparison) table.
+
+N.B. Contributions to these Terraform Modules need to retain as much parity across each infrastructure platform. 
 
 ## Execution time
 
@@ -41,6 +43,8 @@ Please note, for all SAP software installations the execution time will vary bas
 ## Execution permissions
 
 All detailed execution permissions are listed in the documentation for the Terraform Modules of each Infrastructure Platform. See the next section.
+
+---
 
 ## List of Terraform Modules for SAP
 
@@ -86,17 +90,17 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Type* | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) | Virtual Machine<br> (Type 1) |
 | &emsp;&emsp;*Compute*<br/>&emsp;&emsp;*Hypervisor* | KVM | KVM | HyperV | KVM | IBM PowerVM<br> (PHYP LE) | IBM PowerVM<br> (PHYP LE) | VMware vSphere |
 | <br/><br/>***Account Init*** |   |   |   |   |   |   |   |
-| Create Resource Group, or re-use existing Resource Group | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Resource Group, or re-use existing Resource Group | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | Create VPC/VNet, or re-use existing VPC/VNet | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | Create Subnet, or re-use existing Subnet | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | Create Many-to-One NAT Gateway (Public Internet access for hosts) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | <br/>***Account Bootstrap<br/>(aka. minimal landing zone)*** |   |   |   |   |   |   |   |
 | Create Private DNS | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Network Interconnectivity hub (e.g. Transit Gateway) | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Network Interconnectivity hub (e.g. Transit Gateway) | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | Create Network Security for Subnet/s (e.g. ACL, NSG) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
-| Create Network Security for Host/s (e.g. Security Groups) | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create Network Security for Host/s (e.g. Security Groups) | :white_check_mark: | :no_entry_sign: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | Create TLS key pair for SSH (using RSA algorithm) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Import public key to Cloud platform | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Import public key to Cloud platform | :white_check_mark: | :no_entry_sign: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | <br/>***Account IAM*** |   |   |   |   |   |   |   |
 | Create IAM Access Group/s and contained Policies for SAP 'Basis' Administrators | :x: WIP | :x: WIP | :x: WIP | :warning: WIP | :x: WIP | N/A | N/A |
 | <br/>***Bastion Injection*** |   |   |   |   |   |   |   |
@@ -123,3 +127,9 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | Build scripts for Host:<sub><br>     - Enable root login<br>     - Set hostname<br>     - Set DNS in resolv.conf<br>     - Disks and Filesystem setup (LVM with XFS and striping, or Physical with XFS)</sub> | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Build scripts for increased security Hosts:<sub><br>     - Set DNS Proxy in resolv.conf<br>     - Set Web Proxy for non-interactive login shell</sub> | N/A | N/A | N/A | N/A | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Build scripts for BYOL OS:<sub><br>     - Enable OS Subscription with BYOL, setup OS Package Repositories</sub> | N/A | N/A | N/A | N/A | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+
+<sub>**Key:**</sub>
+- :white_check_mark: <sub>Ready and Tested</sub>
+- :warning: <sub>Pending work</sub>
+- :x: <sub>Not available yet</sub>
+- :no_entry_sign: <sub>Capability not provided by vendor (or construct concept does not exist)</sub>

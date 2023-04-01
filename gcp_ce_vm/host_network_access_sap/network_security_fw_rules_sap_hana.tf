@@ -167,6 +167,7 @@ resource "google_compute_firewall" "vpc_fw_rule_tcp_egress_saphana_index_mdc_1" 
 
 
 # SAP HANA for SOAP over HTTP for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
+# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
 resource "google_compute_firewall" "vpc_fw_rule_tcp_ingress_saphana_startsrv_http_soap" {
   count   = local.network_rules_sap_hana_boolean ? 1 : 0
   name    = "${var.module_var_resource_prefix}-vpc-fw-ingress-saphana-startsrv-http"
@@ -174,7 +175,7 @@ resource "google_compute_firewall" "vpc_fw_rule_tcp_ingress_saphana_startsrv_htt
 
   allow {
     protocol = "tcp"
-    ports    = [tonumber("5${var.module_var_sap_hana_instance_no}13")]
+    ports    = ["5${var.module_var_sap_hana_instance_no}13-5${var.module_var_sap_hana_instance_no}14"]
   }
 
   direction  = "INGRESS"
@@ -188,38 +189,7 @@ resource "google_compute_firewall" "vpc_fw_rule_tcp_egress_saphana_startsrv_http
 
   allow {
     protocol = "tcp"
-    ports    = [tonumber("5${var.module_var_sap_hana_instance_no}13")]
-  }
-
-  direction  = "EGRESS"
-  destination_ranges = ["${local.target_vpc_subnet_range}"]
-#  source_ranges      = 
-}
-
-
-# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
-resource "google_compute_firewall" "vpc_fw_rule_tcp_ingress_saphana_startsrv_https_soap" {
-  count   = local.network_rules_sap_hana_boolean ? 1 : 0
-  name    = "${var.module_var_resource_prefix}-vpc-fw-ingress-saphana-startsrv-https"
-  network = local.target_vpc_name
-
-  allow {
-    protocol = "tcp"
-    ports    = [tonumber("5${var.module_var_sap_hana_instance_no}14")]
-  }
-
-  direction  = "INGRESS"
-#  destination_ranges = 
-  source_ranges      = ["${local.target_vpc_subnet_range}"]
-}
-resource "google_compute_firewall" "vpc_fw_rule_tcp_egress_saphana_startsrv_https_soap" {
-  count   = local.network_rules_sap_hana_boolean ? 1 : 0
-  name    = "${var.module_var_resource_prefix}-vpc-fw-egress-saphana-startsrv-https"
-  network = local.target_vpc_name
-
-  allow {
-    protocol = "tcp"
-    ports    = [tonumber("5${var.module_var_sap_hana_instance_no}14")]
+    ports    = ["5${var.module_var_sap_hana_instance_no}13-5${var.module_var_sap_hana_instance_no}14"]
   }
 
   direction  = "EGRESS"
