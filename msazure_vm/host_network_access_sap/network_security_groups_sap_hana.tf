@@ -175,6 +175,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_inde
 
 
 # SAP HANA for SOAP over HTTP for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
+# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
 resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_startsrv_http_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   name      = "tcp_inbound_saphana_startsrv_http_soap"
@@ -185,7 +186,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_start
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("5${var.module_var_sap_hana_instance_no}13")
+  destination_port_ranges    = ["5${var.module_var_sap_hana_instance_no}13-5${var.module_var_sap_hana_instance_no}14"]
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -201,42 +202,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_star
 
   source_port_range          = "*"
   source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("5${var.module_var_sap_hana_instance_no}13")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-
-
-# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
-resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana_startsrv_https_soap" {
-  count = local.network_rules_sap_hana_boolean ? 1 : 0
-  name      = "tcp_inbound_saphana_startsrv_https_soap"
-  priority  = 262
-  direction = "Inbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("5${var.module_var_sap_hana_instance_no}14")
-  destination_address_prefix = local.target_vnet_subnet_range
-
-  resource_group_name         = var.module_var_az_resource_group_name
-  network_security_group_name = var.module_var_host_security_group_name
-}
-resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_outbound_saphana_startsrv_https_soap" {
-  count = local.network_rules_sap_hana_boolean ? 1 : 0
-  name      = "tcp_outbound_saphana_startsrv_https_soap"
-  priority  = 263
-  direction = "Outbound"
-  access    = "Allow"
-  protocol  = "Tcp"
-
-  source_port_range          = "*"
-  source_address_prefix      = local.target_vnet_subnet_range
-  destination_port_range     = tonumber("5${var.module_var_sap_hana_instance_no}14")
+  destination_port_ranges    = ["5${var.module_var_sap_hana_instance_no}13-5${var.module_var_sap_hana_instance_no}14"]
   destination_address_prefix = local.target_vnet_subnet_range
 
   resource_group_name         = var.module_var_az_resource_group_name

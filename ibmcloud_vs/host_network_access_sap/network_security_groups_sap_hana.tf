@@ -123,6 +123,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_index_md
 
 
 # SAP HANA for SOAP over HTTP for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
+# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_startsrv_http_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
   depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
@@ -131,42 +132,17 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_startsrv_
   remote     = local.target_vpc_subnet_range
   tcp {
     port_min = tonumber("5${var.module_var_sap_hana_instance_no}13")
-    port_max = tonumber("5${var.module_var_sap_hana_instance_no}13")
+    port_max = tonumber("5${var.module_var_sap_hana_instance_no}14")
   }
 }
 resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_startsrv_http_soap" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
-  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_index_mdc_1]
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_startsrv_http_soap]
   group      = var.module_var_host_security_group_id
   direction  = "outbound"
   remote     = local.target_vpc_subnet_range
   tcp {
     port_min = tonumber("5${var.module_var_sap_hana_instance_no}13")
-    port_max = tonumber("5${var.module_var_sap_hana_instance_no}13")
-  }
-}
-
-
-# SAP HANA for SOAP over HTTPS (Secure) for SAP Instance Agent (SAPStartSrv, i.e. host:port/SAPControl?wsdl), access from within the same Subnet
-resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_inbound_saphana_startsrv_https_soap" {
-  count = local.network_rules_sap_hana_boolean ? 1 : 0
-  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_startsrv_http_soap]
-  group      = var.module_var_host_security_group_id
-  direction  = "inbound"
-  remote     = local.target_vpc_subnet_range
-  tcp {
-    port_min = tonumber("5${var.module_var_sap_hana_instance_no}14")
-    port_max = tonumber("5${var.module_var_sap_hana_instance_no}14")
-  }
-}
-resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_startsrv_https_soap" {
-  count = local.network_rules_sap_hana_boolean ? 1 : 0
-  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_startsrv_http_soap]
-  group      = var.module_var_host_security_group_id
-  direction  = "outbound"
-  remote     = local.target_vpc_subnet_range
-  tcp {
-    port_min = tonumber("5${var.module_var_sap_hana_instance_no}14")
     port_max = tonumber("5${var.module_var_sap_hana_instance_no}14")
   }
 }
@@ -178,7 +154,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_tcp_outbound_saphana_startsrv
 ## More details in README
 resource "ibm_is_security_group_rule" "vpc_sg_rule_sap_inbound_saphana_hsr1" {
   count = local.network_rules_sap_hana_boolean ? 1 : 0
-  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_inbound_saphana_startsrv_https_soap]
+  depends_on = [ibm_is_security_group_rule.vpc_sg_rule_tcp_outbound_saphana_startsrv_http_soap]
   group      = var.module_var_host_security_group_id
   direction  = "inbound"
   remote     = local.target_vpc_subnet_range
