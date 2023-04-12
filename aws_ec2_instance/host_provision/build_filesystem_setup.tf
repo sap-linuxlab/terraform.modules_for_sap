@@ -555,7 +555,7 @@ function main() {
     physical_volume_partition_runner "/sapmnt" "${var.module_var_disk_volume_capacity_sapmnt}" "4k" "sapmnt" "${var.module_var_filesystem_sapmnt}"
   elif [[ ${var.module_var_nfs_boolean_sapmnt} == "true" ]]
   then
-    # Establish AWS EFS Mount Target DNS Name
+    # Establish AWS EFS Mount Target DNS Name (the AWS EFS network interface must be added to the correct Security Groups for the hosts)
     aws_efs_mount_fqdn_sapmnt='${var.module_var_nfs_boolean_sapmnt ? var.module_var_nfs_fqdn_sapmnt : "null"}'
 
     # AWS recommend OS mount of the AWS EFS Mount Target via the DNS FQDN, which resolves to the IP Address of the AWS EFS Mount Target in the same AWS Availability Zone as the AWS EC2 Virtual Server.
