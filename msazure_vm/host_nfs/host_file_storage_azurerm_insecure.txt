@@ -77,6 +77,6 @@ resource "azurerm_storage_share" "file_storage_sapmnt" {
   name                     = "${var.module_var_resource_prefix}nfs1"
   access_tier              = "Premium"
   enabled_protocol         = "NFS"
-  quota                    = 1000  // Maximum GB capacity of NFS
+  quota                    = 2048  // Maximum GB capacity of NFS
 
 }
