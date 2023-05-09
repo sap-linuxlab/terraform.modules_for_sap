@@ -27,6 +27,8 @@ resource "aws_efs_mount_target" "file_storage_attach_sapmnt" {
 }
 
 resource "aws_efs_access_point" "file_storage_shared_mount_point" {
+  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
+
   file_system_id = aws_efs_file_system.file_storage_sapmnt[0].id
 
   root_directory {
