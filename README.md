@@ -81,6 +81,9 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | &emsp; SAP S/4HANA single-node | /all/ansible_sap_s4hana_install |
 | &emsp; SAP S/4HANA single-node,<br/>&emsp; using SAP Maintenance Planner Stack XML<br/>&emsp; (to run SUM and SPAM / SAINT) | [/all/ansible_sap_s4hana_install_maintplan](/docs/tf_modules/tf_mod_ansible_sap_s4hana_install_maintplan.md) |
 | &emsp; SAP S/4HANA single-node System Copy<br/>&emsp; (Homogeneous with SAP HANA Backup / Recovery) | /all/ansible_sap_s4hana_system_copy_hdb |
+| &emsp; SAP S/4HANA Distributed Install,<br/>&emsp; using SAP Maintenance Planner Stack XML<br/>&emsp; (to run SUM and SPAM / SAINT) | /all/ansible_sap_s4hana_distributed_install_maintplan |
+| &emsp; SAP Solution Manager (ABAP/JAVA) with SAP ASE single-node | /all/ansible_sap_solman_sapase_install |
+| &emsp; SAP Solution Manager (ABAP/JAVA) with SAP HANA single-node | /all/ansible_sap_solman_saphana_install |
 
 ## Infrastructure provisioning parity comparison
 
@@ -113,6 +116,8 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | Build scripts for Bastion host:<sub><br>     - Create OS User for bastion access<br>     - Amend SSH Authorized Keys of OS User for bastion access<br>     - Activate firewalld<br>     - Change SSH Port to within IANA Dynamic Ports range<br>     - Update SELinux of port change<br>     - Deny root login from Public IP</sub> | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | <br/>***Host Network Access for SAP*** |   |   |   |   |   |   |   |
 | Append Network Security rules for SAP (e.g. Security Group Rules)<sub><br>     - SAP NetWeaver AS (ABAP)<br>     - SAP NetWeaver AS (JAVA)<br>     - SAP HANA<br>     - SAP HANA XSA<br>     - SAP Web Dispatcher</sub> | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| <br/>***Host NFS*** |   |   |   |   |   |   |   |
+| Provision | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning: | N/A | N/A |
 | <br/>***Proxy interconnect provision for increased security hosts*** |   |   |   |   |   |   |   |
 | Find OS Image | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
 | Create Proxy host | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
