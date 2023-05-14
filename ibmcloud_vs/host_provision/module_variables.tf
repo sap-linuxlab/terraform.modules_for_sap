@@ -162,6 +162,8 @@ variable "module_var_disk_volume_capacity_sapmnt" {}
 variable "module_var_filesystem_sapmnt" {
   default = "xfs"
 }
+variable "module_var_nfs_boolean_sapmnt" {}
+variable "module_var_nfs_fqdn_sapmnt" {}
 
 variable "module_var_disk_swapfile_size_gb" {}
 variable "module_var_disk_volume_count_swap" {}

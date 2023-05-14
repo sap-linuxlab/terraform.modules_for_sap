@@ -161,7 +161,7 @@ resource "ibm_is_volume" "block_volume_usr_sap_tiered" {
 }
 
 resource "ibm_is_volume" "block_volume_sapmnt_tiered" {
-  count = var.module_var_disk_volume_count_sapmnt
+  count = var.module_var_nfs_boolean_sapmnt ? 0 : var.module_var_disk_volume_count_sapmnt
 
   name           = "${var.module_var_virtual_server_hostname}-volume-sapmnt-${count.index}"
   resource_group = var.module_var_resource_group_id
