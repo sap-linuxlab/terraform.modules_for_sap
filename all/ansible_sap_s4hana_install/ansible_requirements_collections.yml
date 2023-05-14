@@ -10,7 +10,7 @@ collections:
     version: 1.33.0
   - name: community.sap_install
     type: galaxy
-    version: 1.2.2
+    version: 1.2.3
 #  - name: community.sap_launchpad
 #    type: galaxy
 #    version: 0.0.0

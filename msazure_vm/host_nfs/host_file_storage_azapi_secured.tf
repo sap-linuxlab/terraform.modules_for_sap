@@ -84,7 +84,7 @@ resource "azapi_resource" "file_storage_sapmnt" {
     properties = {
       accessTier = "Premium"
       enabledProtocols = "NFS"
-      shareQuota = 1000  // Maximum GB capacity of NFS
+      shareQuota = 2048  // Maximum GB capacity of NFS
 #      metadata = {}
 #      rootSquash = "string"
     }

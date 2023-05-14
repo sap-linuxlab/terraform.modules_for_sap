@@ -541,9 +541,24 @@ function main() {
   fi
 
 
-  if [[ ${var.module_var_disk_volume_count_sapmnt} -gt 0 ]]
+  if [[ ${var.module_var_nfs_boolean_sapmnt} == "false" ]] && [[ ${var.module_var_disk_volume_count_sapmnt} -gt 0 ]]
   then
     physical_volume_partition_runner "/sapmnt" "${var.module_var_disk_volume_capacity_sapmnt}" "4k" "sapmnt" "${var.module_var_filesystem_sapmnt}"
+  elif [[ ${var.module_var_nfs_boolean_sapmnt} == "true" ]]
+  then
+    # Establish IBM Cloud File Share mount path (DNS name and ID e.g. fsf-abcdefg.domain.com:/123456)
+    ibmcloud_file_share_mount_fqdn_sapmnt='${var.module_var_nfs_boolean_sapmnt ? var.module_var_nfs_fqdn_sapmnt : "null"}'
+    # Recommend OS mount of the IBM Cloud File Share via the DNS FQDN, which resolves to the IP Address of the IBM Cloud File Share mount path target
+    # Usually to increase network latency performance for SAP NetWeaver read/write operations, IP Addresses should be used
+    # However, the NFS protocol performs DNS lookup at mount time, and stores into the local host DNS cache - based on the DNS TTL defined by the IBM Cloud Private DNS Name Server
+    # As this activity is infrequent, it should not impact performance to set to the FQDN of the IBM Cloud File Share mount path target
+    # Install NFS
+    if [ "$os_type" = "rhel" ] ; then yum --assumeyes --debuglevel=1 install nfs-utils ; elif [ "$os_type" = "sles" ] ; then zypper install --no-confirm nfs-client ; fi
+    # Mount IBM Cloud File Share via DNS FQDN
+    echo "Mounting NFS for /sapmnt to IBM Cloud File Share mount path target DNS Name: $ibmcloud_file_share_mount_fqdn_sapmnt"
+    #sudo mount -t nfs4 -o sec=sys,nfsvers=4.1 $ibmcloud_file_share_mount_fqdn_sapmnt /sapmnt
+    echo "# fstab entries for NFS"  >> /etc/fstab
+    echo "$ibmcloud_file_share_mount_fqdn_sapmnt    /sapmnt    nfs4    nfsvers=4.1,timeo=600,sec=sys,noatime,proto=tcp    0    0" >> /etc/fstab
   fi
 
 
