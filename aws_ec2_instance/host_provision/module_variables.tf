@@ -25,20 +25,4 @@ variable "module_var_disable_ip_anti_spoofing" {
   default = false
 }
 
-variable "module_var_filesystem_hana_data" {}
-
-variable "module_var_filesystem_hana_log" {}
-
-variable "module_var_filesystem_hana_shared" {}
-
-variable "module_var_filesystem_anydb" {}
-
-variable "module_var_filesystem_usr_sap" {}
-
-variable "module_var_filesystem_sapmnt" {}
-
-variable "module_var_filesystem_swap" {}
-
-variable "module_var_filesystem_software" {}
-
 variable "module_var_storage_definition" {}
