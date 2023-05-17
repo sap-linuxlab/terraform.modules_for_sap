@@ -3,7 +3,6 @@ resource "null_resource" "build_script_os_user_root" {
 
   depends_on = [
     null_resource.dns_resolv_files,
-    null_resource.build_script_fs_init,
     null_resource.build_script_os_prepare
   ]
 
