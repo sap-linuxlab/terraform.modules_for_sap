@@ -30,5 +30,5 @@ resource "azurerm_private_dns_a_record" "dns_a_record_short" {
   resource_group_name = var.module_var_az_resource_group_name
   zone_name           = var.module_var_dns_zone_name
   ttl                 = 1000
-  records             = [azurerm_private_endpoint.endpoint.private_service_connection.0.private_ip_address]
+  records             = [azurerm_private_endpoint.endpoint[0].private_service_connection.0.private_ip_address]
 }
