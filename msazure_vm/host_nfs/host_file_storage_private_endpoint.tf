@@ -1,6 +1,7 @@
 
 # Create Azure Storage Account Private Endpoint connection
 resource "azurerm_private_endpoint" "endpoint" {
+  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
   name                = "${var.module_var_resource_prefix}stgacc${random_string.random_suffix.result}-private-endpoint"
   resource_group_name = var.module_var_az_resource_group_name
   location            = var.module_var_az_location_region
@@ -24,6 +25,7 @@ resource "azurerm_private_endpoint" "endpoint" {
 # Create DNS A Records
 # This is alternative to creating the default private endpoint with a new Private DNS Zone 'privatelink.file.core.windows.net'
 resource "azurerm_private_dns_a_record" "dns_a_record_short" {
+  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
   name                = "${var.module_var_resource_prefix}stgacc${random_string.random_suffix.result}"
   resource_group_name = var.module_var_az_resource_group_name
   zone_name           = var.module_var_dns_zone_name
