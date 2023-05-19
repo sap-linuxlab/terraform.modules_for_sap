@@ -184,3 +184,7 @@ variable "module_var_disk_volume_capacity_software" {
 variable "module_var_dns_zone_name" {}
 
 variable "module_var_dns_root_domain_name" {}
+
+variable "module_var_disable_ip_anti_spoofing" {
+  default = false
+}
