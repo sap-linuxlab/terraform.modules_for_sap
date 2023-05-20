@@ -40,85 +40,11 @@ resource "google_compute_instance" "host" {
 
 # Attach GCP Zonal Persistent Disk block storage volumes to host
 
-resource "google_compute_attached_disk" "volume_attachment_hana_data" {
-  count    = length(google_compute_disk.block_volume_hana_data_voltype.*.id)
-  disk     = google_compute_disk.block_volume_hana_data_voltype[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
+resource "google_compute_attached_disk" "volume_attachment" {
+#  count    = length(google_compute_disk.block_volume.*.id)
+  for_each = google_compute_disk.block_volume
 
-resource "google_compute_attached_disk" "volume_attachment_hana_data_custom" {
-  count    = length(google_compute_disk.block_volume_hana_data_custom.*.id)
-  disk     = google_compute_disk.block_volume_hana_data_custom[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_hana_log" {
-  count    = length(google_compute_disk.block_volume_hana_log_voltype.*.id)
-  disk     = google_compute_disk.block_volume_hana_log_voltype[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_hana_log_custom" {
-  count    = length(google_compute_disk.block_volume_hana_log_custom.*.id)
-  disk     = google_compute_disk.block_volume_hana_log_custom[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_hana_shared" {
-  count    = length(google_compute_disk.block_volume_hana_shared_voltype.*.id)
-  disk     = google_compute_disk.block_volume_hana_shared_voltype[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_hana_shared_custom" {
-  count    = length(google_compute_disk.block_volume_hana_shared_custom.*.id)
-  disk     = google_compute_disk.block_volume_hana_shared_custom[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_anydb" {
-  count    = length(google_compute_disk.block_volume_anydb_voltype.*.id)
-  disk     = google_compute_disk.block_volume_anydb_voltype[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_anydb_custom" {
-  count    = length(google_compute_disk.block_volume_anydb_custom.*.id)
-  disk     = google_compute_disk.block_volume_anydb_custom[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_usr_sap" {
-  count    = length(google_compute_disk.block_volume_usr_sap_voltype.*.id)
-  disk     = google_compute_disk.block_volume_usr_sap_voltype[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_sapmnt" {
-  count    = length(google_compute_disk.block_volume_sapmnt_voltype.*.id)
-  disk     = google_compute_disk.block_volume_sapmnt_voltype[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_swap" {
-  count    = length(google_compute_disk.block_volume_swap_voltype.*.id)
-  disk     = google_compute_disk.block_volume_swap_voltype[count.index].id
-  instance = google_compute_instance.host.id
-  mode     = "READ_WRITE"
-}
-
-resource "google_compute_attached_disk" "volume_attachment_software" {
-  disk     = google_compute_disk.block_volume_software_voltype.id
+  disk     = each.value.id
   instance = google_compute_instance.host.id
   mode     = "READ_WRITE"
 }

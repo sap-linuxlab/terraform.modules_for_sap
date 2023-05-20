@@ -57,8 +57,10 @@ resource "aws_instance" "host" {
 # Attach EBS block disk volumes to host
 # AWS EBS does not accept /dev/sdaa.
 resource "aws_volume_attachment" "block_volume_attachment" {
-  count       = length(aws_ebs_volume.block_volume_provision.*.id)
-  device_name = "/dev/sd${element(["d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"], count.index)}"
+#  count       = length(aws_ebs_volume.block_volume_provision.*.id)
+  for_each    = aws_ebs_volume.block_volume_provision
+
+  device_name = "/dev/sd${element(["d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"], index(keys(aws_ebs_volume.block_volume_provision),each.key))}"
   instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_provision.*.id, count.index)
+  volume_id   = each.value.id
 }

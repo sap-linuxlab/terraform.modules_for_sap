@@ -5,15 +5,8 @@ resource "null_resource" "execute_os_scripts" {
 
   depends_on = [
     null_resource.dns_resolv_files,
-    null_resource.build_script_fs_init,
     null_resource.build_script_os_prepare,
-    azurerm_virtual_machine_data_disk_attachment.volume_attachment_hana_data,
-    azurerm_virtual_machine_data_disk_attachment.volume_attachment_hana_log,
-    azurerm_virtual_machine_data_disk_attachment.volume_attachment_hana_shared,
-    azurerm_virtual_machine_data_disk_attachment.volume_attachment_usr_sap,
-    azurerm_virtual_machine_data_disk_attachment.volume_attachment_sapmnt,
-    azurerm_virtual_machine_data_disk_attachment.volume_attachment_swap,
-    azurerm_virtual_machine_data_disk_attachment.volume_attachment_software
+    azurerm_virtual_machine_data_disk_attachment.volume_attachment
   ]
 
   connection {
@@ -49,7 +42,6 @@ resource "null_resource" "execute_os_scripts" {
       "echo 'Show HOME directory for reference Shell scripts were transferred'",
       "ls -lha $HOME",
       "/root/terraform_dig.sh",
-      "/root/terraform_fs_init.sh",
       "/root/terraform_os_prep.sh"
     ]
   }
