@@ -15,6 +15,8 @@ resource "google_compute_instance" "host" {
     }
   }
 
+  can_ip_forward = var.module_var_disable_ip_anti_spoofing // When disable the Anti IP Spoofing = true, then Can IP Forward = true
+
   network_interface {
 #    name       = "${var.module_var_resource_prefix}-bastion-nic0"
     subnetwork = local.target_vpc_subnet_id
