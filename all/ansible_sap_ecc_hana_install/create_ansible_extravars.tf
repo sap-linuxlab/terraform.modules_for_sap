@@ -172,7 +172,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002031.SAR'
       - 'IMDB_CLIENT20_016_26-80002082.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP37_5-20009701.SAR'
+      - 'SWPM10SP37_6-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
@@ -198,7 +198,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002046.SAR'
       - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP37_5-70002492.SAR'
+      - 'SWPM10SP37_6-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
@@ -262,7 +262,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002031.SAR'
       - 'IMDB_CLIENT20_016_26-80002082.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP37_5-20009701.SAR'
+      - 'SWPM10SP37_6-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
@@ -297,7 +297,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002046.SAR'
       - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP37_5-70002492.SAR'
+      - 'SWPM10SP37_6-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
@@ -369,7 +369,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_059_8-80002031.SAR'
       - 'IMDB_CLIENT20_016_26-80002082.SAR' # SAP HANA Client
-      - 'SWPM10SP37_5-20009701.SAR'
+      - 'SWPM10SP37_6-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
@@ -400,7 +400,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_059_8-80002046.SAR'
       - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
-      - 'SWPM10SP37_5-70002492.SAR'
+      - 'SWPM10SP37_6-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
