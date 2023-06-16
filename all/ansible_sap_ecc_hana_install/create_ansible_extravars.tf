@@ -172,13 +172,13 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002031.SAR'
       - 'IMDB_CLIENT20_016_26-80002082.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP37_6-20009701.SAR'
+      - 'SWPM10SP38_0-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002572.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT51_51-20009394.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP16_8-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51050708_1' # SAP ERP 6.0 EHP8 Installation Export 1/4, Self-extract RAR EXE
       - '51050708_2'
@@ -198,13 +198,13 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002046.SAR'
       - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP37_6-70002492.SAR'
+      - 'SWPM10SP38_0-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002629.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT58_58-80004831.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP16_8-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51050708_1' # SAP ERP 6.0 EHP8 Installation Export 1/4, Self-extract RAR EXE
       - '51050708_2'
@@ -262,13 +262,13 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002031.SAR'
       - 'IMDB_CLIENT20_016_26-80002082.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP37_6-20009701.SAR'
+      - 'SWPM10SP38_0-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002572.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT51_51-20009394.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP16_8-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51052029_1' # IDES FOR SAP ERP 6.0 EHP8 - INSTALL. EXP. HANA DB 1/21
       - '51052029_2'
@@ -297,13 +297,13 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_059_8-80002046.SAR'
       - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP37_6-70002492.SAR'
+      - 'SWPM10SP38_0-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002629.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT58_58-80004831.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP16_8-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51052029_1' # IDES FOR SAP ERP 6.0 EHP8 - INSTALL. EXP. HANA DB 1/21
       - '51052029_2'
@@ -369,7 +369,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPCAR_1115-70006178.EXE'
       - 'IMDB_SERVER20_059_8-80002031.SAR'
       - 'IMDB_CLIENT20_016_26-80002082.SAR' # SAP HANA Client
-      - 'SWPM10SP37_6-20009701.SAR'
+      - 'SWPM10SP38_0-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
@@ -400,7 +400,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_059_8-80002046.SAR'
       - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
-      - 'SWPM10SP37_6-70002492.SAR'
+      - 'SWPM10SP38_0-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
