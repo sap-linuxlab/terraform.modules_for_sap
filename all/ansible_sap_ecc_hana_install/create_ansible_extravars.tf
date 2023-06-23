@@ -178,7 +178,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002572.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT51_51-20009394.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_1-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51050708_1' # SAP ERP 6.0 EHP8 Installation Export 1/4, Self-extract RAR EXE
       - '51050708_2'
@@ -204,7 +204,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002629.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT58_58-80004831.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_1-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51050708_1' # SAP ERP 6.0 EHP8 Installation Export 1/4, Self-extract RAR EXE
       - '51050708_2'
@@ -268,7 +268,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002572.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT51_51-20009394.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_1-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51052029_1' # IDES FOR SAP ERP 6.0 EHP8 - INSTALL. EXP. HANA DB 1/21
       - '51052029_2'
@@ -303,7 +303,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002629.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT58_58-80004831.SAR' # SAP Host Agent 7.22
-      - 'SUM20SP17_0-80002470.SAR' # SUM 2.0 SP15 Patch 5
+      - 'SUM20SP17_1-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
       - '51052029_1' # IDES FOR SAP ERP 6.0 EHP8 - INSTALL. EXP. HANA DB 1/21
       - '51052029_2'
