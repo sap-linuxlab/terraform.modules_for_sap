@@ -270,27 +270,8 @@ sap_swpm_templates_install_dictionary:
       - 'SAPHOSTAGENT51_51-20009394.SAR' # SAP Host Agent 7.22
       - 'SUM20SP15_5-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
-      - '51052029_1' # IDES FOR SAP ERP 6.0 EHP8 - INSTALL. EXP. HANA DB 1/21
-      - '51052029_2'
-      - '51052029_3'
-      - '51052029_4'
-      - '51052029_5'
-      - '51052029_6'
-      - '51052029_7'
-      - '51052029_8'
-      - '51052029_9'
-      - '51052029_10'
-      - '51052029_11'
-      - '51052029_12'
-      - '51052029_13'
-      - '51052029_14'
-      - '51052029_15'
-      - '51052029_16'
-      - '51052029_17'
-      - '51052029_18'
-      - '51052029_19'
-      - '51052029_20'
-      - '51052029_21'
+      - '51057073_1' # IDES for SAP ERP 6.0 EHP8 on HANA (1/2)
+      - '51057073_2'
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
@@ -305,27 +286,8 @@ sap_swpm_templates_install_dictionary:
       - 'SAPHOSTAGENT58_58-80004831.SAR' # SAP Host Agent 7.22
       - 'SUM20SP15_5-80002470.SAR' # SUM 2.0 SP15 Patch 5
       - 'SAPKD75083' # SPAM/SAINT Update - Version 750/0083
-      - '51052029_1' # IDES FOR SAP ERP 6.0 EHP8 - INSTALL. EXP. HANA DB 1/21
-      - '51052029_2'
-      - '51052029_3'
-      - '51052029_4'
-      - '51052029_5'
-      - '51052029_6'
-      - '51052029_7'
-      - '51052029_8'
-      - '51052029_9'
-      - '51052029_10'
-      - '51052029_11'
-      - '51052029_12'
-      - '51052029_13'
-      - '51052029_14'
-      - '51052029_15'
-      - '51052029_16'
-      - '51052029_17'
-      - '51052029_18'
-      - '51052029_19'
-      - '51052029_20'
-      - '51052029_21'
+      - '51057073_1' # IDES for SAP ERP 6.0 EHP8 on HANA (1/2)
+      - '51057073_2'
 
 
   # SAP Business Suite 7i 2013 Support Release 2 > EHP7 for SAP ERP 6.0 ABAP Support Release 2
