@@ -161,11 +161,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_066_0-80002031.SAR'
+      - 'IMDB_SERVER20_067_2-80002031.SAR'
       - 'IMDB_LCAPPS_2066_0-20010426.SAR'
       - 'IMDB_AFL20_066_0-80001894.SAR'
-      - 'IMDB_CLIENT20_015_19-80002082.SAR' # SAP HANA Client
-      - 'SWPM20SP13_4-80003424.SAR'
+      - 'IMDB_CLIENT20_015_22-80002082.SAR' # SAP HANA Client
+      - 'SWPM20SP15_4-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_51-70006642.SAR' # Kernel Part I (789 Patch 51)
@@ -174,8 +174,8 @@ sap_swpm_templates_install_dictionary:
       - 'S4CORE107_INST_EXPORT_1.zip'
       - 'S4CORE107_INST_EXPORT_2.zip'
       - 'S4CORE107_INST_EXPORT_3.zip'
-      - 'S4CORE107_INST_EXPORT_4.zip'
-      - 'S4CORE107_INST_EXPORT_5.zip'
+      - '19118000000000007816'
+      - '19118000000000007817'
       - 'S4CORE107_INST_EXPORT_6.zip'
       - 'S4CORE107_INST_EXPORT_7.zip'
       - 'S4CORE107_INST_EXPORT_8.zip'
@@ -190,8 +190,8 @@ sap_swpm_templates_install_dictionary:
       - 'S4CORE107_INST_EXPORT_17.zip'
       - 'S4CORE107_INST_EXPORT_18.zip'
       - 'S4CORE107_INST_EXPORT_19.zip'
-      - 'S4CORE107_INST_EXPORT_20.zip'
-      - 'S4CORE107_INST_EXPORT_21.zip'
+      - '19118000000000007803'
+      - '19118000000000007804'
       - 'S4CORE107_INST_EXPORT_22.zip'
       - 'S4CORE107_INST_EXPORT_23.zip'
       - 'S4CORE107_INST_EXPORT_24.zip'
@@ -209,11 +209,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_066_0-80002046.SAR'
+      - 'IMDB_SERVER20_067_2-80002046.SAR'
       - 'IMDB_LCAPPS_2066_0-80002183.SAR'
       - 'IMDB_AFL20_066_0-80002045.SAR'
-      - 'IMDB_CLIENT20_015_19-80002095.SAR' # SAP HANA Client
-      - 'SWPM20SP13_4-80003426.SAR'
+      - 'IMDB_CLIENT20_015_22-80002095.SAR' # SAP HANA Client
+      - 'SWPM20SP15_4-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_51-70006667.SAR' # Kernel Part I (789 Patch 51)
@@ -222,8 +222,8 @@ sap_swpm_templates_install_dictionary:
       - 'S4CORE107_INST_EXPORT_1.zip'
       - 'S4CORE107_INST_EXPORT_2.zip'
       - 'S4CORE107_INST_EXPORT_3.zip'
-      - 'S4CORE107_INST_EXPORT_4.zip'
-      - 'S4CORE107_INST_EXPORT_5.zip'
+      - '19118000000000007816'
+      - '19118000000000007817'
       - 'S4CORE107_INST_EXPORT_6.zip'
       - 'S4CORE107_INST_EXPORT_7.zip'
       - 'S4CORE107_INST_EXPORT_8.zip'
@@ -238,8 +238,8 @@ sap_swpm_templates_install_dictionary:
       - 'S4CORE107_INST_EXPORT_17.zip'
       - 'S4CORE107_INST_EXPORT_18.zip'
       - 'S4CORE107_INST_EXPORT_19.zip'
-      - 'S4CORE107_INST_EXPORT_20.zip'
-      - 'S4CORE107_INST_EXPORT_21.zip'
+      - '19118000000000007803'
+      - '19118000000000007804'
       - 'S4CORE107_INST_EXPORT_22.zip'
       - 'S4CORE107_INST_EXPORT_23.zip'
       - 'S4CORE107_INST_EXPORT_24.zip'
@@ -287,11 +287,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_066_0-80002031.SAR'
+      - 'IMDB_SERVER20_067_2-80002031.SAR'
       - 'IMDB_LCAPPS_2066_0-20010426.SAR'
       - 'IMDB_AFL20_066_0-80001894.SAR'
-      - 'IMDB_CLIENT20_015_19-80002082.SAR' # SAP HANA Client
-      - 'SWPM20SP13_4-80003424.SAR'
+      - 'IMDB_CLIENT20_015_22-80002082.SAR' # SAP HANA Client
+      - 'SWPM20SP15_4-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005374.SAR' # Kernel Part I (785 Patch 100)
@@ -303,7 +303,7 @@ sap_swpm_templates_install_dictionary:
       - 'S4CORE106_INST_EXPORT_4.zip'
       - 'S4CORE106_INST_EXPORT_5.zip'
       - 'S4CORE106_INST_EXPORT_6.zip'
-      - 'S4CORE106_INST_EXPORT_7.zip'
+      - '19118000000000006110'
       - 'S4CORE106_INST_EXPORT_8.zip'
       - 'S4CORE106_INST_EXPORT_9.zip'
       - 'S4CORE106_INST_EXPORT_10.zip'
@@ -329,11 +329,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_066_0-80002046.SAR'
+      - 'IMDB_SERVER20_067_2-80002046.SAR'
       - 'IMDB_LCAPPS_2066_0-80002183.SAR'
       - 'IMDB_AFL20_066_0-80002045.SAR'
-      - 'IMDB_CLIENT20_015_19-80002095.SAR' # SAP HANA Client
-      - 'SWPM20SP13_4-80003426.SAR'
+      - 'IMDB_CLIENT20_015_22-80002095.SAR' # SAP HANA Client
+      - 'SWPM20SP15_4-80003426.SAR'
       - 'igsexe_1-70005446.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_100-80005509.SAR' # Kernel Part I (785 Patch 100)
@@ -345,7 +345,7 @@ sap_swpm_templates_install_dictionary:
       - 'S4CORE106_INST_EXPORT_4.zip'
       - 'S4CORE106_INST_EXPORT_5.zip'
       - 'S4CORE106_INST_EXPORT_6.zip'
-      - 'S4CORE106_INST_EXPORT_7.zip'
+      - '19118000000000006110'
       - 'S4CORE106_INST_EXPORT_8.zip'
       - 'S4CORE106_INST_EXPORT_9.zip'
       - 'S4CORE106_INST_EXPORT_10.zip'

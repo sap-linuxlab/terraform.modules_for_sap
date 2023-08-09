@@ -164,28 +164,28 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_066_0-80002031.SAR'
+      - 'IMDB_SERVER20_067_2-80002031.SAR'
 #      - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP36_4-20009701.SAR'
+      - 'SWPM10SP38_3-20009701.SAR'
       - 'igsexe_12-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002572.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_015_19-80002082.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_015_22-80002082.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-20009394.SAR'
       - '51051806_1' # NetWeaver AS ABAP 7.52 Innovation Pkg - Installation Exp 1/2, RAR
       - '51051806_2' # NetWeaver AS ABAP 7.52 Innovation Pkg - Installation Exp 2/2, RAR
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_066_0-80002046.SAR'
+      - 'IMDB_SERVER20_067_2-80002046.SAR'
 #      - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP36_4-70002492.SAR'
+      - 'SWPM10SP38_3-70002492.SAR'
       - 'igsexe_12-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002629.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_015_19-80002095.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_015_22-80002095.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-70002261.SAR'
       - '51051806_1' # NetWeaver AS ABAP 7.52 Innovation Pkg - Installation Exp 1/2, RAR
       - '51051806_2' # NetWeaver AS ABAP 7.52 Innovation Pkg - Installation Exp 2/2, RAR
@@ -227,14 +227,14 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_066_0-80002031.SAR'
+      - 'IMDB_SERVER20_067_2-80002031.SAR'
 #      - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP36_4-20009701.SAR'
+      - 'SWPM10SP38_3-20009701.SAR'
       - 'igsexe_12-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002572.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_015_19-80002082.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_015_22-80002082.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-20009394.SAR'
       - '51050829_3' # SAP Netweaver 7.5 Installation Export, ZIP
 #      - '51050829_4' # NW 7.5 Language 1/2
@@ -246,14 +246,14 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_066_0-80002046.SAR'
+      - 'IMDB_SERVER20_067_2-80002046.SAR'
 #      - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP36_4-70002492.SAR'
+      - 'SWPM10SP38_3-70002492.SAR'
       - 'igsexe_12-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753 Patch 800)
       - 'SAPEXEDB_800-80002629.SAR' # Kernel Part II (753 Patch 800)
-      - 'IMDB_CLIENT20_015_19-80002095.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_015_22-80002095.SAR' # SAP HANA Client
       - 'SAPHOSTAGENT51_51-70002261.SAR'
       - '51050829_3' # SAP Netweaver 7.5 Installation Export, ZIP
 #      - '51050829_4' # NW 7.5 Language 1/2

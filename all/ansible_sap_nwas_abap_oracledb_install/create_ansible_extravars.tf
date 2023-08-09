@@ -153,10 +153,10 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002605.SAR' # Kernel Part II (753 Patch 1000), Oracle DB
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP36_4-20009701.SAR'
+      - 'SWPM10SP38_3-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'DBATL740O11_48-80002605.SAR' # DBATOOLS Package for Oracle 11g, 12c and higher, Support Package SAP KERNEL 7.53 64-BIT UNICODE Linux on x86_64 64bit ORACLE
+      - 'DBATL740O11_49-80002605.SAR' # DBATOOLS Package for Oracle 11g, 12c and higher, Support Package SAP KERNEL 7.53 64-BIT UNICODE Linux on x86_64 64bit ORACLE
 #      - '51047708'   # Oracle 12.1 RDBMS Linux on x86_64 64bit (AKA. Oracle Database 12c Release 1), ZIP. Compatible with RHEL 7.x and SLES 12.x
 #      - '51052773_1' # Oracle 12.2.0.1 RDBMS Linux on x86_64 64bit 1/3, RAR EXE (AKA. Oracle Database 12c Release 2). Compatible with RHEL 7.x and SLES 12.x
 #      - '51052773_2' # Oracle 12.2.0.1 RDBMS Linux on x86_64 64bit 2/3, RAR. Compatible with RHEL 7.x and SLES 12.x
@@ -214,10 +214,10 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002605.SAR' # Kernel Part II (753 Patch 1000), Oracle DB
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP36_4-20009701.SAR'
+      - 'SWPM10SP38_3-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'DBATL740O11_48-80002605.SAR' # DBATOOLS Package for Oracle 11g, 12c and higher, Support Package SAP KERNEL 7.53 64-BIT UNICODE Linux on x86_64 64bit ORACLE
+      - 'DBATL740O11_49-80002605.SAR' # DBATOOLS Package for Oracle 11g, 12c and higher, Support Package SAP KERNEL 7.53 64-BIT UNICODE Linux on x86_64 64bit ORACLE
 #      - '51047708'   # Oracle 12.1 RDBMS Linux on x86_64 64bit (AKA. Oracle Database 12c Release 1), ZIP. Compatible with RHEL 7.x and SLES 12.x
 #      - '51052773_1' # Oracle 12.2.0.1 RDBMS Linux on x86_64 64bit 1/3, RAR EXE (AKA. Oracle Database 12c Release 2). Compatible with RHEL 7.x and SLES 12.x
 #      - '51052773_2' # Oracle 12.2.0.1 RDBMS Linux on x86_64 64bit 2/3, RAR. Compatible with RHEL 7.x and SLES 12.x
