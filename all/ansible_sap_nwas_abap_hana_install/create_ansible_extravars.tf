@@ -164,7 +164,7 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_067_2-80002031.SAR'
+      - 'IMDB_SERVER20_067_3-80002031.SAR'
 #      - 'VCH202000_2059_0-80005463.SAR'
       - 'SWPM10SP38_4-20009701.SAR'
       - 'igsexe_12-80003187.sar' # IGS 7.53
@@ -178,7 +178,7 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_067_2-80002046.SAR'
+      - 'IMDB_SERVER20_067_3-80002046.SAR'
 #      - 'VCH202000_2059_0-80005464.SAR'
       - 'SWPM10SP38_4-70002492.SAR'
       - 'igsexe_12-80003246.sar' # IGS 7.53
@@ -227,7 +227,7 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_067_2-80002031.SAR'
+      - 'IMDB_SERVER20_067_3-80002031.SAR'
 #      - 'VCH202000_2059_0-80005463.SAR'
       - 'SWPM10SP38_4-20009701.SAR'
       - 'igsexe_12-80003187.sar' # IGS 7.53
@@ -246,7 +246,7 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_067_2-80002046.SAR'
+      - 'IMDB_SERVER20_067_3-80002046.SAR'
 #      - 'VCH202000_2059_0-80005464.SAR'
       - 'SWPM10SP38_4-70002492.SAR'
       - 'igsexe_12-80003246.sar' # IGS 7.53
