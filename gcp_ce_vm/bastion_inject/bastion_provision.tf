@@ -3,7 +3,7 @@
 
 resource "google_compute_instance" "bastion_host" {
   name         = "${var.module_var_resource_prefix}-bastion"
-  machine_type = "e2-micro"
+  machine_type = "e2-standard-2"
   zone         = var.module_var_gcp_region_zone
 
   boot_disk {
