@@ -131,7 +131,7 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM10SP38_5-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'SYBCTRL_1227-80002616.SAR'
+      - 'SYBCTRL_1229-80002616.SAR'
       - '51056911_1' # SAP ASE 16.0.03.14 RDBMS Linux on x86_64 64bit
       - 'ASEBC16004P_3-20012477.SAR' # SAP ASE 16.0 FOR BUS. SUITE DBCLIENT SP04 Patch Level x (e.g. 03)
       - '51051806_1' # NetWeaver AS ABAP 7.52 Innovation Pkg - Installation Exp 1/2, RAR
@@ -183,7 +183,7 @@ sap_swpm_templates_install_dictionary:
       - 'SWPM10SP38_5-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'SYBCTRL_1227-80002616.SAR'
+      - 'SYBCTRL_1229-80002616.SAR'
       - '51056911_1' # SAP ASE 16.0.03.14 RDBMS Linux on x86_64 64bit
       - 'ASEBC16004P_3-20012477.SAR' # SAP ASE 16.0 FOR BUS. SUITE DBCLIENT SP04 Patch Level x (e.g. 03)
       - '51050829_3' # SAP Netweaver 7.5 Installation Export, ZIP
