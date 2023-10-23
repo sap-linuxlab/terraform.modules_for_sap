@@ -18,30 +18,35 @@ resource "null_resource" "squid_files" {
 # Adapt to list your (internal) IP networks from where browsing
 # should be allowed
 acl localnet src 0.0.0.1-0.255.255.255	# RFC 1122 "this" network (LAN)
-acl localnet src 10.0.0.0/8		# RFC 1918 local private network (LAN)
-acl localnet src 100.64.0.0/10		# RFC 6598 shared address space (CGN)
-acl localnet src 169.254.0.0/16 	# RFC 3927 link-local (directly plugged) machines
-acl localnet src 172.16.0.0/12		# RFC 1918 local private network (LAN)
-acl localnet src 192.168.0.0/16		# RFC 1918 local private network (LAN)
-acl localnet src fc00::/7       	# RFC 4193 local private network range
-acl localnet src fe80::/10      	# RFC 4291 link-local (directly plugged) machines
+acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
+acl localnet src 172.16.0.0/12          # RFC 1918 local private network (LAN)
+acl localnet src 192.168.0.0/16         # RFC 1918 local private network (LAN)
+acl localnet src fc00::/7               # RFC 4193 local private network range
+acl localnet src 169.254.0.0/16 	      # RFC 3927 link-local (directly plugged) machines
+acl localnet src fe80::/10              # RFC 4291 link-local (directly plugged) machines
+acl localnet src 100.64.0.0/10		      # RFC 6598 shared address space (CGN)
+acl localnet src all
 
-acl SSL_ports port 443
-acl Safe_ports port 80		# http
-acl Safe_ports port 21		# ftp
-acl Safe_ports port 443		# https
-acl Safe_ports port 70		# gopher
-acl Safe_ports port 210		# wais
-acl Safe_ports port 1025-65535	# unregistered ports
-acl Safe_ports port 280		# http-mgmt
-acl Safe_ports port 488		# gss-http
-acl Safe_ports port 591		# filemaker
-acl Safe_ports port 777		# multiling http
+acl FTP_ports port 21 20
+acl SSL_ports port 443          # ssl
+acl SSL_ports port 8443         # ssl (os package mirrors)
+acl Safe_ports port 22          # ssh
+acl Safe_ports port 80          # http
+acl Safe_ports port 443         # https
+acl Safe_ports port 8443        # https alt
+acl Safe_ports port 70          # gopher
+acl Safe_ports port 210         # wais
+acl Safe_ports port 280         # http-mgmt
+acl Safe_ports port 488         # gss-http
+acl Safe_ports port 591         # filemaker
+acl Safe_ports port 777         # multiling http
+#acl Safe_ports port 1025-65535  # unregistered ports
 acl CONNECT method CONNECT
 
 #
 # Recommended minimum Access Permission configuration:
 #
+
 # Deny requests to certain unsafe ports
 http_access deny !Safe_ports
 
@@ -70,8 +75,8 @@ http_access allow localhost
 # And finally deny all other access to this proxy
 #http_access deny all
 
-# ENABLE: public internet forward proxy for HTTP/HTTPS
-http_access allow all
+# OVERRIDE: public internet forward proxy for HTTP/HTTPS
+#http_access allow all
 
 # Squid normally listens to port 3128
 http_port ${var.module_var_proxy_port_squid}
