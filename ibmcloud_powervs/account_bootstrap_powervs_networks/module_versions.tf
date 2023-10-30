@@ -24,6 +24,8 @@ terraform {
 
 #provider "ibm" {
 #
+# alias = "standard"
+#
 # Define Provider inputs manually
 #  ibmcloud_api_key = "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 #
@@ -34,5 +36,22 @@ terraform {
 # from the Cloud Connection credentials (by using Environment Variables)
 #
 # If using IBM Cloud Schematics, the Provider declaration values are populated automatically
+#
+#
+#  region = local.ibmcloud_region
+#
+#  zone = lower(var.ibmcloud_powervs_location) // Required for IBM Power VS only
+#
+#}
+
+#provider "ibm" {
+#
+# alias = "powervs_secure"
+#
+#  ibmcloud_api_key = var.ibmcloud_api_key
+#
+#  region = local.ibmcloud_powervs_region
+#
+#  zone = lower(var.ibmcloud_powervs_location) // Required for IBM Power VS only
 #
 #}
