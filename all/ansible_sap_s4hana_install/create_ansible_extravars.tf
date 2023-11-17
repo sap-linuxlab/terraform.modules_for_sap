@@ -164,7 +164,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_067_3-80002031.SAR'
       - 'IMDB_LCAPPS_2066_0-20010426.SAR'
       - 'IMDB_AFL20_066_0-80001894.SAR'
-      - 'IMDB_CLIENT20_018_24-80002082.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_018_27-80002082.SAR' # SAP HANA Client
       - 'SWPM20SP16_0-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
@@ -290,7 +290,7 @@ sap_swpm_templates_install_dictionary:
       - 'IMDB_SERVER20_067_3-80002031.SAR'
       - 'IMDB_LCAPPS_2066_0-20010426.SAR'
       - 'IMDB_AFL20_066_0-80001894.SAR'
-      - 'IMDB_CLIENT20_018_24-80002082.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_018_27-80002082.SAR' # SAP HANA Client
       - 'SWPM20SP16_0-80003424.SAR'
       - 'igsexe_1-70005417.sar' # IGS 7.81
       - 'igshelper_17-10010245.sar'
