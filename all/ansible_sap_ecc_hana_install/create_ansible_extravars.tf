@@ -196,7 +196,7 @@ sap_swpm_templates_install_dictionary:
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_059_10-80002046.SAR'
-      - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_018_27-80002095.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005464.SAR'
       - 'SWPM10SP39_1-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
@@ -276,7 +276,7 @@ sap_swpm_templates_install_dictionary:
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_059_10-80002046.SAR'
-      - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_018_27-80002095.SAR' # SAP HANA Client
       - 'VCH202000_2059_0-80005464.SAR'
       - 'SWPM10SP39_1-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
@@ -361,7 +361,7 @@ sap_swpm_templates_install_dictionary:
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
       - 'IMDB_SERVER20_059_10-80002046.SAR'
-      - 'IMDB_CLIENT20_016_26-80002095.SAR' # SAP HANA Client
+      - 'IMDB_CLIENT20_018_27-80002095.SAR' # SAP HANA Client
       - 'SWPM10SP39_1-70002492.SAR'
       - 'igsexe_13-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
