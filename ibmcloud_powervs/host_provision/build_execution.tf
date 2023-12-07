@@ -7,8 +7,7 @@ resource "null_resource" "execute_os_scripts" {
     null_resource.build_script_os_prepare,
     null_resource.build_script_web_proxy_noninteractive,
     null_resource.os_subscription_files,
-    null_resource.dns_resolv_files,
-    null_resource.build_script_fs_init
+    null_resource.dns_resolv_files
   ]
 
   # Execute, including all files provisioned by Terraform into $HOME
@@ -23,8 +22,7 @@ resource "null_resource" "execute_os_scripts" {
       "echo 'Change DNS in resolv.conf'",
       "if [ -f /tmp/resolv.conf ]; then mv /etc/resolv.conf /etc/resolv.conf.backup && mv /tmp/resolv.conf /etc/ ; fi",
       "chmod 644 /etc/resolv.conf",
-      "$HOME/terraform_dig.sh",
-      "$HOME/terraform_fs_init.sh"
+      "$HOME/terraform_dig.sh"
     ]
   }
 

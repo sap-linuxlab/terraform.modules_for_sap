@@ -29,17 +29,6 @@ resource "ibm_is_instance" "virtual_server" {
     name = "${var.module_var_virtual_server_hostname}-volume-boot-0"
   }
 
-  volumes = flatten([
-    var.module_var_disk_volume_type_hana_data == "custom" ? ibm_is_volume.block_volume_hana_data_custom.*.id : ibm_is_volume.block_volume_hana_data_tiered.*.id,
-    var.module_var_disk_volume_type_hana_log == "custom" ? ibm_is_volume.block_volume_hana_log_custom.*.id : ibm_is_volume.block_volume_hana_log_tiered.*.id,
-    var.module_var_disk_volume_type_hana_shared == "custom" ? ibm_is_volume.block_volume_hana_shared_custom.*.id : ibm_is_volume.block_volume_hana_shared_tiered.*.id,
-    var.module_var_disk_volume_type_anydb == "custom" ? ibm_is_volume.block_volume_anydb_custom.*.id : ibm_is_volume.block_volume_anydb_tiered.*.id,
-    ibm_is_volume.block_volume_usr_sap_tiered.*.id,
-    ibm_is_volume.block_volume_sapmnt_tiered.*.id,
-    ibm_is_volume.block_volume_swap_tiered.*.id,
-    ibm_is_volume.block_volume_software_tiered.id
-  ])
-
   metadata_service {
     enabled = true
     protocol = "https"
@@ -51,5 +40,20 @@ resource "ibm_is_instance" "virtual_server" {
     create = "30m"
     delete = "30m"
   }
+
+}
+
+
+resource "ibm_is_instance_volume_attachment" "block_volume_attachment" {
+
+  for_each    = ibm_is_volume.block_volume_provision
+
+  instance    = ibm_is_instance.virtual_server.id
+
+  name        = each.value.name
+  volume      = each.value.id
+
+  delete_volume_on_attachment_delete = false
+  delete_volume_on_instance_delete   = true
 
 }

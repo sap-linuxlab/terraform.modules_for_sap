@@ -4,16 +4,9 @@
 resource "null_resource" "execute_os_scripts" {
 
   depends_on = [
-    null_resource.build_script_fs_init,
     null_resource.build_script_os_prepare,
     null_resource.os_subscription_files,
-    openstack_compute_volume_attach_v2.volume_attachment_hana_data,
-    openstack_compute_volume_attach_v2.volume_attachment_hana_log,
-    openstack_compute_volume_attach_v2.volume_attachment_hana_shared,
-    openstack_compute_volume_attach_v2.volume_attachment_usr_sap,
-    openstack_compute_volume_attach_v2.volume_attachment_sapmnt,
-    openstack_compute_volume_attach_v2.volume_attachment_swap,
-    openstack_compute_volume_attach_v2.volume_attachment_software
+    openstack_compute_volume_attach_v2.block_volume_attachment
   ]
 
   connection {
@@ -36,8 +29,7 @@ resource "null_resource" "execute_os_scripts" {
       "chmod +x $HOME/terraform_*",
       "$HOME/terraform_os_prep.sh",
       "$HOME/terraform_web_proxy_noninteractive.sh",
-      "$HOME/terraform_os_subscriptions.sh",
-      "$HOME/terraform_fs_init.sh"
+      "$HOME/terraform_os_subscriptions.sh"
     ]
   }
 

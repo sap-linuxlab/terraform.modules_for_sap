@@ -23,7 +23,7 @@ resource "ibm_pi_instance" "host_via_certified_profile" {
   pi_image_id     = ibm_pi_image.host_os_image.image_id
   pi_storage_type = "tier1" // tier1 required for SAP-certified Profiles
 
-  pi_key_pair_name     = ibm_pi_key.host_ssh.key_id
+  pi_key_pair_name     = ibm_pi_key.host_ssh.name
   pi_cloud_instance_id = var.module_var_ibm_power_group_guid
   pi_pin_policy        = "none"
   pi_health_status     = "OK"
@@ -32,23 +32,21 @@ resource "ibm_pi_instance" "host_via_certified_profile" {
     network_id = var.module_var_power_group_networks[0]
   }
 
-  pi_volume_ids = flatten([
-    ibm_pi_volume.block_volume_hana_data_tiered.*.volume_id,
-    ibm_pi_volume.block_volume_hana_log_tiered.*.volume_id,
-    ibm_pi_volume.block_volume_hana_shared_tiered.*.volume_id,
-    ibm_pi_volume.block_volume_anydb_tiered.*.volume_id,
-    ibm_pi_volume.block_volume_usr_sap_tiered.*.volume_id,
-    ibm_pi_volume.block_volume_sapmnt_tiered.*.volume_id,
-    ibm_pi_volume.block_volume_swap_tiered.*.volume_id,
-    ibm_pi_volume.block_volume_software_tiered.*.volume_id,
-  ])
-
-
   # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {
     create = "30m"
     delete = "30m"
   }
+}
+
+
+# Attach block disk volumes to host
+resource "ibm_pi_volume_attach" "block_volume_attachment" {
+  for_each              = ibm_pi_volume.block_volume_provision
+
+  pi_cloud_instance_id  = var.module_var_ibm_power_group_guid
+  pi_instance_id        = ibm_pi_instance.host_via_certified_profile.id
+  pi_volume_id          = each.value.volume_id
 }
 
 
