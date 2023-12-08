@@ -6,7 +6,7 @@ resource "ibm_is_share" "file_storage_sapmnt" {
   zone = local.target_vpc_availability_zone
 
   size = 2048
-  profile = "tier-3iops"
+  profile = "dp2"
 
 }
 
