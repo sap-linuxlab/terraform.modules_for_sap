@@ -10,7 +10,7 @@ resource "ibm_is_share" "file_storage_sapmnt" {
 
 }
 
-resource "ibm_is_share_target" "file_storage_attach_sapmnt" {
+resource "ibm_is_share_mount_target" "file_storage_attach_sapmnt" {
   count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
   name = "${var.module_var_resource_prefix}-nfs-sapmnt-attach"
 
