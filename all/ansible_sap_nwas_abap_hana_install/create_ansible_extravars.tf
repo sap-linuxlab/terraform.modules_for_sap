@@ -263,5 +263,18 @@ sap_swpm_templates_install_dictionary:
 #      - '51050829_8' # NW 7.5 Upgrade Export Part II 1/2
 #      - '51050829_9' # NW 7.5 Upgrade Export Part II 2/2
 
+
+sap_storage_setup_sid: "${var.module_var_sap_swpm_sid}"
+
+# hana_primary, hana_secondary, nwas_abap_ascs, nwas_abap_ers, nwas_abap_pas, nwas_abap_aas, nwas_java_scs, nwas_java_ers
+sap_storage_setup_host_type:
+  - hana_primary
+  - nwas_abap_ascs
+  - nwas_abap_pas
+
+# Use Ansible Task to convert JSON (as string) to sap_storage_setup_definition Dictionary
+terraform_host_specification_storage_definition: "{{ '${replace(jsonencode(var.module_var_terraform_host_specification_storage_definition),"\"","\\\"")}' | from_json }}"
+
+
 EOF
 }
