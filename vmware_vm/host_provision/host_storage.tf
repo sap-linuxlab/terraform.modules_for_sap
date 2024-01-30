@@ -9,7 +9,7 @@ resource "vsphere_virtual_disk" "virtual_disk_provision" {
       [ for storage_item in var.module_var_storage_definition:
         [ for index, count in range(0,try(storage_item.disk_count,1)) :
           tomap({"name" = replace("${storage_item.name}-${index}","_","-"), "disk_type" = try(storage_item.disk_type, null), "disk_size" = storage_item.disk_size, "disk_iops" = try(storage_item.disk_iops,null)})
-        ]
+        ] if try(storage_item.swap_path,"") == ""
       ]
     ):
     disk.name => disk
