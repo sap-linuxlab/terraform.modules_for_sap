@@ -1,65 +1,8 @@
 ---
-# Ansible Playbook for SAP S/4HANA distributed installation using SAP Maintenance Planner 
+# Ansible Playbook for SAP S/4HANA distributed installation using SAP Maintenance Planner
 
 # Use include_role inside Task block, instead of using roles declaration or Task block with import_roles.
 # This ensures Ansible Roles, and the tasks within, will be parsed in sequence instead of parsing at Playbook initialisation
-
-
-#### Preflight checks ####
-
-#- name: Ansible Play for verifying infrastructure for distributed installation
-#  hosts: nwas_ascs, nwas_pas, nwas_aas
-#  become: true
-#  any_errors_fatal: true # https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html#aborting-a-play-on-all-hosts
-#  tasks:
-
-#    - name: Check SAP Mount Directory (/sapmnt) is NFS on each SAP NetWeaver host
-
-#    - name: Ensure SAP Common Transport Directory symlink (/usr/sap/trans > /sapmnt/trans) exists
-
-#    - name: Check SAP Common Transport Directory is NFS on each SAP NetWeaver host
-
-#    - name: Check interconnectivity between hosts - SAP NetWeaver ASCS
-#32{{sap_swpm_ascs_instance_nr}}
-#36{{sap_swpm_ascs_instance_nr}}
-#39{{sap_swpm_ascs_instance_nr}}
-#5{{sap_swpm_ascs_instance_nr}}13
-#5{{sap_swpm_ascs_instance_nr}}14
-
-#    - name: Check interconnectivity between hosts - SAP NetWeaver PAS
-#32{{sap_swpm_pas_instance_nr}}
-#33{{sap_swpm_pas_instance_nr}}
-#48{{sap_swpm_pas_instance_nr}}
-#5{{sap_swpm_pas_instance_nr}}13
-#5{{sap_swpm_pas_instance_nr}}14
-#80{{sap_swpm_pas_instance_nr}}
-#443{{sap_swpm_pas_instance_nr}}
-
-#    - name: Check interconnectivity between hosts - SAP HANA
-#5{{sap_swpm_db_instance_nr}}13
-#5{{sap_swpm_db_instance_nr}}14
-#3{{sap_swpm_db_instance_nr}}06
-#3{{sap_swpm_db_instance_nr}}13
-#3{{sap_swpm_db_instance_nr}}15
-#80{{sap_swpm_db_instance_nr}}
-#43{{sap_swpm_db_instance_nr}}
-
-#    - name: Check interconnectivity between hosts - SAP Host Agent
-#1128
-#1129
-
-#    - name: Check interconnectivity between hosts - SAP HANA System Replication
-#4{{sap_swpm_db_instance_nr}}01
-#4{{sap_swpm_db_instance_nr}}02
-#4{{sap_swpm_db_instance_nr}}06
-#4{{sap_swpm_db_instance_nr}}03
-#4{{sap_swpm_db_instance_nr}}07
-#4{{sap_swpm_db_instance_nr}}40 - 4{{sap_swpm_db_instance_nr}}97
-#2224
-#3121
-#5404-5412
-
-
 
 - name: Ansible Play for ensuring rsync on all hosts
   hosts: hana_primary, nwas_ascs, nwas_pas, nwas_aas
