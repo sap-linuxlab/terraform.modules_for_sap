@@ -49,3 +49,7 @@ variable "module_var_sap_hana_install_instance_number" {
 variable "module_var_dry_run_test" {
   default = ""
 }
+
+variable "module_var_terraform_host_specification_storage_definition" {
+  default = {}
+}

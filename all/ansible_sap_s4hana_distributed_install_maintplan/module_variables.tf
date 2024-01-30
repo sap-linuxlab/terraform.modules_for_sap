@@ -87,3 +87,7 @@ variable "module_var_inventory_nwas_ascs" {}
 variable "module_var_inventory_nwas_pas" {}
 
 variable "module_var_inventory_nwas_aas" {}
+
+variable "module_var_terraform_host_specification_storage_definition" {
+  default = {}
+}
