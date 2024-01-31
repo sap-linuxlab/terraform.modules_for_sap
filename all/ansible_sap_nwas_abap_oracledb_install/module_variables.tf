@@ -76,3 +76,7 @@ variable "module_var_dry_run_test" {
 variable "module_var_filesystem_mount_path_anydb" {
   default = "/oracle"
 }
+
+variable "module_var_terraform_host_specification_storage_definition" {
+  default = {}
+}

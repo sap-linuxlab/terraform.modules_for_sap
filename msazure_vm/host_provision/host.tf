@@ -6,6 +6,8 @@ resource "azurerm_network_interface" "host_nic0" {
   resource_group_name = local.target_resource_group_name
   location            = var.module_var_az_location_region
 
+  enable_ip_forwarding = var.module_var_disable_ip_anti_spoofing // When disable the Anti IP Spoofing = true, then Enable IP Forwarding = true
+
   ip_configuration {
     primary                       = "true"
     name                          = "${var.module_var_host_name}-nic-0-link"
@@ -91,74 +93,12 @@ resource "azurerm_linux_virtual_machine" "host" {
 
 # Attach block disk volumes to host
 
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_hana_data" {
-  count = length(azurerm_managed_disk.block_volume_hana_data_voltype.*.id)
+resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment" {
+#  count = length([for vol in azurerm_managed_disk.block_volume : vol.name])
+  for_each = azurerm_managed_disk.block_volume
 
-  managed_disk_id    = azurerm_managed_disk.block_volume_hana_data_voltype[count.index].id
+  managed_disk_id    = each.value.id
   virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(10 + count.index)
+  lun                = tostring(10 + index(keys(azurerm_managed_disk.block_volume),each.key))  # Maximum LUN range is 63
   caching            = "None"
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_hana_log" {
-  count = length(azurerm_managed_disk.block_volume_hana_log_voltype.*.id)
-
-  managed_disk_id    = azurerm_managed_disk.block_volume_hana_log_voltype[count.index].id
-  virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(20 + count.index)
-  caching            = "None"
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_hana_shared" {
-  count = length(azurerm_managed_disk.block_volume_hana_shared_voltype.*.id)
-
-  managed_disk_id    = azurerm_managed_disk.block_volume_hana_shared_voltype[count.index].id
-  virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(30 + count.index)
-  caching            = "ReadOnly"
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_anydb" {
-  count = length(azurerm_managed_disk.block_volume_anydb_voltype.*.id)
-
-  managed_disk_id    = azurerm_managed_disk.block_volume_anydb_voltype[count.index].id
-  virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(40 + count.index)
-  caching            = "ReadOnly"
-}
-
-
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_usr_sap" {
-  count = length(azurerm_managed_disk.block_volume_usr_sap_voltype.*.id)
-
-  managed_disk_id    = azurerm_managed_disk.block_volume_usr_sap_voltype[count.index].id
-  virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(45 + count.index)
-  caching            = "ReadWrite"
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_sapmnt" {
-  count              = var.module_var_nfs_boolean_sapmnt ? 0 : length(azurerm_managed_disk.block_volume_sapmnt_voltype.*.id)
-
-  managed_disk_id    = azurerm_managed_disk.block_volume_sapmnt_voltype[count.index].id
-  virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(50 + count.index)
-  caching            = "ReadWrite"
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_swap" {
-  count = length(azurerm_managed_disk.block_volume_swap_voltype.*.id)
-
-  managed_disk_id    = azurerm_managed_disk.block_volume_swap_voltype[count.index].id
-  virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(55 + count.index)
-  caching            = "ReadWrite"
-}
-
-# Maximum LUN range is 63, set to last
-resource "azurerm_virtual_machine_data_disk_attachment" "volume_attachment_software" {
-  managed_disk_id    = azurerm_managed_disk.block_volume_software_voltype.id
-  virtual_machine_id = azurerm_linux_virtual_machine.host.id
-  lun                = tostring(63)
-  caching            = "ReadWrite"
 }

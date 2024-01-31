@@ -26,14 +26,7 @@ data "template_file" "cloud_init_user_data" {
 resource "vsphere_virtual_machine" "host_provision" {
 
   depends_on = [
-    vsphere_virtual_disk.virtual_disk_hana_data,
-    vsphere_virtual_disk.virtual_disk_hana_log,
-    vsphere_virtual_disk.virtual_disk_hana_shared,
-    vsphere_virtual_disk.virtual_disk_anydb,
-    vsphere_virtual_disk.virtual_disk_usr_sap,
-    vsphere_virtual_disk.virtual_disk_sapmnt,
-    vsphere_virtual_disk.virtual_disk_swap,
-    vsphere_virtual_disk.virtual_disk_software
+    vsphere_virtual_disk.virtual_disk_provision
   ]
 
   name                   = var.module_var_vmware_vm_hostname
@@ -89,7 +82,7 @@ resource "vsphere_virtual_machine" "host_provision" {
   dynamic "disk" {
 
     for_each = [
-      for virtual_disks in concat(vsphere_virtual_disk.virtual_disk_hana_data,vsphere_virtual_disk.virtual_disk_hana_log,vsphere_virtual_disk.virtual_disk_hana_shared,vsphere_virtual_disk.virtual_disk_anydb,vsphere_virtual_disk.virtual_disk_usr_sap,vsphere_virtual_disk.virtual_disk_sapmnt,vsphere_virtual_disk.virtual_disk_swap,vsphere_virtual_disk.virtual_disk_software) : {
+      for virtual_disks in concat(vsphere_virtual_disk.virtual_disk_provision) : {
         path = virtual_disks.vmdk_path
 #        size = virtual_disks.size
       }

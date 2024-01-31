@@ -12,5 +12,5 @@
 #}
 
 output "output_nfs_fqdn" {
-  value = "${azurerm_private_dns_a_record.dns_a_record_short.fqdn}:/${azapi_resource.storage_account_sap[0].name}/${azapi_resource.file_storage_sapmnt[0].name}"
+  value = try("${azurerm_private_dns_a_record.dns_a_record_short[0].fqdn}:/${azapi_resource.storage_account_sap[0].name}/${azapi_resource.file_storage_sapmnt[0].name}","")
 }

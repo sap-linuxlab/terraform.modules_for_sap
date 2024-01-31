@@ -23,7 +23,7 @@ jobs:
         terraform_module_ansible: [ansible_sap_bw4hana_install, ansible_sap_ecc_hana_install, ansible_sap_ecc_hana_system_copy_hdb, ansible_sap_ecc_ibmdb2_install, ansible_sap_ecc_oracledb_install, ansible_sap_ecc_sapase_install, ansible_sap_ecc_sapmaxdb_install, ansible_sap_hana_install, ansible_sap_nwas_abap_hana_install, ansible_sap_nwas_abap_ibmdb2_install, ansible_sap_nwas_abap_oracledb_install, ansible_sap_nwas_abap_sapase_install, ansible_sap_nwas_abap_sapmaxdb_install, ansible_sap_nwas_java_ibmdb2_install, ansible_sap_nwas_java_sapase_install, ansible_sap_s4hana_distributed_install_maintplan, ansible_sap_s4hana_install, ansible_sap_s4hana_install_maintplan, ansible_sap_s4hana_system_copy_hdb, ansible_sap_solman_sapase_install, ansible_sap_solman_saphana_install]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v4
         with:
           path: gh_repo
       - name: Ansible setup
@@ -72,6 +72,7 @@ jobs:
             echo 'import sys' >> python_module_fuzzy_call_script.py
             echo 'input_search_file=sys.argv[1]' >> python_module_fuzzy_call_script.py
             echo 'input_search_file_name_and_version_only=sys.argv[2]' >> python_module_fuzzy_call_script.py
+            echo 'from module_utils.sap_id_sso import sap_sso_login' >> python_module_fuzzy_call_script.py
             echo 'from module_utils.sap_launchpad_software_center_download_search_fuzzy import *' >> python_module_fuzzy_call_script.py
             echo "username='$sap_user_id'" >> python_module_fuzzy_call_script.py
             echo "password='$sap_user_id_password'" >> python_module_fuzzy_call_script.py

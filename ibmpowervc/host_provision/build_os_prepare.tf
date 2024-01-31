@@ -2,13 +2,7 @@
 resource "null_resource" "build_script_os_prepare" {
 
   depends_on = [
-    openstack_compute_volume_attach_v2.volume_attachment_hana_data,
-    openstack_compute_volume_attach_v2.volume_attachment_hana_log,
-    openstack_compute_volume_attach_v2.volume_attachment_hana_shared,
-    openstack_compute_volume_attach_v2.volume_attachment_usr_sap,
-    openstack_compute_volume_attach_v2.volume_attachment_sapmnt,
-    openstack_compute_volume_attach_v2.volume_attachment_swap,
-    openstack_compute_volume_attach_v2.volume_attachment_software
+    openstack_compute_volume_attach_v2.block_volume_attachment
   ]
 
   # Specify the ssh connection

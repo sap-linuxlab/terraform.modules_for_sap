@@ -81,3 +81,7 @@ variable "module_var_sap_swpm_template_selected" {}
 variable "module_var_dry_run_test" {
   default = ""
 }
+
+variable "module_var_terraform_host_specification_storage_definition" {
+  default = {}
+}

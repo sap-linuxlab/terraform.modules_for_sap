@@ -54,93 +54,13 @@ resource "aws_instance" "host" {
 }
 
 
-
 # Attach EBS block disk volumes to host
+# AWS EBS does not accept /dev/sdaa.
+resource "aws_volume_attachment" "block_volume_attachment" {
+#  count       = length(aws_ebs_volume.block_volume_provision.*.id)
+  for_each    = aws_ebs_volume.block_volume_provision
 
-resource "aws_volume_attachment" "volume_attachment_hana_data" {
-  count       = length(aws_ebs_volume.block_volume_hana_data_voltype.*.id)
-  device_name = "/dev/sd${element(["c", "d", "e", "f"], count.index)}"
+  device_name = "/dev/sd${element(["d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"], index(keys(aws_ebs_volume.block_volume_provision),each.key))}"
   instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_hana_data_voltype.*.id, count.index)
-}
-
-resource "aws_volume_attachment" "volume_attachment_hana_data_custom" {
-  count       = length(aws_ebs_volume.block_volume_hana_data_custom.*.id)
-  device_name = "/dev/sd${element(["c", "d", "e", "f"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_hana_data_custom.*.id, count.index)
-}
-
-
-resource "aws_volume_attachment" "volume_attachment_hana_log" {
-  count       = length(aws_ebs_volume.block_volume_hana_log_voltype.*.id)
-  device_name = "/dev/sd${element(["g", "h", "i", "j"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_hana_log_voltype.*.id, count.index)
-}
-
-resource "aws_volume_attachment" "volume_attachment_hana_log_custom" {
-  count       = length(aws_ebs_volume.block_volume_hana_log_custom.*.id)
-  device_name = "/dev/sd${element(["g", "h", "i", "j"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_hana_log_custom.*.id, count.index)
-}
-
-
-resource "aws_volume_attachment" "volume_attachment_hana_shared" {
-  count       = length(aws_ebs_volume.block_volume_hana_shared_voltype.*.id)
-  device_name = "/dev/sd${element(["k", "l", "m", "n"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_hana_shared_voltype.*.id, count.index)
-}
-
-resource "aws_volume_attachment" "volume_attachment_hana_shared_custom" {
-  count       = length(aws_ebs_volume.block_volume_hana_shared_custom.*.id)
-  device_name = "/dev/sd${element(["k", "l", "m", "n"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_hana_shared_custom.*.id, count.index)
-}
-
-resource "aws_volume_attachment" "volume_attachment_usr_sap" {
-  count       = length(aws_ebs_volume.block_volume_usr_sap_voltype.*.id)
-  device_name = "/dev/sd${element(["o", "p", "q", "r"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_usr_sap_voltype.*.id, count.index)
-}
-
-resource "aws_volume_attachment" "volume_attachment_sapmnt" {
-  count        = var.module_var_nfs_boolean_sapmnt ? 0 : length(aws_ebs_volume.block_volume_sapmnt_voltype.*.id)
-  device_name = "/dev/sd${element(["s", "t", "u", "v"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_sapmnt_voltype.*.id, count.index)
-}
-
-resource "aws_volume_attachment" "volume_attachment_swap" {
-  count       = length(aws_ebs_volume.block_volume_swap_voltype.*.id)
-  device_name = "/dev/sd${element(["w", "x", "y", "z"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_swap_voltype.*.id, count.index)
-}
-
-# AWS EBS does not accept /dev/sdaa. Only 1 software drive is expected therefore put to front of Linux device naming i.e. /dev/sdb
-resource "aws_volume_attachment" "volume_attachment_software" {
-  count       = length(aws_ebs_volume.block_volume_software_voltype.*.id)
-  device_name = "/dev/sdb"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_software_voltype.*.id, count.index)
-}
-
-
-resource "aws_volume_attachment" "volume_attachment_anydb" {
-  count       = length(aws_ebs_volume.block_volume_anydb_voltype.*.id)
-  device_name = "/dev/sd${element(["aa", "ab", "ac", "ad"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_anydb_voltype.*.id, count.index)
-}
-
-resource "aws_volume_attachment" "volume_attachment_anydb_custom" {
-  count       = length(aws_ebs_volume.block_volume_anydb_custom.*.id)
-  device_name = "/dev/sd${element(["aa", "ab", "ac", "ad"], count.index)}"
-  instance_id = aws_instance.host.id
-  volume_id   = element(aws_ebs_volume.block_volume_anydb_custom.*.id, count.index)
+  volume_id   = each.value.id
 }
