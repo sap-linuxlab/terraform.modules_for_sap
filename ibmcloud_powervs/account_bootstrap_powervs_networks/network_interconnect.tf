@@ -10,7 +10,7 @@ resource "ibm_pi_cloud_connection" "cloud_connection" {
     null_resource.sleep_temp_network
   ]
 
-  pi_cloud_instance_id               = ibm_resource_instance.power_group.guid
+  pi_cloud_instance_id               = var.module_var_ibmcloud_powervs_workspace_guid
   pi_cloud_connection_name           = "${var.module_var_resource_prefix}-pwr-to-cld"
   pi_cloud_connection_global_routing = false
   pi_cloud_connection_speed          = 200 // Mbps
@@ -18,7 +18,7 @@ resource "ibm_pi_cloud_connection" "cloud_connection" {
   pi_cloud_connection_vpc_enabled = true
 
   pi_cloud_connection_vpc_crns = [
-    local.target_vpc_crn
+    var.module_var_ibmcloud_vpc_crn
   ]
 
   pi_cloud_connection_networks = [

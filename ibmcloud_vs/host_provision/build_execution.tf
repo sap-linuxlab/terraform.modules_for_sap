@@ -5,7 +5,6 @@ resource "null_resource" "execute_os_scripts" {
 
   depends_on = [
     null_resource.dns_resolv_update,
-    null_resource.build_script_fs_init,
     null_resource.build_script_os_prepare
   ]
 
@@ -40,7 +39,6 @@ resource "null_resource" "execute_os_scripts" {
       "chmod +x $HOME/terraform_*",
       "echo 'Show HOME directory for reference Shell scripts were transferred'",
       "ls -lha $HOME",
-      "$HOME/terraform_fs_init.sh",
       "$HOME/terraform_os_prep.sh"
     ]
   }

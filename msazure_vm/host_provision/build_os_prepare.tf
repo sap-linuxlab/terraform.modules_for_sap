@@ -1,6 +1,10 @@
 
 resource "null_resource" "build_script_os_prepare" {
 
+  depends_on = [
+    azurerm_virtual_machine_data_disk_attachment.volume_attachment
+  ]
+
   connection {
     type                = "ssh"
     user                = "root"

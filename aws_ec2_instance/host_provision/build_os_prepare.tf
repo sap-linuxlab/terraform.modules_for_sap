@@ -2,18 +2,7 @@
 resource "null_resource" "build_script_os_prepare" {
 
   depends_on = [
-    aws_volume_attachment.volume_attachment_hana_data,
-    aws_volume_attachment.volume_attachment_hana_data_custom,
-    aws_volume_attachment.volume_attachment_hana_log,
-    aws_volume_attachment.volume_attachment_hana_log_custom,
-    aws_volume_attachment.volume_attachment_hana_shared,
-    aws_volume_attachment.volume_attachment_hana_shared_custom,
-    aws_volume_attachment.volume_attachment_usr_sap,
-    aws_volume_attachment.volume_attachment_sapmnt,
-    aws_volume_attachment.volume_attachment_swap,
-    aws_volume_attachment.volume_attachment_software,
-    aws_volume_attachment.volume_attachment_anydb,
-    aws_volume_attachment.volume_attachment_anydb_custom
+    aws_volume_attachment.block_volume_attachment
   ]
 
   connection {

@@ -654,5 +654,9 @@ sap_update_profile_default_profile_params:
 #sap_update_profile_instance_profile_params:
 #  - icm/server_port_1 = PROT=HTTPS,PORT=443$$,PROCTIMEOUT=600,TIMEOUT=3600
 
+
+# Use Ansible Task to convert JSON (as string) to sap_storage_setup_definition Dictionary
+terraform_host_specification_storage_definition: "{{ '${replace(jsonencode(var.module_var_terraform_host_specification_storage_definition_all_hosts),"\"","\\\"")}' | from_json }}"
+
 EOF
 }

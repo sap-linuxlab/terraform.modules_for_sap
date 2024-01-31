@@ -9,12 +9,8 @@
 
 # Create IBM Power Virtual Server Group Private Network Subnet
 resource "ibm_pi_network" "power_group_network_private" {
-  depends_on = [
-    null_resource.sleep_temp
-  ]
-
   pi_network_name      = "${var.module_var_resource_prefix}-power-group-network-private"
-  pi_cloud_instance_id = ibm_resource_instance.power_group.guid // Also shown by running either > ibmcloud resource service-instances --long  or  ibmcloud pi service-list
+  pi_cloud_instance_id = var.module_var_ibmcloud_powervs_workspace_guid // Also shown by running either > ibmcloud resource service-instances --long  or  ibmcloud pi service-list
   pi_network_type      = "vlan"
   pi_cidr              = "192.168.0.32/27"
   pi_dns               = ["127.0.0.1"]
@@ -33,11 +29,10 @@ resource "null_resource" "sleep_temp_network" {
 # Create IBM Power Virtual Server Group Private Network Subnet for Management networking
 resource "ibm_pi_network" "power_group_network_mgmt" {
   depends_on = [
-    null_resource.sleep_temp,
     ibm_pi_network.power_group_network_private
   ]
   pi_network_name      = "${var.module_var_resource_prefix}-power-group-network-mgmt"
-  pi_cloud_instance_id = ibm_resource_instance.power_group.guid // Also shown by running either > ibmcloud resource service-instances --long  or  ibmcloud pi service-list
+  pi_cloud_instance_id = var.module_var_ibmcloud_powervs_workspace_guid // Also shown by running either > ibmcloud resource service-instances --long  or  ibmcloud pi service-list
   pi_network_type      = "vlan"
   pi_cidr              = "192.168.0.0/27"
   pi_dns               = ["127.0.0.1"]
@@ -52,6 +47,6 @@ resource "ibm_pi_network" "power_group_network_mgmt" {
 #  ]
 #
 #  pi_network_name      = "${var.module_var_resource_prefix}-power-group-network-public"
-#  pi_cloud_instance_id = ibm_resource_instance.power_group.guid   // Also shown by running either > ibmcloud resource service-instances --long  or  ibmcloud pi service-list
+#  pi_cloud_instance_id = var.module_var_ibmcloud_powervs_workspace_guid   // Also shown by running either > ibmcloud resource service-instances --long  or  ibmcloud pi service-list
 #  pi_network_type      = "pub-vlan"
 #}

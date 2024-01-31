@@ -2,18 +2,7 @@
 resource "null_resource" "build_script_os_prepare" {
 
   depends_on = [
-    google_compute_attached_disk.volume_attachment_hana_data,
-    google_compute_attached_disk.volume_attachment_hana_data_custom,
-    google_compute_attached_disk.volume_attachment_hana_log,
-    google_compute_attached_disk.volume_attachment_hana_log_custom,
-    google_compute_attached_disk.volume_attachment_hana_shared,
-    google_compute_attached_disk.volume_attachment_hana_shared_custom,
-    google_compute_attached_disk.volume_attachment_usr_sap,
-    google_compute_attached_disk.volume_attachment_sapmnt,
-    google_compute_attached_disk.volume_attachment_swap,
-    google_compute_attached_disk.volume_attachment_software,
-    google_compute_attached_disk.volume_attachment_anydb,
-    google_compute_attached_disk.volume_attachment_anydb_custom
+    google_compute_attached_disk.volume_attachment
   ]
 
   connection {

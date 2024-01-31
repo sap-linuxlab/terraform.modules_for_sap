@@ -4,201 +4,25 @@
 # Maximum 4 secondary data volumes per instance attached when creating an instance
 # Maximum 12 secondary data volumes after instance exists
 
-resource "ibm_is_volume" "block_volume_hana_data_tiered" {
-  count = var.module_var_disk_volume_type_hana_data != "custom" ? var.module_var_disk_volume_count_hana_data : 0
+resource "ibm_is_volume" "block_volume_provision" {
 
-  name           = "${var.module_var_virtual_server_hostname}-volume-hana-data-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_hana_data
-  capacity       = var.module_var_disk_volume_capacity_hana_data
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
+  for_each = {
+    for disk in flatten(
+      [ for storage_item in var.module_var_storage_definition:
+        [ for index, count in range(0,try(storage_item.disk_count,1)) :
+          tomap({"name" = replace("${storage_item.name}-${index}","_","-"), "disk_type" = try(storage_item.disk_type, null), "disk_size" = storage_item.disk_size, "disk_iops" = try(storage_item.disk_iops,null)})
+        ] if try(storage_item.swap_path,"") == ""
+      ]
+    ):
+    disk.name => disk
   }
-}
 
-resource "ibm_is_volume" "block_volume_hana_data_custom" {
-  count = var.module_var_disk_volume_type_hana_data == "custom" ? var.module_var_disk_volume_count_hana_data : 0
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-hana-data-${count.index}"
+  name           = "${var.module_var_virtual_server_hostname}-vol-${each.value.name}"
   resource_group = var.module_var_resource_group_id
   zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_hana_data
-  capacity       = var.module_var_disk_volume_capacity_hana_data
-  iops           = var.module_var_disk_volume_iops_hana_data
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-
-
-resource "ibm_is_volume" "block_volume_hana_log_tiered" {
-  count = var.module_var_disk_volume_type_hana_log != "custom" ? var.module_var_disk_volume_count_hana_log : 0
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-hana-log-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_hana_log
-  capacity       = var.module_var_disk_volume_capacity_hana_log
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-resource "ibm_is_volume" "block_volume_hana_log_custom" {
-  count = var.module_var_disk_volume_type_hana_log == "custom" ? var.module_var_disk_volume_count_hana_log : 0
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-hana-log-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_hana_log
-  capacity       = var.module_var_disk_volume_capacity_hana_log
-  iops           = var.module_var_disk_volume_iops_hana_log
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-
-
-resource "ibm_is_volume" "block_volume_hana_shared_tiered" {
-  count = var.module_var_disk_volume_type_hana_shared != "custom" ? var.module_var_disk_volume_count_hana_shared : 0
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-hana-shared-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_hana_shared
-  capacity       = var.module_var_disk_volume_capacity_hana_shared
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-resource "ibm_is_volume" "block_volume_hana_shared_custom" {
-  count = var.module_var_disk_volume_type_hana_shared == "custom" ? var.module_var_disk_volume_count_hana_shared : 0
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-hana-shared-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_hana_shared
-  capacity       = var.module_var_disk_volume_capacity_hana_shared
-  iops           = var.module_var_disk_volume_iops_hana_shared
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-
-
-resource "ibm_is_volume" "block_volume_anydb_tiered" {
-  count = var.module_var_disk_volume_type_anydb != "custom" ? var.module_var_disk_volume_count_anydb : 0
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-anydb-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_anydb
-  capacity       = var.module_var_disk_volume_capacity_anydb
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-resource "ibm_is_volume" "block_volume_anydb_custom" {
-  count = var.module_var_disk_volume_type_anydb == "custom" ? var.module_var_disk_volume_count_anydb : 0
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-anydb-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_anydb
-  capacity       = var.module_var_disk_volume_capacity_anydb
-  iops           = var.module_var_disk_volume_iops_anydb
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-
-
-resource "ibm_is_volume" "block_volume_usr_sap_tiered" {
-  count = var.module_var_disk_volume_count_usr_sap
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-usr-sap-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_usr_sap
-  capacity       = var.module_var_disk_volume_capacity_usr_sap
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-resource "ibm_is_volume" "block_volume_sapmnt_tiered" {
-  count = var.module_var_nfs_boolean_sapmnt ? 0 : var.module_var_disk_volume_count_sapmnt
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-sapmnt-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_sapmnt
-  capacity       = var.module_var_disk_volume_capacity_sapmnt
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-resource "ibm_is_volume" "block_volume_swap_tiered" {
-  count = var.module_var_disk_volume_count_swap
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-swap-${count.index}"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_swap
-  capacity       = var.module_var_disk_volume_capacity_swap
-
-  # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
-  timeouts {
-    create = "30m"
-    delete = "30m"
-  }
-}
-
-resource "ibm_is_volume" "block_volume_software_tiered" {
-
-  name           = "${var.module_var_virtual_server_hostname}-volume-software-0"
-  resource_group = var.module_var_resource_group_id
-  zone           = local.target_vpc_availability_zone
-  profile        = var.module_var_disk_volume_type_software
-  capacity       = var.module_var_disk_volume_capacity_software
+  profile        = each.value.disk_type
+  capacity       = each.value.disk_size
+  iops           = each.value.disk_iops
 
   # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {

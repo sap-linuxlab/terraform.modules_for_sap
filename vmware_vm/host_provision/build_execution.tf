@@ -4,15 +4,7 @@
 resource "null_resource" "execute_os_scripts" {
 
   depends_on = [
-    vsphere_virtual_disk.virtual_disk_hana_data,
-    vsphere_virtual_disk.virtual_disk_hana_log,
-    vsphere_virtual_disk.virtual_disk_hana_shared,
-    vsphere_virtual_disk.virtual_disk_anydb,
-    vsphere_virtual_disk.virtual_disk_usr_sap,
-    vsphere_virtual_disk.virtual_disk_sapmnt,
-    vsphere_virtual_disk.virtual_disk_swap,
-    vsphere_virtual_disk.virtual_disk_software,
-    null_resource.build_script_fs_init,
+    vsphere_virtual_disk.virtual_disk_provision,
     null_resource.build_script_os_prepare,
     null_resource.os_subscription_files,
     vsphere_virtual_machine.host_provision
@@ -39,8 +31,7 @@ resource "null_resource" "execute_os_scripts" {
       "chmod +x $HOME/terraform_*",
       "$HOME/terraform_os_prep.sh",
       "$HOME/terraform_web_proxy_noninteractive.sh",
-      "$HOME/terraform_os_subscriptions.sh",
-      "$HOME/terraform_fs_init.sh"
+      "$HOME/terraform_os_subscriptions.sh"
     ]
   }
 
