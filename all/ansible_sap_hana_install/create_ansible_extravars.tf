@@ -45,7 +45,7 @@ softwarecenter_search_list_saphana_x86_64:
 
 softwarecenter_search_list_saphana_ppc64le: 
   - 'SAPCAR_1115-70006238.EXE'
-  - 'IMDB_SERVER20_067_3-80002046.SAR'
+  - 'IMDB_SERVER20_067_4-80002046.SAR'
   - 'IMDB_LCAPPS_2067_0-80002183.SAR'
   - 'IMDB_AFL20_066_0-80002045.SAR'
 
