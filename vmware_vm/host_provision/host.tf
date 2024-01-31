@@ -1,28 +1,4 @@
 
-# Cloud-init directive metadata
-data "template_file" "cloud_init_metadata" {
-  template = file("${path.module}/cloudinit_config_metadata.yml")
-
-  vars = {
-    template_var_hostname = var.module_var_vmware_vm_hostname
-  }
-
-}
-
-# Cloud-init directive user_data
-data "template_file" "cloud_init_user_data" {
-  template = file("${path.module}/cloudinit_config_userdata.yml")
-
-  vars = {
-    template_var_hostname = var.module_var_vmware_vm_hostname
-    template_var_dns_root_domain_name = var.module_var_vmware_vm_dns_root_domain_name
-    template_public_key_openssh = var.module_var_host_public_ssh_key
-  }
-
-}
-
-
-
 resource "vsphere_virtual_machine" "host_provision" {
 
   depends_on = [
@@ -151,10 +127,27 @@ resource "vsphere_virtual_machine" "host_provision" {
     "isolation.tools.copy.disable" = "FALSE" // Should be uppercase to avoid 'updated in-place' if re-executed
     "isolation.tools.paste.disable" = "FALSE" // Should be uppercase to avoid 'updated in-place' if re-executed
     "isolation.tools.setGUIOptions.enable" = "TRUE" // Should be uppercase to avoid 'updated in-place' if re-executed
-    "guestinfo.metadata"          = base64encode(data.template_file.cloud_init_metadata.rendered)
     "guestinfo.metadata.encoding" = "base64"
-    "guestinfo.userdata"          = base64encode(data.template_file.cloud_init_user_data.rendered)
     "guestinfo.userdata.encoding" = "base64"
+
+    "guestinfo.metadata"          = base64encode(templatefile(
+                                      "${path.module}/cloudinit_config_metadata.yml",
+                                        {
+                                          "template_var_hostname" = var.module_var_vmware_vm_hostname
+                                        }
+                                      )
+                                    )
+
+    "guestinfo.userdata"          = base64encode(templatefile(
+                                      "${path.module}/cloudinit_config_userdata.yml",
+                                        {
+                                          "template_var_hostname" = var.module_var_vmware_vm_hostname
+                                          "template_var_dns_root_domain_name" = var.module_var_vmware_vm_dns_root_domain_name
+                                          "template_public_key_openssh" = var.module_var_host_public_ssh_key
+                                        }
+                                      )
+                                    )
+
   }
 
 
