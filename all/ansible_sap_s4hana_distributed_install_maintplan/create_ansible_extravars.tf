@@ -656,7 +656,7 @@ sap_update_profile_default_profile_params:
 
 
 # Use Ansible Task to convert JSON (as string) to sap_storage_setup_definition Dictionary
-terraform_host_specification_storage_definition: "{{ '${replace(jsonencode(var.module_var_terraform_host_specification_storage_definition),"\"","\\\"")}' | from_json }}"
+terraform_host_specification_storage_definition: "{{ '${replace(jsonencode(var.module_var_terraform_host_specification_storage_definition_all_hosts),"\"","\\\"")}' | from_json }}"
 
 EOF
 }
