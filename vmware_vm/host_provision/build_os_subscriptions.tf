@@ -7,6 +7,8 @@ resource "null_resource" "os_subscription_files" {
     vsphere_virtual_machine.host_provision
   ]
 
+  count = var.module_var_os_vendor_enable ? 1 : 0
+
   connection {
     type        = "ssh"
     user        = "root"
