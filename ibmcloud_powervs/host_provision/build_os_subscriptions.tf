@@ -3,6 +3,8 @@
 
 resource "null_resource" "os_subscription_files" {
 
+  count = var.module_var_os_vendor_enable ? 1 : 0
+
   # Path must already exist and must not use Bash shell special variable, e.g. cannot use $HOME/file.sh
   # "By default, OpenSSH's scp implementation runs in the remote user's home directory and so you can specify a relative path to upload into that home directory"
   # https://www.terraform.io/language/resources/provisioners/file#destination-paths

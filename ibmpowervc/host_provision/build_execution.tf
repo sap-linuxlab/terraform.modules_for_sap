@@ -43,6 +43,8 @@ resource "null_resource" "execute_os_scripts_web_proxy" {
     null_resource.execute_os_scripts_generic
   ]
 
+  count = var.module_var_web_proxy_enable ? 1 : 0
+
   connection {
     type        = "ssh"
     user        = "root"
@@ -74,6 +76,8 @@ resource "null_resource" "execute_os_scripts_os_vendor" {
     null_resource.execute_os_scripts_generic,
     null_resource.execute_os_scripts_web_proxy
   ]
+
+  count = var.module_var_os_vendor_enable ? 1 : 0
 
   connection {
     type        = "ssh"
