@@ -53,13 +53,23 @@ variable "module_var_host_public_ssh_key" {}
 
 variable "module_var_host_private_ssh_key" {}
 
+
+variable "module_var_web_proxy_enable" {
+  default = true
+}
+
 variable "module_var_web_proxy_url" {}
 variable "module_var_web_proxy_exclusion" {}
+
+variable "module_var_os_vendor_enable" {
+  default = true
+}
 
 variable "module_var_os_vendor_account_user" {}
 variable "module_var_os_vendor_account_user_passcode" {}
 variable "module_var_os_systems_mgmt_host" {
   default = ""
 }
+
 
 variable "module_var_storage_definition" {}

@@ -1,6 +1,8 @@
 
 resource "null_resource" "build_script_web_proxy_noninteractive" {
 
+  count = var.module_var_web_proxy_enable ? 1 : 0
+
   # Specify the ssh connection
   connection {
     # The Bastion host ssh connection is established first, and then the host connection will be made from there.

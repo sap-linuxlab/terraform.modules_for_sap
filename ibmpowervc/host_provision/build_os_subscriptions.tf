@@ -7,6 +7,8 @@ resource "null_resource" "os_subscription_files" {
     openstack_compute_volume_attach_v2.block_volume_attachment
   ]
 
+  count = var.module_var_os_vendor_enable ? 1 : 0
+
   connection {
     type        = "ssh"
     user        = "root"

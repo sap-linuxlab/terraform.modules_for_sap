@@ -5,6 +5,8 @@ resource "null_resource" "build_script_web_proxy_noninteractive" {
     openstack_compute_volume_attach_v2.block_volume_attachment
   ]
 
+  count = var.module_var_web_proxy_enable ? 1 : 0
+
   # Specify the ssh connection
   connection {
     type        = "ssh"
