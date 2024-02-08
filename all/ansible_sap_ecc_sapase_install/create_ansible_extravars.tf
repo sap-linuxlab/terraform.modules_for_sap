@@ -134,10 +134,10 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002616.SAR' # Kernel Part II (753 Patch 1000), SAP ASE 16.0 FOR BUS. SUITE
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP37_6-20009701.SAR'
+      - 'SWPM10SP39_4-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'SYBCTRL_1218-80002616.SAR'
+      - 'SYBCTRL_1240-80002616.SAR'
       - '51056521_1' # SAP ASE 16.0.04.04 RDBMS Linux on x86_64 64bit
       - 'ASEBC16004P_3-20012477.SAR' # SAP ASE 16.0 FOR BUS. SUITE DBCLIENT SP04 Patch Level x (e.g. 03)
       - '51050708_1' # SAP ERP 6.0 EHP8 Installation Export 1/4, Self-extract RAR EXE
@@ -199,10 +199,10 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002616.SAR' # Kernel Part II (753 Patch 1000), SAP ASE 16.0 FOR BUS. SUITE
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP37_6-20009701.SAR'
+      - 'SWPM10SP39_4-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
-      - 'SYBCTRL_1218-80002616.SAR'
+      - 'SYBCTRL_1240-80002616.SAR'
       - '51056521_1' # SAP ASE 16.0.04.04 RDBMS Linux on x86_64 64bit
       - 'ASEBC16004P_3-20012477.SAR' # SAP ASE 16.0 FOR BUS. SUITE DBCLIENT SP04 Patch Level x (e.g. 03)
       - '51053216_1' # IDES SAP ERP 6.0 EHP8 - INSTALL. EXP. (1/2) 1/22
