@@ -18,7 +18,7 @@ resource "azurerm_network_security_group" "bastion_connection_sg" {
     access                     = "Allow"
     protocol                   = "Tcp"
     destination_port_range     = 22
-    destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+    destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
     source_port_range          = 22
     source_address_prefix      = azurerm_subnet.bastion_subnet.address_prefixes[0]
   }

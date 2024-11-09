@@ -9,9 +9,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_abap_
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -25,9 +25,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_abap
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -44,9 +44,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_abap_
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -60,9 +60,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_abap
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -79,9 +79,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_abap_
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("48${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -95,9 +95,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_abap
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("48${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -114,9 +114,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_abap_
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_ranges     = ["5${var.module_var_sap_nwas_abap_pas_instance_no}13-5${var.module_var_sap_nwas_abap_pas_instance_no}14"]
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -130,9 +130,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound_sapnwas_abap
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_ranges     = ["5${var.module_var_sap_nwas_abap_pas_instance_no}13-5${var.module_var_sap_nwas_abap_pas_instance_no}14"]
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -149,9 +149,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_inbound_sapnwas_abap_
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name
@@ -165,9 +165,9 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_sap_outbound__sapnwas_aba
   protocol  = "Tcp"
 
   source_port_range          = "*"
-  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix
+  source_address_prefix      = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_range     = tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")
-  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix
+  destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
   resource_group_name         = var.module_var_az_resource_group_name
   network_security_group_name = var.module_var_host_security_group_name

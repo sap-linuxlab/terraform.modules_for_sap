@@ -14,6 +14,6 @@ locals {
 
   target_vnet_subnet_name  = var.module_var_az_vnet_subnet_name
   target_vnet_subnet_id    = data.azurerm_subnet.vnet_subnet.id
-  target_vnet_subnet_range = data.azurerm_subnet.vnet_subnet.address_prefix
+  target_vnet_subnet_range = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
 
 }
