@@ -6,11 +6,11 @@ terraform {
     azurerm = {
       #source  = "localdomain/provider/azurerm" // Local, on macOS path to place files would be $HOME/.terraform.d/plugins/localdomain/provider/azurerm/1.xx.xx/darwin_amd6
       source  = "hashicorp/azurerm" // Terraform Registry
-      version = ">>=3.108.0"
+      version = ">=3.108.0"
     }
     azapi = {
       source = "Azure/azapi"
-      version = ">=1.3.0"
+      version = ">=1.13.0"
     }
   }
 }

@@ -27,7 +27,7 @@ resource "azapi_resource" "storage_account_sap" {
   identity {
     type = "None"
   }
-  body = jsonencode({
+  body = {
     sku = {
       name = "Premium_LRS"
     }
@@ -67,7 +67,7 @@ resource "azapi_resource" "storage_account_sap" {
       publicNetworkAccess = "Disabled"
       supportsHttpsTrafficOnly = false // "Secure transfer required" must be disabled, as the NFS protocol does not support encryption and relies on network-level security.
     }
-  })
+  }
 }
 
 
@@ -80,7 +80,7 @@ resource "azapi_resource" "file_storage_sapmnt" {
   type = "Microsoft.Storage/storageAccounts/fileServices/shares@2022-05-01"
   name = "${var.module_var_resource_prefix}nfs"
   parent_id = "${azapi_resource.storage_account_sap[0].id}/fileServices/default"
-  body = jsonencode({
+  body = {
     properties = {
       accessTier = "Premium"
       enabledProtocols = "NFS"
@@ -88,7 +88,7 @@ resource "azapi_resource" "file_storage_sapmnt" {
 #      metadata = {}
 #      rootSquash = "string"
     }
-  })
+  }
 }
 
 
