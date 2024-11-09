@@ -40,14 +40,14 @@ suser_password: '${var.module_var_sap_id_user_password}'
 softwarecenter_search_list_saphana_x86_64: 
   - 'SAPCAR_1115-70006178.EXE'
   - 'IMDB_SERVER20_067_4-80002031.SAR'
-  - 'IMDB_LCAPPS_2066_0-20010426.SAR'
-  - 'IMDB_AFL20_066_0-80001894.SAR'
+  - 'IMDB_LCAPPS_2067_0-20010426.SAR'
+  - 'IMDB_AFL20_067_0-80001894.SAR'
 
 softwarecenter_search_list_saphana_ppc64le: 
   - 'SAPCAR_1115-70006238.EXE'
   - 'IMDB_SERVER20_067_4-80002046.SAR'
   - 'IMDB_LCAPPS_2067_0-80002183.SAR'
-  - 'IMDB_AFL20_066_0-80002045.SAR'
+  - 'IMDB_AFL20_067_0-80002045.SAR'
 
 
 
