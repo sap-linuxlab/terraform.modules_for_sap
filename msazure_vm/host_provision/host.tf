@@ -6,7 +6,7 @@ resource "azurerm_network_interface" "host_nic0" {
   resource_group_name = local.target_resource_group_name
   location            = var.module_var_az_location_region
 
-  enable_ip_forwarding = var.module_var_disable_ip_anti_spoofing // When disable the Anti IP Spoofing = true, then Enable IP Forwarding = true
+  ip_forwarding_enabled = var.module_var_disable_ip_anti_spoofing // When disable the Anti IP Spoofing = true, then Enable IP Forwarding = true
 
   ip_configuration {
     primary                       = "true"
