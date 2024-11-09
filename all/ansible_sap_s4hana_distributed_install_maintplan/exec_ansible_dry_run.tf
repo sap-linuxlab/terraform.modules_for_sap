@@ -56,6 +56,8 @@ resource "null_resource" "ansible_exec_dry_run" {
       # Required for running on Windows using WSL2 and Ubuntu (otherwise will default to Dash - https://wiki.ubuntu.com/DashAsBinSh)
       cat << EOF > ansible_dry_run.sh
       #!/bin/bash
+      # For local dry-run, override any callback config
+      export ANSIBLE_STDOUT_CALLBACK="default"
       ansible-playbook ${path.module}/ansible_playbook_dry_run.yml \
       --extra-vars "@${path.root}/tmp/s4hana_distributed/ansible_vars.yml" \
       --inventory 'localhost,' \
@@ -64,6 +66,8 @@ EOF
       chmod +x ansible_dry_run.sh
       /bin/bash ansible_dry_run.sh
     else
+      # For local dry-run, override any callback config
+      export ANSIBLE_STDOUT_CALLBACK="default"
       ansible-playbook ${path.module}/ansible_playbook_dry_run.yml \
       --extra-vars "@${path.root}/tmp/s4hana_distributed/ansible_vars.yml" \
       --inventory 'localhost,' \
