@@ -75,7 +75,7 @@ resource "azurerm_network_security_group" "vnet_sg" {
     access                     = "Allow"
     protocol                   = "Tcp"
     destination_port_range     = 22
-    destination_address_prefix = local.target_vnet_subnet_range
+    destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
     source_port_range          = "*"
     source_address_prefix      = "*"
   }
@@ -86,7 +86,7 @@ resource "azurerm_network_security_group" "vnet_sg" {
     access                     = "Allow"
     protocol                   = "Tcp"
     destination_port_range     = 22
-    destination_address_prefix = local.target_vnet_subnet_range
+    destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
     source_port_range          = "*"
     source_address_prefix      = "*"
   }

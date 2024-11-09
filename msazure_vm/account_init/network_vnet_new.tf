@@ -15,6 +15,6 @@ resource "azurerm_subnet" "vnet_subnet" {
   virtual_network_name = var.module_var_az_vnet_name_create_boolean ? azurerm_virtual_network.vnet[0].name : data.azurerm_virtual_network.vnet[0].name
   address_prefixes     = ["10.200.10.0/24"]
 
-  private_endpoint_network_policies_enabled     = true
+  private_endpoint_network_policies             = "Enabled"
   private_link_service_network_policies_enabled = true
 }

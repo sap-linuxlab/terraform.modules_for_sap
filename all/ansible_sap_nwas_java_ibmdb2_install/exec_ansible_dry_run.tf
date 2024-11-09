@@ -45,6 +45,9 @@ resource "null_resource" "ansible_exec_dry_run" {
     # Find Python used by Ansible on the localhost
     #export ANSIBLE_PYTHON_INTERPRETER="auto_silent"
     #ansible_python=$(ansible --inventory 'localhost,' --connection 'local' --module-name setup localhost | awk '/ansible_python/{f=1} f{print; if (/}/) exit}' | awk '/executable/ { gsub("\"",""); gsub(",",""); print $NF }')
+    # For dry-run, test if using venv and enforce use by Ansible instead of system detection
+    python_venv_test=$(python -c $'import sys\nif sys.prefix != sys.base_prefix: print("true");')
+    if [ $python_venv_test="true" ]; then python_venv_path=$(python -c 'import sys; print(sys.prefix)') && export ANSIBLE_PYTHON_INTERPRETER="$${python_venv_path}/bin/python3" ; fi
 
     os_info_id=$(grep ^ID= /etc/os-release | cut -d '=' -f2 | tr -d '\"')
     if [ "$os_info_id" = "ubuntu" ]
@@ -53,6 +56,8 @@ resource "null_resource" "ansible_exec_dry_run" {
       # Required for running on Windows using WSL2 and Ubuntu (otherwise will default to Dash - https://wiki.ubuntu.com/DashAsBinSh)
       cat << EOF > ansible_dry_run.sh
       #!/bin/bash
+      # For local dry-run, override any callback config
+      export ANSIBLE_STDOUT_CALLBACK="default"
       ansible-playbook ${path.module}/ansible_playbook_dry_run.yml \
       --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
       --inventory 'localhost,' \
@@ -61,6 +66,8 @@ EOF
       chmod +x ansible_dry_run.sh
       /bin/bash ansible_dry_run.sh
     else
+      # For local dry-run, override any callback config
+      export ANSIBLE_STDOUT_CALLBACK="default"
       ansible-playbook ${path.module}/ansible_playbook_dry_run.yml \
       --extra-vars "@${path.root}/tmp/${var.module_var_hostname}/ansible_vars.yml" \
       --inventory 'localhost,' \

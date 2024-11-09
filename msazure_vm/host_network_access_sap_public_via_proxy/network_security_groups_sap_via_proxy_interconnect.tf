@@ -13,7 +13,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapnwas_sapgu
   source_address_prefix       = local.target_vnet_bastion_subnet_range
   source_port_ranges          = tolist([tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}"), tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
-  destination_address_prefix  = local.target_vnet_subnet_range
+  destination_address_prefix  = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_ranges     = tolist([tonumber("32${var.module_var_sap_nwas_abap_pas_instance_no}"), tonumber("33${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -36,7 +36,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapfiori" {
   source_address_prefix       = local.target_vnet_bastion_subnet_range
   source_port_ranges          = tolist([tonumber("443${var.module_var_sap_hana_instance_no}"), tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
-  destination_address_prefix  = local.target_vnet_subnet_range
+  destination_address_prefix  = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_ranges     = tolist([tonumber("443${var.module_var_sap_hana_instance_no}"), tonumber("443${var.module_var_sap_nwas_abap_pas_instance_no}")])
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -56,7 +56,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_sapctrl" {
   source_address_prefix       = local.target_vnet_bastion_subnet_range
   source_port_ranges          = tolist([tonumber("5${var.module_var_sap_hana_instance_no}13"), tonumber("5${var.module_var_sap_hana_instance_no}14")])
 
-  destination_address_prefix  = local.target_vnet_subnet_range
+  destination_address_prefix  = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_ranges     = tolist([tonumber("5${var.module_var_sap_hana_instance_no}13"), tonumber("5${var.module_var_sap_hana_instance_no}14")])
 
   resource_group_name         = var.module_var_az_resource_group_name
@@ -78,7 +78,7 @@ resource "azurerm_network_security_rule" "vnet_sg_rule_tcp_inbound_saphana" {
   source_address_prefix       = local.target_vnet_bastion_subnet_range
   source_port_ranges          = tolist([tonumber("3${var.module_var_sap_hana_instance_no}13"), tonumber("3${var.module_var_sap_hana_instance_no}41")])
 
-  destination_address_prefix  = local.target_vnet_subnet_range
+  destination_address_prefix  = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
   destination_port_ranges     = tolist([tonumber("3${var.module_var_sap_hana_instance_no}13"), tonumber("3${var.module_var_sap_hana_instance_no}41")])
 
   resource_group_name         = var.module_var_az_resource_group_name
