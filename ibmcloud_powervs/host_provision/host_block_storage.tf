@@ -4,8 +4,10 @@
 # Types = tier1 (10 IOPS/GB), tier3 (3 IOPS/GB). See https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-about-virtual-server#storage-tiers
 
 resource "ibm_pi_volume" "block_volume_provision" {
-#  count = sum([ for storage_item in var.module_var_storage_definition: try(storage_item.disk_count,1) ])
 
+  provider             = ibm.powervs_secure_enclave
+
+#  count = sum([ for storage_item in var.module_var_storage_definition: try(storage_item.disk_count,1) ])
   for_each = {
     for disk in flatten(
       [ for storage_item in var.module_var_storage_definition:
@@ -21,7 +23,7 @@ resource "ibm_pi_volume" "block_volume_provision" {
   pi_volume_size       = each.value.disk_size
   pi_volume_type       = each.value.disk_type
   pi_volume_shareable  = false
-  pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+  pi_cloud_instance_id = var.module_var_ibm_power_guid
 
   # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {

@@ -24,14 +24,16 @@ resource "null_resource" "dns_resolv_files" {
     ibm_dns_resource_record.dns_resource_record_ptr
   ]
 
+  # Removed 'nameserver ${var.module_var_dns_proxy_ip}' as proxy for DNS Resolver not required for IBM Power Workspaces that use backend Power Edge Router (PER)
   # Path must already exist and must not use Bash shell special variable, e.g. cannot use $HOME/terraform/tmp/
   # https://www.terraform.io/language/resources/provisioners/file#destination-paths
   provisioner "file" {
     destination = "/tmp/resolv.conf"
     content     = <<EOF
-nameserver ${var.module_var_dns_proxy_ip}
-nameserver 192.168.122.1
-nameserver 127.0.0.1
+nameserver 161.26.0.7
+nameserver 161.26.0.8
+nameserver 161.26.0.10
+nameserver 161.26.0.11
 EOF
   }
 
@@ -62,8 +64,8 @@ echo 'Install dig...'
 if [ "$os_type" = "rhel" ] ; then yum --assumeyes --debuglevel=1 install bind-utils ; elif [ "$os_type" = "sles" ] ; then zypper install --no-confirm bind-utils ; fi
 
 echo '#### Run dig to Private DNS with Domain Name ####'
-echo 'Running dig @${var.module_var_dns_proxy_ip} A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}'
-dig @${var.module_var_dns_proxy_ip} A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}
+echo 'Running dig @161.26.0.7 A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}'
+dig @161.26.0.7 A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}
 
 echo '#### Run nslookup ####'
 nslookup ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name} | \

@@ -12,6 +12,8 @@ variable "module_var_bastion_ssh_port" {}
 
 variable "module_var_host_public_ssh_key" {}
 
+variable "module_var_hardware_machine_type" {}
+
 variable "module_var_virtual_server_profile" {}
 
 variable "module_var_virtual_server_hostname" {
@@ -26,9 +28,9 @@ variable "module_var_host_os_image" {}
 
 variable "module_var_bastion_user" {}
 
-variable "module_var_ibm_power_group_guid" {}
+variable "module_var_ibm_power_guid" {}
 
-variable "module_var_power_group_networks" {}
+variable "module_var_power_networks" {}
 
 variable "module_var_bastion_ip" {}
 
@@ -46,7 +48,8 @@ variable "module_var_dns_root_domain_name" {}
 variable "module_var_dns_services_instance" {}
 
 
-variable "module_var_dns_proxy_ip" {}
+# Proxy for DNS Resolver not required for IBM Power Workspaces that use backend Power Edge Router (PER)
+# variable "module_var_dns_proxy_ip" {}
 
 
 variable "module_var_web_proxy_enable" {

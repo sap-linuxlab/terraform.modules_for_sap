@@ -5,7 +5,6 @@ resource "null_resource" "execute_os_scripts" {
 
   depends_on = [
     null_resource.dns_resolv_update,
-    null_resource.bind_files,
     null_resource.nginx_files
   ]
 
@@ -35,12 +34,13 @@ resource "null_resource" "execute_os_scripts" {
   }
 
   # Execute, including all files provisioned by Terraform into $HOME
+  # Proxy for DNS Resolver not required for IBM Power Workspaces that use backend Power Edge Router (PER)
   provisioner "remote-exec" {
     inline = [
       "chmod +x $HOME/terraform_*",
       "echo 'Show HOME directory for reference Shell scripts were transferred'",
       "ls -lha $HOME",
-      "if [ -f $HOME/terraform_proxy_dns_bind.sh ]; then $HOME/terraform_proxy_dns_bind.sh ; fi",
+#      "if [ -f $HOME/terraform_proxy_dns_bind.sh ]; then $HOME/terraform_proxy_dns_bind.sh ; fi",
       "if [ -f $HOME/terraform_proxy_web_squid.sh ]; then $HOME/terraform_proxy_web_squid.sh ; fi",
       "if [ -f $HOME/terraform_proxy_web_nginx.sh ]; then $HOME/terraform_proxy_web_nginx.sh ; fi"
     ]

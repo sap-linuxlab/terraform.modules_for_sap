@@ -1,6 +1,7 @@
 # OS Images lookup
 
 data "ibm_is_images" "proxy_os_images_list" {
+  status = "available"
 }
 
 # Display everything from ibm_is_images.abc.images, which is list of objects with 42 elements, with each element containing 7 attributes which are strings

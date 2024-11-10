@@ -3,7 +3,7 @@
 resource "ibm_is_security_group_rule" "vpc_sg_rule_bastion_inbound_dns_tcp" {
   group     = var.module_var_host_security_group_id
   direction = "inbound"
-  remote    = var.module_var_power_group_network_private_subnet
+  remote    = var.module_var_power_network_private_subnet
 
   tcp {
     port_min = 53
@@ -16,7 +16,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_bastion_inbound_dns_tcp" {
 resource "ibm_is_security_group_rule" "vpc_sg_rule_bastion_inbound_dns_udp" {
   group     = var.module_var_host_security_group_id
   direction = "inbound"
-  remote    = var.module_var_power_group_network_private_subnet
+  remote    = var.module_var_power_network_private_subnet
 
   udp {
     port_min = 53
@@ -29,7 +29,7 @@ resource "ibm_is_security_group_rule" "vpc_sg_rule_bastion_inbound_dns_udp" {
 resource "ibm_is_security_group_rule" "vpc_sg_rule_bastion_inbound_proxy_http" {
   group     = var.module_var_host_security_group_id
   direction = "inbound"
-  remote    = var.module_var_power_group_network_private_subnet
+  remote    = var.module_var_power_network_private_subnet
 
   tcp {
     port_min = 50888

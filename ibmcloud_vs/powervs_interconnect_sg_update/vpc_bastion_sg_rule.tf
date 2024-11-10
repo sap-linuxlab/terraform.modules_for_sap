@@ -3,7 +3,7 @@
 resource "ibm_is_security_group_rule" "vpc_sg_rule_bastion_outbound_ssh_to_virtualserver" {
   group     = var.module_var_bastion_security_group_id
   direction = "outbound"
-  remote    = var.module_var_power_group_network_private_subnet
+  remote    = var.module_var_power_network_private_subnet
 
   tcp {
     port_min = 22

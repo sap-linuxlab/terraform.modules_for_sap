@@ -42,9 +42,10 @@ variable "module_var_virtual_server_profile" {}
 variable "module_var_proxy_os_image" {}
 
 
-variable "module_var_proxy_enabled_bind" {
-  default = true
-}
+# Proxy for DNS Resolver not required for IBM Power Workspaces that use backend Power Edge Router (PER)
+# variable "module_var_proxy_enabled_bind" {
+#   default = true
+# }
 
 variable "module_var_proxy_enabled_squid" {
   default = true
