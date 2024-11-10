@@ -50,6 +50,7 @@ variable "module_var_dns_services_instance" {}
 
 # Proxy for DNS Resolver not required for IBM Power Workspaces that use backend Power Edge Router (PER)
 # variable "module_var_dns_proxy_ip" {}
+variable "module_var_dns_custom_resolver_ip" {}
 
 
 variable "module_var_web_proxy_enable" {

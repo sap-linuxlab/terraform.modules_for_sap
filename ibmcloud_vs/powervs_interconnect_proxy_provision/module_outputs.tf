@@ -11,3 +11,6 @@ output "output_proxy_port_squid" {
   value = var.module_var_proxy_port_squid
 }
 
+output "output_dns_custom_resolver_ip" {
+  value = ibm_dns_custom_resolver.dns_custom_powervs.locations[0].dns_server_ip
+}

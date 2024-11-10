@@ -30,8 +30,7 @@ resource "null_resource" "dns_resolv_files" {
   provisioner "file" {
     destination = "/tmp/resolv.conf"
     content     = <<EOF
-nameserver 161.26.0.7
-nameserver 161.26.0.8
+nameserver ${var.module_var_dns_custom_resolver_ip}
 nameserver 161.26.0.10
 nameserver 161.26.0.11
 EOF

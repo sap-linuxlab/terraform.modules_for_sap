@@ -66,3 +66,16 @@ resource "ibm_dns_resource_record" "dns_resource_record_ptr" {
   }
 }
 
+
+resource "ibm_dns_custom_resolver" "dns_custom_powervs" {
+  instance_id        =  data.ibm_resource_instance.dns_services_instance.guid
+  name               =  "${var.module_var_resource_prefix}-dns-custom-resolver-pvs"
+  high_availability  =  false
+  enabled            =  true
+
+  locations {
+    subnet_crn  = data.ibm_is_subnet.vpc_subnet.crn
+    enabled     = true
+  }
+
+}
