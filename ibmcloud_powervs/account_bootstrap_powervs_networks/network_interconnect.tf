@@ -7,28 +7,15 @@ data "ibm_pi_workspace" "power_info" {
 
 # IBM Cloud Transit Gateway Connection to IBM Power Workspace, using backend Power Edge Router (PER) connectivity
 
-resource "ibm_tg_gateway" "tgw_vpc_to_power" {
-  provider       = ibm.main
-
-  name           = "${var.module_var_resource_prefix}-tgw"
-  location       = "us-south"
-  global         = true
-  resource_group = var.module_var_resource_group_id
-}
-
-resource "ibm_tg_connection" "tgw_connection_to_vpc" {
-  provider     = ibm.main
-
-  gateway      = ibm_tg_gateway.tgw_vpc_to_power.id # IBM Cloud Transit Gateway ID
-  name         = "${var.module_var_resource_prefix}-vpc-connect"
-  network_type = "vpc"
-  network_id   = var.module_var_ibmcloud_vpc_crn
+data "ibm_tg_gateway" "tgw_existing" {
+  provider = ibm.main
+  name     = var.module_var_ibmcloud_tgw_instance_name
 }
 
 resource "ibm_tg_connection" "tgw_connection_to_power" {
   provider     = ibm.main
 
-  gateway      = ibm_tg_gateway.tgw_vpc_to_power.id # IBM Cloud Transit Gateway ID
+  gateway      = data.ibm_tg_gateway.tgw_existing.id
 
   name         = "${var.module_var_resource_prefix}-power-connect"
   network_type = "power_virtual_server"

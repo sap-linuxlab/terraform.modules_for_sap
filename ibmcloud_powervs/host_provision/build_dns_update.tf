@@ -63,8 +63,8 @@ echo 'Install dig...'
 if [ "$os_type" = "rhel" ] ; then yum --assumeyes --debuglevel=1 install bind-utils ; elif [ "$os_type" = "sles" ] ; then zypper install --no-confirm bind-utils ; fi
 
 echo '#### Run dig to Private DNS with Domain Name ####'
-echo 'Running dig @161.26.0.7 A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}'
-dig @161.26.0.7 A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}
+echo 'Running dig @${var.module_var_dns_custom_resolver_ip} A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}'
+dig @${var.module_var_dns_custom_resolver_ip} A ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name}
 
 echo '#### Run nslookup ####'
 nslookup ${ibm_pi_instance.host_via_certified_profile.pi_instance_name}.${var.module_var_dns_root_domain_name} | \

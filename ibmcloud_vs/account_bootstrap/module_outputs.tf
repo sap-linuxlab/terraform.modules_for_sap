@@ -53,3 +53,7 @@ output "output_host_private_ssh_key" {
 output "output_host_security_group_id" {
   value = ibm_is_security_group.vpc_sg.id
 }
+
+output "output_tgw_name" {
+  value = ibm_tg_gateway.tg_gateway.name
+}
