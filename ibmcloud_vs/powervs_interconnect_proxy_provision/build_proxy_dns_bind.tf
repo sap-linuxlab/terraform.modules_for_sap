@@ -25,7 +25,7 @@
 # // configuration located in /usr/share/doc/bind-{version}/Bv9ARM.html
 
 # options {
-# 	listen-on port 53 { 127.0.0.1; ${ibm_is_instance.proxy_virtual_server.primary_network_interface[0].primary_ip[0].address}; };
+# 	listen-on port 53 { 127.0.0.1; ${ibm_is_instance.proxy_virtual_server.primary_network_attachment[0].virtual_network_interface[0].primary_ip[0].address}; };
 # 	listen-on-v6 port 53 { ::1; };
 # 	directory 	"/var/named";
 # 	dump-file 	"/var/named/data/cache_dump.db";
@@ -132,7 +132,7 @@
 #     # Checking Host Key is false when not using bastion_host_key
 #     type         = "ssh"
 #     user         = "root"
-#     host         = ibm_is_instance.proxy_virtual_server.primary_network_interface[0].primary_ip[0].address
+#     host         = ibm_is_instance.proxy_virtual_server.primary_network_attachment[0].virtual_network_interface[0].primary_ip[0].address
 #     private_key  = var.module_var_host_private_ssh_key
 #     bastion_host = var.module_var_bastion_floating_ip
 #     #bastion_host_key = 

@@ -1,6 +1,6 @@
 
 output "output_proxy_private_ip" {
-  value = ibm_is_instance.proxy_virtual_server.primary_network_interface[0].primary_ip[0].address
+  value = ibm_is_instance.proxy_virtual_server.primary_network_attachment[0].virtual_network_interface[0].primary_ip[0].address
 }
 
 output "output_proxy_host_name" {
