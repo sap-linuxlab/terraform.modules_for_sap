@@ -30,9 +30,9 @@ resource "ibm_is_instance" "bastion_host" {
       subnet = ibm_is_subnet.vpc_bastion_subnet.id
       security_groups = [ibm_is_security_group.vpc_sg_bastion.id]
       allow_ip_spoofing = false
-      enable_infrastructure_nat = true
+      enable_infrastructure_nat = true // must be true as Virtual Server instances require Infrastructure NAT
       protocol_state_filtering_mode = "auto"
-      auto_delete = true // will be false if created separately prior to Virtual Server instance
+      auto_delete = true // if VNI created separately, must be false
     }
   }
 

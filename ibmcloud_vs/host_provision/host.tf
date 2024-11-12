@@ -39,9 +39,9 @@ resource "ibm_is_instance" "virtual_server" {
         var.module_var_bastion_connection_security_group_id
       ]
       allow_ip_spoofing = var.module_var_disable_ip_anti_spoofing // When disable the Anti IP Spoofing = true, then Allow IP Spoofing = true
-      enable_infrastructure_nat = true
+      enable_infrastructure_nat = true // must be true as Virtual Server instances require Infrastructure NAT
       protocol_state_filtering_mode = "auto"
-      auto_delete = true // will be false if created separately prior to Virtual Server instance
+      auto_delete = true // if VNI created separately, must be false
     }
   }
 

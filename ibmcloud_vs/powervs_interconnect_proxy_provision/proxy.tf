@@ -37,9 +37,9 @@ resource "ibm_is_instance" "proxy_virtual_server" {
         var.module_var_bastion_connection_security_group_id
       ]
       allow_ip_spoofing = false
-      enable_infrastructure_nat = false
+      enable_infrastructure_nat = true // must be true as Virtual Server instances require Infrastructure NAT
       protocol_state_filtering_mode = "auto"
-      auto_delete = true // will be false if created separately prior to Virtual Server instance
+      auto_delete = true // if VNI created separately, must be false
     }
   }
 
