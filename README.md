@@ -125,7 +125,7 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | Build scripts for Bastion host:<sub><br>     - Setup BIND/named for DNS Proxy<br>     - Setup Squid for Web Forward Proxy<br>     - Setup Nginx for Web Reverse Proxy</sub> | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
 | <br/>***Host Provision*** |   |   |   |   |   |   |   |
 | Find OS Image with SAP-relevant OS   Package Repositories | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:<br/><sub>clone from Stock OS Image</sub> | :white_check_mark: | :white_check_mark: |
-| Create DNS Records (i.e. A, CNAME, PTR) | :white_check_mark: | :white_check_mark: | ::white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
+| Create DNS Records (i.e. A, CNAME, PTR) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | Create Storage Volumes (defined storage   profile with IOPS/GB, or custom IOPS) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning:<br/><sub>no custom IOPS</sub> | :white_check_mark: | :white_check_mark: |
 | Create Host/s | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Attach Storage Volumes to Host/s | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
