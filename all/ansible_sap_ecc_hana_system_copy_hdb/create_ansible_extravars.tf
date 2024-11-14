@@ -168,11 +168,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_059_13-80002031.SAR'
+      - 'IMDB_SERVER20_059_15-80002031.SAR'
       - 'IMDB_LCAPPS_2059_0-20010426.SAR'
       - 'IMDB_AFL20_059_0-80001894.SAR'
       - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP41_0-20009701.SAR'
+      - 'SWPM10SP42_1-20009701.SAR'
       - 'igsexe_12-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753 Patch 800)
@@ -182,11 +182,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_059_13-80002046.SAR'
+      - 'IMDB_SERVER20_059_15-80002046.SAR'
       - 'IMDB_LCAPPS_2059_0-80002183.SAR'
       - 'IMDB_AFL20_059_0-80002045.SAR'
       - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP41_0-70002492.SAR'
+      - 'SWPM10SP42_1-70002492.SAR'
       - 'igsexe_12-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753 Patch 800)
@@ -233,11 +233,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_x86_64:
       - 'SAPCAR_1115-70006178.EXE'
-      - 'IMDB_SERVER20_059_13-80002031.SAR'
+      - 'IMDB_SERVER20_059_15-80002031.SAR'
       - 'IMDB_LCAPPS_2059_0-20010426.SAR'
       - 'IMDB_AFL20_059_0-80001894.SAR'
       - 'VCH202000_2059_0-80005463.SAR'
-      - 'SWPM10SP41_0-20009701.SAR'
+      - 'SWPM10SP42_1-20009701.SAR'
       - 'igsexe_12-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002573.SAR' # Kernel Part I (753 Patch 800)
@@ -247,11 +247,11 @@ sap_swpm_templates_install_dictionary:
 
     softwarecenter_search_list_ppc64le:
       - 'SAPCAR_1115-70006238.EXE'
-      - 'IMDB_SERVER20_059_13-80002046.SAR'
+      - 'IMDB_SERVER20_059_15-80002046.SAR'
       - 'IMDB_LCAPPS_2059_0-80002183.SAR'
       - 'IMDB_AFL20_059_0-80002045.SAR'
       - 'VCH202000_2059_0-80005464.SAR'
-      - 'SWPM10SP41_0-70002492.SAR'
+      - 'SWPM10SP42_1-70002492.SAR'
       - 'igsexe_12-80003246.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - 'SAPEXE_800-80002630.SAR' # Kernel Part I (753 Patch 800)
