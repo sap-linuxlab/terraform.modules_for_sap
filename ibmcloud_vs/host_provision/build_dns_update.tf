@@ -82,7 +82,7 @@ EOF
     # Checking Host Key is false when not using bastion_host_key
     type         = "ssh"
     user         = "root"
-    host         = ibm_is_instance.virtual_server.primary_network_interface[0].primary_ip[0].address
+    host         = ibm_is_instance.virtual_server.primary_network_attachment[0].virtual_network_interface[0].primary_ip[0].address
     private_key  = var.module_var_host_private_ssh_key
     bastion_host = var.module_var_bastion_floating_ip
     #bastion_host_key = 
@@ -116,7 +116,7 @@ resource "null_resource" "dns_resolv_update" {
     # Checking Host Key is false when not using bastion_host_key
     type                = "ssh"
     user                = "root"
-    host                = ibm_is_instance.virtual_server.primary_network_interface[0].primary_ip[0].address
+    host                = ibm_is_instance.virtual_server.primary_network_attachment[0].virtual_network_interface[0].primary_ip[0].address
     private_key         = var.module_var_host_private_ssh_key
     bastion_host        = var.module_var_bastion_floating_ip
     bastion_port        = var.module_var_bastion_ssh_port

@@ -1,6 +1,7 @@
 # OS Images lookup
 
 data "ibm_is_images" "host_os_images_list" {
+  status = "available"
 }
 
 # Loop through and display everything from images, which is list of objects with 40+ elements, with each element containing 7 attributes which are strings

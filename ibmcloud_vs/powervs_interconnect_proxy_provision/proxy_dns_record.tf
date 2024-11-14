@@ -23,7 +23,7 @@ resource "ibm_dns_resource_record" "dns_resource_record_a" {
   zone_id     = local.target_dns_zone_id
   type        = "A"
   name        = ibm_is_instance.proxy_virtual_server.name // Use Host Name given to the Virtual Server
-  rdata       = ibm_is_instance.proxy_virtual_server.primary_network_interface[0].primary_ip[0].address
+  rdata       = ibm_is_instance.proxy_virtual_server.primary_network_attachment[0].virtual_network_interface[0].primary_ip[0].address
   ttl         = 1800
 }
 
@@ -52,7 +52,7 @@ resource "ibm_dns_resource_record" "dns_resource_record_ptr" {
   instance_id = data.ibm_resource_instance.dns_services_instance.guid
   zone_id     = local.target_dns_zone_id
   type        = "PTR"
-  name        = ibm_is_instance.proxy_virtual_server.primary_network_interface[0].primary_ip[0].address
+  name        = ibm_is_instance.proxy_virtual_server.primary_network_attachment[0].virtual_network_interface[0].primary_ip[0].address
   rdata       = "${ibm_is_instance.proxy_virtual_server.name}.${var.module_var_dns_root_domain_name}"
   ttl         = 1800
 
@@ -66,3 +66,16 @@ resource "ibm_dns_resource_record" "dns_resource_record_ptr" {
   }
 }
 
+
+resource "ibm_dns_custom_resolver" "dns_custom_powervs" {
+  instance_id        =  data.ibm_resource_instance.dns_services_instance.guid
+  name               =  "${var.module_var_resource_prefix}-dns-custom-resolver-pvs"
+  high_availability  =  false
+  enabled            =  true
+
+  locations {
+    subnet_crn  = data.ibm_is_subnet.vpc_subnet.crn
+    enabled     = true
+  }
+
+}

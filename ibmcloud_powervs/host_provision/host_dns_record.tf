@@ -19,6 +19,7 @@
 # Create "A" (IPv4 Address) Resource Record to map IPv4 address as hostname / subdomain of the root domain name
 # The input name becomes the "subdomain of the root domain"
 resource "ibm_dns_resource_record" "dns_resource_record_a" {
+  provider    = ibm.main
   instance_id = data.ibm_resource_instance.dns_services_instance.guid
   zone_id     = local.target_dns_zone_id
   type        = "A"
@@ -30,6 +31,7 @@ resource "ibm_dns_resource_record" "dns_resource_record_a" {
 # Canonical Name (CNAME) - Provides a way to alias a hostname to another hostname or Canonical Name (CNAME)
 # "An A, AAAA or CNAME record already exists with that host" will appear if the key name has a value equal to any A, AAAA or CNAME record that exists
 resource "ibm_dns_resource_record" "dns_resource_record_cname" {
+  provider    = ibm.main
   instance_id = data.ibm_resource_instance.dns_services_instance.guid
   zone_id     = local.target_dns_zone_id
   type        = "CNAME"
@@ -49,6 +51,7 @@ resource "ibm_dns_resource_record" "dns_resource_record_cname" {
 
 # PTR (Pointer) - Enables reverse DNS lookup, from an IP address (IPv4 or IPv6) to a hostname
 resource "ibm_dns_resource_record" "dns_resource_record_ptr" {
+  provider    = ibm.main
   instance_id = data.ibm_resource_instance.dns_services_instance.guid
   zone_id     = local.target_dns_zone_id
   type        = "PTR"

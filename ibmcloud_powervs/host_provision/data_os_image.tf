@@ -2,7 +2,8 @@
 # List all Stock OS Images for IBM Power Virtual Server
 # Equivalent to ibmcloud pi image-list-catalog --long
 data "ibm_pi_catalog_images" "stock_os_images_list" {
-  pi_cloud_instance_id = var.module_var_ibm_power_group_guid
+  provider             = ibm.powervs_secure_enclave
+  pi_cloud_instance_id = var.module_var_ibm_power_guid
   sap                  = true
 }
 
