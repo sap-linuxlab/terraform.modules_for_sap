@@ -44,17 +44,18 @@ jobs:
             cd "$d"
             if [ "${{ matrix.terraform_module_parent }}" == "ibmcloud_powervs" ]
             then
-              echo 'provider "ibm" {' > temp_provider.tf
-              echo '  alias = "main"' > temp_provider.tf
-              echo '  ibmcloud_api_key = "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"' > temp_provider.tf
-              echo '  region = "eu-es"' > temp_provider.tf
-              echo '}' > temp_provider.tf
-              echo 'provider "ibm" {' > temp_provider.tf
-              echo '  alias = "powervs_secure_enclave"' > temp_provider.tf
-              echo '  ibmcloud_api_key = "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"' > temp_provider.tf
-              echo '  region = "mad"' > temp_provider.tf
-              echo '  zone = "mad04"' > temp_provider.tf
-              echo '}' > temp_provider.tf
+              touch temp_provider.tf
+              echo 'provider "ibm" {' >> temp_provider.tf
+              echo '  alias = "main"' >> temp_provider.tf
+              echo '  ibmcloud_api_key = "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"' >> temp_provider.tf
+              echo '  region = "eu-es"' >> temp_provider.tf
+              echo '}' >> temp_provider.tf
+              echo 'provider "ibm" {' >> temp_provider.tf
+              echo '  alias = "powervs_secure_enclave"' >> temp_provider.tf
+              echo '  ibmcloud_api_key = "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"' >> temp_provider.tf
+              echo '  region = "mad"' >> temp_provider.tf
+              echo '  zone = "mad04"' >> temp_provider.tf
+              echo '}' >> temp_provider.tf
             fi
             terraform validate -no-color
             cd ..
