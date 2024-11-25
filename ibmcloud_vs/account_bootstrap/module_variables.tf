@@ -1,6 +1,5 @@
 
 variable "module_var_bastion_user" {
-  default = "bastionuser"
 }
 
 variable "module_var_bastion_ssh_port" {
