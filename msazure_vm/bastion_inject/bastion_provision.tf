@@ -157,7 +157,7 @@ resource "null_resource" "bastion_setup" {
     echo 'Removing Root SSH Login for Bastion from Public IP'
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
     sed -i 's/#PermitRootLogin/PermitRootLogin/' /etc/ssh/sshd_config
-    echo 'Allow SSH Login to root user only from the Bastion's private Subnet range (i.e. no root login using Public IP)'
+    echo 'Allow SSH Login to root user only from the Bastion private Subnet range (i.e. no root login using Public IP)'
     echo 'Match Address ${local.target_vnet_subnet_range}' >> /etc/ssh/sshd_config
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 
