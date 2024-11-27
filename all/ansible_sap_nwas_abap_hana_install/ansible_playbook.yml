@@ -39,6 +39,12 @@
         loop_var: convert_item
         label: "{{ convert_item.name }}"
 
+    - name: Set facts for all hosts - IBM Power (ppc64le) only
+      ansible.builtin.set_fact:
+        sap_storage_setup_multipath_enable_and_detect: true
+      when:
+        - ansible_architecture == "ppc64le"
+
     - name: Execute Ansible Role sap_storage_setup
       include_role:
         name: { role: community.sap_install.sap_storage_setup }
