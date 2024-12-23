@@ -135,7 +135,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002603.SAR' # Kernel Part II (753 Patch 1000), IBM DB2
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP42_3-20009701.SAR'
+      - 'SWPM10SP42_4-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - '51055282' # IBM DB2 FOR LUW 11.5 MP7 FP0 SAP LINUX x86_64, ZIP
@@ -202,7 +202,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002603.SAR' # Kernel Part II (753 Patch 1000), IBM DB2
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP42_3-20009701.SAR'
+      - 'SWPM10SP42_4-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - '51055282' # IBM DB2 FOR LUW 11.5 MP7 FP0 SAP LINUX x86_64, ZIP
@@ -279,7 +279,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002603.SAR' # Kernel Part II (753 Patch 1000), IBM DB2
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP42_3-20009701.SAR'
+      - 'SWPM10SP42_4-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - '51055282' # IBM DB2 FOR LUW 11.5 MP7 FP0 SAP LINUX x86_64, ZIP
@@ -344,7 +344,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1000-80002573.SAR' # Kernel Part I (753 Patch 1000)
       - 'SAPEXEDB_1000-80002603.SAR' # Kernel Part II (753 Patch 1000), IBM DB2
       - 'SAPHOSTAGENT51_51-20009394.SAR'
-      - 'SWPM10SP42_3-20009701.SAR'
+      - 'SWPM10SP42_4-20009701.SAR'
       - 'igsexe_13-80003187.sar' # IGS 7.53
       - 'igshelper_17-10010245.sar'
       - '51055282' # IBM DB2 FOR LUW 11.5 MP7 FP0 SAP LINUX x86_64, ZIP
