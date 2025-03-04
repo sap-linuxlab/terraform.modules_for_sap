@@ -337,7 +337,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1100-80002573.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002572.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT51_51-20009394.SAR' # SAP Host Agent 7.22 SP58
-      - 'SUM11SP03_8-80006800.SAR' # SUM 1.1 SP00 Patch 10
+      - 'SUM11SP04_1-80006800.SAR' # SUM 1.1 SP00 Patch 10
       - 'SAPKD74083' # SPAM/SAINT Update - Version 740/0083
       - '51050036_1' # SAP ERP 6.0 on HANA EHP7 Installation Export 1/18
       - '51050036_2'
@@ -368,7 +368,7 @@ sap_swpm_templates_install_dictionary:
       - 'SAPEXE_1100-80002630.SAR' # Kernel Part I (753 Patch 1100)
       - 'SAPEXEDB_1100-80002629.SAR' # Kernel Part II (753 Patch 1100), SAP HANA
       - 'SAPHOSTAGENT58_58-80004831.SAR' # SAP Host Agent 7.22 SP58
-      - 'SUM11SP03_8-80006861.SAR' # SUM 1.1 SP00 Patch 10
+      - 'SUM11SP04_1-80006861.SAR' # SUM 1.1 SP00 Patch 10
       - 'SAPKD74083' # SPAM/SAINT Update - Version 740/0083
       - '51050036_1' # SAP ERP 6.0 on HANA EHP7 Installation Export 1/18
       - '51050036_2'
