@@ -13,6 +13,4 @@ variable "module_var_az_vnet_subnet_name" {}
 
 variable "module_var_host_security_group_name" {}
 
-variable "module_var_nfs_boolean_sapmnt" {}
-
 variable "module_var_dns_zone_name" {}

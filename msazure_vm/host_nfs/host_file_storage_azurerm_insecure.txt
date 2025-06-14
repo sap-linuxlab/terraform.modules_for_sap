@@ -26,7 +26,6 @@ locals {
 # Create Azure Storage Account for File Storage
 
 resource "azurerm_storage_account" "storage_account_sap" {
-  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
 
   name                     = "${var.module_var_resource_prefix}stgacc1${random_string.random_suffix1.result}"
   resource_group_name      = var.module_var_az_resource_group_name
@@ -71,9 +70,8 @@ resource "azurerm_storage_account" "storage_account_sap" {
 ## Error: autorest/azure: Service returned an error. Status=403 Code="AuthorizationFailure" Message="This request is not authorized to perform this operation"
 
 resource "azurerm_storage_share" "file_storage_sapmnt" {
-  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
 
-  storage_account_name     = azurerm_storage_account.storage_account_sap[0].name
+  storage_account_name     = azurerm_storage_account.storage_account_sap.name
   name                     = "${var.module_var_resource_prefix}nfs1"
   access_tier              = "Premium"
   enabled_protocol         = "NFS"
