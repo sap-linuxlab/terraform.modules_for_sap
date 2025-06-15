@@ -63,7 +63,11 @@ variable "module_var_web_proxy_exclusion" {}
 variable "module_var_os_vendor_enable" {
   default = true
 }
-variable "module_var_os_vendor_account_user" {}
-variable "module_var_os_vendor_account_user_passcode" {}
+variable "module_var_os_vendor_account_user" {
+  default = ""
+}
+variable "module_var_os_vendor_account_user_passcode" {
+  default = ""
+}
 
 variable "module_var_storage_definition" {}

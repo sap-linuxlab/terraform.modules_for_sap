@@ -17,8 +17,6 @@ data "azurerm_resource_group" "id_lookup" {
 
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?pivots=deployment-language-terraform
 resource "azapi_resource" "storage_account_sap" {
-  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
-
   type = "Microsoft.Storage/storageAccounts@2022-05-01"
   name = "${var.module_var_resource_prefix}stgacc${random_string.random_suffix.result}"
   location = var.module_var_az_location_region
@@ -75,11 +73,24 @@ resource "azapi_resource" "storage_account_sap" {
 
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/fileservices/shares?pivots=deployment-language-terraform
 resource "azapi_resource" "file_storage_sapmnt" {
-  count = var.module_var_nfs_boolean_sapmnt ? 1 : 0
-
   type = "Microsoft.Storage/storageAccounts/fileServices/shares@2022-05-01"
-  name = "${var.module_var_resource_prefix}nfs"
-  parent_id = "${azapi_resource.storage_account_sap[0].id}/fileServices/default"
+  name = "${var.module_var_resource_prefix}nfssapmnt"
+  parent_id = "${azapi_resource.storage_account_sap.id}/fileServices/default"
+  body = {
+    properties = {
+      accessTier = "Premium"
+      enabledProtocols = "NFS"
+      shareQuota = 2048  // Maximum GB capacity of NFS
+#      metadata = {}
+#      rootSquash = "string"
+    }
+  }
+}
+
+resource "azapi_resource" "file_storage_transport" {
+  type = "Microsoft.Storage/storageAccounts/fileServices/shares@2022-05-01"
+  name = "${var.module_var_resource_prefix}nfstrans"
+  parent_id = "${azapi_resource.storage_account_sap.id}/fileServices/default"
   body = {
     properties = {
       accessTier = "Premium"
@@ -102,12 +113,12 @@ resource "azapi_resource" "file_storage_sapmnt" {
 #data "azapi_resource" "data_storage_account_file_service" {
 #  type       = "Microsoft.Storage/storageAccounts/fileServices@2022-05-01"
 #  name       = "default"
-#  parent_id  = "${azapi_resource.storage_account_sap[0].id}"
+#  parent_id  = "${azapi_resource.storage_account_sap.id}"
 #}
 
 #data "azapi_resource" "data_storage_account_file_service_shares" {
 #  type       = "Microsoft.Storage/storageAccounts/fileServices/shares@2022-05-01"
 #  name       = azapi_resource.file_storage_sapmnt.name
-#  parent_id  = "${azapi_resource.storage_account_sap[0].id}/fileServices/default"
+#  parent_id  = "${azapi_resource.storage_account_sap.id}/fileServices/default"
 #}
 

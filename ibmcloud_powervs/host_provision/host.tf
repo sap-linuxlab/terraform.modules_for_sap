@@ -3,7 +3,6 @@
 
 resource "ibm_pi_image" "host_os_image" {
   provider             = ibm.powervs_secure_enclave
-  pi_image_name        = "${var.module_var_host_os_image}-tf"
   pi_image_id          = local.target_catalog_os_image_id
   pi_cloud_instance_id = var.module_var_ibm_power_guid
 }
