@@ -1,6 +1,5 @@
 # Terraform Modules for SAP
 [![Terraform Validate Tests](https://github.com/sap-linuxlab/terraform.modules_for_sap/actions/workflows/terraform_validate.yml/badge.svg?branch=main)](https://github.com/sap-linuxlab/terraform.modules_for_sap/actions/workflows/terraform_validate.yml)
-[![SAP Software Availability Tests](https://github.com/sap-linuxlab/terraform.modules_for_sap/actions/workflows/terraform_ansible_software_availability.yml/badge.svg?branch=main)](https://github.com/sap-linuxlab/terraform.modules_for_sap/actions/workflows/terraform_ansible_software_availability.yml)
 
 Terraform Modules for SAP are a subcomponent designed to be used from the [Terraform Templates for SAP](https://github.com/sap-linuxlab/terraform.templates_for_sap), but can be executed individually.
 
