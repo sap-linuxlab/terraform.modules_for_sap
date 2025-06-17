@@ -116,7 +116,7 @@ The below table lists the Terraform Modules for SAP, and any detailed documentat
 | <br/>***Host Network Access for SAP*** |   |   |   |   |   |   |   |
 | Append Network Security rules for SAP (e.g. Security Group Rules)<sub><br>     - SAP NetWeaver AS (ABAP)<br>     - SAP NetWeaver AS (JAVA)<br>     - SAP HANA<br>     - SAP HANA XSA<br>     - SAP Web Dispatcher</sub> | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | <br/>***Host NFS*** |   |   |   |   |   |   |   |
-| Provision | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning: | N/A | N/A |
+| Provision | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | N/A | N/A |
 | <br/>***Proxy interconnect provision for increased security hosts*** |   |   |   |   |   |   |   |
 | Find OS Image | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
 | Create Proxy host | N/A | N/A | N/A | N/A | :white_check_mark: | N/A | N/A |
