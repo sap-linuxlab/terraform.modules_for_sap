@@ -38,5 +38,8 @@ sap_vm_provision_ssh_host_private_key_file_path: "${abspath(path.root)}/tmp/host
 ${ strcontains(var.module_var_ansible_sap_scenario_selection, "hana") ? "# Ansible Playbooks for SAP - SAP HANA variables when multiple hosts (HA or Scale-Out)" : "" }
 ${ strcontains(var.module_var_ansible_sap_scenario_selection, "hana") ? "sap_hana_install_update_firewall: true" : "" }
 
+${ var.module_var_ibmpower_flag ? "# Ansible Playbooks for SAP - IBM Power" : "" }
+${ var.module_var_ibmpower_flag ? "sap_storage_setup_multipath_enable_and_detect: true" : "" }
+
 EOF
 }
