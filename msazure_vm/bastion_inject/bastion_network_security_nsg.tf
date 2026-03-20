@@ -21,6 +21,27 @@ resource "azurerm_network_security_group" "bastion_nsg" {
     source_address_prefix      = "*"
   }
 
+  # TCP port 443 for SUSE Subscription Management Tool (SMT) package repositories (smt-azure.susecloud.net)
+  # https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/linux/suse-public-cloud-connectivity-registration-issues
+  security_rule {
+    name                       = "outbound_https_443"
+    priority                   = 200
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    destination_port_range     = 443
+    destination_address_prefix = "0.0.0.0/0"
+    source_port_range          = "*"
+    source_address_prefix      = "*"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      tags,
+      security_rule # avoid force replacement when additional rules are appended by azurerm_network_security_rule resources
+    ]
+  }
+
 }
 
 

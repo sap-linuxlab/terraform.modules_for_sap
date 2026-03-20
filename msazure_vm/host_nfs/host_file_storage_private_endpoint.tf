@@ -4,7 +4,7 @@ resource "azurerm_private_endpoint" "endpoint" {
   name                = "${var.module_var_resource_prefix}stgacc${random_string.random_suffix.result}-private-endpoint"
   resource_group_name = var.module_var_az_resource_group_name
   location            = var.module_var_az_location_region
-  subnet_id           = local.target_vnet_subnet_id
+  subnet_id           = var.module_var_az_vnet_subnet_id
 
   private_service_connection {
     name                           = "${var.module_var_resource_prefix}stgacc${random_string.random_suffix.result}-private-service-connection"
@@ -16,6 +16,12 @@ resource "azurerm_private_endpoint" "endpoint" {
   private_dns_zone_group {
     name                 = var.module_var_dns_zone_name
     private_dns_zone_ids = ["${data.azurerm_private_dns_zone.vnet_private_dns.id}"]
+  }
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
   }
 
 }

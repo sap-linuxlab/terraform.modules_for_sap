@@ -3,7 +3,7 @@
 # By default, the Internal Domain Name Suffix will use ".internal.cloudapp.net" from the Azure Dynamic Host Configuration Protocol (DHCP) is applied to each NIC.
 resource "azurerm_network_interface" "host_nic0" {
   name                = "${var.module_var_host_name}-nic-0"
-  resource_group_name = local.target_resource_group_name
+  resource_group_name = var.module_var_az_resource_group_name
   location            = var.module_var_az_location_region
 
   ip_forwarding_enabled = var.module_var_disable_ip_anti_spoofing // When disable the Anti IP Spoofing = true, then Enable IP Forwarding = true
@@ -11,18 +11,25 @@ resource "azurerm_network_interface" "host_nic0" {
   ip_configuration {
     primary                       = "true"
     name                          = "${var.module_var_host_name}-nic-0-link"
-    subnet_id                     = local.target_vnet_subnet_id
+    subnet_id                     = var.module_var_az_vnet_subnet_id
     private_ip_address_allocation = "Dynamic"
     #private_ip_address            = 
     #public_ip_address_id          = 
   }
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
+
 }
 
 
 # Create host
 resource "azurerm_linux_virtual_machine" "host" {
   name                = var.module_var_host_name
-  resource_group_name = local.target_resource_group_name
+  resource_group_name = var.module_var_az_resource_group_name
   location            = var.module_var_az_location_region
   size                = var.module_var_az_vm_instance
 
@@ -83,7 +90,8 @@ resource "azurerm_linux_virtual_machine" "host" {
 
   lifecycle {
     ignore_changes = [
-      source_image_reference
+      source_image_reference,
+      tags
     ]
   }
 

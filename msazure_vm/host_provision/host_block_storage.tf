@@ -16,7 +16,7 @@ resource "azurerm_managed_disk" "block_volume" {
   }
 
   name                 = "${var.module_var_host_name}-vol-${each.value.name}"
-  resource_group_name  = local.target_resource_group_name
+  resource_group_name  = var.module_var_az_resource_group_name
   location             = var.module_var_az_location_region
 
   // Premium SSD size (P), Standard SSD size (E), Standard HDD size (S)
@@ -26,6 +26,12 @@ resource "azurerm_managed_disk" "block_volume" {
   disk_size_gb         = each.value.disk_size
 
   disk_iops_read_write = each.value.disk_iops
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 
   # Increase operation timeout for Compute and Storage, default to 30m in all Terraform Modules for SAP
   timeouts {
