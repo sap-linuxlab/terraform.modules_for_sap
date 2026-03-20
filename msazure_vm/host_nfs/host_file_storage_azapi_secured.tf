@@ -66,6 +66,13 @@ resource "azapi_resource" "storage_account_sap" {
       supportsHttpsTrafficOnly = false // "Secure transfer required" must be disabled, as the NFS protocol does not support encryption and relies on network-level security.
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
+
 }
 
 

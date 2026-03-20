@@ -18,9 +18,16 @@ resource "azurerm_network_security_group" "bastion_connection_sg" {
     access                     = "Allow"
     protocol                   = "Tcp"
     destination_port_range     = 22
-    destination_address_prefix = data.azurerm_subnet.vnet_subnet.address_prefix  # if using local value this will cause error UnknownVal
+    destination_address_prefix = var.module_var_az_vnet_subnet_range # if using local value this will cause error UnknownVal
     source_port_range          = 22
     source_address_prefix      = azurerm_subnet.bastion_subnet.address_prefixes[0]
+  }
+
+  lifecycle {
+    ignore_changes = [
+      tags,
+      security_rule # avoid force replacement when additional rules are appended by azurerm_network_security_rule resources
+    ]
   }
 
 }
@@ -57,6 +64,19 @@ resource "azurerm_network_security_group" "bastion_vm_sg" {
     source_address_prefix      = "0.0.0.0/0"
   }
 
+  # Security Group Rule for Bastion/Jump Host - Allow Inbound GRD RDP port chosen by user
+  security_rule {
+    name                       = "inbound_grd_rdp_custom"
+    priority                   = 102
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    destination_port_range     = var.module_var_bastion_grd_rdp_port
+    destination_address_prefix = "0.0.0.0/0"
+    source_port_range          = "*"
+    source_address_prefix      = "0.0.0.0/0"
+  }
+
   # Security Group Rule for Bastion/Jump Host - Allow Outbound SSH Port 22 connection (e.g. to other hosts)
   #  security_rule {
   #    name                       = "outbound_ssh_22"
@@ -70,6 +90,11 @@ resource "azurerm_network_security_group" "bastion_vm_sg" {
   #    source_address_prefix      = "0.0.0.0/0"
   #  }
 
+  lifecycle {
+    ignore_changes = [
+      tags,
+      security_rule # avoid force replacement when additional rules are appended by azurerm_network_security_rule resources
+    ]
+  }
+
 }
-
-

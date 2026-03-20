@@ -9,6 +9,11 @@ resource "azurerm_public_ip" "nat_gw_publicip" {
   allocation_method   = "Static"
   sku                 = "Standard"
   #zones               = ["1"]
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 resource "azurerm_nat_gateway" "nat_gw" {
@@ -19,6 +24,11 @@ resource "azurerm_nat_gateway" "nat_gw" {
   sku_name            = "Standard"
   #idle_timeout_in_minutes = 10
   #zones               = ["1"]
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 resource "azurerm_subnet_nat_gateway_association" "nat_gw_assoc_subnet" {

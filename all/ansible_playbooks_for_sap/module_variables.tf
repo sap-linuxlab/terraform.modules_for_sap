@@ -47,6 +47,10 @@ variable "module_var_ansible_sap_system_nwas_java_ci_instance_nr" {}
 variable "module_var_ansible_sap_maintenance_planner_transaction_name" {}
 variable "module_var_ansible_sap_software_download_directory" {}
 
+variable "module_var_ansible_sap_system_default_password" {
+  default = "NewPass$321"
+}
+
 variable "module_var_ibmpower_flag" {
   default = false
 }

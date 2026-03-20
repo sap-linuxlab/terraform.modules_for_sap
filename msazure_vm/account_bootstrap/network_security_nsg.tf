@@ -67,10 +67,17 @@ resource "azurerm_network_security_group" "vnet_nsg" {
     source_address_prefix      = "*"
   }
 
+  lifecycle {
+    ignore_changes = [
+      tags,
+      security_rule # avoid force replacement when additional rules are appended by azurerm_network_security_rule resources
+    ]
+  }
+
 }
 
 
 resource "azurerm_subnet_network_security_group_association" "vnet_nsg_attach_subnet" {
-  subnet_id                 = local.target_vnet_subnet_id
+  subnet_id                 = var.module_var_az_vnet_subnet_id
   network_security_group_id = azurerm_network_security_group.vnet_nsg.id
 }

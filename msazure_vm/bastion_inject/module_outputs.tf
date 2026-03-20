@@ -21,3 +21,7 @@ output "output_bastion_connection_security_group_name" {
 output "output_vnet_bastion_subnet_name" {
   value = azurerm_subnet.bastion_subnet.name
 }
+
+output "output_vnet_bastion_subnet_range" {
+  value = azurerm_subnet.bastion_subnet.address_prefixes[0]
+}

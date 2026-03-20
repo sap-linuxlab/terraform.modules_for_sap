@@ -11,6 +11,11 @@ resource "azurerm_ssh_public_key" "bastion_ssh" {
   resource_group_name = var.module_var_az_resource_group_name
   location            = var.module_var_az_location_region
   public_key          = trimspace(tls_private_key.bastion_ssh.public_key_openssh)
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 
@@ -26,6 +31,11 @@ resource "azurerm_ssh_public_key" "host_ssh" {
   resource_group_name = var.module_var_az_resource_group_name
   location            = var.module_var_az_location_region
   public_key          = trimspace(tls_private_key.host_ssh.public_key_openssh)
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 

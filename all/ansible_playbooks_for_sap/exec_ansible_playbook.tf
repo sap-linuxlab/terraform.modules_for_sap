@@ -31,6 +31,11 @@ resource "null_resource" "ansible_exec" {
   provisioner "local-exec" {
     command = <<EOT
 
+    # GNU vs BSD SED check
+    sed --version >/dev/null 2>&1
+    gnu_sed_check=$?
+    if [ $gnu_sed_check != 0 ] ; then echo 'Assume BSD sed (macOS)' && sed_cmd="$sed_cmd" ; else sed_cmd="sed -i.bak"; fi
+
     sap_scenario_selection="${var.module_var_ansible_sap_scenario_selection}"
 
     # If Terraform Cloud/Enterprise, install Ansible Core to the Workspace Run container (Ubuntu)
@@ -79,38 +84,41 @@ resource "null_resource" "ansible_exec" {
     curl -L -J -O $ansible_playbooks_for_sap_latest --output-dir ${abspath(path.root)}/tmp
     tar xf ${abspath(path.root)}/tmp/sap-linuxlab-ansible.playbooks_for_sap-*.tar.gz -C ${abspath(path.root)}/tmp/ansible_playbooks_for_sap --strip-components 1
 
-    echo "### Amend Requirements for Ansible Playbooks for SAP ###"
-    sed -i .bak '/# Collections for Infrastructure from Ansible Galaxy.*$/,$d' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_requirements.yml
+    echo "### Amend Requirements file of Ansible Playbooks for SAP ###"
+    $sed_cmd '/# Collections for Infrastructure from Ansible Galaxy.*$/,$d' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_requirements.yml
     ansible-galaxy collection install --requirements-file ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_requirements.yml --collections-path ${path.root}/tmp
     # Must export the Shell Variable, otherwise it cannot be read by Ansible binaries
     export ANSIBLE_COLLECTIONS_PATH="${abspath(path.root)}/tmp"
 
     echo "### Edit selected SAP scenario from Ansible Playbooks for SAP ###"
-    sed -i .bak 's|sap_vm_provision_iac_type: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_iac_type: "existing_hosts"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_vm_provision_iac_platform: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_iac_platform: "existing_hosts"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_vm_provision_dns_root_domain: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_dns_root_domain: "${var.module_var_dns_root_domain}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_vm_provision_host_specification_plan: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_host_specification_plan: "${var.module_var_host_specification_plan}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_software_product: "ENTER_STRING_VALUE_HERE"|sap_software_product: "${var.module_var_ansible_sap_software_product}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_id_user: "ENTER_STRING_VALUE_HERE"|sap_id_user: "${var.module_var_ansible_sap_id_user}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak "s|sap_id_user_password: 'ENTER_STRING_VALUE_HERE'|sap_id_user_password: '${var.module_var_ansible_sap_id_user_password}'|" ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_install_media_detect_source_directory: "ENTER_STRING_VALUE_HERE"|sap_install_media_detect_source_directory: "${var.module_var_ansible_sap_software_download_directory}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_sid\:.*#|sap_system_sid: \"${var.module_var_ansible_sap_system_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_hana_db_sid\:.*#|sap_system_hana_db_sid: \"${var.module_var_ansible_sap_system_hana_db_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_hana_db_instance_nr\:.*#|sap_system_hana_db_instance_nr: \"${var.module_var_ansible_sap_system_hana_db_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_anydb_sid\:.*#|sap_system_anydb_sid: \"${var.module_var_ansible_sap_system_anydb_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_nwas_abap_ascs_instance_nr\:.*#|sap_system_nwas_abap_ascs_instance_nr: \"${var.module_var_ansible_sap_system_nwas_abap_ascs_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_nwas_abap_pas_instance_nr\:.*#|sap_system_nwas_abap_pas_instance_nr: \"${var.module_var_ansible_sap_system_nwas_abap_pas_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_nwas_abap_aas_instance_nr\:.*#|sap_system_nwas_abap_aas_instance_nr: \"${var.module_var_ansible_sap_system_nwas_abap_aas_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_nwas_java_scs_instance_nr\:.*#|sap_system_nwas_java_scs_instance_nr: \"${var.module_var_ansible_sap_system_nwas_java_scs_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_system_nwas_java_ci_instance_nr\:.*#|sap_system_nwas_java_ci_instance_nr: \"${var.module_var_ansible_sap_system_nwas_java_ci_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    sed -i .bak 's|sap_maintenance_planner_transaction_name\:.*#|sap_maintenance_planner_transaction_name: "${var.module_var_ansible_sap_maintenance_planner_transaction_name}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
-    if [ "${strcontains(var.module_var_ansible_sap_scenario_selection, "solman")}" == "true" ] ; then sed -i .bak 's|sap_system_sid_abap\:.*#|sap_system_sid_abap: \"${var.module_var_ansible_sap_system_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml ; fi
-    if [ "${strcontains(var.module_var_ansible_sap_scenario_selection, "solman")}" == "true" ] ; then sed -i .bak 's|sap_system_sid_java\:.*#|sap_system_sid_java: \"${format("%s%s%s",substr(var.module_var_ansible_sap_system_sid,0,1),"J",substr(var.module_var_ansible_sap_system_sid,2,1))}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml ; fi
+    $sed_cmd 's|sap_vm_provision_iac_type: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_iac_type: "existing_hosts"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_vm_provision_iac_platform: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_iac_platform: "existing_hosts"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_vm_provision_dns_root_domain: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_dns_root_domain: "${var.module_var_dns_root_domain}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_vm_provision_host_specification_plan: "ENTER_STRING_VALUE_HERE"|sap_vm_provision_host_specification_plan: "${var.module_var_host_specification_plan}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_software_product: "ENTER_STRING_VALUE_HERE"|sap_software_product: "${var.module_var_ansible_sap_software_product}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_id_user: "ENTER_STRING_VALUE_HERE"|sap_id_user: "${var.module_var_ansible_sap_id_user}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd "s|sap_id_user_password: 'ENTER_STRING_VALUE_HERE'|sap_id_user_password: '${var.module_var_ansible_sap_id_user_password}'|" ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_install_media_detect_source_directory: "ENTER_STRING_VALUE_HERE"|sap_install_media_detect_source_directory: "${var.module_var_ansible_sap_software_download_directory}"|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_sid\:.*#|sap_system_sid: \"${var.module_var_ansible_sap_system_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_hana_db_sid\:.*#|sap_system_hana_db_sid: \"${var.module_var_ansible_sap_system_hana_db_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_hana_db_instance_nr\:.*#|sap_system_hana_db_instance_nr: \"${var.module_var_ansible_sap_system_hana_db_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_anydb_sid\:.*#|sap_system_anydb_sid: \"${var.module_var_ansible_sap_system_anydb_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_nwas_abap_ascs_instance_nr\:.*#|sap_system_nwas_abap_ascs_instance_nr: \"${var.module_var_ansible_sap_system_nwas_abap_ascs_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_nwas_abap_pas_instance_nr\:.*#|sap_system_nwas_abap_pas_instance_nr: \"${var.module_var_ansible_sap_system_nwas_abap_pas_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_nwas_abap_aas_instance_nr\:.*#|sap_system_nwas_abap_aas_instance_nr: \"${var.module_var_ansible_sap_system_nwas_abap_aas_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_nwas_java_scs_instance_nr\:.*#|sap_system_nwas_java_scs_instance_nr: \"${var.module_var_ansible_sap_system_nwas_java_scs_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_system_nwas_java_ci_instance_nr\:.*#|sap_system_nwas_java_ci_instance_nr: \"${var.module_var_ansible_sap_system_nwas_java_ci_instance_nr}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+    $sed_cmd 's|sap_maintenance_planner_transaction_name\:.*#|sap_maintenance_planner_transaction_name: "${var.module_var_ansible_sap_maintenance_planner_transaction_name}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+
+    $sed_cmd 's|_password\: '\'''\''|_password: '\''${var.module_var_ansible_sap_system_default_password}'\''|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml
+
+    if [ "${strcontains(var.module_var_ansible_sap_scenario_selection, "solman")}" == "true" ] ; then $sed_cmd 's|sap_system_sid_abap\:.*#|sap_system_sid_abap: \"${var.module_var_ansible_sap_system_sid}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml ; fi
+    if [ "${strcontains(var.module_var_ansible_sap_scenario_selection, "solman")}" == "true" ] ; then $sed_cmd 's|sap_system_sid_java\:.*#|sap_system_sid_java: \"${format("%s%s%s",substr(var.module_var_ansible_sap_system_sid,0,1),"J",substr(var.module_var_ansible_sap_system_sid,2,1))}\" #|' ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml ; fi
 
     echo "### Execute Ansible Playbooks for SAP ###"
     ansible-playbook -vv ${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_playbook.yml \
     --extra-vars "@${abspath(path.root)}/tmp/ansible_playbooks_for_sap/deploy_scenarios/$sap_scenario_selection/ansible_extravars.yml" \
-    --extra-vars "@${abspath(path.root)}/tmp/ansible_extravars_generated.yml" \
+    --extra-vars "@${abspath(path.root)}/tmp/ansible_extravars_existing_hosts_generated.yml" \
     --inventory "${abspath(path.root)}/tmp/ansible_inventory.ini" \
     --private-key '${abspath(path.root)}/tmp/hosts_rsa' \
     --ssh-extra-args="-o ControlMaster=auto -o ControlPersist=3600s -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ForwardX11=no -o ProxyCommand='ssh -W %h:%p ${var.module_var_bastion_user}@${var.module_var_bastion_floating_ip} -p ${var.module_var_bastion_ssh_port} -i ${path.root}/tmp/bastion_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
